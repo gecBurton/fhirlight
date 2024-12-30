@@ -11,6 +11,8 @@ from api.models.patient import (
 )
 from api.serializers.common import UKCoreModelSerializer
 
+from django.utils.translation import gettext_lazy as _
+
 
 class PatientIdentifierSerializer(UKCoreModelSerializer):
     class Meta:
@@ -47,9 +49,24 @@ class LanguageSerializer(Serializer):
 
 
 class PatientCommunicationSerializer(RelatedField):
+    default_error_messages = {
+        "required": _("This field is required."),
+        "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
+        "incorrect_format": _(
+            'Incorrect format. Expected {"language": {"coding": [{"code": code]}}.'
+        ),
+    }
+
     def to_internal_value(self, data):
-        code = data["language"]["coding"][0]["code"]
-        return self.get_queryset().get(code=code)
+        try:
+            code = data["language"]["coding"][0]["code"]
+        except (KeyError, IndexError):
+            self.fail("incorrect_format")
+
+        try:
+            return self.get_queryset().get(code=code)
+        except Concept.DoesNotExist:
+            self.fail("does_not_exist", pk_value=code)
 
     def to_representation(self, value):
         return {
