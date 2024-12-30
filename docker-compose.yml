@@ -1,0 +1,18 @@
+services:
+
+  postgres:
+    image: ankane/pgvector
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_NAME: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+    restart: always
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data:Z
+
+volumes:
+  local_postgres_data: {}
