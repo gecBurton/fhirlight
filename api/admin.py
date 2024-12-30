@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin import StackedInline
 
-from api.models import (
+from api.models.organization import (
     Organization,
     OrganizationContactPoint,
     OrganizationAddress,

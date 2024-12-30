@@ -154,6 +154,19 @@ class Identifier(DataTypeWithPeriod):
         ODS_ORGANISATION_CODE = "https://fhir.nhs.uk/Id/ods-organization-code"
         ODS_SITE_CODE = "https://fhir.nhs.uk/Id/ods-site-code"
         NHS_NUMBER = "https://fhir.nhs.uk/Id/nhs-number"
+        GENERAL_MEDICAL_COUNCIL_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/gmc-number"
+        )
+        GENERAL_PHARMACEUTICAL_COUNCIL_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/gphc-number"
+        )
+        NURSES_MIDWIVES_HEALTH_VISITORS_COUNCIL_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/nmc-number"
+        )
+        HEALTHCARE_PROFESSIONS_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/hcpc-number"
+        )
+        SPINE = "https://fhir.nhs.uk/Id/sds-user-id"
 
     use = models.CharField(
         null=True,

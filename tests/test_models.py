@@ -32,3 +32,30 @@ def test_organizations(client, organization):
     get_response = client.get(url)
     assert get_response.status_code == 200
     assert get_response.json() == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "practitioner",
+    [
+        "UKCore-Practitioner-ConsultantSandraGose-Example",
+        "UKCore-Practitioner-DoctorPaulRastall-Example",
+        "UKCore-Practitioner-PharmacistJimmyChuck-Example",
+    ],
+)
+def test_practitioner(client, practitioner):
+    with open(f"{TEST_DIR}/data/{practitioner}.json") as f:
+        payload = json.load(f)
+
+    url = reverse("practitioner-list")
+
+    post_response = client.post(
+        url, json.dumps(payload), content_type="application/json"
+    )
+    assert post_response.status_code == 201, post_response.json()
+    assert post_response.json() == payload
+
+    url = reverse("practitioner-detail", kwargs={"id": payload["id"]})
+    get_response = client.get(url)
+    assert get_response.status_code == 200
+    assert get_response.json() == payload
