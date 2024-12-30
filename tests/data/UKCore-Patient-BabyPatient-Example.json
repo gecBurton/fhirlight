@@ -1,0 +1,36 @@
+{
+    "resourceType": "Patient",
+    "id": "UKCore-Patient-BabyPatient-Example",
+    "identifier":  [
+        {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9912003890"
+        }
+    ],
+    "name":  [
+        {
+            "use": "official",
+            "family": "JONES",
+            "given":  [
+                "Melanie"
+            ]
+        }
+    ],
+    "telecom":  [
+        {
+            "system": "phone",
+            "value": "01131231266"
+        }
+    ],
+    "gender": "female",
+    "birthDate": "2021-02-11",
+    "address":  [
+        {
+            "line":  [
+                "10 Fearnville Grove"
+            ],
+            "city": "LEEDS",
+            "postalCode": "LS8 3DR"
+        }
+    ]
+}

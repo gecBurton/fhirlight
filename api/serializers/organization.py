@@ -1,6 +1,6 @@
 from rest_framework.fields import SerializerMethodField, CharField
 
-from api.models.organization import (
+from api.models import (
     OrganizationAddress,
     OrganizationIdentifier,
     Organization,

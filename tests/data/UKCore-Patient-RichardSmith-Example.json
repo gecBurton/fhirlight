@@ -1,0 +1,49 @@
+{
+    "resourceType": "Patient",
+    "id": "UKCore-Patient-RichardSmith-Example",
+    "identifier":  [
+        {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9912003888"
+        }
+    ],
+    "name":  [
+        {
+            "use": "official",
+            "family": "SMITH",
+            "given":  [
+                "Richard"
+            ]
+        }
+    ],
+    "telecom":  [
+        {
+            "system": "phone",
+            "value": "01131231234"
+        }
+    ],
+    "gender": "male",
+    "birthDate": "1970-09-11",
+    "address":  [
+        {
+            "line":  [
+                "4 Sandmoor Drive"
+            ],
+            "city": "LEEDS",
+            "postalCode": "LS17 7DF"
+        }
+    ],
+    "communication":  [
+        {
+            "language": {
+                "coding":  [
+                    {
+                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage",
+                        "code": "en",
+                        "display": "English"
+                    }
+                ]
+            }
+        }
+    ]
+}

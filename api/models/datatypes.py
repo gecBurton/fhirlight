@@ -227,3 +227,35 @@ class Name(DataTypeWithPeriod):
         blank=True,
         help_text="Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name.",
     )
+
+
+class Concept(models.Model):
+    class SYSTEM(models.TextChoices):
+        LANGUAGE = "https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage"
+
+    system = models.CharField(
+        null=True,
+        blank=True,
+        max_length=128,
+        choices=SYSTEM,
+        help_text="The identification of the code system that defines the meaning of the symbol in the code.",
+    )
+    version = models.CharField(
+        null=True,
+        blank=True,
+        max_length=128,
+        help_text="Version of the system - if relevant",
+    )
+    code = models.CharField(
+        null=True,
+        blank=True,
+        max_length=128,
+        help_text="Symbol in syntax defined by the system",
+    )
+    display = models.CharField(
+        null=True,
+        blank=True,
+        max_length=128,
+        help_text="A representation of the meaning of the code in the system, following the rules of the system.",
+    )
+    # userSelected	Σ	0..1	boolean

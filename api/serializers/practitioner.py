@@ -1,6 +1,6 @@
 from rest_framework.fields import SerializerMethodField, CharField
 
-from api.models.practitioner import (
+from api.models import (
     Practitioner,
     PractitionerName,
     PractitionerIdentifier,

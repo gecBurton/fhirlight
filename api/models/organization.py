@@ -1,6 +1,6 @@
 from django.db import models
 
-from api.datatypes import Identifier, ContactPoint, Address
+from api.models.datatypes import Identifier, ContactPoint, Address
 from api.models.common import UKCore
 
 

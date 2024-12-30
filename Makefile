@@ -10,5 +10,8 @@ web:
 
 clean:
 	docker-compose down
-	docker rm -f -v fhirlight_local_postgres_data
+	docker volume rm -f fhirlight_local_postgres_data
 	docker-compose up -d
+
+test:
+	poetry run pytest tests

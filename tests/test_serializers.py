@@ -4,6 +4,7 @@ import os
 import pytest
 
 from api.serializers.organization import OrganizationSerializer
+from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -41,6 +42,24 @@ def test_practitioner(practitioner):
         payload = json.load(f)
 
     serializer = PractitionerSerializer(data=payload)
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "patient",
+    [
+        "UKCore-Patient-BabyPatient-Example",
+        "UKCore-Patient-RichardSmith-Example",
+    ],
+)
+def test_patient(patient):
+    with open(f"{TEST_DIR}/data/{patient}.json") as f:
+        payload = json.load(f)
+
+    serializer = PatientSerializer(data=payload)
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload
