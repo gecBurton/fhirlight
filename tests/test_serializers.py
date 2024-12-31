@@ -3,7 +3,6 @@ import os
 
 import pytest
 
-from api.models import Patient, Organization
 from api.serializers.medication import MedicationSerializer
 from api.serializers.observation import ObservationSerializer
 from api.serializers.organization import OrganizationSerializer
@@ -89,36 +88,23 @@ def test_medication(resource):
 
 @pytest.mark.django_db
 @pytest.mark.parametrize(
-    "resource, subject, organization",
+    "resource",
     [
-        (
-            "UKCore-Observation-24HourBloodPressure-Example",
-            "UKCore-Patient-RichardSmith-Example",
-            "UKCore-Organization-LeedsTeachingHospital-Example",
-        ),
-        (
-            "UKCore-Observation-AwarenessOfDiagnosis-Example",
-            "UKCore-Patient-RichardSmith-Example",
-            None,
-        ),
-        (
-            "UKCore-Observation-BreathingNormally-Example",
-            "UKCore-Patient-RichardSmith-Example",
-            "UKCore-Organization-LeedsTeachingHospital-Example",
-        ),
-        (
-            "UKCore-Observation-DrugUse-Example",
-            "UKCore-Patient-RichardSmith-Example",
-            "UKCore-Organization-LeedsTeachingHospital-Example",
-        ),
+        "UKCore-Observation-24HourBloodPressure-Example",
+        "UKCore-Observation-AwarenessOfDiagnosis-Example",
+        "UKCore-Observation-BreathingNormally-Example",
+        "UKCore-Observation-DrugUse-Example",
+        "UKCore-Observation-FastingTest-Example",
+        # "UKCore-Observation-FingerJointInflamed-Example",performer=Practitioner
+        "UKCore-Observation-Group-FullBloodCount-Example",
+        "UKCore-Observation-HeavyDrinker-Example",
+        # "UKCore-Observation-Lab-RedCellCount-Example", missing referenceRange and specimen
+        # "UKCore-Observation-Lab-WhiteCellCount-Example",missing referenceRange and specimen
     ],
 )
-def test_observation(resource, subject, organization):
-    if subject:
-        Patient.objects.create(id=subject)
-    if organization:
-        Organization.objects.create(id=organization)
-
+def test_observation(
+    resource, richard_smith, leeds_teaching_hospital, white_cell_count, red_cell_count
+):
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)
 

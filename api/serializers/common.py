@@ -74,12 +74,16 @@ class RelatedResourceSerializer(RelatedField):
         "incorrect_format": _(
             'Incorrect format. Expected {"language": {"coding": [{"code": code]}}.'
         ),
+        "incorrect_resource_type": _(
+            "incorrect resourceType. Expected {resource_type}"
+        ),
     }
 
     def to_internal_value(self, data):
         qs = self.get_queryset()
         resource_type, id = data["reference"].split("/", 2)
-        assert resource_type == qs.model.__name__
+        if resource_type != qs.model.__name__:
+            self.fail("incorrect_resource_type", resource_type=qs.model.__name__)
         try:
             return qs.get(id=id)
         except qs.model.DoesNotExist:

@@ -4,7 +4,7 @@ from rest_framework.fields import (
     DateTimeField,
     JSONField,
 )
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, Serializer
 
 from api.models import Patient, Organization
 from api.models.datatypes import Concept
@@ -39,6 +39,14 @@ class ObservationIdentifierSerializer(UKCoreModelSerializer):
         model = ObservationIdentifier
 
 
+class ReferenceRangeSerializer(Serializer):
+    low = DateTimeField(source="batchExpirationDate", required=False)
+    high = CharField(source="batchLotNumber", required=False)
+
+    def to_internal_value(self, data):
+        raise ValueError(data)
+
+
 class ObservationSerializer(UKCoreModelSerializer):
     id = CharField()
     resourceType = SerializerMethodField()
@@ -55,7 +63,7 @@ class ObservationSerializer(UKCoreModelSerializer):
         ),
     )
 
-    subject = RelatedResourceSerializer(queryset=Patient.objects.all())
+    subject = RelatedResourceSerializer(required=False, queryset=Patient.objects.all())
     performer = RelatedResourceSerializer(
         required=False, many=True, queryset=Organization.objects.all()
     )
@@ -67,6 +75,11 @@ class ObservationSerializer(UKCoreModelSerializer):
     )
     identifier = ObservationIdentifierSerializer(
         required=False, many=True, source="observationidentifier_set"
+    )
+    valueQuantity = JSONField(required=False)
+
+    hasMember = RelatedResourceSerializer(
+        required=False, many=True, queryset=Observation.objects.all()
     )
 
     def get_resourceType(self, _obj):
@@ -85,6 +98,8 @@ class ObservationSerializer(UKCoreModelSerializer):
             "effectiveInstant",
             "component",
             "identifier",
+            "valueQuantity",
+            "hasMember",
         )
         model = Observation
 

@@ -65,6 +65,8 @@ class Observation(UKCore):
         blank=True,
         help_text="Clinically relevant time/time-period for observation",
     )
+    valueQuantity = models.JSONField(null=True, blank=True)
+    hasMember = models.ManyToManyField("self")
 
 
 class ObservationComponent(models.Model):
