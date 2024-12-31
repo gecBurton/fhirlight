@@ -99,7 +99,9 @@ class PatientSerializer(UKCoreModelSerializer):
     communication = PatientCommunicationSerializer(
         required=False,
         many=True,
-        queryset=Concept.objects.filter(system=Concept.SYSTEM.LANGUAGE),
+        queryset=Concept.objects.filter(
+            valueset=Concept.VALUESET.UK_CORE_HUMAN_LANGUAGE
+        ),
     )
 
     class Meta:

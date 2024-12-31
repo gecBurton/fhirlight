@@ -19,12 +19,18 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from api.views import OrganizationViewSet, PractitionerViewSet, PatientViewSet
+from api.views import (
+    OrganizationViewSet,
+    PractitionerViewSet,
+    PatientViewSet,
+    MedicationViewSet,
+)
 
 router = routers.DefaultRouter()
 router.register(r"Organization", OrganizationViewSet, basename="organization")
 router.register(r"Practitioner", PractitionerViewSet, basename="practitioner")
 router.register(r"Patient", PatientViewSet, basename="patient")
+router.register(r"Medication", MedicationViewSet, basename="medication")
 
 urlpatterns = [
     path("admin/", admin.site.urls),

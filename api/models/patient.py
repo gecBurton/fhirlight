@@ -42,7 +42,9 @@ class Patient(UKCore):
         null=True, blank=True, help_text="The date of birth for the individual."
     )
     communication = models.ManyToManyField(
-        Concept, limit_choices_to={"system": Concept.SYSTEM.LANGUAGE}, help_text=""
+        Concept,
+        limit_choices_to={"system": Concept.VALUESET.UK_CORE_HUMAN_LANGUAGE},
+        help_text="",
     )
 
 

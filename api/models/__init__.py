@@ -12,7 +12,7 @@ from .practitioner import (
     PractitionerAddress,
     Practitioner,
 )
-
+from .medication import Medication
 
 __all__ = [
     "Patient",
@@ -25,4 +25,5 @@ __all__ = [
     "PractitionerIdentifier",
     "PractitionerTelecom",
     "PractitionerAddress",
+    "Medication",
 ]
