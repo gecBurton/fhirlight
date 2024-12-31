@@ -167,6 +167,7 @@ class Identifier(DataTypeWithPeriod):
             "https://fhir.hl7.org.uk/Id/hcpc-number"
         )
         SPINE = "https://fhir.nhs.uk/Id/sds-user-id"
+        UUID = "https://tools.ietf.org/html/rfc4122"
 
     use = models.CharField(
         null=True,
@@ -234,6 +235,8 @@ class Concept(models.Model):
         UK_CORE_HUMAN_LANGUAGE = "UKCore-HumanLanguage"
         UK_CORE_MEDICATION_FORM = "UKCoreMedicationForm"
         UK_CORE_MEDICATION_CODE = "UKCoreMedicationCode"
+        OBSERVATION_CATEGORY_CODE = "ObservationCategoryCodes"
+        UK_CORE_OBSERVATION_TYPE = "UKCoreObservationType"
 
     system = models.CharField(
         null=True,

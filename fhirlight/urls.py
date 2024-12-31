@@ -24,6 +24,7 @@ from api.views import (
     PractitionerViewSet,
     PatientViewSet,
     MedicationViewSet,
+    ObservationViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -31,6 +32,8 @@ router.register(r"Organization", OrganizationViewSet, basename="organization")
 router.register(r"Practitioner", PractitionerViewSet, basename="practitioner")
 router.register(r"Patient", PatientViewSet, basename="patient")
 router.register(r"Medication", MedicationViewSet, basename="medication")
+router.register(r"Observation", ObservationViewSet, basename="observation")
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
