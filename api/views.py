@@ -1,9 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
 
-from api.models import Patient, Medication
+from api.models import Patient, Medication, Observation
 from api.models.organization import Organization
 from api.models.practitioner import Practitioner
 from api.serializers.medication import MedicationSerializer
+from api.serializers.observation import ObservationSerializer
 from api.serializers.organization import OrganizationSerializer
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
@@ -30,4 +31,10 @@ class PatientViewSet(ModelViewSet):
 class MedicationViewSet(ModelViewSet):
     queryset = Medication.objects.all()
     serializer_class = MedicationSerializer
+    lookup_field = "id"
+
+
+class ObservationViewSet(ModelViewSet):
+    queryset = Observation.objects.all()
+    serializer_class = ObservationSerializer
     lookup_field = "id"

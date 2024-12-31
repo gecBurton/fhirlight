@@ -96,11 +96,28 @@ def test_medication(resource):
             "UKCore-Patient-RichardSmith-Example",
             "UKCore-Organization-LeedsTeachingHospital-Example",
         ),
+        (
+            "UKCore-Observation-AwarenessOfDiagnosis-Example",
+            "UKCore-Patient-RichardSmith-Example",
+            None,
+        ),
+        (
+            "UKCore-Observation-BreathingNormally-Example",
+            "UKCore-Patient-RichardSmith-Example",
+            "UKCore-Organization-LeedsTeachingHospital-Example",
+        ),
+        # (
+        #     "UKCore-Observation-DrugUse-Example",
+        #     "UKCore-Patient-RichardSmith-Example",
+        #     "UKCore-Organization-LeedsTeachingHospital-Example",
+        # ),
     ],
 )
 def test_observation(resource, subject, organization):
-    Patient.objects.create(id=subject)
-    Organization.objects.create(id=organization)
+    if subject:
+        Patient.objects.create(id=subject)
+    if organization:
+        Organization.objects.create(id=organization)
 
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)

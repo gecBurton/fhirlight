@@ -40,8 +40,7 @@
                         "code": "314464000",
                         "display": "24 hour systolic blood pressure"
                     }
-                ],
-                "text": "Systolic blood pressure"
+                ]
             },
             "valueQuantity": {
                 "value": 102,
@@ -58,8 +57,7 @@
                         "code": "314465004",
                         "display": "24 hour diastolic blood pressure"
                     }
-                ],
-                "text": "Diastolic blood pressure"
+                ]
             },
             "valueQuantity": {
                 "value": 84,

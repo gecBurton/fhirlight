@@ -30,11 +30,8 @@ class Observation(UKCore):
         max_length=16, choices=STATUS, help_text="The status of the result value."
     )
 
-    category = models.ForeignKey(
+    category = models.ManyToManyField(
         Concept,
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
         limit_choices_to={"valueset": Concept.VALUESET.OBSERVATION_CATEGORY_CODE},
         help_text="A code that classifies the general type of observation being made.",
         related_name="observationcategory",
@@ -46,15 +43,16 @@ class Observation(UKCore):
         help_text="Type of observation (code / type)",
         related_name="observationcode",
     )
-    performer = models.ForeignKey(
+    performer = models.ManyToManyField(
         Organization,
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
         help_text="Who is responsible for the observation",
     )
-    subject = models.ManyToManyField(
-        Patient, help_text="Who and/or what the observation is about"
+    subject = models.ForeignKey(
+        Patient,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        help_text="Who and/or what the observation is about",
     )
 
     effectiveDateTime = models.DateTimeField(
@@ -62,3 +60,18 @@ class Observation(UKCore):
         blank=True,
         help_text="Clinically relevant time/time-period for observation",
     )
+    effectiveInstant = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Clinically relevant time/time-period for observation",
+    )
+
+
+class ObservationComponent(models.Model):
+    observation = models.ForeignKey(Observation, on_delete=models.CASCADE)
+    code = models.ForeignKey(
+        Concept,
+        on_delete=models.CASCADE,
+        limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_OBSERVATION_TYPE},
+    )
+    valueQuantity = models.JSONField(null=True, blank=True)

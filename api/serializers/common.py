@@ -22,6 +22,10 @@ def strip_none(obj):
 
     if isinstance(obj, str):
         return obj.removesuffix("T00:00:00Z")
+
+    if isinstance(obj, str):
+        if obj.endswith(":00Z"):
+            return obj.replace(":00Z", "00+00:00")
     return obj
 
 
