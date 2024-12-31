@@ -230,14 +230,15 @@ class Name(DataTypeWithPeriod):
 
 
 class Concept(models.Model):
-    class SYSTEM(models.TextChoices):
-        LANGUAGE = "https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage"
+    class VALUESET(models.TextChoices):
+        UK_CORE_HUMAN_LANGUAGE = "UKCore-HumanLanguage"
+        UK_CORE_MEDICATION_FORM = "UKCoreMedicationForm"
+        UK_CORE_MEDICATION_CODE = "UKCoreMedicationCode"
 
     system = models.CharField(
         null=True,
         blank=True,
         max_length=128,
-        choices=SYSTEM,
         help_text="The identification of the code system that defines the meaning of the symbol in the code.",
     )
     version = models.CharField(
@@ -258,4 +259,5 @@ class Concept(models.Model):
         max_length=128,
         help_text="A representation of the meaning of the code in the system, following the rules of the system.",
     )
+    valueset = models.CharField(max_length=128, choices=VALUESET)
     # userSelected	Σ	0..1	boolean
