@@ -1,8 +1,9 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.fields import DateTimeField
+from rest_framework.serializers import Serializer
 
-from api.models import Specimen, Patient, Practitioner
+from api.models import Patient, Practitioner
 from api.models.datatypes import Concept
-from api.models.specimen import SpecimenComponent
+from api.models.specimen import Specimen
 from api.serializers.common import (
     UKCoreProfileSerializer,
     ConceptSerializer,
@@ -10,7 +11,7 @@ from api.serializers.common import (
 )
 
 
-class SpecimenComponentSerializer(ModelSerializer):
+class SpecimenComponentSerializer(Serializer):
     method = ConceptSerializer(
         queryset=Concept.objects.filter(
             valueset=Concept.VALUESET.FHIR_SPECIMEN_COLLECTION_METHOD
@@ -25,10 +26,7 @@ class SpecimenComponentSerializer(ModelSerializer):
             valueset=Concept.VALUESET.UK_CORE_SPECIMEN_BODY_SITE
         ),
     )
-
-    class Meta:
-        fields = ("method", "collector", "collectedDateTime", "bodySite")
-        model = SpecimenComponent
+    collectedDateTime = DateTimeField(required=False)
 
 
 class SpecimenSerializer(UKCoreProfileSerializer):
@@ -43,6 +41,8 @@ class SpecimenSerializer(UKCoreProfileSerializer):
         required=False, source="specimencomponent_set"
     )
 
+    collection = SpecimenComponentSerializer(required=False, source="*")
+
     class Meta:
         fields = (
             "id",
@@ -54,12 +54,3 @@ class SpecimenSerializer(UKCoreProfileSerializer):
             "collection",
         )
         model = Specimen
-
-    def create(self, validated_data):
-        collection = validated_data.pop("specimencomponent_set", {})
-
-        specimen = Specimen.objects.create(**validated_data)
-
-        SpecimenComponent.objects.create(specimen=specimen, **collection)
-
-        return specimen

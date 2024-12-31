@@ -48,20 +48,20 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
                 "UKCore-Organization-LeedsTeachingHospital-Example",
             ],
         ),
-        # (
-        #     "UKCore-Specimen-UrineSpecimen-Example",
-        #     [
-        #         "UKCore-Practitioner-ConsultantSandraGose-Example",
-        #         "UKCore-Patient-RichardSmith-Example",
-        #     ],
-        # ),
-        # (
-        #     "UKCore-Specimen-BloodSpecimen-Example",
-        #     [
-        #         "UKCore-Practitioner-ConsultantSandraGose-Example",
-        #         "UKCore-Patient-RichardSmith-Example",
-        #     ],
-        # ),
+        (
+            "UKCore-Specimen-UrineSpecimen-Example",
+            [
+                "UKCore-Practitioner-ConsultantSandraGose-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-Specimen-BloodSpecimen-Example",
+            [
+                "UKCore-Practitioner-ConsultantSandraGose-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
     ],
 )
 def test_resource(client, resource, dependants):

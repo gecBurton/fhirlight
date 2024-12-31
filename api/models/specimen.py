@@ -48,15 +48,13 @@ class Specimen(UKCore):
         help_text="The time when specimen was received for processing.",
     )
 
-
-class SpecimenComponent(models.Model):
-    specimen = models.ForeignKey(Specimen, on_delete=models.CASCADE)
     method = models.ForeignKey(
         Concept,
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         limit_choices_to={"valueset": Concept.VALUESET.FHIR_SPECIMEN_COLLECTION_METHOD},
+        related_name="specimenmethod",
     )
     collector = models.ForeignKey(
         Practitioner, on_delete=models.CASCADE, null=True, blank=True
@@ -68,5 +66,5 @@ class SpecimenComponent(models.Model):
         null=True,
         blank=True,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_SPECIMEN_BODY_SITE},
-        related_name="specimencomponentbodysite",
+        related_name="specimenbodysite",
     )
