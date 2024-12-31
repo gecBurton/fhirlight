@@ -234,6 +234,8 @@ class Concept(models.Model):
         UK_CORE_HUMAN_LANGUAGE = "UKCore-HumanLanguage"
         UK_CORE_MEDICATION_FORM = "UKCoreMedicationForm"
         UK_CORE_MEDICATION_CODE = "UKCoreMedicationCode"
+        OBSERVATION_CATEGORY_CODE = "ObservationCategoryCodes"
+        UK_CORE_OBSERVATION_TYPE = "UKCoreObservationType"
 
     system = models.CharField(
         null=True,

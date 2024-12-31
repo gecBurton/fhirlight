@@ -3,7 +3,9 @@ import os
 
 import pytest
 
+from api.models import Patient, Organization
 from api.serializers.medication import MedicationSerializer
+from api.serializers.observation import ObservationSerializer
 from api.serializers.organization import OrganizationSerializer
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
@@ -80,6 +82,30 @@ def test_medication(resource):
         payload = json.load(f)
 
     serializer = MedicationSerializer(data=payload)
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource, subject, organization",
+    [
+        (
+            "UKCore-Observation-24HourBloodPressure-Example",
+            "UKCore-Patient-RichardSmith-Example",
+            "UKCore-Organization-LeedsTeachingHospital-Example",
+        ),
+    ],
+)
+def test_observation(resource, subject, organization):
+    Patient.objects.create(id=subject)
+    Organization.objects.create(id=organization)
+
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = ObservationSerializer(data=payload)
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload
