@@ -1,13 +1,12 @@
 from rest_framework.fields import (
     CharField,
-    SerializerMethodField,
     DateTimeField,
 )
 from rest_framework.serializers import Serializer
 
 from api.models.datatypes import Concept
 from api.models.medication import Medication
-from api.serializers.common import UKCoreModelSerializer, ConceptSerializer
+from api.serializers.common import ConceptSerializer, UKCoreProfileSerializer
 
 
 class BatchSerializer(Serializer):
@@ -15,9 +14,7 @@ class BatchSerializer(Serializer):
     lotNumber = CharField(source="batchLotNumber", required=False)
 
 
-class MedicationSerializer(UKCoreModelSerializer):
-    id = CharField()
-    resourceType = SerializerMethodField()
+class MedicationSerializer(UKCoreProfileSerializer):
     batch = BatchSerializer(required=False, source="*")
 
     code = ConceptSerializer(
@@ -41,6 +38,3 @@ class MedicationSerializer(UKCoreModelSerializer):
             "batch",
         ]
         model = Medication
-
-    def get_resourceType(self, _obj):
-        return "Medication"

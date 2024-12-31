@@ -1,4 +1,3 @@
-from rest_framework.fields import SerializerMethodField, CharField
 
 from api.models import (
     OrganizationAddress,
@@ -6,7 +5,7 @@ from api.models import (
     Organization,
     OrganizationContactPoint,
 )
-from api.serializers.common import UKCoreModelSerializer
+from api.serializers.common import UKCoreModelSerializer, UKCoreProfileSerializer
 
 
 class OrganizationAddressSerializer(UKCoreModelSerializer):
@@ -27,9 +26,7 @@ class OrganizationIdentifierSerializer(UKCoreModelSerializer):
         model = OrganizationIdentifier
 
 
-class OrganizationSerializer(UKCoreModelSerializer):
-    id = CharField()
-    resourceType = SerializerMethodField()
+class OrganizationSerializer(UKCoreProfileSerializer):
     address = OrganizationAddressSerializer(
         required=False, many=True, source="organizationaddress_set"
     )
@@ -43,9 +40,6 @@ class OrganizationSerializer(UKCoreModelSerializer):
     class Meta:
         fields = ("resourceType", "id", "identifier", "name", "address", "telecom")
         model = Organization
-
-    def get_resourceType(self, _obj):
-        return "Organization"
 
     def create(self, validated_data):
         addresses = validated_data.pop("organizationaddress_set", [])

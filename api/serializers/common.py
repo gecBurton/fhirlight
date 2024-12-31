@@ -1,3 +1,4 @@
+from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework.relations import RelatedField
 from rest_framework.serializers import ModelSerializer
 from django.utils.translation import gettext_lazy as _
@@ -33,6 +34,14 @@ class UKCoreModelSerializer(ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         return strip_none(representation)
+
+
+class UKCoreProfileSerializer(UKCoreModelSerializer):
+    id = CharField()
+    resourceType = SerializerMethodField()
+
+    def get_resourceType(self, _obj):
+        return self.Meta.model.__name__
 
 
 class ConceptSerializer(RelatedField):
