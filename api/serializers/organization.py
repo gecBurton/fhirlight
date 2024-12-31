@@ -1,4 +1,3 @@
-
 from api.models import (
     OrganizationAddress,
     OrganizationIdentifier,

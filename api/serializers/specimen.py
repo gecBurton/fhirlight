@@ -39,7 +39,9 @@ class SpecimenSerializer(UKCoreProfileSerializer):
         ),
     )
     subject = RelatedResourceSerializer(queryset=Patient.objects.all(), required=False)
-    collection = SpecimenComponentSerializer(required=False)
+    collection = SpecimenComponentSerializer(
+        required=False, source="specimencomponent_set"
+    )
 
     class Meta:
         fields = (
@@ -52,3 +54,12 @@ class SpecimenSerializer(UKCoreProfileSerializer):
             "collection",
         )
         model = Specimen
+
+    def create(self, validated_data):
+        collection = validated_data.pop("specimencomponent_set", {})
+
+        specimen = Specimen.objects.create(**validated_data)
+
+        SpecimenComponent.objects.create(specimen=specimen, **collection)
+
+        return specimen
