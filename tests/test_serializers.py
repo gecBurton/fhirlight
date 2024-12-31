@@ -106,11 +106,11 @@ def test_medication(resource):
             "UKCore-Patient-RichardSmith-Example",
             "UKCore-Organization-LeedsTeachingHospital-Example",
         ),
-        # (
-        #     "UKCore-Observation-DrugUse-Example",
-        #     "UKCore-Patient-RichardSmith-Example",
-        #     "UKCore-Organization-LeedsTeachingHospital-Example",
-        # ),
+        (
+            "UKCore-Observation-DrugUse-Example",
+            "UKCore-Patient-RichardSmith-Example",
+            "UKCore-Organization-LeedsTeachingHospital-Example",
+        ),
     ],
 )
 def test_observation(resource, subject, organization):

@@ -167,6 +167,7 @@ class Identifier(DataTypeWithPeriod):
             "https://fhir.hl7.org.uk/Id/hcpc-number"
         )
         SPINE = "https://fhir.nhs.uk/Id/sds-user-id"
+        UUID = "https://tools.ietf.org/html/rfc4122"
 
     use = models.CharField(
         null=True,

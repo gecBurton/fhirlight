@@ -8,7 +8,11 @@ from rest_framework.serializers import ModelSerializer
 
 from api.models import Patient, Organization
 from api.models.datatypes import Concept
-from api.models.observation import Observation, ObservationComponent
+from api.models.observation import (
+    Observation,
+    ObservationComponent,
+    ObservationIdentifier,
+)
 from api.serializers.common import (
     UKCoreModelSerializer,
     ConceptSerializer,
@@ -27,6 +31,12 @@ class ObservationComponentSerializer(ModelSerializer):
     class Meta:
         fields = ("code", "valueQuantity")
         model = ObservationComponent
+
+
+class ObservationIdentifierSerializer(UKCoreModelSerializer):
+    class Meta:
+        exclude = ("uuid", "observation", "created_at", "updated_at")
+        model = ObservationIdentifier
 
 
 class ObservationSerializer(UKCoreModelSerializer):
@@ -55,6 +65,9 @@ class ObservationSerializer(UKCoreModelSerializer):
     component = ObservationComponentSerializer(
         many=True, required=False, source="observationcomponent_set"
     )
+    identifier = ObservationIdentifierSerializer(
+        required=False, many=True, source="observationidentifier_set"
+    )
 
     def get_resourceType(self, _obj):
         return "Observation"
@@ -71,10 +84,12 @@ class ObservationSerializer(UKCoreModelSerializer):
             "effectiveDateTime",
             "effectiveInstant",
             "component",
+            "identifier",
         )
         model = Observation
 
     def create(self, validated_data):
+        identifiers = validated_data.pop("observationidentifier_set", [])
         components = validated_data.pop("observationcomponent_set", [])
         performers = validated_data.pop("performer", [])
         categories = validated_data.pop("category", [])
@@ -86,4 +101,7 @@ class ObservationSerializer(UKCoreModelSerializer):
 
         for component in components:
             ObservationComponent.objects.create(observation=observation, **component)
+
+        for identifier in identifiers:
+            ObservationIdentifier.objects.create(observation=observation, **identifier)
         return observation

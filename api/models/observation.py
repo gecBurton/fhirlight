@@ -2,7 +2,7 @@ from django.db import models
 
 from api.models import Organization, Patient
 from api.models.common import UKCore
-from api.models.datatypes import Concept
+from api.models.datatypes import Concept, Identifier
 
 
 class Observation(UKCore):
@@ -75,3 +75,15 @@ class ObservationComponent(models.Model):
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_OBSERVATION_TYPE},
     )
     valueQuantity = models.JSONField(null=True, blank=True)
+
+
+class ObservationIdentifier(Identifier):
+    observation = models.ForeignKey(
+        Observation,
+        on_delete=models.CASCADE,
+        limit_choices_to={
+            "system": [
+                Identifier.SYSTEM.UUID,
+            ]
+        },
+    )

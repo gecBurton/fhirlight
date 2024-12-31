@@ -13,7 +13,7 @@ from .practitioner import (
     Practitioner,
 )
 from .medication import Medication
-from .observation import Observation
+from .observation import Observation, ObservationIdentifier
 
 __all__ = [
     "Patient",
@@ -28,4 +28,5 @@ __all__ = [
     "PractitionerAddress",
     "Medication",
     "Observation",
+    "ObservationIdentifier",
 ]
