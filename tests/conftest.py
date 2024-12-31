@@ -1,6 +1,6 @@
 import pytest
 
-from api.models import Patient, Organization, Observation
+from api.models import Patient, Organization, Observation, Practitioner
 from api.models.datatypes import Concept
 
 
@@ -9,6 +9,15 @@ def richard_smith():
     patient = Patient.objects.create(id="UKCore-Patient-RichardSmith-Example")
     yield patient
     patient.delete()
+
+
+@pytest.fixture
+def consultant_sandra_gose():
+    practitioner = Practitioner.objects.create(
+        id="UKCore-Practitioner-ConsultantSandraGose-Example"
+    )
+    yield practitioner
+    practitioner.delete()
 
 
 @pytest.fixture

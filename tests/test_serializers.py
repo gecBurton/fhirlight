@@ -8,6 +8,7 @@ from api.serializers.observation import ObservationSerializer
 from api.serializers.organization import OrganizationSerializer
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
+from api.serializers.specimen import SpecimenSerializer
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -109,6 +110,21 @@ def test_observation(
         payload = json.load(f)
 
     serializer = ObservationSerializer(data=payload)
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    ["UKCore-Specimen-UrineSpecimen-Example", "UKCore-Specimen-BloodSpecimen-Example"],
+)
+def test_specimen(resource, richard_smith, consultant_sandra_gose):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = SpecimenSerializer(data=payload)
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

@@ -1,5 +1,3 @@
-from rest_framework.fields import SerializerMethodField, CharField
-
 from api.models import (
     Practitioner,
     PractitionerName,
@@ -7,7 +5,7 @@ from api.models import (
     PractitionerTelecom,
     PractitionerAddress,
 )
-from api.serializers.common import UKCoreModelSerializer
+from api.serializers.common import UKCoreModelSerializer, UKCoreProfileSerializer
 
 
 class PractitionerNameSerializer(UKCoreModelSerializer):
@@ -34,9 +32,7 @@ class PractitionerIdentifierSerializer(UKCoreModelSerializer):
         model = PractitionerIdentifier
 
 
-class PractitionerSerializer(UKCoreModelSerializer):
-    id = CharField()
-    resourceType = SerializerMethodField()
+class PractitionerSerializer(UKCoreProfileSerializer):
     name = PractitionerNameSerializer(
         required=False, many=True, source="practitionername_set"
     )
@@ -62,9 +58,6 @@ class PractitionerSerializer(UKCoreModelSerializer):
             "telecom",
         )
         model = Practitioner
-
-    def get_resourceType(self, _obj):
-        return "Practitioner"
 
     def create(self, validated_data):
         addresses = validated_data.pop("practitioneraddress_set", [])

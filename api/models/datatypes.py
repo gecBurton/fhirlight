@@ -237,6 +237,9 @@ class Concept(models.Model):
         UK_CORE_MEDICATION_CODE = "UKCoreMedicationCode"
         OBSERVATION_CATEGORY_CODE = "ObservationCategoryCodes"
         UK_CORE_OBSERVATION_TYPE = "UKCoreObservationType"
+        UK_CORE_SPECIMEN_TYPE = "UKCoreSpecimenType"
+        FHIR_SPECIMEN_COLLECTION_METHOD = "FHIRSpecimenCollectionMethod"
+        UK_CORE_SPECIMEN_BODY_SITE = "UKCoreSpecimenBodySite"
 
     system = models.CharField(
         null=True,

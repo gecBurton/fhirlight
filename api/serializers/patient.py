@@ -1,4 +1,4 @@
-from rest_framework.fields import CharField, SerializerMethodField
+from rest_framework.fields import CharField
 from rest_framework.serializers import Serializer, RelatedField
 
 from api.models import Patient
@@ -9,7 +9,7 @@ from api.models.patient import (
     PatientName,
     PatientAddress,
 )
-from api.serializers.common import UKCoreModelSerializer
+from api.serializers.common import UKCoreModelSerializer, UKCoreProfileSerializer
 
 from django.utils.translation import gettext_lazy as _
 
@@ -82,9 +82,7 @@ class PatientCommunicationSerializer(RelatedField):
         }
 
 
-class PatientSerializer(UKCoreModelSerializer):
-    id = CharField()
-    resourceType = SerializerMethodField()
+class PatientSerializer(UKCoreProfileSerializer):
     identifier = PatientIdentifierSerializer(
         required=False, many=True, source="patientidentifier_set"
     )
@@ -117,9 +115,6 @@ class PatientSerializer(UKCoreModelSerializer):
             "communication",
         ]
         model = Patient
-
-    def get_resourceType(self, _obj):
-        return "Patient"
 
     def create(self, validated_data):
         addresses = validated_data.pop("patientaddress_set", [])

@@ -1,6 +1,5 @@
 from rest_framework.fields import (
     CharField,
-    SerializerMethodField,
     DateTimeField,
     JSONField,
 )
@@ -17,6 +16,7 @@ from api.serializers.common import (
     UKCoreModelSerializer,
     ConceptSerializer,
     RelatedResourceSerializer,
+    UKCoreProfileSerializer,
 )
 
 
@@ -47,9 +47,7 @@ class ReferenceRangeSerializer(Serializer):
         raise ValueError(data)
 
 
-class ObservationSerializer(UKCoreModelSerializer):
-    id = CharField()
-    resourceType = SerializerMethodField()
+class ObservationSerializer(UKCoreProfileSerializer):
     category = ConceptSerializer(
         many=True,
         required=False,
@@ -81,9 +79,6 @@ class ObservationSerializer(UKCoreModelSerializer):
     hasMember = RelatedResourceSerializer(
         required=False, many=True, queryset=Observation.objects.all()
     )
-
-    def get_resourceType(self, _obj):
-        return "Observation"
 
     class Meta:
         fields = (
