@@ -225,11 +225,12 @@ class Concept(models.Model):
         SERVICE_DELIVERY_LOCATION_ROLE_TYPE = "ServiceDeliveryLocationRoleType"
         SNOMED_CT_BODY_STRUCTURES = "SNOMEDCTBodyStructures"
         UK_CORE_VACCINE_CODE = "UKCoreVaccineCode"
+        UK_CORE_OPERATION_OUTCOME_ISSUE_DETAILS = "UKCoreOperationOutcomeIssueDetails"
 
     system = models.CharField(
         null=True,
         blank=True,
-        max_length=128,
+        max_length=256,
         help_text="The identification of the code system that defines the meaning of the symbol in the code.",
     )
     version = models.CharField(
@@ -244,10 +245,9 @@ class Concept(models.Model):
         max_length=128,
         help_text="Symbol in syntax defined by the system",
     )
-    display = models.CharField(
+    display = models.TextField(
         null=True,
         blank=True,
-        max_length=128,
         help_text="A representation of the meaning of the code in the system, following the rules of the system.",
     )
     valueset = models.CharField(max_length=128, choices=VALUESET)

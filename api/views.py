@@ -7,6 +7,7 @@ from api.models import (
     Specimen,
     Location,
     Immunization,
+    OperationOutcome,
 )
 from api.models.organization import Organization
 from api.models.practitioner import Practitioner
@@ -14,6 +15,7 @@ from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
 from api.serializers.observation import ObservationSerializer
+from api.serializers.operation_outcome import OperationOutcomeSerializer
 from api.serializers.organization import OrganizationSerializer
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
@@ -65,4 +67,10 @@ class LocationViewSet(ModelViewSet):
 class ImmunizationViewSet(ModelViewSet):
     queryset = Immunization.objects.all()
     serializer_class = ImmunizationSerializer
+    lookup_field = "id"
+
+
+class OperationOutcomeViewSet(ModelViewSet):
+    queryset = OperationOutcome.objects.all()
+    serializer_class = OperationOutcomeSerializer
     lookup_field = "id"
