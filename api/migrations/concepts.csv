@@ -417,3 +417,6 @@
 "386089008", "http://snomed.info/sct", "Collection of coughed sputum", "FHIRSpecimenCollectionMethod"
 "278450005", "http://snomed.info/sct", "Finger-prick sampling (procedure)", "FHIRSpecimenCollectionMethod"
 "182266005", "http://snomed.info/sct", "Tip of index finger", "UKCoreSpecimenBodySite"
+"GIM", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", "General internal medicine clinic", "ServiceDeliveryLocationRoleType"
+"HOSP", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", "Hospital", "ServiceDeliveryLocationRoleType"
+"CARD", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", "Ambulatory Health Care Facilities; Clinic/Center; Rehabilitation: Cardiac Facilities", "ServiceDeliveryLocationRoleType"

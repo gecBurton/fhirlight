@@ -150,25 +150,6 @@ class Identifier(DataTypeWithPeriod):
         SECONDARY = "secondary"
         OLD = "old"
 
-    class SYSTEM(models.TextChoices):
-        ODS_ORGANISATION_CODE = "https://fhir.nhs.uk/Id/ods-organization-code"
-        ODS_SITE_CODE = "https://fhir.nhs.uk/Id/ods-site-code"
-        NHS_NUMBER = "https://fhir.nhs.uk/Id/nhs-number"
-        GENERAL_MEDICAL_COUNCIL_REGISTRATION_NUMBER = (
-            "https://fhir.hl7.org.uk/Id/gmc-number"
-        )
-        GENERAL_PHARMACEUTICAL_COUNCIL_REGISTRATION_NUMBER = (
-            "https://fhir.hl7.org.uk/Id/gphc-number"
-        )
-        NURSES_MIDWIVES_HEALTH_VISITORS_COUNCIL_REGISTRATION_NUMBER = (
-            "https://fhir.hl7.org.uk/Id/nmc-number"
-        )
-        HEALTHCARE_PROFESSIONS_REGISTRATION_NUMBER = (
-            "https://fhir.hl7.org.uk/Id/hcpc-number"
-        )
-        SPINE = "https://fhir.nhs.uk/Id/sds-user-id"
-        UUID = "https://tools.ietf.org/html/rfc4122"
-
     use = models.CharField(
         null=True,
         blank=True,
@@ -177,15 +158,13 @@ class Identifier(DataTypeWithPeriod):
         help_text="The purpose of this identifier.",
     )
     # type This is not required with ODS
-    system = models.URLField(
-        max_length=64,
-        choices=SYSTEM,
-        help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
-    )
     value = models.TextField(
         help_text="The portion of the identifier typically relevant to the user and which is unique within the context of the system."
     )
     # assigner Implicit for ODS codes - SHOULD be omitted
+
+    class Meta:
+        abstract = True
 
 
 class Name(DataTypeWithPeriod):
@@ -229,6 +208,9 @@ class Name(DataTypeWithPeriod):
         help_text="Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name.",
     )
 
+    class Meta:
+        abstract = True
+
 
 class Concept(models.Model):
     class VALUESET(models.TextChoices):
@@ -240,6 +222,7 @@ class Concept(models.Model):
         UK_CORE_SPECIMEN_TYPE = "UKCoreSpecimenType"
         FHIR_SPECIMEN_COLLECTION_METHOD = "FHIRSpecimenCollectionMethod"
         UK_CORE_SPECIMEN_BODY_SITE = "UKCoreSpecimenBodySite"
+        SERVICE_DELIVERY_LOCATION_ROLE_TYPE = "ServiceDeliveryLocationRoleType"
 
     system = models.CharField(
         null=True,

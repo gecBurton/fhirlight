@@ -33,13 +33,17 @@ class OrganizationAddress(Address):
 class OrganizationIdentifier(Identifier):
     """The address of the organisation using the Address datatype."""
 
+    class SYSTEM(models.TextChoices):
+        ODS_ORGANISATION_CODE = "https://fhir.nhs.uk/Id/ods-organization-code"
+        ODS_SITE_CODE = "https://fhir.nhs.uk/Id/ods-site-code"
+
+    system = models.URLField(
+        max_length=64,
+        choices=SYSTEM,
+        help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
+    )
+
     organization = models.ForeignKey(
         Organization,
         on_delete=models.CASCADE,
-        limit_choices_to={
-            "system": [
-                Identifier.SYSTEM.ODS_SITE_CODE,
-                Identifier.SYSTEM.ODS_ORGANISATION_CODE,
-            ]
-        },
     )

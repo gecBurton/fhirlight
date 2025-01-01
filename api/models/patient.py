@@ -40,12 +40,18 @@ class Patient(UKCore):
 class PatientIdentifier(Identifier):
     """An identifier for this patient."""
 
+    class SYSTEM(models.TextChoices):
+        NHS_NUMBER = "https://fhir.nhs.uk/Id/nhs-number"
+
+    system = models.URLField(
+        max_length=64,
+        choices=SYSTEM,
+        help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
+    )
+
     patient = models.ForeignKey(
         Patient,
         on_delete=models.CASCADE,
-        limit_choices_to=[
-            Identifier.SYSTEM.NHS_NUMBER,
-        ],
     )
 
 
