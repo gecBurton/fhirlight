@@ -14,14 +14,14 @@ from api.models.observation import (
 )
 from api.serializers.common import (
     UKCoreModelSerializer,
-    ConceptSerializer,
+    CodingSerializer,
     RelatedResourceSerializer,
     UKCoreProfileSerializer,
 )
 
 
 class ObservationComponentSerializer(ModelSerializer):
-    code = ConceptSerializer(
+    code = CodingSerializer(
         queryset=Concept.objects.filter(
             valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE
         )
@@ -48,16 +48,22 @@ class ReferenceRangeSerializer(Serializer):
 
 
 class ObservationSerializer(UKCoreProfileSerializer):
-    category = ConceptSerializer(
+    category = CodingSerializer(
         many=True,
         required=False,
         queryset=Concept.objects.filter(
             valueset=Concept.VALUESET.OBSERVATION_CATEGORY_CODE,
         ),
     )
-    code = ConceptSerializer(
+    code = CodingSerializer(
         queryset=Concept.objects.filter(
             valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE,
+        ),
+    )
+    bodySite = CodingSerializer(
+        required=False,
+        queryset=Concept.objects.filter(
+            valueset=Concept.VALUESET.SNOMED_CT_BODY_STRUCTURES,
         ),
     )
 
@@ -95,5 +101,6 @@ class ObservationSerializer(UKCoreProfileSerializer):
             "identifier",
             "valueQuantity",
             "hasMember",
+            "bodySite",
         )
         model = Observation

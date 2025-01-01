@@ -102,6 +102,15 @@ def test_medication(resource):
         "UKCore-Observation-HeavyDrinker-Example",
         # "UKCore-Observation-Lab-RedCellCount-Example", missing referenceRange and specimen
         # "UKCore-Observation-Lab-WhiteCellCount-Example",missing referenceRange and specimen
+        "UKCore-Observation-VitalSigns-BloodPressure-Example",
+        "UKCore-Observation-VitalSigns-BMI-Example",
+        "UKCore-Observation-VitalSigns-BodyHeight-Example",
+        "UKCore-Observation-VitalSigns-BodyTemperature-Example",
+        "UKCore-Observation-VitalSigns-BodyWeight-Example",
+        "UKCore-Observation-VitalSigns-HeadCircumference-Example",
+        "UKCore-Observation-VitalSigns-HeartRate-Example",
+        "UKCore-Observation-VitalSigns-OxygenSaturation-Example",
+        "UKCore-Observation-VitalSigns-RespiratoryRate-Example",
     ],
 )
 def test_observation(

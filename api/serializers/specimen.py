@@ -6,13 +6,13 @@ from api.models.datatypes import Concept
 from api.models.specimen import Specimen
 from api.serializers.common import (
     UKCoreProfileSerializer,
-    ConceptSerializer,
+    CodingSerializer,
     RelatedResourceSerializer,
 )
 
 
 class SpecimenComponentSerializer(Serializer):
-    method = ConceptSerializer(
+    method = CodingSerializer(
         queryset=Concept.objects.filter(
             valueset=Concept.VALUESET.FHIR_SPECIMEN_COLLECTION_METHOD
         )
@@ -20,7 +20,7 @@ class SpecimenComponentSerializer(Serializer):
     collector = RelatedResourceSerializer(
         queryset=Practitioner.objects.all(), required=False
     )
-    bodySite = ConceptSerializer(
+    bodySite = CodingSerializer(
         required=False,
         queryset=Concept.objects.filter(
             valueset=Concept.VALUESET.UK_CORE_SPECIMEN_BODY_SITE
@@ -30,7 +30,7 @@ class SpecimenComponentSerializer(Serializer):
 
 
 class SpecimenSerializer(UKCoreProfileSerializer):
-    type = ConceptSerializer(
+    type = CodingSerializer(
         required=False,
         queryset=Concept.objects.filter(
             valueset=Concept.VALUESET.UK_CORE_SPECIMEN_TYPE
