@@ -30,6 +30,15 @@ def leeds_teaching_hospital():
 
 
 @pytest.fixture
+def white_rose_medical_centre():
+    Oorganization = Organization.objects.create(
+        id="UKCore-Organization-WhiteRoseMedicalCentre-Example"
+    )
+    yield Oorganization
+    Oorganization.delete()
+
+
+@pytest.fixture
 def observation_type():
     return Concept.objects.filter(
         valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE

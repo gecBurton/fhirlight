@@ -15,11 +15,6 @@ class Observation(UKCore):
     # Last Updated	2023-04-28
     # Description	This profile defines the UK constraints and extensions on the International FHIR resource Observation.
 
-    # Observation.subject	Who and/or what the observation is about
-    # Observation.effective[x]	Clinically relevant time/time-period for observation
-    # Observation.performer	Who is responsible for the observation
-    # Observation.value[x]	Actual result.
-
     class STATUS(models.TextChoices):
         REGISTERED = "registered"
         PRELIMINARY = "preliminary"
@@ -80,12 +75,31 @@ class ObservationComponent(models.Model):
 
 
 class ObservationIdentifier(Identifier):
+    class SYSTEM(models.TextChoices):
+        ODS_ORGANISATION_CODE = "https://fhir.nhs.uk/Id/ods-organization-code"
+        ODS_SITE_CODE = "https://fhir.nhs.uk/Id/ods-site-code"
+        NHS_NUMBER = "https://fhir.nhs.uk/Id/nhs-number"
+        GENERAL_MEDICAL_COUNCIL_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/gmc-number"
+        )
+        GENERAL_PHARMACEUTICAL_COUNCIL_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/gphc-number"
+        )
+        NURSES_MIDWIVES_HEALTH_VISITORS_COUNCIL_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/nmc-number"
+        )
+        HEALTHCARE_PROFESSIONS_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/hcpc-number"
+        )
+        SPINE = "https://fhir.nhs.uk/Id/sds-user-id"
+        UUID = "https://tools.ietf.org/html/rfc4122"
+
+    system = models.URLField(
+        max_length=64,
+        choices=SYSTEM,
+        help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
+    )
     observation = models.ForeignKey(
         Observation,
         on_delete=models.CASCADE,
-        limit_choices_to={
-            "system": [
-                Identifier.SYSTEM.UUID,
-            ]
-        },
     )

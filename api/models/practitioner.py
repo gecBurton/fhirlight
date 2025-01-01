@@ -38,18 +38,31 @@ class PractitionerAddress(Address):
 class PractitionerIdentifier(Identifier):
     """An identifier that applies to this person in this role."""
 
+    class SYSTEM(models.TextChoices):
+        NHS_NUMBER = "https://fhir.nhs.uk/Id/nhs-number"
+        GENERAL_MEDICAL_COUNCIL_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/gmc-number"
+        )
+        GENERAL_PHARMACEUTICAL_COUNCIL_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/gphc-number"
+        )
+        NURSES_MIDWIVES_HEALTH_VISITORS_COUNCIL_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/nmc-number"
+        )
+        HEALTHCARE_PROFESSIONS_REGISTRATION_NUMBER = (
+            "https://fhir.hl7.org.uk/Id/hcpc-number"
+        )
+        SPINE = "https://fhir.nhs.uk/Id/sds-user-id"
+
+    system = models.URLField(
+        max_length=64,
+        choices=SYSTEM,
+        help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
+    )
+
     practitioner = models.ForeignKey(
         Practitioner,
         on_delete=models.CASCADE,
-        limit_choices_to={
-            "system": [
-                Identifier.SYSTEM.GENERAL_MEDICAL_COUNCIL_REGISTRATION_NUMBER,
-                Identifier.SYSTEM.GENERAL_PHARMACEUTICAL_COUNCIL_REGISTRATION_NUMBER,
-                Identifier.SYSTEM.HEALTHCARE_PROFESSIONS_REGISTRATION_NUMBER,
-                Identifier.SYSTEM.NURSES_MIDWIVES_HEALTH_VISITORS_COUNCIL_REGISTRATION_NUMBER,
-                Identifier.SYSTEM.SPINE,
-            ]
-        },
     )
 
 

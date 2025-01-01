@@ -14,6 +14,19 @@ class Medication(UKCore):
     # Last Updated	2022-12-16
     # Description	This profile defines the UK constraints and extensions on the International FHIR resource Medication.
 
+    class STATUS(models.TextChoices):
+        ACTIVE = "active"
+        INACTIVE = "inactive"
+        ENTERED_IN_ERROR = "entered-in-error"
+
+    status = models.CharField(
+        null=True,
+        blank=True,
+        max_length=16,
+        choices=STATUS,
+        help_text="A code to indicate if the medication is in active use.",
+    )
+
     code = models.ForeignKey(
         Concept,
         on_delete=models.CASCADE,
