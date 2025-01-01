@@ -62,6 +62,15 @@ class Observation(UKCore):
     )
     valueQuantity = models.JSONField(null=True, blank=True)
     hasMember = models.ManyToManyField("self")
+    bodySite = models.ForeignKey(
+        Concept,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        limit_choices_to={"valueset": Concept.VALUESET.SNOMED_CT_BODY_STRUCTURES},
+        help_text="Type of observation (code / type)",
+        related_name="observationbodysite",
+    )
 
 
 class ObservationComponent(models.Model):

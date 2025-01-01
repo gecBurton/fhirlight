@@ -2,6 +2,7 @@ from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework.relations import RelatedField
 from django.utils.translation import gettext_lazy as _
+from rest_framework.serializers import Serializer
 
 from api.models.datatypes import Concept
 
@@ -44,20 +45,24 @@ class UKCoreProfileSerializer(UKCoreModelSerializer):
         return self.Meta.model.__name__
 
 
-class ConceptSerializer(RelatedField):
+class ConceptSerializer(Serializer):
+    code = CharField()
+    system = CharField(required=False)
+    display = CharField(required=False)
+
+
+class CodingSerializer(RelatedField):
+    coding = ConceptSerializer(many=True)
     default_error_messages = {
         "required": _("This field is required."),
         "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
-        "incorrect_format": _(
-            'Incorrect format. Expected {"language": {"coding": [{"code": code]}}.'
-        ),
     }
 
     def to_internal_value(self, data):
-        try:
-            code = data["coding"][0]["code"]
-        except (KeyError, IndexError):
-            self.fail("incorrect_format")
+        if "coding" not in data:
+            self.fail("required")
+        internal_value = self.coding.to_internal_value(data=data["coding"])
+        code = internal_value[0]["code"]
 
         try:
             return self.get_queryset().get(code=code)
@@ -65,15 +70,8 @@ class ConceptSerializer(RelatedField):
             self.fail("does_not_exist", pk_value=code)
 
     def to_representation(self, value):
-        return {
-            "coding": [
-                {
-                    "code": value.code,
-                    "system": value.system,
-                    "display": value.display,
-                }
-            ]
-        }
+        representation = self.coding.to_representation([value])
+        return {"coding": representation}
 
 
 class RelatedResourceSerializer(RelatedField):

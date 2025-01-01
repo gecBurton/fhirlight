@@ -10,8 +10,7 @@
                     "code": "vital-signs",
                     "display": "Vital Signs"
                 }
-            ],
-            "text": "Vital Signs"
+            ]
         }
     ],
     "code": {
@@ -20,11 +19,6 @@
                 "system": "http://snomed.info/sct",
                 "code": "276885007",
                 "display": "Core body temperature"
-            },
-            {
-                "system": "http://loinc.org",
-                "code": "8310-5",
-                "display": "Body temperature"
             }
         ]
     },

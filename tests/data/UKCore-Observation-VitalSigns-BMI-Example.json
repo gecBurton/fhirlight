@@ -10,8 +10,7 @@
                     "code": "vital-signs",
                     "display": "Vital Signs"
                 }
-            ],
-            "text": "Vital Signs"
+            ]
         }
     ],
     "code": {
@@ -20,11 +19,6 @@
                 "system": "http://snomed.info/sct",
                 "code": "60621009",
                 "display": "Body mass index"
-            },
-            {
-                "system": "http://loinc.org",
-                "code": "39156-5",
-                "display": "Body mass index (BMI) [Ratio]"
             }
         ]
     },

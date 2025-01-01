@@ -4,7 +4,7 @@ from api.models.location import LocationIdentifier, LocationAddress, LocationTel
 from api.serializers.common import (
     UKCoreProfileSerializer,
     UKCoreModelSerializer,
-    ConceptSerializer,
+    CodingSerializer,
     RelatedResourceSerializer,
 )
 
@@ -32,7 +32,7 @@ class LocationSerializer(UKCoreProfileSerializer):
         many=True, required=False, source="locationidentifier_set"
     )
     address = LocationAddressSerializer(required=False)
-    type = ConceptSerializer(
+    type = CodingSerializer(
         required=False,
         many=True,
         queryset=Concept.objects.filter(

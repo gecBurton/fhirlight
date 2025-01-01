@@ -1,5 +1,8 @@
 https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=1.7.0
 
+intentional exclusions:
+code-able concepts - only one, no text
+
 incomplete:
 - Observation -> Specimen
 

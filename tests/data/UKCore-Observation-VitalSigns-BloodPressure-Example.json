@@ -19,14 +19,8 @@
                 "system": "http://snomed.info/sct",
                 "code": "75367002",
                 "display": "Blood pressure"
-            },
-            {
-                "system": "http://loinc.org",
-                "code": "85354-9",
-                "display": "Blood pressure panel with all children optional"
             }
-        ],
-        "text": "Blood pressure"
+        ]
     },
     "subject": {
         "reference": "Patient/UKCore-Patient-RichardSmith-Example"
@@ -44,8 +38,7 @@
                 "code": "40983000",
                 "display": "Structure of upper extremity between shoulder and elbow"
             }
-        ],
-        "text": "Structure of upper extremity between shoulder and elbow"
+        ]
     },
     "component":  [
         {
@@ -55,14 +48,8 @@
                         "system": "http://snomed.info/sct",
                         "code": "72313002",
                         "display": "Systolic arterial pressure"
-                    },
-                    {
-                        "system": "http://loinc.org",
-                        "code": "8480-6",
-                        "display": "Systolic blood pressure"
                     }
-                ],
-                "text": "Systolic blood pressure"
+                ]
             },
             "valueQuantity": {
                 "value": 142,
@@ -78,14 +65,8 @@
                         "system": "http://snomed.info/sct",
                         "code": "1091811000000102",
                         "display": "Diastolic arterial pressure"
-                    },
-                    {
-                        "system": "http://loinc.org",
-                        "code": "8462-4",
-                        "display": "Diastolic blood pressure"
                     }
-                ],
-                "text": "Diastolic blood pressure"
+                ]
             },
             "valueQuantity": {
                 "value": 94,

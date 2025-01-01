@@ -10,8 +10,7 @@
                     "code": "vital-signs",
                     "display": "Vital Signs"
                 }
-            ],
-            "text": "Vital Signs"
+            ]
         }
     ],
     "code": {
@@ -20,11 +19,6 @@
                 "system": "http://snomed.info/sct",
                 "code": "363812007",
                 "display": "Head circumference"
-            },
-            {
-                "system": "http://loinc.org",
-                "code": "9843-4",
-                "display": "Head Occipital-frontal circumference"
             }
         ]
     },

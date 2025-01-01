@@ -10,8 +10,7 @@
                     "code": "vital-signs",
                     "display": "Vital Signs"
                 }
-            ],
-            "text": "Vital Signs"
+            ]
         }
     ],
     "code": {
@@ -20,11 +19,6 @@
                 "system": "http://snomed.info/sct",
                 "code": "50373000",
                 "display": "Body height measure"
-            },
-            {
-                "system": "http://loinc.org",
-                "code": "8302-2",
-                "display": "Body height"
             }
         ]
     },
