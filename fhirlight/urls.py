@@ -26,6 +26,7 @@ from api.views import (
     MedicationViewSet,
     ObservationViewSet,
     SpecimenViewSet,
+    LocationViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -35,6 +36,7 @@ router.register(r"Patient", PatientViewSet, basename="patient")
 router.register(r"Medication", MedicationViewSet, basename="medication")
 router.register(r"Observation", ObservationViewSet, basename="observation")
 router.register(r"Specimen", SpecimenViewSet, basename="specimen")
+router.register(r"Location", LocationViewSet, basename="location")
 
 
 urlpatterns = [

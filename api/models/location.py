@@ -5,6 +5,10 @@ from api.models.common import UKCore
 from api.models.datatypes import Address, Identifier, ContactPoint, Concept
 
 
+class LocationAddress(Address):
+    pass
+
+
 class Location(UKCore):
     """This profile can be used to exchange details and position information for a physical place where services are
     provided and resources and participants may be stored, found, contained, or accommodated.
@@ -38,6 +42,28 @@ class Location(UKCore):
         blank=True,
         help_text="Name of the location as used by humans. This does not need to be unique.",
     )
+    managingOrganization = models.ForeignKey(
+        Organization,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        help_text="Organization responsible for provisioning and upkeep",
+    )
+    type = models.ManyToManyField(
+        Concept,
+        limit_choices_to={
+            "valueset": Concept.VALUESET.SERVICE_DELIVERY_LOCATION_ROLE_TYPE
+        },
+        help_text="Type of function performed",
+    )
+
+    address = models.OneToOneField(
+        LocationAddress,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        help_text="If locations can be visited, we need to keep track of their address.",
+    )
 
 
 class LocationIdentifier(Identifier):
@@ -54,31 +80,6 @@ class LocationIdentifier(Identifier):
         Location,
         on_delete=models.CASCADE,
     )
-
-    type = models.ForeignKey(
-        Concept,
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
-        limit_choices_to={
-            "valueset": Concept.VALUESET.SERVICE_DELIVERY_LOCATION_ROLE_TYPE
-        },
-        help_text="Type of function performed",
-    )
-
-    managingOrganization = models.ForeignKey(
-        Organization,
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
-        help_text="Organization responsible for provisioning and upkeep",
-    )
-
-
-class LocationAddress(Address):
-    """If locations can be visited, we need to keep track of their address."""
-
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
 
 class LocationTelecom(ContactPoint):
