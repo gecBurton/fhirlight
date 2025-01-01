@@ -25,7 +25,7 @@ incomplete:
 | UKCore-ImagingStudy                             |          |
 | UKCore-Immunization                             |          |
 | UKCore-List                                     |          |
-| UKCore-Location                                 |          |
+| UKCore-Location                                 | yes      |
 | UKCore-Medication                               | yes      |
 | UKCore-MedicationAdministration                 |          |
 | UKCore-MedicationDispense                       |          |

@@ -115,28 +115,3 @@ class PatientSerializer(UKCoreProfileSerializer):
             "communication",
         ]
         model = Patient
-
-    def create(self, validated_data):
-        addresses = validated_data.pop("patientaddress_set", [])
-        names = validated_data.pop("patientname_set", [])
-        identifiers = validated_data.pop("patientidentifier_set", [])
-        telecoms = validated_data.pop("patienttelecom_set", [])
-        communications = validated_data.pop("communication", [])
-
-        patient = Patient.objects.create(**validated_data)
-
-        for address in addresses:
-            PatientAddress.objects.create(patient=patient, **address)
-
-        for name in names:
-            PatientName.objects.create(patient=patient, **name)
-
-        for identifier in identifiers:
-            PatientIdentifier.objects.create(patient=patient, **identifier)
-
-        for telecom in telecoms:
-            PatientTelecom.objects.create(patient=patient, **telecom)
-
-        patient.communication.set(communications)
-        patient.save()
-        return patient

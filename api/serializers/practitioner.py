@@ -58,26 +58,3 @@ class PractitionerSerializer(UKCoreProfileSerializer):
             "telecom",
         )
         model = Practitioner
-
-    def create(self, validated_data):
-        addresses = validated_data.pop("practitioneraddress_set", [])
-        names = validated_data.pop("practitionername_set", [])
-        identifiers = validated_data.pop("practitioneridentifier_set", [])
-        telecoms = validated_data.pop("practitionertelecom_set", [])
-
-        practitioner = Practitioner.objects.create(**validated_data)
-
-        for address in addresses:
-            PractitionerAddress.objects.create(practitioner=practitioner, **address)
-
-        for name in names:
-            PractitionerName.objects.create(practitioner=practitioner, **name)
-
-        for identifier in identifiers:
-            PractitionerIdentifier.objects.create(
-                practitioner=practitioner, **identifier
-            )
-
-        for telecom in telecoms:
-            PractitionerTelecom.objects.create(practitioner=practitioner, **telecom)
-        return practitioner
