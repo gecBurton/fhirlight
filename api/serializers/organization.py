@@ -39,23 +39,3 @@ class OrganizationSerializer(UKCoreProfileSerializer):
     class Meta:
         fields = ("resourceType", "id", "identifier", "name", "address", "telecom")
         model = Organization
-
-    def create(self, validated_data):
-        addresses = validated_data.pop("organizationaddress_set", [])
-        identifiers = validated_data.pop("organizationidentifier_set", [])
-        telecoms = validated_data.pop("organizationcontactpoint_set", [])
-
-        organization = Organization.objects.create(**validated_data)
-        for address in addresses:
-            OrganizationAddress.objects.create(organization=organization, **address)
-
-        for identifier in identifiers:
-            OrganizationIdentifier.objects.create(
-                organization=organization, **identifier
-            )
-
-        for telecom in telecoms:
-            OrganizationContactPoint.objects.create(
-                organization=organization, **telecom
-            )
-        return organization

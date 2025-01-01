@@ -16,10 +16,6 @@ class LocationIdentifierSerializer(UKCoreModelSerializer):
 
 
 class LocationAddressSerializer(UKCoreModelSerializer):
-    def to_internal_value(self, data):
-        internal_value = super().to_internal_value(data)
-        return LocationAddress.objects.create(**internal_value)
-
     class Meta:
         exclude = ("uuid", "created_at", "updated_at")
         model = LocationAddress
@@ -63,18 +59,3 @@ class LocationSerializer(UKCoreProfileSerializer):
             "managingOrganization",
         ]
         model = Location
-
-    def create(self, validated_data):
-        identifiers = validated_data.pop("locationidentifier_set", [])
-        telecoms = validated_data.pop("locationtelecom_set", [])
-        types = validated_data.pop("type", [])
-
-        location = Location.objects.create(**validated_data)
-
-        location.type.set(types)
-
-        for identifier in identifiers:
-            LocationIdentifier.objects.create(location=location, **identifier)
-        for telecom in telecoms:
-            LocationTelecom.objects.create(location=location, **telecom)
-        return location

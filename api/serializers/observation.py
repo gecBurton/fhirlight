@@ -97,21 +97,3 @@ class ObservationSerializer(UKCoreProfileSerializer):
             "hasMember",
         )
         model = Observation
-
-    def create(self, validated_data):
-        identifiers = validated_data.pop("observationidentifier_set", [])
-        components = validated_data.pop("observationcomponent_set", [])
-        performers = validated_data.pop("performer", [])
-        categories = validated_data.pop("category", [])
-
-        observation = Observation.objects.create(**validated_data)
-        observation.performer.set(performers)
-        observation.category.set(categories)
-        observation.save()
-
-        for component in components:
-            ObservationComponent.objects.create(observation=observation, **component)
-
-        for identifier in identifiers:
-            ObservationIdentifier.objects.create(observation=observation, **identifier)
-        return observation

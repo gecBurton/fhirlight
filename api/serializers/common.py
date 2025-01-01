@@ -1,6 +1,6 @@
+from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework.relations import RelatedField
-from rest_framework.serializers import ModelSerializer
 from django.utils.translation import gettext_lazy as _
 
 from api.models.datatypes import Concept
@@ -30,7 +30,7 @@ def strip_none(obj):
     return obj
 
 
-class UKCoreModelSerializer(ModelSerializer):
+class UKCoreModelSerializer(WritableNestedModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         return strip_none(representation)
