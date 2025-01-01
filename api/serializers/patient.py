@@ -1,4 +1,3 @@
-from rest_framework.fields import CharField
 from rest_framework.serializers import Serializer, RelatedField
 
 from api.models import Patient
@@ -9,7 +8,11 @@ from api.models.patient import (
     PatientName,
     PatientAddress,
 )
-from api.serializers.common import UKCoreModelSerializer, UKCoreProfileSerializer
+from api.serializers.common import (
+    UKCoreModelSerializer,
+    UKCoreProfileSerializer,
+    ConceptSerializer,
+)
 
 from django.utils.translation import gettext_lazy as _
 
@@ -38,14 +41,8 @@ class PatientNameSerializer(UKCoreModelSerializer):
         model = PatientName
 
 
-class CodingSerializer(Serializer):
-    system = CharField()
-    code = CharField()
-    display = CharField()
-
-
 class LanguageSerializer(Serializer):
-    coding = CodingSerializer(many=True)
+    coding = ConceptSerializer(many=True)
 
 
 class PatientCommunicationSerializer(RelatedField):

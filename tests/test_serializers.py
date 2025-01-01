@@ -3,6 +3,7 @@ import os
 
 import pytest
 
+from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
 from api.serializers.observation import ObservationSerializer
@@ -154,6 +155,23 @@ def test_location(resource, leeds_teaching_hospital, white_rose_medical_centre):
         payload = json.load(f)
 
     serializer = LocationSerializer(data=payload)
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Immunization-InfluenzaVaccine-Example",
+    ],
+)
+def test_immunization(resource, general_practice_nurse_clinic, richard_smith):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = ImmunizationSerializer(data=payload)
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

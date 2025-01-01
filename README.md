@@ -26,7 +26,7 @@ incomplete:
 | UKCore-Flag                                     |          |
 | UKCore-HealthcareService                        |          |
 | UKCore-ImagingStudy                             |          |
-| UKCore-Immunization                             |          |
+| UKCore-Immunization                             | yes      |
 | UKCore-List                                     |          |
 | UKCore-Location                                 | yes      |
 | UKCore-Medication                               | yes      |

@@ -4,7 +4,7 @@ import os.path
 import pytest
 from django.urls import reverse
 
-from api.models import Patient, Organization, Practitioner
+from api.models import Patient, Organization, Practitioner, Location
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -49,6 +49,69 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
             ],
         ),
         (
+            "UKCore-Observation-VitalSigns-BloodPressure-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-Observation-VitalSigns-BMI-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-Observation-VitalSigns-BodyHeight-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-Observation-VitalSigns-BodyTemperature-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-Observation-VitalSigns-BodyWeight-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-Observation-VitalSigns-HeadCircumference-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-Observation-VitalSigns-HeartRate-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-Observation-VitalSigns-OxygenSaturation-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-Observation-VitalSigns-RespiratoryRate-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
             "UKCore-Specimen-UrineSpecimen-Example",
             [
                 "UKCore-Practitioner-ConsultantSandraGose-Example",
@@ -74,6 +137,13 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
             "UKCore-Location-HospitalSJUH-Example",
             ["UKCore-Organization-LeedsTeachingHospital-Example"],
         ),
+        (
+            "UKCore-Immunization-InfluenzaVaccine-Example",
+            [
+                "UKCore-Location-GeneralPracticeNurseClinic-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
     ],
 )
 def test_resource(client, resource, dependants):
@@ -83,6 +153,7 @@ def test_resource(client, resource, dependants):
             "patient": Patient,
             "organization": Organization,
             "practitioner": Practitioner,
+            "location": Location,
         }
         resource_types[dependant_resource_type].objects.create(id=dependant)
 
