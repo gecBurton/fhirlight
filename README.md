@@ -55,7 +55,7 @@ incomplete:
 | UKCore-Observation-VitalSigns-HeartRate         | yes      |
 | UKCore-Observation-VitalSigns-OxygenSaturation  | yes      |
 | UKCore-Observation-VitalSigns-RespirationRate   | yes      |
-| UKCore-OperationOutcome                         |          |
+| UKCore-OperationOutcome                         | yes      |
 | UKCore-Organization                             | yes      |
 | UKCore-Patient                                  | yes      |
 | UKCore-Practitioner                             | yes      |

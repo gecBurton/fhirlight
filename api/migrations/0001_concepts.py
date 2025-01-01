@@ -67,10 +67,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "display",
-                    models.CharField(
+                    models.TextField(
                         blank=True,
                         help_text="A representation of the meaning of the code in the system, following the rules of the system.",
-                        max_length=128,
                         null=True,
                     ),
                 ),
