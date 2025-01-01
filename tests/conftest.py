@@ -1,6 +1,6 @@
 import pytest
 
-from api.models import Patient, Organization, Observation, Practitioner
+from api.models import Patient, Organization, Observation, Practitioner, Location
 from api.models.datatypes import Concept
 
 
@@ -61,3 +61,15 @@ def red_cell_count(observation_type):
     )
     yield observation
     observation.delete()
+
+
+@pytest.fixture
+def general_practice_nurse_clinic(observation_type):
+    location = Location.objects.create(
+        id="UKCore-Location-GeneralPracticeNurseClinic-Example"
+    )
+    yield location
+    location.delete()
+
+
+#

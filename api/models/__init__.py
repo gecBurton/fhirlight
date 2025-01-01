@@ -16,8 +16,10 @@ from .medication import Medication
 from .observation import Observation, ObservationIdentifier
 from .specimen import Specimen
 from .location import Location
+from .immunization import Immunization
 
 __all__ = [
+    "Immunization",
     "Location",
     "Patient",
     "OrganizationAddress",

@@ -1,8 +1,16 @@
 from rest_framework.viewsets import ModelViewSet
 
-from api.models import Patient, Medication, Observation, Specimen, Location
+from api.models import (
+    Patient,
+    Medication,
+    Observation,
+    Specimen,
+    Location,
+    Immunization,
+)
 from api.models.organization import Organization
 from api.models.practitioner import Practitioner
+from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
 from api.serializers.observation import ObservationSerializer
@@ -51,4 +59,10 @@ class SpecimenViewSet(ModelViewSet):
 class LocationViewSet(ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
+    lookup_field = "id"
+
+
+class ImmunizationViewSet(ModelViewSet):
+    queryset = Immunization.objects.all()
+    serializer_class = ImmunizationSerializer
     lookup_field = "id"

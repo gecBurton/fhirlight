@@ -224,6 +224,7 @@ class Concept(models.Model):
         UK_CORE_SPECIMEN_BODY_SITE = "UKCoreSpecimenBodySite"
         SERVICE_DELIVERY_LOCATION_ROLE_TYPE = "ServiceDeliveryLocationRoleType"
         SNOMED_CT_BODY_STRUCTURES = "SNOMEDCTBodyStructures"
+        UK_CORE_VACCINE_CODE = "UKCoreVaccineCode"
 
     system = models.CharField(
         null=True,
