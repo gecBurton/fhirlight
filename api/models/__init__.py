@@ -23,8 +23,10 @@ from .practitioner_role import PractitionerRole
 from .schedule import Schedule
 from .questionnaire import Questionnaire
 from .procedure import Procedure
+from .related_person import RelatedPerson
 
 __all__ = [
+    "RelatedPerson",
     "Procedure",
     "Questionnaire",
     "Schedule",

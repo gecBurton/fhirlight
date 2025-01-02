@@ -83,6 +83,7 @@ tested examples
   * [Inpatient Survey](tests/data/UKCore-Questionnaire-InpatientSurvey-Example.json)
 * UKCore-QuestionnaireResponse
 * UKCore-RelatedPerson
+  * [Joy Smith](tests/data/UKCore-RelatedPerson-JoySmith-Example.json)
 * UKCore-Schedule
   * [Immunization](tests/data/UKCore-Schedule-Immunization-Example.json)
 * UKCore-ServiceRequest
