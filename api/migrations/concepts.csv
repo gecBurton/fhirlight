@@ -609,3 +609,4 @@
 "708190004", "http://snomed.info/sct", "Immunology service", "ServiceType"
 "408480009", "http://snomed.info/sct", "Clinical immunology", "UKCorePracticeSettingCode"
 "62247001", "http://snomed.info/sct", "General practitioner", "PractitionerRole"
+"128004", "http://snomed.info/sct", "Hand microscope examination of skin", "UKCoreProcedureCode"
