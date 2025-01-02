@@ -31,6 +31,7 @@ from api.views import (
     OperationOutcomeViewSet,
     SlotViewSet,
     PractitionerRoleViewSet,
+    ScheduleViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -49,6 +50,7 @@ router.register(r"Slot", SlotViewSet, basename="slot")
 router.register(
     r"PractitionerRole", PractitionerRoleViewSet, basename="practitionerrole"
 )
+router.register(r"ScheduleRole", ScheduleViewSet, basename="schedule")
 
 
 urlpatterns = [

@@ -605,6 +605,7 @@
 "960", "https://fhir.hl7.org.uk/CodeSystem/UKCore-PracticeSettingCode", "Allied Health Professional", "UKCorePracticeSettingCode"
 "WALKIN", "http://terminology.hl7.org/CodeSystem/v2-0276", "A previously unscheduled walk-in visit", "v2.0276"
 "788007007", "http://snomed.info/sct", "General practice service", "ServiceCategory"
+"17", "http://terminology.hl7.org/CodeSystem/service-category", "General Practice", "ServiceCategory"
 "708190004", "http://snomed.info/sct", "Immunology service", "ServiceType"
 "408480009", "http://snomed.info/sct", "Clinical immunology", "UKCorePracticeSettingCode"
 "62247001", "http://snomed.info/sct", "General practitioner", "PractitionerRole"

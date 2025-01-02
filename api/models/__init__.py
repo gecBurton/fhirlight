@@ -20,8 +20,10 @@ from .immunization import Immunization
 from .operation_outcome import OperationOutcome
 from .slot import Slot
 from .practitioner_role import PractitionerRole
+from .schedule import Schedule
 
 __all__ = [
+    "Schedule",
     "PractitionerRole",
     "Slot",
     "OperationOutcome",
