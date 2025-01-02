@@ -232,6 +232,8 @@ class Concept(models.Model):
         PRACTITIONER_ROLE = "PractitionerRole"
         UK_CORE_PROCEDURE_CODE = "UKCoreProcedureCode"
         UK_CORE_PERSON_RELATIONSHIP_TYPE = "UKCorePersonRelationshipType"
+        DIAGNOSTIC_SERVICE_SECTION_CODE = "DiagnosticServiceSectionCodes"
+        UK_CORE_REPORT_CODE = "UKCoreReportCode"
 
     system = models.CharField(
         null=True,

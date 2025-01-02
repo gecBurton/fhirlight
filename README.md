@@ -20,6 +20,8 @@ tested examples
 * UKCore-Consent
 * UKCore-Device
 * UKCore-DiagnosticReport
+  * [Diagnostic Studies Report](tests/data/UKCore-DiagnosticReport-DiagnosticStudiesReport-Example.json)
+  * [Diagnostic Studies Report](tests/data/UKCore-DiagnosticReport-Lab-DiagnosticStudiesReport-Example.json)
 * UKCore-Encounter
 * UKCore-EpisodeOfCare
 * UKCore-FamilyMemberHistory

@@ -24,8 +24,10 @@ from .schedule import Schedule
 from .questionnaire import Questionnaire
 from .procedure import Procedure
 from .related_person import RelatedPerson
+from .diagnostic_report import DiagnosticReport
 
 __all__ = [
+    "DiagnosticReport",
     "RelatedPerson",
     "Procedure",
     "Questionnaire",
