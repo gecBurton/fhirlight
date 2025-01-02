@@ -79,6 +79,7 @@ tested examples
   * [General Practitioner](tests/data/UKCore-PractitionerRole-GeneralPractitioner-Example.json)
 * UKCore-Procedure
 * UKCore-Questionnaire
+  * [Inpatient Survey](tests/data/UKCore-Questionnaire-InpatientSurvey-Example.json)
 * UKCore-QuestionnaireResponse
 * UKCore-RelatedPerson
 * UKCore-Schedule

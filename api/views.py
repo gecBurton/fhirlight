@@ -11,6 +11,7 @@ from api.models import (
     Slot,
     PractitionerRole,
     Schedule,
+    Questionnaire,
 )
 from api.models.organization import Organization
 from api.models.practitioner import Practitioner
@@ -23,6 +24,7 @@ from api.serializers.organization import OrganizationSerializer
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
 from api.serializers.practitioner_role import PractitionerRoleSerializer
+from api.serializers.questionnaire import QuestionnaireSerializer
 from api.serializers.schedule import ScheduleSerializer
 from api.serializers.slot import SlotSerializer
 from api.serializers.specimen import SpecimenSerializer
@@ -97,4 +99,10 @@ class PractitionerRoleViewSet(ModelViewSet):
 class ScheduleViewSet(ModelViewSet):
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
+    lookup_field = "id"
+
+
+class QuestionnaireViewSet(ModelViewSet):
+    queryset = Questionnaire.objects.all()
+    serializer_class = QuestionnaireSerializer
     lookup_field = "id"
