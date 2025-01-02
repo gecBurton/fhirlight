@@ -16,7 +16,7 @@ from api.views import (
     PractitionerRoleViewSet,
     ScheduleViewSet,
     QuestionnaireViewSet,
-    ProcedureViewSet,
+    ProcedureViewSet, QuestionnaireResponseViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -38,6 +38,7 @@ router.register(
 router.register(r"ScheduleRole", ScheduleViewSet, basename="schedule")
 router.register(r"Questionnaire", QuestionnaireViewSet, basename="questionnaire")
 router.register(r"Procedure", ProcedureViewSet, basename="procedure")
+router.register(r"QuestionnaireResponse", QuestionnaireResponseViewSet, basename="questionnaireresponse")
 
 
 urlpatterns = [

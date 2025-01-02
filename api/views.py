@@ -27,6 +27,7 @@ from api.serializers.practitioner import PractitionerSerializer
 from api.serializers.practitioner_role import PractitionerRoleSerializer
 from api.serializers.procedure import ProcedureSerializer
 from api.serializers.questionnaire import QuestionnaireSerializer
+from api.serializers.questionnaire_reponse import QuestionnaireResponseSerializer
 from api.serializers.schedule import ScheduleSerializer
 from api.serializers.slot import SlotSerializer
 from api.serializers.specimen import SpecimenSerializer
@@ -113,4 +114,11 @@ class QuestionnaireViewSet(ModelViewSet):
 class ProcedureViewSet(ModelViewSet):
     queryset = Procedure.objects.all()
     serializer_class = ProcedureSerializer
+    lookup_field = "id"
+
+
+
+class QuestionnaireResponseViewSet(ModelViewSet):
+    queryset = Questionnaire.objects.all()
+    serializer_class = QuestionnaireResponseSerializer
     lookup_field = "id"
