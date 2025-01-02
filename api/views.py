@@ -8,7 +8,8 @@ from api.models import (
     Location,
     Immunization,
     OperationOutcome,
-    Slot, PractitionerRole,
+    Slot,
+    PractitionerRole,
 )
 from api.models.organization import Organization
 from api.models.practitioner import Practitioner

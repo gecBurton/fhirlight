@@ -230,7 +230,7 @@ class Concept(models.Model):
         V2_0276 = "v2.0276"
         SERVICE_CATEGORY = "ServiceCategory"
         SERVICE_TYPE = "ServiceType"
-        PRACTITIONER_ROLE  = "PractitionerRole"
+        PRACTITIONER_ROLE = "PractitionerRole"
 
     system = models.CharField(
         null=True,
