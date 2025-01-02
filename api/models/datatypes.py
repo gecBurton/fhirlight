@@ -161,7 +161,6 @@ class Identifier(DataTypeWithPeriod):
     value = models.TextField(
         help_text="The portion of the identifier typically relevant to the user and which is unique within the context of the system."
     )
-    # assigner Implicit for ODS codes - SHOULD be omitted
 
     class Meta:
         abstract = True

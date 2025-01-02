@@ -12,6 +12,7 @@ from api.serializers.organization import OrganizationSerializer
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
 from api.serializers.practitioner_role import PractitionerRoleSerializer
+from api.serializers.questionnaire import QuestionnaireSerializer
 from api.serializers.schedule import ScheduleSerializer
 from api.serializers.slot import SlotSerializer
 from api.serializers.specimen import SpecimenSerializer
@@ -244,6 +245,23 @@ def test_schedule(resource, general_practice_nurse_clinic):
         payload = json.load(f)
 
     serializer = ScheduleSerializer(data=payload)
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Questionnaire-InpatientSurvey-Example",
+    ],
+)
+def test_questionnaire(resource, general_practice_nurse_clinic):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = QuestionnaireSerializer(data=payload)
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload
