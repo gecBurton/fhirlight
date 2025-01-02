@@ -59,9 +59,12 @@ class CodingSerializer(RelatedField):
     }
 
     def to_internal_value(self, data):
-        if "coding" not in data:
+        if not (isinstance(data, dict) and "coding" in data):
             self.fail("required")
-        internal_value = self.coding.to_internal_value(data=data["coding"])
+        try:
+            internal_value = self.coding.to_internal_value(data=data["coding"])
+        except Exception:
+            raise
         code = internal_value[0]["code"]
 
         try:

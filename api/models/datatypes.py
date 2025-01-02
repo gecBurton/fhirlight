@@ -226,6 +226,10 @@ class Concept(models.Model):
         SNOMED_CT_BODY_STRUCTURES = "SNOMEDCTBodyStructures"
         UK_CORE_VACCINE_CODE = "UKCoreVaccineCode"
         UK_CORE_OPERATION_OUTCOME_ISSUE_DETAILS = "UKCoreOperationOutcomeIssueDetails"
+        UK_CORE_PRACTICE_SETTINGS_CODE = "UKCorePracticeSettingCode"
+        V2_0276 = "v2.0276"
+        SERVICE_CATEGORY = "ServiceCategory"
+        SERVICE_TYPE = "ServiceType"
 
     system = models.CharField(
         null=True,

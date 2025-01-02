@@ -11,6 +11,7 @@ from api.serializers.operation_outcome import OperationOutcomeSerializer
 from api.serializers.organization import OrganizationSerializer
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
+from api.serializers.slot import SlotSerializer
 from api.serializers.specimen import SpecimenSerializer
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -190,6 +191,23 @@ def test_operation_outcome(resource, general_practice_nurse_clinic, richard_smit
         payload = json.load(f)
 
     serializer = OperationOutcomeSerializer(data=payload)
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Slot-AvailableWalkInVisit-Example",
+    ],
+)
+def test_slot(resource, general_practice_nurse_clinic, richard_smith):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = SlotSerializer(data=payload)
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload
