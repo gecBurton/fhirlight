@@ -46,6 +46,13 @@ def leeds_teaching_hospital():
 
 
 @pytest.fixture
+def cardiology_sjuh():
+    location = Location.objects.create(id="UKCore-Location-CardiologySJUH-Example")
+    yield location
+    location.delete()
+
+
+@pytest.fixture
 def white_rose_medical_centre():
     organization = Organization.objects.create(
         id="UKCore-Organization-WhiteRoseMedicalCentre-Example"

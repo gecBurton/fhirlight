@@ -5,6 +5,7 @@ import os
 import pytest
 
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
+from api.serializers.encounter import EncounterSerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
@@ -325,6 +326,29 @@ def test_diagnostic_report(
         payload = json.load(f)
 
     serializer = DiagnosticReportSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Encounter-InpatientEncounter-Example",
+    ],
+)
+def test_encounter(
+    resource,
+    richard_smith,
+    leeds_teaching_hospital,
+    consultant_sandra_gose,
+    cardiology_sjuh,
+):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = EncounterSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

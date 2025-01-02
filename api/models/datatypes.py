@@ -234,6 +234,11 @@ class Concept(models.Model):
         UK_CORE_PERSON_RELATIONSHIP_TYPE = "UKCorePersonRelationshipType"
         DIAGNOSTIC_SERVICE_SECTION_CODE = "DiagnosticServiceSectionCodes"
         UK_CORE_REPORT_CODE = "UKCoreReportCode"
+        V3_ACT_ENCOUNTER_CODE = "v3.ActEncounterCode"
+        UK_CORE_ENCOUNTER_TYPE = "UKCoreEncounterType"
+        PARTICIPANT_TYPE = "ParticipantType"
+        ENCOUNTER_REASON_CODE = "EncounterReasonCodes"
+        UK_CORE_DISCHARGE_DESTINATION = "UKCoreDischargeDestination"
 
     system = models.CharField(
         null=True,
