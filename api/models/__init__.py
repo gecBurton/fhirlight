@@ -18,8 +18,10 @@ from .specimen import Specimen
 from .location import Location
 from .immunization import Immunization
 from .operation_outcome import OperationOutcome
+from .slot import Slot
 
 __all__ = [
+    "Slot",
     "OperationOutcome",
     "Immunization",
     "Location",

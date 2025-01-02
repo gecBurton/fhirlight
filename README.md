@@ -2,12 +2,13 @@ https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=
 
 intentional exclusions:
 code-able concepts - only one, no text
+text is ignored
+datetimes - UTC only
 
 incomplete:
 - Observation -> Specimen
-
 - Specimen -> ServiceRequest
-
+- Slot -> Schedule
 
 | name                                            | complete |
 |-------------------------------------------------|----------|
@@ -67,6 +68,6 @@ incomplete:
 | UKCore-Schedule                                 |          |
 | UKCore-ServiceRequest                           |          |
 | UKCore-ServiceRequest-Lab                       |          |
-| UKCore-Slot                                     |          |
+| UKCore-Slot                                     | yes      |
 | UKCore-Specimen                                 | yes      |
 | UKCore-Task                                     |          |
