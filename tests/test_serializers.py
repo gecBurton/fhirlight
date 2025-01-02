@@ -1,3 +1,4 @@
+import copy
 import json
 import os
 
@@ -261,7 +262,7 @@ def test_questionnaire(resource, general_practice_nurse_clinic):
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)
 
-    serializer = QuestionnaireSerializer(data=payload)
+    serializer = QuestionnaireSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

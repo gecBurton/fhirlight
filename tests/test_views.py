@@ -157,6 +157,7 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
             "UKCore-Schedule-Immunization-Example",
             ["UKCore-Location-GeneralPracticeNurseClinic-Example"],
         ),
+        ("UKCore-Questionnaire-InpatientSurvey-Example", []),
     ],
 )
 def test_resource(client, resource, dependants):

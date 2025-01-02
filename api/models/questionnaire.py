@@ -1,9 +1,8 @@
-
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 from api.models.common import UKCore
-from api.models.datatypes import Identifier, ContactPoint
+from api.models.datatypes import Identifier, ContactPoint, DataTypeWithPeriod
 
 
 class Questionnaire(UKCore):
@@ -15,11 +14,6 @@ class Questionnaire(UKCore):
     # Current Version	1.2.0
     # Last Updated	2022-12-16
     # Description	This profile defines the UK constraints and extensions on the International FHIR resource Questionnaire.
-
-    # Questionnaire.item	Questions and sections within the Questionnaire.
-    # Questionnaire.item.linkId	Unique id for item in questionnaire.
-    # Questionnaire.item.text	The text of a question.
-    # Questionnaire.item.type	Defines the format in which the user is to be prompted for the answer.
 
     class STATUS(models.TextChoices):
         DRAFT = "draft"
@@ -114,13 +108,37 @@ class Questionnaire(UKCore):
         null=True, blank=True, help_text="When the questionnaire is expected to be used"
     )
 
-    #     "item":  [
 
+class QuestionnaireItem(DataTypeWithPeriod):
+    """Questions and sections within the Questionnaire"""
 
-# class OrganizationAddress(Address):
-#     """The address of the organisation using the Address datatype."""
-#
-#     Questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
+    questionnaire = models.ForeignKey(
+        Questionnaire,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+    )
+
+    class TYPE(models.TextChoices):
+        GROUP = "group"
+        DISPLAY = "display"
+        BOOLEAN = "boolean"
+        DECIMAL = "decimal"
+        INTEGER = "integer"
+        DATE = "date"
+        DATE_TIME = "dateTime"
+        STRING = "string"
+
+    linkId = models.CharField(
+        max_length=256, help_text="Unique id for item in questionnaire."
+    )
+    text = models.TextField(null=True, blank=True, help_text="The text of a question.")
+    type = models.CharField(
+        max_length=16,
+        choices=TYPE,
+        help_text="Defines the format in which the user is to be prompted for the answer.",
+    )
+    parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
 
 
 class QuestionnaireIdentifier(Identifier):
