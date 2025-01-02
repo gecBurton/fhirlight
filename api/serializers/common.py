@@ -58,6 +58,10 @@ class CodingSerializer(RelatedField):
         "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
     }
 
+    def __init__(self, valueset: str, many: bool = False, required: bool = True):
+        queryset = Concept.objects.filter(valueset=valueset)
+        return super().__init__(queryset=queryset, many=many, required=required)
+
     def to_internal_value(self, data):
         if not (isinstance(data, dict) and "coding" in data):
             self.fail("required")

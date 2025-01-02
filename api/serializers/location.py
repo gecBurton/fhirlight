@@ -35,9 +35,7 @@ class LocationSerializer(UKCoreProfileSerializer):
     type = CodingSerializer(
         required=False,
         many=True,
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.SERVICE_DELIVERY_LOCATION_ROLE_TYPE
-        ),
+        valueset=Concept.VALUESET.SERVICE_DELIVERY_LOCATION_ROLE_TYPE,
     )
     telecom = LocationTelecomSerializer(
         required=False, many=True, source="locationtelecom_set"

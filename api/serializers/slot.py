@@ -21,23 +21,21 @@ class SlotSerializer(UKCoreProfileSerializer):
     serviceCategory = CodingSerializer(
         required=False,
         many=True,
-        queryset=Concept.objects.filter(valueset=Concept.VALUESET.SERVICE_CATEGORY),
+        valueset=Concept.VALUESET.SERVICE_CATEGORY,
     )
     serviceType = CodingSerializer(
         required=False,
         many=True,
-        queryset=Concept.objects.filter(valueset=Concept.VALUESET.SERVICE_TYPE),
+        valueset=Concept.VALUESET.SERVICE_TYPE,
     )
     specialty = CodingSerializer(
         required=False,
         many=True,
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.UK_CORE_PRACTICE_SETTINGS_CODE
-        ),
+        valueset=Concept.VALUESET.UK_CORE_PRACTICE_SETTINGS_CODE,
     )
     appointmentType = CodingSerializer(
         required=False,
-        queryset=Concept.objects.filter(valueset=Concept.VALUESET.V2_0276),
+        valueset=Concept.VALUESET.V2_0276,
     )
 
     class Meta:

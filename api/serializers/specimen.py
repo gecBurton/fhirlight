@@ -12,29 +12,19 @@ from api.serializers.common import (
 
 
 class SpecimenComponentSerializer(Serializer):
-    method = CodingSerializer(
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.FHIR_SPECIMEN_COLLECTION_METHOD
-        )
-    )
+    method = CodingSerializer(valueset=Concept.VALUESET.FHIR_SPECIMEN_COLLECTION_METHOD)
     collector = RelatedResourceSerializer(
         queryset=Practitioner.objects.all(), required=False
     )
     bodySite = CodingSerializer(
-        required=False,
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.UK_CORE_SPECIMEN_BODY_SITE
-        ),
+        required=False, valueset=Concept.VALUESET.UK_CORE_SPECIMEN_BODY_SITE
     )
     collectedDateTime = DateTimeField(required=False)
 
 
 class SpecimenSerializer(UKCoreProfileSerializer):
     type = CodingSerializer(
-        required=False,
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.UK_CORE_SPECIMEN_TYPE
-        ),
+        required=False, valueset=Concept.VALUESET.UK_CORE_SPECIMEN_TYPE
     )
     subject = RelatedResourceSerializer(queryset=Patient.objects.all(), required=False)
     collection = SpecimenComponentSerializer(

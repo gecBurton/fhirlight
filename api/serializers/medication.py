@@ -17,16 +17,9 @@ class BatchSerializer(Serializer):
 class MedicationSerializer(UKCoreProfileSerializer):
     batch = BatchSerializer(required=False, source="*")
 
-    code = CodingSerializer(
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.UK_CORE_MEDICATION_CODE
-        ),
-    )
+    code = CodingSerializer(valueset=Concept.VALUESET.UK_CORE_MEDICATION_CODE)
     form = CodingSerializer(
-        required=False,
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.UK_CORE_MEDICATION_FORM
-        ),
+        required=False, valueset=Concept.VALUESET.UK_CORE_MEDICATION_FORM
     )
 
     class Meta:
