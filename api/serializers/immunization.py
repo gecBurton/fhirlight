@@ -16,9 +16,7 @@ class ImmunizationSerializer(UKCoreProfileSerializer):
         required=False, queryset=Organization.objects.all()
     )
     patient = RelatedResourceSerializer(queryset=Patient.objects.all())
-    vaccineCode = CodingSerializer(
-        queryset=Concept.objects.filter(valueset=Concept.VALUESET.UK_CORE_VACCINE_CODE)
-    )
+    vaccineCode = CodingSerializer(valueset=Concept.VALUESET.UK_CORE_VACCINE_CODE)
 
     class Meta:
         fields = (

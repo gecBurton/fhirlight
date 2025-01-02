@@ -10,9 +10,7 @@ from api.serializers.common import (
 class OperationOutcomeIssueSerializer(UKCoreModelSerializer):
     details = CodingSerializer(
         required=False,
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.UK_CORE_OPERATION_OUTCOME_ISSUE_DETAILS
-        ),
+        valueset=Concept.VALUESET.UK_CORE_OPERATION_OUTCOME_ISSUE_DETAILS,
     )
 
     class Meta:

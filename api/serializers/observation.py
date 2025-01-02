@@ -21,11 +21,7 @@ from api.serializers.common import (
 
 
 class ObservationComponentSerializer(ModelSerializer):
-    code = CodingSerializer(
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE
-        )
-    )
+    code = CodingSerializer(valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE)
     valueQuantity = JSONField(required=False)
 
     class Meta:
@@ -51,20 +47,14 @@ class ObservationSerializer(UKCoreProfileSerializer):
     category = CodingSerializer(
         many=True,
         required=False,
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.OBSERVATION_CATEGORY_CODE,
-        ),
+        valueset=Concept.VALUESET.OBSERVATION_CATEGORY_CODE,
     )
     code = CodingSerializer(
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE,
-        ),
+        valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE,
     )
     bodySite = CodingSerializer(
         required=False,
-        queryset=Concept.objects.filter(
-            valueset=Concept.VALUESET.SNOMED_CT_BODY_STRUCTURES,
-        ),
+        valueset=Concept.VALUESET.SNOMED_CT_BODY_STRUCTURES,
     )
 
     subject = RelatedResourceSerializer(required=False, queryset=Patient.objects.all())
