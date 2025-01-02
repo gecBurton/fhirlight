@@ -19,6 +19,15 @@ def consultant_sandra_gose():
     yield practitioner
     practitioner.delete()
 
+@pytest.fixture
+def doctor_paul_rastall():
+    practitioner = Practitioner.objects.create(
+        id="UKCore-Practitioner-DoctorPaulRastall-Example"
+    )
+    yield practitioner
+    practitioner.delete()
+
+
 
 @pytest.fixture
 def leeds_teaching_hospital():
