@@ -14,9 +14,11 @@ from api.models import (
     Questionnaire,
     Procedure,
     RelatedPerson,
+    DiagnosticReport,
 )
 from api.models.organization import Organization
 from api.models.practitioner import Practitioner
+from api.serializers.diagnostic_report import DiagnosticReportSerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
@@ -121,4 +123,10 @@ class ProcedureViewSet(ModelViewSet):
 class RelatedPersonViewSet(ModelViewSet):
     queryset = RelatedPerson.objects.all()
     serializer_class = RelatedPersonSerializer
+    lookup_field = "id"
+
+
+class DiagnosticReportViewSet(ModelViewSet):
+    queryset = DiagnosticReport.objects.all()
+    serializer_class = DiagnosticReportSerializer
     lookup_field = "id"

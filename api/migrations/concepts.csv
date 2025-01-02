@@ -741,3 +741,6 @@
 "U", "http://terminology.hl7.org/CodeSystem/v2-0131", "Unknown", "UKCorePersonRelationshipType"
 "FRND", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", "unrelated friend", "UKCorePersonRelationshipType"
 "WIFE", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", "wife", "UKCorePersonRelationshipType"
+"PHY", "http://terminology.hl7.org/CodeSystem/v2-0074", "Physician (Hx. Dx, admission note, etc.)", "DiagnosticServiceSectionCodes"
+"LAB", "http://terminology.hl7.org/CodeSystem/v2-0074", "Laboratory", "DiagnosticServiceSectionCodes"
+"721981007", "http://snomed.info/sct", "Diagnostic studies report", "UKCoreReportCode"

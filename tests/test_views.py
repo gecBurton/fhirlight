@@ -4,7 +4,15 @@ import os.path
 import pytest
 from django.urls import reverse
 
-from api.models import Patient, Organization, Practitioner, Location
+from api.models import (
+    Patient,
+    Organization,
+    Practitioner,
+    Location,
+    Observation,
+    Specimen,
+)
+from api.models.datatypes import Concept
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -166,6 +174,23 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
             "UKCore-RelatedPerson-JoySmith-Example",
             ["UKCore-Patient-RichardSmith-Example"],
         ),
+        (
+            "UKCore-DiagnosticReport-DiagnosticStudiesReport-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Observation-FingerJointInflamed-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-DiagnosticReport-Lab-DiagnosticStudiesReport-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Observation-Group-FullBloodCount-Example",
+                "UKCore-Specimen-BloodSpecimen-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
     ],
 )
 def test_resource(client, resource, dependants):
@@ -176,8 +201,18 @@ def test_resource(client, resource, dependants):
             "organization": Organization,
             "practitioner": Practitioner,
             "location": Location,
+            "observation": Observation,
+            "specimen": Specimen,
         }
-        resource_types[dependant_resource_type].objects.create(id=dependant)
+        code = Concept.objects.filter(
+            valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE
+        ).first()
+        if dependant_resource_type == "observation":
+            resource_types[dependant_resource_type].objects.create(
+                id=dependant, code=code
+            )
+        else:
+            resource_types[dependant_resource_type].objects.create(id=dependant)
 
     resource_type = resource.split("-")[1].lower()
     with open(f"{TEST_DIR}/data/{resource}.json") as f:

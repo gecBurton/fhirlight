@@ -1,6 +1,13 @@
 import pytest
 
-from api.models import Patient, Organization, Observation, Practitioner, Location
+from api.models import (
+    Patient,
+    Organization,
+    Observation,
+    Practitioner,
+    Location,
+    Specimen,
+)
 from api.models.datatypes import Concept
 
 
@@ -31,20 +38,20 @@ def doctor_paul_rastall():
 
 @pytest.fixture
 def leeds_teaching_hospital():
-    Oorganization = Organization.objects.create(
+    organization = Organization.objects.create(
         id="UKCore-Organization-LeedsTeachingHospital-Example"
     )
-    yield Oorganization
-    Oorganization.delete()
+    yield organization
+    organization.delete()
 
 
 @pytest.fixture
 def white_rose_medical_centre():
-    Oorganization = Organization.objects.create(
+    organization = Organization.objects.create(
         id="UKCore-Organization-WhiteRoseMedicalCentre-Example"
     )
-    yield Oorganization
-    Oorganization.delete()
+    yield organization
+    organization.delete()
 
 
 @pytest.fixture
@@ -73,7 +80,25 @@ def red_cell_count(observation_type):
 
 
 @pytest.fixture
-def general_practice_nurse_clinic(observation_type):
+def finger_joint_inflamed(observation_type):
+    observation = Observation.objects.create(
+        id="UKCore-Observation-FingerJointInflamed-Example", code=observation_type
+    )
+    yield observation
+    observation.delete()
+
+
+@pytest.fixture
+def full_blood_count(observation_type):
+    observation = Observation.objects.create(
+        id="UKCore-Observation-Group-FullBloodCount-Example", code=observation_type
+    )
+    yield observation
+    observation.delete()
+
+
+@pytest.fixture
+def general_practice_nurse_clinic():
     location = Location.objects.create(
         id="UKCore-Location-GeneralPracticeNurseClinic-Example"
     )
@@ -81,4 +106,8 @@ def general_practice_nurse_clinic(observation_type):
     location.delete()
 
 
-#
+@pytest.fixture
+def blood_specimen():
+    location = Specimen.objects.create(id="UKCore-Specimen-BloodSpecimen-Example")
+    yield location
+    location.delete()
