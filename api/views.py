@@ -9,6 +9,7 @@ from api.models import (
     Immunization,
     OperationOutcome,
     Slot,
+    PractitionerRole,
 )
 from api.models.organization import Organization
 from api.models.practitioner import Practitioner
@@ -20,6 +21,7 @@ from api.serializers.operation_outcome import OperationOutcomeSerializer
 from api.serializers.organization import OrganizationSerializer
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
+from api.serializers.practitioner_role import PractitionerRoleSerializer
 from api.serializers.slot import SlotSerializer
 from api.serializers.specimen import SpecimenSerializer
 
@@ -81,4 +83,10 @@ class OperationOutcomeViewSet(ModelViewSet):
 class SlotViewSet(ModelViewSet):
     queryset = Slot.objects.all()
     serializer_class = SlotSerializer
+    lookup_field = "id"
+
+
+class PractitionerRoleViewSet(ModelViewSet):
+    queryset = PractitionerRole.objects.all()
+    serializer_class = PractitionerRoleSerializer
     lookup_field = "id"

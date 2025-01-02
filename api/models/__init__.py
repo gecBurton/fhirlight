@@ -19,8 +19,10 @@ from .location import Location
 from .immunization import Immunization
 from .operation_outcome import OperationOutcome
 from .slot import Slot
+from .practitioner_role import PractitionerRole
 
 __all__ = [
+    "PractitionerRole",
     "Slot",
     "OperationOutcome",
     "Immunization",
