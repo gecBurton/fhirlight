@@ -1,6 +1,8 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django.db.models import JSONField
 
+from api.models import Patient, Practitioner
 from api.models.common import UKCore
 from api.models.datatypes import Identifier, ContactPoint, DataTypeWithPeriod
 
@@ -20,6 +22,12 @@ class Questionnaire(UKCore):
         ACTIVE = "active"
         RETIRED = "retired"
         UNKNOWN = "unknown"
+
+        IN_PROGRESS = "n-progress"
+        COMPLETED = "completed"
+        AMENDED = "amended"
+        ENTERED_IN_ERROR = "entered-in-error"
+        STOPPED = "stopped"
 
     class SUBJECT_TYPE(models.TextChoices):
         ALLERGY_INTOLERANCE = "AllergyIntolerance"
@@ -67,7 +75,7 @@ class Questionnaire(UKCore):
         unique=True,
     )
     status = models.CharField(
-        max_length=8,
+        max_length=16,
         choices=STATUS,
         help_text="The status of this questionnaire. Enables tracking the life-cycle of the content.",
     )
@@ -108,6 +116,25 @@ class Questionnaire(UKCore):
         null=True, blank=True, help_text="When the questionnaire is expected to be used"
     )
 
+    # response
+    author = models.ForeignKey(
+        Practitioner,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        help_text="Person who received and recorded the answers",
+    )
+    subject = models.ForeignKey(
+        Patient,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        help_text="The subject of the questions",
+    )
+    authored = models.DateTimeField(
+        null=True, blank=True, help_text="Date the answers were gathered"
+    )
+
 
 class QuestionnaireItem(DataTypeWithPeriod):
     """Questions and sections within the Questionnaire"""
@@ -135,18 +162,22 @@ class QuestionnaireItem(DataTypeWithPeriod):
     text = models.TextField(null=True, blank=True, help_text="The text of a question.")
     type = models.CharField(
         max_length=16,
+        null=True,
+        blank=True,
         choices=TYPE,
         help_text="Defines the format in which the user is to be prompted for the answer.",
     )
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
+
+    # response
+    answer = JSONField(null=True, blank=True)
 
 
 class QuestionnaireIdentifier(Identifier):
     """The address of the organisation using the Address datatype."""
 
     class SYSTEM(models.TextChoices):
-        ODS_ORGANISATION_CODE = "https://fhir.nhs.uk/Id/ods-organization-code"
-        ODS_SITE_CODE = "https://fhir.nhs.uk/Id/ods-site-code"
+        pass
 
     system = models.URLField(
         max_length=64,

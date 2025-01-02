@@ -16,7 +16,17 @@ class QuestionnaireIdentifierSerializer(UKCoreModelSerializer):
         model = QuestionnaireIdentifier
 
 
+class QuestionnaireChildChildItemSerializer(UKCoreModelSerializer):
+    class Meta:
+        exclude = ("uuid", "questionnaire", "parent", "created_at", "updated_at")
+        model = QuestionnaireItem
+
+
 class QuestionnaireChildItemSerializer(UKCoreModelSerializer):
+    item = QuestionnaireChildChildItemSerializer(
+        many=True, required=False, source="questionnaireitem_set"
+    )
+
     class Meta:
         exclude = ("uuid", "questionnaire", "parent", "created_at", "updated_at")
         model = QuestionnaireItem

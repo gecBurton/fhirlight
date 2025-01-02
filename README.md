@@ -13,36 +13,36 @@ incomplete:
 
 tested examples
 
-* UKCore-AllergyIntolerance
-* UKCore-Appointment
-* UKCore-Composition
-* UKCore-Condition
-* UKCore-Consent
-* UKCore-Device
-* UKCore-DiagnosticReport
-* UKCore-Encounter
-* UKCore-EpisodeOfCare
-* UKCore-FamilyMemberHistory
-* UKCore-Flag
-* UKCore-HealthcareService
-* UKCore-ImagingStudy
-* UKCore-Immunization
+* UKCore-AllergyIntolerance ❌
+* UKCore-Appointment ❌
+* UKCore-Composition ❌
+* UKCore-Condition ❌
+* UKCore-Consent ❌
+* UKCore-Device ❌
+* UKCore-DiagnosticReport ❌
+* UKCore-Encounter ❌
+* UKCore-EpisodeOfCare ❌
+* UKCore-FamilyMemberHistory ❌
+* UKCore-Flag ❌
+* UKCore-HealthcareService ❌
+* UKCore-ImagingStudy ❌
+* UKCore-Immunization ✅
   * [Influenza Vaccine](tests/data/UKCore-Immunization-InfluenzaVaccine-Example.json)
-* UKCore-List
-* UKCore-Location
+* UKCore-List ❌
+* UKCore-Location  ✅
   * [Cardiology SJUH](tests/data/UKCore-Location-CardiologySJUH-Example.json)
   * [General Practice Nurse Clinic](tests/data/UKCore-Location-GeneralPracticeNurseClinic-Example.json)
   * [Hospital SJUH](tests/data/UKCore-Location-HospitalSJUH-Example.json)
-* UKCore-Medication
+* UKCore-Medication ✅
   * [COVID-Vaccine](tests/data/UKCore-Medication-COVID-Vaccine-Example.json)
   * [Timolol VTM](tests/data/UKCore-Medication-TimololVTM-Example.json)
   * [Timoptol Eye Drops](tests/data/UKCore-Medication-TimoptolEyeDrops-Example.json)
-* UKCore-MedicationAdministration
-* UKCore-MedicationDispense
-* UKCore-MedicationRequest
-* UKCore-MedicationStatement
-* UKCore-MessageHeader
-* UKCore-Observation
+* UKCore-MedicationAdministration ❌
+* UKCore-MedicationDispense ❌
+* UKCore-MedicationRequest ❌
+* UKCore-MedicationStatement ❌
+* UKCore-MessageHeader ❌
+* UKCore-Observation ✅
   * [24 Hour Blood Pressure](tests/data/UKCore-Observation-24HourBloodPressure-Example.json)
   * [Awareness Of Diagnosis](tests/data/UKCore-Observation-AwarenessOfDiagnosis-Example.json)
   * [Breathing Normally](tests/data/UKCore-Observation-BreathingNormally-Example.json)
@@ -53,7 +53,7 @@ tested examples
   * [Heavy Drinker](tests/data/UKCore-Observation-HeavyDrinker-Example.json)
   * [Lab Red Cell Count](tests/data/UKCore-Observation-Lab-RedCellCount-Example.json)
   * [Lab White Cell Count](tests/data/UKCore-Observation-Lab-WhiteCellCount-Example.json)
-  * Vital-Signs
+  * Vital-Signs ✅
     * [BMI](tests/data/UKCore-Observation-VitalSigns-BMI-Example.json)
     * [Blood Pressure](tests/data/UKCore-Observation-VitalSigns-BloodPressure-Example.json)
     * [Body Height](tests/data/UKCore-Observation-VitalSigns-BodyHeight-Example.json)
@@ -63,32 +63,32 @@ tested examples
     * [Heart Rate](tests/data/UKCore-Observation-VitalSigns-HeartRate-Example.json)
     * [Oxygen Saturation](tests/data/UKCore-Observation-VitalSigns-OxygenSaturation-Example.json)
     * [Respiratory Rate](tests/data/UKCore-Observation-VitalSigns-RespiratoryRate-Example.json)
-* UKCore-OperationOutcome
+* UKCore-OperationOutcome ✅
   * [Date Error](tests/data/UKCore-OperationOutcome-DateError-Example.json)
-* UKCore-Organization
+* UKCore-Organization ✅
   * [Leeds Teaching Hospital](tests/data/UKCore-Organization-LeedsTeachingHospital-Example.json)
   * [White Rose Medical Centre](tests/data/UKCore-Organization-WhiteRoseMedicalCentre-Example.json)
-* UKCore-Patient
+* UKCore-Patient ✅
   * [Baby Patient](tests/data/UKCore-Patient-BabyPatient-Example.json)
   * [Richard Smith](tests/data/UKCore-Patient-RichardSmith-Example.json)
-* UKCore-Practitioner
+* UKCore-Practitioner ✅
   * [Consultant Sandra Gose](tests/data/UKCore-Practitioner-ConsultantSandraGose-Example.json)
   * [Doctor Paul Rastall](tests/data/UKCore-Practitioner-DoctorPaulRastall-Example.json)
   * [Pharmacist Jimmy Chuck](tests/data/UKCore-Practitioner-PharmacistJimmyChuck-Example.json)
-* UKCore-PractitionerRole
+* UKCore-PractitionerRole ✅
   * [General Practitioner](tests/data/UKCore-PractitionerRole-GeneralPractitioner-Example.json)
-* UKCore-Procedure
+* UKCore-Procedure ✅
   * [Examination Of Skin](tests/data/UKCore-Procedure-ExaminationOfSkin-Example.json)
-* UKCore-Questionnaire
+* UKCore-Questionnaire ✅
   * [Inpatient Survey](tests/data/UKCore-Questionnaire-InpatientSurvey-Example.json)
-* UKCore-QuestionnaireResponse
-* UKCore-RelatedPerson
-* UKCore-Schedule
+* UKCore-QuestionnaireResponse ❌
+* UKCore-RelatedPerson ❌
+* UKCore-Schedule ✅
   * [Immunization](tests/data/UKCore-Schedule-Immunization-Example.json)
-* UKCore-ServiceRequest
+* UKCore-ServiceRequest ❌
 * UKCore-Slot
   * [Available Walk-in Visit](tests/data/UKCore-Slot-AvailableWalkInVisit-Example.json)
-* UKCore-Specimen
+* UKCore-Specimen ✅
   * [Blood Specimen](tests/data/UKCore-Specimen-BloodSpecimen-Example.json)
   * [Urine Specimen](tests/data/UKCore-Specimen-UrineSpecimen-Example.json)
-* UKCore-Task
+* UKCore-Task ❌
