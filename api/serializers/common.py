@@ -91,10 +91,13 @@ class RelatedResourceSerializer(RelatedField):
         "incorrect_resource_type": _(
             "incorrect resourceType. Expected {resource_type}"
         ),
+        "incorrect_type": _("incorrect type. Expected {type}"),
     }
 
     def to_internal_value(self, data):
         qs = self.get_queryset()
+        if not isinstance(data, dict):
+            self.fail("incorrect_type", type=dict)
         resource_type, id = data["reference"].split("/", 2)
         if resource_type != qs.model.__name__:
             self.fail("incorrect_resource_type", resource_type=qs.model.__name__)
