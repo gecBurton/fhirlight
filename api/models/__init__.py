@@ -22,8 +22,10 @@ from .slot import Slot
 from .practitioner_role import PractitionerRole
 from .schedule import Schedule
 from .questionnaire import Questionnaire
+from .procedure import Procedure
 
 __all__ = [
+    "Procedure",
     "Questionnaire",
     "Schedule",
     "PractitionerRole",

@@ -78,6 +78,7 @@ tested examples
 * UKCore-PractitionerRole
   * [General Practitioner](tests/data/UKCore-PractitionerRole-GeneralPractitioner-Example.json)
 * UKCore-Procedure
+  * [Examination Of Skin](tests/data/UKCore-Procedure-ExaminationOfSkin-Example.json)
 * UKCore-Questionnaire
   * [Inpatient Survey](tests/data/UKCore-Questionnaire-InpatientSurvey-Example.json)
 * UKCore-QuestionnaireResponse
