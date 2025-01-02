@@ -1,4 +1,3 @@
-
 from api.models import Patient
 from api.models.datatypes import Concept
 from api.models.procedure import Procedure
