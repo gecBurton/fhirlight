@@ -1,4 +1,4 @@
-from api.models import PractitionerRole, Organization, Practitioner
+from api.models import PractitionerRole
 from api.models.datatypes import Concept
 from api.models.practitioner_role import (
     PractitionerRoleIdentifier,
@@ -7,7 +7,6 @@ from api.models.practitioner_role import (
 from api.serializers.common import (
     UKCoreProfileSerializer,
     UKCoreModelSerializer,
-    RelatedResourceSerializer,
     CodingSerializer,
 )
 
@@ -36,8 +35,6 @@ class PractitionerRoleSerializer(UKCoreProfileSerializer):
     identifier = PractitionerRoleIdentifierSerializer(
         many=True, required=False, source="practitionerroleidentifier_set"
     )
-    organization = RelatedResourceSerializer(queryset=Organization.objects.all())
-    practitioner = RelatedResourceSerializer(queryset=Practitioner.objects.all())
     telecom = PractitionerRoleTelecomSerializer(
         many=True, required=False, source="practitionerroletelecom_set"
     )

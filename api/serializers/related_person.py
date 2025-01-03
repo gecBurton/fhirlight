@@ -1,4 +1,4 @@
-from api.models import Patient, RelatedPerson
+from api.models import RelatedPerson
 from api.models.datatypes import Concept
 from api.models.related_person import (
     RelatedPersonAddress,
@@ -7,7 +7,6 @@ from api.models.related_person import (
 )
 from api.serializers.common import (
     UKCoreProfileSerializer,
-    RelatedResourceSerializer,
     CodingSerializer,
     UKCoreModelSerializer,
 )
@@ -38,7 +37,6 @@ class RelatedPersonSerializer(UKCoreProfileSerializer):
     telecom = RelatedPersonTelecomSerializer(required=False, many=True)
     address = RelatedPersonAddressSerializer(required=False, many=True)
 
-    patient = RelatedResourceSerializer(queryset=Patient.objects.all())
     relationship = CodingSerializer(
         many=True,
         required=False,

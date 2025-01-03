@@ -40,6 +40,7 @@ class Observation(UKCore):
     )
     performer = models.ManyToManyField(
         Organization,
+        blank=True,
         help_text="Who is responsible for the observation",
     )
     subject = models.ForeignKey(
@@ -61,7 +62,7 @@ class Observation(UKCore):
         help_text="Clinically relevant time/time-period for observation",
     )
     valueQuantity = models.JSONField(null=True, blank=True)
-    hasMember = models.ManyToManyField("self")
+    hasMember = models.ManyToManyField("self", blank=True)
     bodySite = models.ForeignKey(
         Concept,
         null=True,

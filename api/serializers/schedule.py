@@ -1,13 +1,11 @@
 from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer
 
-from api.models import Location
 from api.models.datatypes import Concept
 from api.models.schedule import Schedule, ScheduleIdentifier
 from api.serializers.common import (
     UKCoreProfileSerializer,
     CodingSerializer,
-    RelatedResourceSerializer,
     UKCoreModelSerializer,
 )
 
@@ -34,9 +32,6 @@ class ScheduleSerializer(UKCoreProfileSerializer):
         many=True,
         required=False,
         valueset=Concept.VALUESET.UK_CORE_PRACTICE_SETTINGS_CODE,
-    )
-    actor = RelatedResourceSerializer(
-        many=True, required=False, queryset=Location.objects.all()
     )
     identifier = ScheduleIdentifierSerializer(
         many=True, required=False, source="scheduleidentifier_set"
