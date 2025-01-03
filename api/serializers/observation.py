@@ -5,7 +5,6 @@ from rest_framework.fields import (
 )
 from rest_framework.serializers import ModelSerializer, Serializer
 
-from api.models import Patient, Organization
 from api.models.datatypes import Concept
 from api.models.observation import (
     Observation,
@@ -15,7 +14,6 @@ from api.models.observation import (
 from api.serializers.common import (
     UKCoreModelSerializer,
     CodingSerializer,
-    RelatedResourceSerializer,
     UKCoreProfileSerializer,
 )
 
@@ -57,10 +55,6 @@ class ObservationSerializer(UKCoreProfileSerializer):
         valueset=Concept.VALUESET.SNOMED_CT_BODY_STRUCTURES,
     )
 
-    subject = RelatedResourceSerializer(required=False, queryset=Patient.objects.all())
-    performer = RelatedResourceSerializer(
-        required=False, many=True, queryset=Organization.objects.all()
-    )
     effectiveDateTime = DateTimeField(required=False)
     effectiveInstant = DateTimeField(required=False)
 
@@ -71,10 +65,6 @@ class ObservationSerializer(UKCoreProfileSerializer):
         required=False, many=True, source="observationidentifier_set"
     )
     valueQuantity = JSONField(required=False)
-
-    hasMember = RelatedResourceSerializer(
-        required=False, many=True, queryset=Observation.objects.all()
-    )
 
     class Meta:
         fields = (

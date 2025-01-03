@@ -27,10 +27,6 @@ class SpecimenSerializer(UKCoreProfileSerializer):
         required=False, valueset=Concept.VALUESET.UK_CORE_SPECIMEN_TYPE
     )
     subject = RelatedResourceSerializer(queryset=Patient.objects.all(), required=False)
-    collection = SpecimenComponentSerializer(
-        required=False, source="specimencomponent_set"
-    )
-
     collection = SpecimenComponentSerializer(required=False, source="*")
 
     class Meta:

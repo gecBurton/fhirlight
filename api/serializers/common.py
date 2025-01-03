@@ -31,20 +31,6 @@ def strip_none(obj):
     return obj
 
 
-class UKCoreModelSerializer(WritableNestedModelSerializer):
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        return strip_none(representation)
-
-
-class UKCoreProfileSerializer(UKCoreModelSerializer):
-    id = CharField()
-    resourceType = SerializerMethodField()
-
-    def get_resourceType(self, _obj):
-        return self.Meta.model.__name__
-
-
 class ConceptSerializer(Serializer):
     code = CharField()
     system = CharField(required=False)
@@ -109,3 +95,19 @@ class RelatedResourceSerializer(RelatedField):
     def to_representation(self, value):
         qs = self.get_queryset()
         return {"reference": qs.model.__name__ + "/" + value.id}
+
+
+class UKCoreModelSerializer(WritableNestedModelSerializer):
+    serializer_related_field = RelatedResourceSerializer
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return strip_none(representation)
+
+
+class UKCoreProfileSerializer(UKCoreModelSerializer):
+    id = CharField()
+    resourceType = SerializerMethodField()
+
+    def get_resourceType(self, _obj):
+        return self.Meta.model.__name__
