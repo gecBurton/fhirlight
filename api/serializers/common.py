@@ -37,36 +37,6 @@ class ConceptSerializer(Serializer):
     display = CharField(required=False)
 
 
-class CodingSerializer(RelatedField):
-    coding = ConceptSerializer(many=True)
-    default_error_messages = {
-        "required": _("This field is required."),
-        "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
-    }
-
-    def __init__(self, valueset: str, many: bool = False, required: bool = True):
-        queryset = Concept.objects.filter(valueset=valueset)
-        return super().__init__(queryset=queryset, many=many, required=required)
-
-    def to_internal_value(self, data):
-        if not (isinstance(data, dict) and "coding" in data):
-            self.fail("required")
-        try:
-            internal_value = self.coding.to_internal_value(data=data["coding"])
-        except Exception:
-            raise
-        code = internal_value[0]["code"]
-
-        try:
-            return self.get_queryset().get(code=code)
-        except Concept.DoesNotExist:
-            self.fail("does_not_exist", pk_value=code)
-
-    def to_representation(self, value):
-        representation = self.coding.to_representation([value])
-        return {"coding": representation}
-
-
 class RelatedResourceSerializer(RelatedField):
     coding = ConceptSerializer(many=True)
 
