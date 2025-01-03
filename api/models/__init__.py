@@ -25,8 +25,10 @@ from .questionnaire import Questionnaire
 from .procedure import Procedure
 from .related_person import RelatedPerson
 from .diagnostic_report import DiagnosticReport
+from .encounter import Encounter
 
 __all__ = [
+    "Encounter",
     "DiagnosticReport",
     "RelatedPerson",
     "Procedure",

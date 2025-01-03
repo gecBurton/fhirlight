@@ -15,10 +15,12 @@ from api.models import (
     Procedure,
     RelatedPerson,
     DiagnosticReport,
+    Encounter,
 )
 from api.models.organization import Organization
 from api.models.practitioner import Practitioner
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
+from api.serializers.encounter import EncounterSerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
@@ -129,4 +131,10 @@ class RelatedPersonViewSet(ModelViewSet):
 class DiagnosticReportViewSet(ModelViewSet):
     queryset = DiagnosticReport.objects.all()
     serializer_class = DiagnosticReportSerializer
+    lookup_field = "id"
+
+
+class EncounterViewSet(ModelViewSet):
+    queryset = Encounter.objects.all()
+    serializer_class = EncounterSerializer
     lookup_field = "id"
