@@ -3,9 +3,8 @@ from rest_framework.fields import (
     DateTimeField,
     JSONField,
 )
-from rest_framework.serializers import ModelSerializer, Serializer
+from rest_framework.serializers import Serializer
 
-from api.models.datatypes import Concept
 from api.models.observation import (
     Observation,
     ObservationComponent,
@@ -13,13 +12,11 @@ from api.models.observation import (
 )
 from api.serializers.common import (
     UKCoreModelSerializer,
-    CodingSerializer,
     UKCoreProfileSerializer,
 )
 
 
-class ObservationComponentSerializer(ModelSerializer):
-    code = CodingSerializer(valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE)
+class ObservationComponentSerializer(UKCoreModelSerializer):
     valueQuantity = JSONField(required=False)
 
     class Meta:
@@ -42,19 +39,6 @@ class ReferenceRangeSerializer(Serializer):
 
 
 class ObservationSerializer(UKCoreProfileSerializer):
-    category = CodingSerializer(
-        many=True,
-        required=False,
-        valueset=Concept.VALUESET.OBSERVATION_CATEGORY_CODE,
-    )
-    code = CodingSerializer(
-        valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE,
-    )
-    bodySite = CodingSerializer(
-        required=False,
-        valueset=Concept.VALUESET.SNOMED_CT_BODY_STRUCTURES,
-    )
-
     effectiveDateTime = DateTimeField(required=False)
     effectiveInstant = DateTimeField(required=False)
 

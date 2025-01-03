@@ -1,11 +1,9 @@
 from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer
 
-from api.models.datatypes import Concept
 from api.models.schedule import Schedule, ScheduleIdentifier
 from api.serializers.common import (
     UKCoreProfileSerializer,
-    CodingSerializer,
     UKCoreModelSerializer,
 )
 
@@ -22,17 +20,6 @@ class planningHorizonSerializer(Serializer):
 
 
 class ScheduleSerializer(UKCoreProfileSerializer):
-    serviceCategory = CodingSerializer(
-        many=True, required=False, valueset=Concept.VALUESET.SERVICE_CATEGORY
-    )
-    serviceType = CodingSerializer(
-        many=True, required=False, valueset=Concept.VALUESET.SERVICE_TYPE
-    )
-    specialty = CodingSerializer(
-        many=True,
-        required=False,
-        valueset=Concept.VALUESET.UK_CORE_PRACTICE_SETTINGS_CODE,
-    )
     identifier = ScheduleIdentifierSerializer(
         many=True, required=False, source="scheduleidentifier_set"
     )

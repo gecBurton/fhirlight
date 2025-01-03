@@ -1,5 +1,4 @@
 from api.models import RelatedPerson
-from api.models.datatypes import Concept
 from api.models.related_person import (
     RelatedPersonAddress,
     RelatedPersonTelecom,
@@ -7,7 +6,6 @@ from api.models.related_person import (
 )
 from api.serializers.common import (
     UKCoreProfileSerializer,
-    CodingSerializer,
     UKCoreModelSerializer,
 )
 
@@ -36,12 +34,6 @@ class RelatedPersonSerializer(UKCoreProfileSerializer):
     )
     telecom = RelatedPersonTelecomSerializer(required=False, many=True)
     address = RelatedPersonAddressSerializer(required=False, many=True)
-
-    relationship = CodingSerializer(
-        many=True,
-        required=False,
-        valueset=Concept.VALUESET.UK_CORE_PERSON_RELATIONSHIP_TYPE,
-    )
 
     class Meta:
         fields = (
