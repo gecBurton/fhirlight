@@ -27,6 +27,7 @@ class Observation(UKCore):
 
     category = models.ManyToManyField(
         Concept,
+        blank=True,
         limit_choices_to={"valueset": Concept.VALUESET.OBSERVATION_CATEGORY_CODE},
         help_text="A code that classifies the general type of observation being made.",
         related_name="observationcategory",
@@ -40,6 +41,7 @@ class Observation(UKCore):
     )
     performer = models.ManyToManyField(
         Organization,
+        blank=True,
         help_text="Who is responsible for the observation",
     )
     subject = models.ForeignKey(
@@ -61,7 +63,7 @@ class Observation(UKCore):
         help_text="Clinically relevant time/time-period for observation",
     )
     valueQuantity = models.JSONField(null=True, blank=True)
-    hasMember = models.ManyToManyField("self")
+    hasMember = models.ManyToManyField("self", blank=True)
     bodySite = models.ForeignKey(
         Concept,
         null=True,

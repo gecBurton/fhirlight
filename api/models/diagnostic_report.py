@@ -63,6 +63,7 @@ class DiagnosticReport(UKCore):
     )
     specimen = models.ManyToManyField(
         Specimen,
+        blank=True,
         help_text="Who is responsible for the observation",
     )
 

@@ -31,78 +31,15 @@ def strip_none(obj):
     return obj
 
 
-class UKCoreModelSerializer(WritableNestedModelSerializer):
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        return strip_none(representation)
-
-
-class UKCoreProfileSerializer(UKCoreModelSerializer):
-    id = CharField()
-    resourceType = SerializerMethodField()
-
-    def get_resourceType(self, _obj):
-        return self.Meta.model.__name__
-
-
 class ConceptSerializer(Serializer):
     code = CharField()
     system = CharField(required=False)
     display = CharField(required=False)
 
 
-class CodingSerializerSimple(RelatedField):
-    default_error_messages = {
-        "required": _("This field is required."),
-        "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
-    }
-    coding = ConceptSerializer()
-
-    def to_internal_value(self, data):
-        try:
-            internal_value = self.coding.to_internal_value(data=data)
-        except Exception:
-            raise
-        code = internal_value["code"]
-
-        try:
-            return self.get_queryset().get(code=code)
-        except Concept.DoesNotExist:
-            self.fail("does_not_exist", pk_value=code)
-
-    def to_representation(self, value):
-        representation = self.coding.to_representation(value)
-        return representation
-
-
-class CodingSerializer(RelatedField):
-    coding = ConceptSerializer(many=True)
-    default_error_messages = {
-        "required": _("This field is required."),
-        "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
-    }
-
-    def __init__(self, valueset: str, many: bool = False, required: bool = True):
-        queryset = Concept.objects.filter(valueset=valueset)
-        super().__init__(queryset=queryset, many=many, required=required)
-
-    def to_internal_value(self, data):
-        if not (isinstance(data, dict) and "coding" in data):
-            self.fail("required")
-        internal_value = self.coding.to_internal_value(data=data["coding"])
-        code = internal_value[0]["code"]
-
-        try:
-            return self.get_queryset().get(code=code)
-        except Concept.DoesNotExist:
-            self.fail("does_not_exist", pk_value=code)
-
-    def to_representation(self, value):
-        representation = self.coding.to_representation([value])
-        return {"coding": representation}
-
-
 class RelatedResourceSerializer(RelatedField):
+    coding = ConceptSerializer(many=True)
+
     default_error_messages = {
         "required": _("This field is required."),
         "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
@@ -119,14 +56,50 @@ class RelatedResourceSerializer(RelatedField):
         qs = self.get_queryset()
         if not isinstance(data, dict):
             self.fail("incorrect_type", type=dict)
-        resource_type, id = data["reference"].split("/", 2)
-        if resource_type != qs.model.__name__:
-            self.fail("incorrect_resource_type", resource_type=qs.model.__name__)
-        try:
-            return qs.get(id=id)
-        except qs.model.DoesNotExist:
-            self.fail("does_not_exist", pk_value=id)
+
+        if qs.model.__name__ == "Concept":
+            if not (isinstance(data, dict) and "coding" in data):
+                self.fail("required")
+            try:
+                internal_value = self.coding.to_internal_value(data=data["coding"])
+            except Exception:
+                raise
+            code = internal_value[0]["code"]
+
+            try:
+                return qs.get(code=code)
+            except Concept.DoesNotExist:
+                self.fail("does_not_exist", pk_value=code)
+        else:
+            resource_type, id = data["reference"].split("/", 2)
+            if resource_type != qs.model.__name__:
+                self.fail("incorrect_resource_type", resource_type=qs.model.__name__)
+            try:
+                return qs.get(id=id)
+            except qs.model.DoesNotExist:
+                self.fail("does_not_exist", pk_value=id)
 
     def to_representation(self, value):
         qs = self.get_queryset()
-        return {"reference": qs.model.__name__ + "/" + value.id}
+        model_name = qs.model.__name__
+        if model_name == "Concept":
+            representation = self.coding.to_representation([value])
+            return {"coding": representation}
+        else:
+            return {"reference": model_name + "/" + value.id}
+
+
+class UKCoreModelSerializer(WritableNestedModelSerializer):
+    serializer_related_field = RelatedResourceSerializer
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return strip_none(representation)
+
+
+class UKCoreProfileSerializer(UKCoreModelSerializer):
+    id = CharField()
+    resourceType = SerializerMethodField()
+
+    def get_resourceType(self, _obj):
+        return self.Meta.model.__name__

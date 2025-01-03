@@ -1,11 +1,8 @@
-from api.models import Location, Organization
-from api.models.datatypes import Concept
+from api.models import Location
 from api.models.location import LocationIdentifier, LocationAddress, LocationTelecom
 from api.serializers.common import (
     UKCoreProfileSerializer,
     UKCoreModelSerializer,
-    CodingSerializer,
-    RelatedResourceSerializer,
 )
 
 
@@ -32,16 +29,8 @@ class LocationSerializer(UKCoreProfileSerializer):
         many=True, required=False, source="locationidentifier_set"
     )
     address = LocationAddressSerializer(required=False)
-    type = CodingSerializer(
-        required=False,
-        many=True,
-        valueset=Concept.VALUESET.SERVICE_DELIVERY_LOCATION_ROLE_TYPE,
-    )
     telecom = LocationTelecomSerializer(
         required=False, many=True, source="locationtelecom_set"
-    )
-    managingOrganization = RelatedResourceSerializer(
-        queryset=Organization.objects.all(), required=False
     )
 
     class Meta:

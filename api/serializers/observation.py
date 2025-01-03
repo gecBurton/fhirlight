@@ -3,10 +3,8 @@ from rest_framework.fields import (
     DateTimeField,
     JSONField,
 )
-from rest_framework.serializers import ModelSerializer, Serializer
+from rest_framework.serializers import Serializer
 
-from api.models import Patient, Organization
-from api.models.datatypes import Concept
 from api.models.observation import (
     Observation,
     ObservationComponent,
@@ -14,14 +12,11 @@ from api.models.observation import (
 )
 from api.serializers.common import (
     UKCoreModelSerializer,
-    CodingSerializer,
-    RelatedResourceSerializer,
     UKCoreProfileSerializer,
 )
 
 
-class ObservationComponentSerializer(ModelSerializer):
-    code = CodingSerializer(valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE)
+class ObservationComponentSerializer(UKCoreModelSerializer):
     valueQuantity = JSONField(required=False)
 
     class Meta:
@@ -44,23 +39,6 @@ class ReferenceRangeSerializer(Serializer):
 
 
 class ObservationSerializer(UKCoreProfileSerializer):
-    category = CodingSerializer(
-        many=True,
-        required=False,
-        valueset=Concept.VALUESET.OBSERVATION_CATEGORY_CODE,
-    )
-    code = CodingSerializer(
-        valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE,
-    )
-    bodySite = CodingSerializer(
-        required=False,
-        valueset=Concept.VALUESET.SNOMED_CT_BODY_STRUCTURES,
-    )
-
-    subject = RelatedResourceSerializer(required=False, queryset=Patient.objects.all())
-    performer = RelatedResourceSerializer(
-        required=False, many=True, queryset=Organization.objects.all()
-    )
     effectiveDateTime = DateTimeField(required=False)
     effectiveInstant = DateTimeField(required=False)
 
@@ -71,10 +49,6 @@ class ObservationSerializer(UKCoreProfileSerializer):
         required=False, many=True, source="observationidentifier_set"
     )
     valueQuantity = JSONField(required=False)
-
-    hasMember = RelatedResourceSerializer(
-        required=False, many=True, queryset=Observation.objects.all()
-    )
 
     class Meta:
         fields = (
