@@ -32,6 +32,12 @@ class EncounterLocationSerializer(UKCoreModelSerializer):
         model = EncounterLocation
 
 
+class EncounterIdentifierSerializer(UKCoreModelSerializer):
+    class Meta:
+        exclude = ("uuid", "encounter", "created_at", "updated_at")
+        model = EncounterIdentifier
+
+
 class EncounterParticipantSerializer(UKCoreModelSerializer):
     individual = RelatedResourceSerializer(queryset=Practitioner.objects.all())
     type = CodingSerializer(valueset=Concept.VALUESET.PARTICIPANT_TYPE, many=True)
@@ -39,12 +45,6 @@ class EncounterParticipantSerializer(UKCoreModelSerializer):
     class Meta:
         fields = ("individual", "type")
         model = EncounterParticipant
-
-
-class EncounterIdentifierSerializer(UKCoreModelSerializer):
-    class Meta:
-        exclude = ("uuid", "encounter", "created_at", "updated_at")
-        model = EncounterIdentifier
 
 
 class EncounterHospitalizationSerializer(UKCoreModelSerializer):
@@ -58,7 +58,9 @@ class EncounterHospitalizationSerializer(UKCoreModelSerializer):
 
 
 class EncounterSerializer(UKCoreProfileSerializer):
-    hospitalization = EncounterHospitalizationSerializer(required=False)
+    hospitalization = EncounterHospitalizationSerializer(
+        required=False, source="encounterhospitalization_set"
+    )
     klass = CodingSerializerSimple(
         queryset=Concept.objects.filter(valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE)
     )
@@ -71,9 +73,15 @@ class EncounterSerializer(UKCoreProfileSerializer):
     serviceProvider = RelatedResourceSerializer(
         queryset=Organization.objects.all(), required=False
     )
-    participant = EncounterParticipantSerializer(many=True, required=False)
-    location = EncounterLocationSerializer(many=True, required=False)
-    identifier = EncounterIdentifierSerializer(many=True, required=False)
+    participant = EncounterParticipantSerializer(
+        many=True, required=False, source="encounterparticipant_set"
+    )
+    location = EncounterLocationSerializer(
+        many=True, required=False, source="encounterlocation_set"
+    )
+    identifier = EncounterIdentifierSerializer(
+        many=True, required=False, source="encounteridentifier_set"
+    )
 
     def to_internal_value(self, data):
         data["klass"] = data.pop("class", None)
@@ -84,7 +92,12 @@ class EncounterSerializer(UKCoreProfileSerializer):
         representation["class"] = representation.pop("klass")
         return representation
 
-    #     "hospitalization": {
+    #    'period',
+
+    def create(self, validated_data):
+        validated_data.pop("period", None)
+        return super().create(validated_data)
+
     class Meta:
         fields = (
             "id",
