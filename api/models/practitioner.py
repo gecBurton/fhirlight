@@ -3,7 +3,7 @@ from api.models.datatypes import ContactPoint, Address, Identifier, Name
 from api.models.common import UKCore
 
 
-class Practitioner(UKCore):
+class UKCorePractitioner(UKCore):
     """This profile allows exchange of information about all individuals who are engaged in the healthcare process and
     healthcare-related services as part of their formal responsibilities, is used for attribution of activities and
     responsibilities to these individuals.
@@ -32,7 +32,7 @@ class Practitioner(UKCore):
 class PractitionerAddress(Address):
     """The address of the practitioner using the Address datatype."""
 
-    practitioner = models.ForeignKey(Practitioner, on_delete=models.CASCADE)
+    practitioner = models.ForeignKey(UKCorePractitioner, on_delete=models.CASCADE)
 
 
 class PractitionerIdentifier(Identifier):
@@ -61,7 +61,7 @@ class PractitionerIdentifier(Identifier):
     )
 
     practitioner = models.ForeignKey(
-        Practitioner,
+        UKCorePractitioner,
         on_delete=models.CASCADE,
     )
 
@@ -69,10 +69,10 @@ class PractitionerIdentifier(Identifier):
 class PractitionerName(Name):
     """The name(s) associated with the practitioner."""
 
-    practitioner = models.ForeignKey(Practitioner, on_delete=models.CASCADE)
+    practitioner = models.ForeignKey(UKCorePractitioner, on_delete=models.CASCADE)
 
 
 class PractitionerTelecom(ContactPoint):
     """A contact detail for the practitioner, e.g. a telephone number or an email address."""
 
-    practitioner = models.ForeignKey(Practitioner, on_delete=models.CASCADE)
+    practitioner = models.ForeignKey(UKCorePractitioner, on_delete=models.CASCADE)

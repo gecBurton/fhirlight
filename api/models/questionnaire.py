@@ -5,7 +5,7 @@ from api.models.common import UKCore
 from api.models.datatypes import Identifier, ContactPoint, DataTypeWithPeriod
 
 
-class Questionnaire(UKCore):
+class UKCoreQuestionnaire(UKCore):
     """This profile is used to organise a collection of questions intended to solicit information from patients,
     providers or other individuals involved in the healthcare domain.
     """
@@ -113,7 +113,7 @@ class QuestionnaireItem(DataTypeWithPeriod):
     """Questions and sections within the Questionnaire"""
 
     questionnaire = models.ForeignKey(
-        Questionnaire,
+        UKCoreQuestionnaire,
         null=True,
         blank=True,
         on_delete=models.CASCADE,
@@ -157,13 +157,13 @@ class QuestionnaireIdentifier(Identifier):
     )
 
     questionnaire = models.ForeignKey(
-        Questionnaire,
+        UKCoreQuestionnaire,
         on_delete=models.CASCADE,
     )
 
 
 class QuestionnaireContactPoint(ContactPoint):
-    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
+    questionnaire = models.ForeignKey(UKCoreQuestionnaire, on_delete=models.CASCADE)
     name = models.CharField(
         max_length=256,
         null=True,

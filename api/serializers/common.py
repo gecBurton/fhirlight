@@ -54,10 +54,11 @@ class RelatedResourceSerializer(RelatedField):
 
     def to_internal_value(self, data):
         qs = self.get_queryset()
+        model_name = qs.model.__name__.removeprefix("UKCore")
         if not isinstance(data, dict):
             self.fail("incorrect_type", type=dict)
 
-        if qs.model.__name__ == "Concept":
+        if model_name == "Concept":
             if not (isinstance(data, dict) and "coding" in data):
                 self.fail("required")
             try:
@@ -72,8 +73,8 @@ class RelatedResourceSerializer(RelatedField):
                 self.fail("does_not_exist", pk_value=code)
         else:
             resource_type, id = data["reference"].split("/", 2)
-            if resource_type != qs.model.__name__:
-                self.fail("incorrect_resource_type", resource_type=qs.model.__name__)
+            if resource_type != model_name:
+                self.fail("incorrect_resource_type", resource_type=model_name)
             try:
                 return qs.get(id=id)
             except qs.model.DoesNotExist:
@@ -81,7 +82,7 @@ class RelatedResourceSerializer(RelatedField):
 
     def to_representation(self, value):
         qs = self.get_queryset()
-        model_name = qs.model.__name__
+        model_name = qs.model.__name__.removeprefix("UKCore")
         if model_name == "Concept":
             representation = self.coding.to_representation([value])
             return {"coding": representation}
@@ -102,4 +103,4 @@ class UKCoreProfileSerializer(UKCoreModelSerializer):
     resourceType = SerializerMethodField()
 
     def get_resourceType(self, _obj):
-        return self.Meta.model.__name__
+        return self.Meta.model.__name__.removeprefix("UKCore")

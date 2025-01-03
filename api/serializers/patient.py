@@ -1,6 +1,6 @@
 from rest_framework.serializers import Serializer, RelatedField
 
-from api.models import Patient
+from api.models import UKCorePatient
 from api.models.datatypes import Concept
 from api.models.patient import (
     PatientIdentifier,
@@ -111,4 +111,4 @@ class PatientSerializer(UKCoreProfileSerializer):
             "birthDate",
             "communication",
         ]
-        model = Patient
+        model = UKCorePatient

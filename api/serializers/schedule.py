@@ -1,7 +1,7 @@
 from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer
 
-from api.models.schedule import Schedule, ScheduleIdentifier
+from api.models.schedule import UKCoreSchedule, ScheduleIdentifier
 from api.serializers.common import (
     UKCoreProfileSerializer,
     UKCoreModelSerializer,
@@ -38,4 +38,4 @@ class ScheduleSerializer(UKCoreProfileSerializer):
             "specialty",
             "actor",
         )
-        model = Schedule
+        model = UKCoreSchedule

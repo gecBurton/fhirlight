@@ -1,11 +1,11 @@
 from django.db import models
 
-from api.models import Organization, Patient
+from api.models import UKCoreOrganization, UKCorePatient
 from api.models.common import UKCore
 from api.models.datatypes import Concept, Identifier
 
 
-class Observation(UKCore):
+class UKCoreObservation(UKCore):
     """This profile allows exchange of information of Measurements and simple assertions made about an individual,
     device or other subject.
     Note: this profile SHALL NOT be used where a more specific UK Core profile exists."""
@@ -40,12 +40,12 @@ class Observation(UKCore):
         related_name="observationcode",
     )
     performer = models.ManyToManyField(
-        Organization,
+        UKCoreOrganization,
         blank=True,
         help_text="Who is responsible for the observation",
     )
     subject = models.ForeignKey(
-        Patient,
+        UKCorePatient,
         on_delete=models.CASCADE,
         null=True,
         blank=True,
@@ -76,7 +76,7 @@ class Observation(UKCore):
 
 
 class ObservationComponent(models.Model):
-    observation = models.ForeignKey(Observation, on_delete=models.CASCADE)
+    observation = models.ForeignKey(UKCoreObservation, on_delete=models.CASCADE)
     code = models.ForeignKey(
         Concept,
         on_delete=models.CASCADE,
@@ -111,6 +111,6 @@ class ObservationIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
     observation = models.ForeignKey(
-        Observation,
+        UKCoreObservation,
         on_delete=models.CASCADE,
     )

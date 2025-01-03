@@ -1,5 +1,5 @@
 from api.models.datatypes import Concept
-from api.models.immunization import Immunization
+from api.models.immunization import UKCoreImmunization
 from api.serializers.common import (
     UKCoreProfileSerializer,
     RelatedResourceSerializer,
@@ -22,4 +22,4 @@ class ImmunizationSerializer(UKCoreProfileSerializer):
             "patient",
             "vaccineCode",
         )
-        model = Immunization
+        model = UKCoreImmunization

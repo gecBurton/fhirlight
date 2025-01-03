@@ -1,11 +1,11 @@
 from django.db import models
 
-from api.models import Patient, Organization, Location
+from api.models import UKCorePatient, UKCoreOrganization, UKCoreLocation
 from api.models.common import UKCore
 from api.models.datatypes import Concept
 
 
-class Immunization(UKCore):
+class UKCoreImmunization(UKCore):
     """This profile is intended to cover the recording of current and historical administration of vaccines to
     individuals across all healthcare disciplines in all care settings and all regions.
 
@@ -36,7 +36,7 @@ class Immunization(UKCore):
         help_text="Vaccine that was administered or was to be administered.",
     )
     patient = models.ForeignKey(
-        Patient,
+        UKCorePatient,
         on_delete=models.CASCADE,
         help_text="The patient who either received or did not receive the immunization.",
     )
@@ -44,14 +44,14 @@ class Immunization(UKCore):
         help_text="vaccine administered or was to be administered."
     )
     manufacturer = models.ForeignKey(
-        Organization,
+        UKCoreOrganization,
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="Name of vaccine manufacturer.",
     )
     location = models.ForeignKey(
-        Location,
+        UKCoreLocation,
         null=True,
         blank=True,
         on_delete=models.CASCADE,

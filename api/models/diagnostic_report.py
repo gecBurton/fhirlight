@@ -1,11 +1,16 @@
-from api.models import Patient, Observation, Organization, Specimen
+from api.models import (
+    UKCorePatient,
+    UKCoreObservation,
+    UKCoreOrganization,
+    UKCoreSpecimen,
+)
 from api.models.common import UKCore
 from django.db import models
 
 from api.models.datatypes import Concept, Identifier
 
 
-class DiagnosticReport(UKCore):
+class UKCoreDiagnosticReport(UKCore):
     """This profile allows exchange of the findings and interpretation of diagnostic tests performed on individuals,
     groups of individuals, devices and locations and/or specimens derived from these. The report includes clinical
     context such as requesting and provider information and some mix of atomic results, images, textual and coded
@@ -41,7 +46,7 @@ class DiagnosticReport(UKCore):
         help_text="A code or name that describes this diagnostic report.",
     )
     subject = models.ForeignKey(
-        Patient,
+        UKCorePatient,
         null=True,
         blank=True,
         on_delete=models.CASCADE,
@@ -55,14 +60,14 @@ class DiagnosticReport(UKCore):
         help_text="Clinically relevant time/time-period for report.",
     )
     result = models.ManyToManyField(
-        Observation, help_text="that are part of this diagnostic report."
+        UKCoreObservation, help_text="that are part of this diagnostic report."
     )
     performer = models.ManyToManyField(
-        Organization,
+        UKCoreOrganization,
         help_text="Who is responsible for the observation",
     )
     specimen = models.ManyToManyField(
-        Specimen,
+        UKCoreSpecimen,
         blank=True,
         help_text="Who is responsible for the observation",
     )
@@ -81,6 +86,6 @@ class DiagnosticReportIdentifier(Identifier):
     )
 
     diagnostic_report = models.ForeignKey(
-        DiagnosticReport,
+        UKCoreDiagnosticReport,
         on_delete=models.CASCADE,
     )

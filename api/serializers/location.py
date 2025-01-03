@@ -1,4 +1,4 @@
-from api.models import Location
+from api.models import UKCoreLocation
 from api.models.location import LocationIdentifier, LocationAddress, LocationTelecom
 from api.serializers.common import (
     UKCoreProfileSerializer,
@@ -45,4 +45,4 @@ class LocationSerializer(UKCoreProfileSerializer):
             "telecom",
             "managingOrganization",
         ]
-        model = Location
+        model = UKCoreLocation

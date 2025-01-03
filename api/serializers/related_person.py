@@ -1,4 +1,4 @@
-from api.models import RelatedPerson
+from api.models import UKCoreRelatedPerson
 from api.models.related_person import (
     RelatedPersonAddress,
     RelatedPersonTelecom,
@@ -45,4 +45,4 @@ class RelatedPersonSerializer(UKCoreProfileSerializer):
             "telecom",
             "address",
         )
-        model = RelatedPerson
+        model = UKCoreRelatedPerson

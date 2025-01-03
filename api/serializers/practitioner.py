@@ -1,5 +1,5 @@
 from api.models import (
-    Practitioner,
+    UKCorePractitioner,
     PractitionerName,
     PractitionerIdentifier,
     PractitionerTelecom,
@@ -57,4 +57,4 @@ class PractitionerSerializer(UKCoreProfileSerializer):
             "name",
             "telecom",
         )
-        model = Practitioner
+        model = UKCorePractitioner

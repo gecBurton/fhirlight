@@ -1,7 +1,7 @@
 from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer, ModelSerializer
 
-from api.models import Questionnaire
+from api.models import UKCoreQuestionnaire
 from api.models.questionnaire import (
     QuestionnaireIdentifier,
     QuestionnaireContactPoint,
@@ -79,4 +79,4 @@ class QuestionnaireSerializer(UKCoreProfileSerializer):
             "effectivePeriod",
             "item",
         )
-        model = Questionnaire
+        model = UKCoreQuestionnaire

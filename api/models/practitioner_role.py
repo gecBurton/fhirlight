@@ -1,11 +1,11 @@
 from django.db import models
 
-from api.models import Practitioner, Organization, Location
+from api.models import UKCorePractitioner, UKCoreOrganization, UKCoreLocation
 from api.models.common import UKCore
 from api.models.datatypes import ContactPoint, Concept, Identifier
 
 
-class PractitionerRole(UKCore):
+class UKCorePractitionerRole(UKCore):
     """This profile allows exchange of a specific set of roles, specialties and services that a practitioner may
     perform at an organisation for a period of time.
     """
@@ -22,17 +22,18 @@ class PractitionerRole(UKCore):
         related_name="practitionerrole_code",
     )
     practitioner = models.ForeignKey(
-        Practitioner,
+        UKCorePractitioner,
         on_delete=models.CASCADE,
         help_text="Practitioner that is able to provide the defined services for the organization.",
     )
     organization = models.ForeignKey(
-        Organization,
+        UKCoreOrganization,
         on_delete=models.CASCADE,
         help_text="Organization where the roles are available.",
     )
     location = models.ManyToManyField(
-        Location, help_text="The location(s) at which this practitioner provides care"
+        UKCoreLocation,
+        help_text="The location(s) at which this practitioner provides care",
     )
 
     period_start = models.DateTimeField(
@@ -55,7 +56,9 @@ class PractitionerRole(UKCore):
 class PractitionerRoleTelecom(ContactPoint):
     """Contact details that are specific to the role/location/service"""
 
-    practitioner_role = models.ForeignKey(PractitionerRole, on_delete=models.CASCADE)
+    practitioner_role = models.ForeignKey(
+        UKCorePractitionerRole, on_delete=models.CASCADE
+    )
 
 
 class PractitionerRoleIdentifier(Identifier):
@@ -67,4 +70,6 @@ class PractitionerRoleIdentifier(Identifier):
         choices=SYSTEM,
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
-    practitioner_role = models.ForeignKey(PractitionerRole, on_delete=models.CASCADE)
+    practitioner_role = models.ForeignKey(
+        UKCorePractitionerRole, on_delete=models.CASCADE
+    )

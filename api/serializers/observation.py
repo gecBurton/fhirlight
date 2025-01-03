@@ -6,7 +6,7 @@ from rest_framework.fields import (
 from rest_framework.serializers import Serializer
 
 from api.models.observation import (
-    Observation,
+    UKCoreObservation,
     ObservationComponent,
     ObservationIdentifier,
 )
@@ -67,4 +67,4 @@ class ObservationSerializer(UKCoreProfileSerializer):
             "hasMember",
             "bodySite",
         )
-        model = Observation
+        model = UKCoreObservation

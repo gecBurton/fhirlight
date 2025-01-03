@@ -1,6 +1,6 @@
 from django.db import models
 
-from api.models import Organization
+from api.models import UKCoreOrganization
 from api.models.common import UKCore
 from api.models.datatypes import Address, Identifier, ContactPoint, Concept
 
@@ -9,7 +9,7 @@ class LocationAddress(Address):
     pass
 
 
-class Location(UKCore):
+class UKCoreLocation(UKCore):
     """This profile can be used to exchange details and position information for a physical place where services are
     provided and resources and participants may be stored, found, contained, or accommodated.
 
@@ -43,7 +43,7 @@ class Location(UKCore):
         help_text="Name of the location as used by humans. This does not need to be unique.",
     )
     managingOrganization = models.ForeignKey(
-        Organization,
+        UKCoreOrganization,
         null=True,
         blank=True,
         on_delete=models.CASCADE,
@@ -77,14 +77,14 @@ class LocationIdentifier(Identifier):
     )
 
     location = models.ForeignKey(
-        Location,
+        UKCoreLocation,
         on_delete=models.CASCADE,
     )
 
 
 class LocationTelecom(ContactPoint):
     location = models.ForeignKey(
-        Location,
+        UKCoreLocation,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
     )

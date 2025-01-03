@@ -1,23 +1,23 @@
 from rest_framework.viewsets import ModelViewSet
 
 from api.models import (
-    Patient,
-    Medication,
-    Observation,
-    Specimen,
-    Location,
-    Immunization,
-    OperationOutcome,
-    Slot,
-    PractitionerRole,
-    Schedule,
-    Questionnaire,
-    Procedure,
-    RelatedPerson,
-    DiagnosticReport,
+    UKCorePatient,
+    UKCoreMedication,
+    UKCoreObservation,
+    UKCoreSpecimen,
+    UKCoreLocation,
+    UKCoreImmunization,
+    UKCoreOperationOutcome,
+    UKCoreSlot,
+    UKCorePractitionerRole,
+    UKCoreSchedule,
+    UKCoreQuestionnaire,
+    UKCoreProcedure,
+    UKCoreRelatedPerson,
+    UKCoreDiagnosticReport,
 )
-from api.models.organization import Organization
-from api.models.practitioner import Practitioner
+from api.models.organization import UKCoreOrganization
+from api.models.practitioner import UKCorePractitioner
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
@@ -37,96 +37,96 @@ from api.serializers.specimen import SpecimenSerializer
 
 
 class OrganizationViewSet(ModelViewSet):
-    queryset = Organization.objects.all()
+    queryset = UKCoreOrganization.objects.all()
     serializer_class = OrganizationSerializer
     lookup_field = "id"
 
 
 class PractitionerViewSet(ModelViewSet):
-    queryset = Practitioner.objects.all()
+    queryset = UKCorePractitioner.objects.all()
     serializer_class = PractitionerSerializer
     lookup_field = "id"
 
 
 class PatientViewSet(ModelViewSet):
-    queryset = Patient.objects.all()
+    queryset = UKCorePatient.objects.all()
     serializer_class = PatientSerializer
     lookup_field = "id"
 
 
 class MedicationViewSet(ModelViewSet):
-    queryset = Medication.objects.all()
+    queryset = UKCoreMedication.objects.all()
     serializer_class = MedicationSerializer
     lookup_field = "id"
 
 
 class ObservationViewSet(ModelViewSet):
-    queryset = Observation.objects.all()
+    queryset = UKCoreObservation.objects.all()
     serializer_class = ObservationSerializer
     lookup_field = "id"
 
 
 class SpecimenViewSet(ModelViewSet):
-    queryset = Specimen.objects.all()
+    queryset = UKCoreSpecimen.objects.all()
     serializer_class = SpecimenSerializer
     lookup_field = "id"
 
 
 class LocationViewSet(ModelViewSet):
-    queryset = Location.objects.all()
+    queryset = UKCoreLocation.objects.all()
     serializer_class = LocationSerializer
     lookup_field = "id"
 
 
 class ImmunizationViewSet(ModelViewSet):
-    queryset = Immunization.objects.all()
+    queryset = UKCoreImmunization.objects.all()
     serializer_class = ImmunizationSerializer
     lookup_field = "id"
 
 
 class OperationOutcomeViewSet(ModelViewSet):
-    queryset = OperationOutcome.objects.all()
+    queryset = UKCoreOperationOutcome.objects.all()
     serializer_class = OperationOutcomeSerializer
     lookup_field = "id"
 
 
 class SlotViewSet(ModelViewSet):
-    queryset = Slot.objects.all()
+    queryset = UKCoreSlot.objects.all()
     serializer_class = SlotSerializer
     lookup_field = "id"
 
 
 class PractitionerRoleViewSet(ModelViewSet):
-    queryset = PractitionerRole.objects.all()
+    queryset = UKCorePractitionerRole.objects.all()
     serializer_class = PractitionerRoleSerializer
     lookup_field = "id"
 
 
 class ScheduleViewSet(ModelViewSet):
-    queryset = Schedule.objects.all()
+    queryset = UKCoreSchedule.objects.all()
     serializer_class = ScheduleSerializer
     lookup_field = "id"
 
 
 class QuestionnaireViewSet(ModelViewSet):
-    queryset = Questionnaire.objects.all()
+    queryset = UKCoreQuestionnaire.objects.all()
     serializer_class = QuestionnaireSerializer
     lookup_field = "id"
 
 
 class ProcedureViewSet(ModelViewSet):
-    queryset = Procedure.objects.all()
+    queryset = UKCoreProcedure.objects.all()
     serializer_class = ProcedureSerializer
     lookup_field = "id"
 
 
 class RelatedPersonViewSet(ModelViewSet):
-    queryset = RelatedPerson.objects.all()
+    queryset = UKCoreRelatedPerson.objects.all()
     serializer_class = RelatedPersonSerializer
     lookup_field = "id"
 
 
 class DiagnosticReportViewSet(ModelViewSet):
-    queryset = DiagnosticReport.objects.all()
+    queryset = UKCoreDiagnosticReport.objects.all()
     serializer_class = DiagnosticReportSerializer
     lookup_field = "id"

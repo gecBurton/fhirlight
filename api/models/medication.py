@@ -4,7 +4,7 @@ from api.models.common import UKCore
 from api.models.datatypes import Concept
 
 
-class Medication(UKCore):
+class UKCoreMedication(UKCore):
     """This profile is primarily used for the identification and definition of a medication for the purposes of
     prescribing, dispensing, and administering a medication as well as for making statements about medication use.
     """

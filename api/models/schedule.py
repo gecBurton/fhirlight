@@ -1,11 +1,11 @@
 from django.db import models
 
-from api.models import Location
+from api.models import UKCoreLocation
 from api.models.common import UKCore
 from api.models.datatypes import Identifier, Concept
 
 
-class Schedule(UKCore):
+class UKCoreSchedule(UKCore):
     """Schedule resources provide a container for time-slots that can be booked using an appointment. It provides the
     window of time (period) that slots are defined for and what type of appointments can be booked.
 
@@ -47,7 +47,7 @@ class Schedule(UKCore):
         null=True, blank=True, help_text="Period of time covered by schedule."
     )
     actor = models.ManyToManyField(
-        Location,
+        UKCoreLocation,
         help_text="Resource(s) that availability information is being provided for",
     )
 
@@ -61,4 +61,4 @@ class ScheduleIdentifier(Identifier):
         choices=SYSTEM,
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
-    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    schedule = models.ForeignKey(UKCoreSchedule, on_delete=models.CASCADE)

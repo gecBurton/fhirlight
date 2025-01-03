@@ -1,4 +1,7 @@
-from api.models.diagnostic_report import DiagnosticReport, DiagnosticReportIdentifier
+from api.models.diagnostic_report import (
+    UKCoreDiagnosticReport,
+    DiagnosticReportIdentifier,
+)
 from api.serializers.common import (
     UKCoreProfileSerializer,
     UKCoreModelSerializer,
@@ -30,4 +33,4 @@ class DiagnosticReportSerializer(UKCoreProfileSerializer):
             "subject",
             "result",
         )
-        model = DiagnosticReport
+        model = UKCoreDiagnosticReport

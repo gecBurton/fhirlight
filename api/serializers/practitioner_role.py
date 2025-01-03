@@ -1,4 +1,4 @@
-from api.models import PractitionerRole
+from api.models import UKCorePractitionerRole
 from api.models.practitioner_role import (
     PractitionerRoleIdentifier,
     PractitionerRoleTelecom,
@@ -40,4 +40,4 @@ class PractitionerRoleSerializer(UKCoreProfileSerializer):
             "code",
             "specialty",
         )
-        model = PractitionerRole
+        model = UKCorePractitionerRole

@@ -1,4 +1,4 @@
-from api.models.slot import Slot, SlotIdentifier
+from api.models.slot import UKCoreSlot, SlotIdentifier
 from api.serializers.common import (
     UKCoreProfileSerializer,
     UKCoreModelSerializer,
@@ -30,4 +30,4 @@ class SlotSerializer(UKCoreProfileSerializer):
             "end",
             "status",
         )
-        model = Slot
+        model = UKCoreSlot

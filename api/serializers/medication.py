@@ -4,7 +4,7 @@ from rest_framework.fields import (
 )
 from rest_framework.serializers import Serializer
 
-from api.models.medication import Medication
+from api.models.medication import UKCoreMedication
 from api.serializers.common import UKCoreProfileSerializer
 
 
@@ -24,4 +24,4 @@ class MedicationSerializer(UKCoreProfileSerializer):
             "form",
             "batch",
         ]
-        model = Medication
+        model = UKCoreMedication

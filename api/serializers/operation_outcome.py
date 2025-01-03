@@ -1,4 +1,4 @@
-from api.models.operation_outcome import OperationOutcome, OperationOutcomeIssue
+from api.models.operation_outcome import UKCoreOperationOutcome, OperationOutcomeIssue
 from api.serializers.common import (
     UKCoreProfileSerializer,
     UKCoreModelSerializer,
@@ -18,4 +18,4 @@ class OperationOutcomeSerializer(UKCoreProfileSerializer):
 
     class Meta:
         fields = ("id", "resourceType", "issue")
-        model = OperationOutcome
+        model = UKCoreOperationOutcome

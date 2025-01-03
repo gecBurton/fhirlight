@@ -1,54 +1,54 @@
 from .organization import (
     OrganizationAddress,
     OrganizationIdentifier,
-    Organization,
+    UKCoreOrganization,
     OrganizationContactPoint,
 )
-from .patient import Patient
+from .patient import UKCorePatient
 from .practitioner import (
     PractitionerName,
     PractitionerIdentifier,
     PractitionerTelecom,
     PractitionerAddress,
-    Practitioner,
+    UKCorePractitioner,
 )
-from .medication import Medication
-from .observation import Observation, ObservationIdentifier
-from .specimen import Specimen
-from .location import Location
-from .immunization import Immunization
-from .operation_outcome import OperationOutcome
-from .slot import Slot
-from .practitioner_role import PractitionerRole
-from .schedule import Schedule
-from .questionnaire import Questionnaire
-from .procedure import Procedure
-from .related_person import RelatedPerson
-from .diagnostic_report import DiagnosticReport
+from .medication import UKCoreMedication
+from .observation import UKCoreObservation, ObservationIdentifier
+from .specimen import UKCoreSpecimen
+from .location import UKCoreLocation
+from .immunization import UKCoreImmunization
+from .operation_outcome import UKCoreOperationOutcome
+from .slot import UKCoreSlot
+from .practitioner_role import UKCorePractitionerRole
+from .schedule import UKCoreSchedule
+from .questionnaire import UKCoreQuestionnaire
+from .procedure import UKCoreProcedure
+from .related_person import UKCoreRelatedPerson
+from .diagnostic_report import UKCoreDiagnosticReport
 
 __all__ = [
-    "DiagnosticReport",
-    "RelatedPerson",
-    "Procedure",
-    "Questionnaire",
-    "Schedule",
-    "PractitionerRole",
-    "Slot",
-    "OperationOutcome",
-    "Immunization",
-    "Location",
-    "Patient",
+    "UKCoreDiagnosticReport",
+    "UKCoreRelatedPerson",
+    "UKCoreProcedure",
+    "UKCoreQuestionnaire",
+    "UKCoreSchedule",
+    "UKCorePractitionerRole",
+    "UKCoreSlot",
+    "UKCoreOperationOutcome",
+    "UKCoreImmunization",
+    "UKCoreLocation",
+    "UKCorePatient",
     "OrganizationAddress",
     "OrganizationIdentifier",
-    "Organization",
+    "UKCoreOrganization",
     "OrganizationContactPoint",
-    "Practitioner",
+    "UKCorePractitioner",
     "PractitionerName",
     "PractitionerIdentifier",
     "PractitionerTelecom",
     "PractitionerAddress",
-    "Medication",
-    "Observation",
+    "UKCoreMedication",
+    "UKCoreObservation",
     "ObservationIdentifier",
-    "Specimen",
+    "UKCoreSpecimen",
 ]

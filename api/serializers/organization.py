@@ -1,7 +1,7 @@
 from api.models import (
     OrganizationAddress,
     OrganizationIdentifier,
-    Organization,
+    UKCoreOrganization,
     OrganizationContactPoint,
 )
 from api.serializers.common import UKCoreModelSerializer, UKCoreProfileSerializer
@@ -38,4 +38,4 @@ class OrganizationSerializer(UKCoreProfileSerializer):
 
     class Meta:
         fields = ("resourceType", "id", "identifier", "name", "address", "telecom")
-        model = Organization
+        model = UKCoreOrganization

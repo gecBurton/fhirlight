@@ -5,7 +5,7 @@ from api.models.common import UKCore
 from api.models.datatypes import Concept, DataTypeWithPeriod
 
 
-class OperationOutcome(UKCore):
+class UKCoreOperationOutcome(UKCore):
     """The purpose of this profile is to provide detailed information about the outcome of an attempted system
     operation. Operation outcomes are sets of error, warning and information messages provided as a direct system
     response, or part of one, and provide information about the outcome of the operation.
@@ -18,7 +18,9 @@ class OperationOutcome(UKCore):
 
 
 class OperationOutcomeIssue(DataTypeWithPeriod):
-    operation_outcome = models.ForeignKey(OperationOutcome, on_delete=models.CASCADE)
+    operation_outcome = models.ForeignKey(
+        UKCoreOperationOutcome, on_delete=models.CASCADE
+    )
 
     class SEVERITY(models.TextChoices):
         FATAL = "fatal"

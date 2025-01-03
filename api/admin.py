@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import StackedInline
 
 from api.models.organization import (
-    Organization,
+    UKCoreOrganization,
     OrganizationContactPoint,
     OrganizationAddress,
     OrganizationIdentifier,
@@ -32,4 +32,4 @@ class OrganizationAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(Organization, OrganizationAdmin)
+admin.site.register(UKCoreOrganization, OrganizationAdmin)
