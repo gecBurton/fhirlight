@@ -27,6 +27,7 @@ class Observation(UKCore):
 
     category = models.ManyToManyField(
         Concept,
+        blank=True,
         limit_choices_to={"valueset": Concept.VALUESET.OBSERVATION_CATEGORY_CODE},
         help_text="A code that classifies the general type of observation being made.",
         related_name="observationcategory",

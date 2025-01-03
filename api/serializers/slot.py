@@ -1,8 +1,6 @@
-from api.models.datatypes import Concept
 from api.models.slot import Slot, SlotIdentifier
 from api.serializers.common import (
     UKCoreProfileSerializer,
-    CodingSerializer,
     UKCoreModelSerializer,
 )
 
@@ -16,21 +14,6 @@ class SlotIdentifierSerializer(UKCoreModelSerializer):
 class SlotSerializer(UKCoreProfileSerializer):
     identifier = SlotIdentifierSerializer(
         many=True, required=False, source="slotidentifier_set"
-    )
-
-    serviceType = CodingSerializer(
-        required=False,
-        many=True,
-        valueset=Concept.VALUESET.SERVICE_TYPE,
-    )
-    specialty = CodingSerializer(
-        required=False,
-        many=True,
-        valueset=Concept.VALUESET.UK_CORE_PRACTICE_SETTINGS_CODE,
-    )
-    appointmentType = CodingSerializer(
-        required=False,
-        valueset=Concept.VALUESET.V2_0276,
     )
 
     class Meta:
