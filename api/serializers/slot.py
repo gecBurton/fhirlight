@@ -18,11 +18,6 @@ class SlotSerializer(UKCoreProfileSerializer):
         many=True, required=False, source="slotidentifier_set"
     )
 
-    serviceCategory = CodingSerializer(
-        required=False,
-        many=True,
-        valueset=Concept.VALUESET.SERVICE_CATEGORY,
-    )
     serviceType = CodingSerializer(
         required=False,
         many=True,

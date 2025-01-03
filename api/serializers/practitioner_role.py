@@ -1,5 +1,4 @@
 from api.models import PractitionerRole
-from api.models.datatypes import Concept
 from api.models.practitioner_role import (
     PractitionerRoleIdentifier,
     PractitionerRoleTelecom,
@@ -7,7 +6,6 @@ from api.models.practitioner_role import (
 from api.serializers.common import (
     UKCoreProfileSerializer,
     UKCoreModelSerializer,
-    CodingSerializer,
 )
 
 
@@ -24,14 +22,6 @@ class PractitionerRoleTelecomSerializer(UKCoreModelSerializer):
 
 
 class PractitionerRoleSerializer(UKCoreProfileSerializer):
-    code = CodingSerializer(
-        many=True, required=False, valueset=Concept.VALUESET.PRACTITIONER_ROLE
-    )
-    specialty = CodingSerializer(
-        many=True,
-        required=False,
-        valueset=Concept.VALUESET.UK_CORE_PRACTICE_SETTINGS_CODE,
-    )
     identifier = PractitionerRoleIdentifierSerializer(
         many=True, required=False, source="practitionerroleidentifier_set"
     )

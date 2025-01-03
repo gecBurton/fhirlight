@@ -47,13 +47,6 @@ class ObservationSerializer(UKCoreProfileSerializer):
         required=False,
         valueset=Concept.VALUESET.OBSERVATION_CATEGORY_CODE,
     )
-    code = CodingSerializer(
-        valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE,
-    )
-    bodySite = CodingSerializer(
-        required=False,
-        valueset=Concept.VALUESET.SNOMED_CT_BODY_STRUCTURES,
-    )
 
     effectiveDateTime = DateTimeField(required=False)
     effectiveInstant = DateTimeField(required=False)

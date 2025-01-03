@@ -1,7 +1,7 @@
 from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer
 
-from api.models import Patient, Practitioner
+from api.models import Practitioner
 from api.models.datatypes import Concept
 from api.models.specimen import Specimen
 from api.serializers.common import (
@@ -23,10 +23,6 @@ class SpecimenComponentSerializer(Serializer):
 
 
 class SpecimenSerializer(UKCoreProfileSerializer):
-    type = CodingSerializer(
-        required=False, valueset=Concept.VALUESET.UK_CORE_SPECIMEN_TYPE
-    )
-    subject = RelatedResourceSerializer(queryset=Patient.objects.all(), required=False)
     collection = SpecimenComponentSerializer(required=False, source="*")
 
     class Meta:

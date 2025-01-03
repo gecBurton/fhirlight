@@ -4,9 +4,8 @@ from rest_framework.fields import (
 )
 from rest_framework.serializers import Serializer
 
-from api.models.datatypes import Concept
 from api.models.medication import Medication
-from api.serializers.common import CodingSerializer, UKCoreProfileSerializer
+from api.serializers.common import UKCoreProfileSerializer
 
 
 class BatchSerializer(Serializer):
@@ -16,11 +15,6 @@ class BatchSerializer(Serializer):
 
 class MedicationSerializer(UKCoreProfileSerializer):
     batch = BatchSerializer(required=False, source="*")
-
-    code = CodingSerializer(valueset=Concept.VALUESET.UK_CORE_MEDICATION_CODE)
-    form = CodingSerializer(
-        required=False, valueset=Concept.VALUESET.UK_CORE_MEDICATION_FORM
-    )
 
     class Meta:
         fields = [
