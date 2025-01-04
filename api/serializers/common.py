@@ -21,13 +21,8 @@ def strip_none(obj):
         return {k: strip_none(v) for k, v in obj.items() if not is_none(v)}
     if isinstance(obj, list):
         return list(map(strip_none, obj))
-
     if isinstance(obj, str):
         return obj.removesuffix("T00:00:00Z")
-
-    if isinstance(obj, str):
-        if obj.endswith(":00Z"):
-            return obj.replace(":00Z", "00+00:00")
     return obj
 
 
