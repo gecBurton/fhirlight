@@ -1,7 +1,6 @@
 from django.db import models
 
-from api.models import Organization
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Address, Identifier, ContactPoint, Concept
 
 
@@ -9,7 +8,7 @@ class LocationAddress(Address):
     pass
 
 
-class Location(UKCore):
+class LocationProfile(BaseProfile):
     """This profile can be used to exchange details and position information for a physical place where services are
     provided and resources and participants may be stored, found, contained, or accommodated.
 
@@ -43,11 +42,13 @@ class Location(UKCore):
         help_text="Name of the location as used by humans. This does not need to be unique.",
     )
     managingOrganization = models.ForeignKey(
-        Organization,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["organizationprofile"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="Organization responsible for provisioning and upkeep",
+        related_name="Location_organization",
     )
     type = models.ManyToManyField(
         Concept,
@@ -77,14 +78,14 @@ class LocationIdentifier(Identifier):
     )
 
     location = models.ForeignKey(
-        Location,
+        LocationProfile,
         on_delete=models.CASCADE,
     )
 
 
 class LocationTelecom(ContactPoint):
     location = models.ForeignKey(
-        Location,
+        LocationProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
     )

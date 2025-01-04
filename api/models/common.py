@@ -1,9 +1,10 @@
 import uuid
 
 from django.db import models
+from polymorphic.models import PolymorphicModel
 
 
-class UKCore(models.Model):
+class BaseProfile(PolymorphicModel):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     id = models.CharField(
@@ -16,6 +17,3 @@ class UKCore(models.Model):
     active = models.BooleanField(
         default=True, help_text="Whether the record is still in active use"
     )
-
-    class Meta:
-        abstract = True

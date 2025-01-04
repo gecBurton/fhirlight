@@ -1,14 +1,14 @@
 from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer
 
-from api.models.schedule import Schedule, ScheduleIdentifier
+from api.models.schedule import ScheduleProfile, ScheduleIdentifier
 from api.serializers.common import (
-    UKCoreProfileSerializer,
-    UKCoreModelSerializer,
+    ProfileSerializer,
+    BaseModelSerializer,
 )
 
 
-class ScheduleIdentifierSerializer(UKCoreModelSerializer):
+class ScheduleIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "schedule", "created_at", "updated_at")
         model = ScheduleIdentifier
@@ -19,7 +19,7 @@ class planningHorizonSerializer(Serializer):
     end = DateTimeField(required=False, source="planningHorizonEnd")
 
 
-class ScheduleSerializer(UKCoreProfileSerializer):
+class ScheduleSerializer(ProfileSerializer):
     identifier = ScheduleIdentifierSerializer(
         many=True, required=False, source="scheduleidentifier_set"
     )
@@ -38,4 +38,4 @@ class ScheduleSerializer(UKCoreProfileSerializer):
             "specialty",
             "actor",
         )
-        model = Schedule
+        model = ScheduleProfile

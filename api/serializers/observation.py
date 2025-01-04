@@ -6,17 +6,17 @@ from rest_framework.fields import (
 from rest_framework.serializers import Serializer
 
 from api.models.observation import (
-    Observation,
+    ObservationProfile,
     ObservationComponent,
     ObservationIdentifier,
 )
 from api.serializers.common import (
-    UKCoreModelSerializer,
-    UKCoreProfileSerializer,
+    BaseModelSerializer,
+    ProfileSerializer,
 )
 
 
-class ObservationComponentSerializer(UKCoreModelSerializer):
+class ObservationComponentSerializer(BaseModelSerializer):
     valueQuantity = JSONField(required=False)
 
     class Meta:
@@ -24,7 +24,7 @@ class ObservationComponentSerializer(UKCoreModelSerializer):
         model = ObservationComponent
 
 
-class ObservationIdentifierSerializer(UKCoreModelSerializer):
+class ObservationIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "observation", "created_at", "updated_at")
         model = ObservationIdentifier
@@ -38,7 +38,7 @@ class ReferenceRangeSerializer(Serializer):
         raise ValueError(data)
 
 
-class ObservationSerializer(UKCoreProfileSerializer):
+class ObservationSerializer(ProfileSerializer):
     effectiveDateTime = DateTimeField(required=False)
     effectiveInstant = DateTimeField(required=False)
 
@@ -67,4 +67,4 @@ class ObservationSerializer(UKCoreProfileSerializer):
             "hasMember",
             "bodySite",
         )
-        model = Observation
+        model = ObservationProfile

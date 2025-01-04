@@ -1,11 +1,10 @@
 from django.db import models
 
-from api.models import Patient
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Concept, Name, Address, ContactPoint
 
 
-class RelatedPerson(UKCore):
+class RelatedPersonProfile(BaseProfile):
     """This profile allows exchange of information about a person that is involved in the care for an individual, but
     who is not the target of healthcare, nor has a formal responsibility in the care process.
     """
@@ -16,9 +15,11 @@ class RelatedPerson(UKCore):
     # Description	This profile defines the UK constraints and extensions on the International FHIR resource RelatedPerson.
 
     patient = models.ForeignKey(
-        Patient,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["patientprofile"]},
         on_delete=models.CASCADE,
         help_text="The patient this person is related to.",
+        related_name="RelatedPerson_patient",
     )
     relationship = models.ManyToManyField(
         Concept,
@@ -32,12 +33,12 @@ class RelatedPerson(UKCore):
 class RelatedPersonTelecom(ContactPoint):
     """A contact detail for the person."""
 
-    related_person = models.ForeignKey(RelatedPerson, on_delete=models.CASCADE)
+    related_person = models.ForeignKey(RelatedPersonProfile, on_delete=models.CASCADE)
 
 
 class RelatedPersonName(Name):
     related_person = models.ForeignKey(
-        RelatedPerson,
+        RelatedPersonProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
     )
@@ -45,7 +46,7 @@ class RelatedPersonName(Name):
 
 class RelatedPersonAddress(Address):
     related_person = models.ForeignKey(
-        RelatedPerson,
+        RelatedPersonProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
     )

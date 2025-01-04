@@ -1,54 +1,54 @@
 from .organization import (
     OrganizationAddress,
     OrganizationIdentifier,
-    Organization,
+    OrganizationProfile,
     OrganizationContactPoint,
 )
-from .patient import Patient
+from .patient import PatientProfile
 from .practitioner import (
     PractitionerName,
     PractitionerIdentifier,
     PractitionerTelecom,
     PractitionerAddress,
-    Practitioner,
+    PractitionerProfile,
 )
-from .medication import Medication
-from .observation import Observation, ObservationIdentifier
-from .specimen import Specimen
-from .location import Location
-from .immunization import Immunization
-from .operation_outcome import OperationOutcome
-from .slot import Slot
+from .medication import MedicationProfile
+from .observation import ObservationProfile, ObservationIdentifier
+from .specimen import SpecimenProfile
+from .location import LocationProfile
+from .immunization import ImmunizationProfile
+from .operation_outcome import OperationOutcomeProfile
+from .slot import SlotProfile
 from .practitioner_role import PractitionerRole
-from .schedule import Schedule
-from .questionnaire import Questionnaire
-from .procedure import Procedure
-from .related_person import RelatedPerson
-from .diagnostic_report import DiagnosticReport
+from .schedule import ScheduleProfile
+from .questionnaire import QuestionnaireProfile
+from .procedure import ProcedureProfile
+from .related_person import RelatedPersonProfile
+from .diagnostic_report import DiagnosticReportProfile
 
 __all__ = [
-    "DiagnosticReport",
-    "RelatedPerson",
-    "Procedure",
-    "Questionnaire",
-    "Schedule",
+    "DiagnosticReportProfile",
+    "RelatedPersonProfile",
+    "ProcedureProfile",
+    "QuestionnaireProfile",
+    "ScheduleProfile",
     "PractitionerRole",
-    "Slot",
-    "OperationOutcome",
-    "Immunization",
-    "Location",
-    "Patient",
+    "SlotProfile",
+    "OperationOutcomeProfile",
+    "ImmunizationProfile",
+    "LocationProfile",
+    "PatientProfile",
     "OrganizationAddress",
     "OrganizationIdentifier",
-    "Organization",
+    "OrganizationProfile",
     "OrganizationContactPoint",
-    "Practitioner",
+    "PractitionerProfile",
     "PractitionerName",
     "PractitionerIdentifier",
     "PractitionerTelecom",
     "PractitionerAddress",
-    "Medication",
-    "Observation",
+    "MedicationProfile",
+    "ObservationProfile",
     "ObservationIdentifier",
-    "Specimen",
+    "SpecimenProfile",
 ]

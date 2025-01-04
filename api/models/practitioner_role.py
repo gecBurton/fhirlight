@@ -1,11 +1,10 @@
 from django.db import models
 
-from api.models import Practitioner, Organization, Location
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import ContactPoint, Concept, Identifier
 
 
-class PractitionerRole(UKCore):
+class PractitionerRole(BaseProfile):
     """This profile allows exchange of a specific set of roles, specialties and services that a practitioner may
     perform at an organisation for a period of time.
     """
@@ -19,20 +18,27 @@ class PractitionerRole(UKCore):
         Concept,
         limit_choices_to={"valueset": Concept.VALUESET.PRACTITIONER_ROLE},
         help_text="Roles which this practitioner may perform",
-        related_name="practitionerrole_code",
+        related_name="PractitionerRole_code",
     )
     practitioner = models.ForeignKey(
-        Practitioner,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["practitionerprofile"]},
         on_delete=models.CASCADE,
         help_text="Practitioner that is able to provide the defined services for the organization.",
+        related_name="PractitionerRole_practitioner",
     )
     organization = models.ForeignKey(
-        Organization,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["organizationprofile"]},
         on_delete=models.CASCADE,
         help_text="Organization where the roles are available.",
+        related_name="PractitionerRole_organization",
     )
     location = models.ManyToManyField(
-        Location, help_text="The location(s) at which this practitioner provides care"
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["locationprofile"]},
+        help_text="The location(s) at which this practitioner provides care",
+        related_name="PractitionerRole_location",
     )
 
     period_start = models.DateTimeField(

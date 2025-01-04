@@ -1,11 +1,10 @@
 from django.db import models
 
-from api.models import Patient
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Concept
 
 
-class Procedure(UKCore):
+class ProcedureProfile(BaseProfile):
     """This profile allows exchange of details of current and historical procedures performed on or for an individual.
     A procedure is an activity that is performed on, with, or for an individual as part of the provision of care.
     Examples include surgical procedures, diagnostic procedures, endoscopic procedures, biopsies, counselling,
@@ -45,7 +44,9 @@ class Procedure(UKCore):
         null=True, blank=True, help_text="Date and time the procedure was performed."
     )
     subject = models.ForeignKey(
-        Patient,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["patientprofile"]},
         on_delete=models.CASCADE,
         help_text="Who the procedure was performed on",
+        related_name="Procedure_subject",
     )

@@ -4,24 +4,24 @@ from api.models.practitioner_role import (
     PractitionerRoleTelecom,
 )
 from api.serializers.common import (
-    UKCoreProfileSerializer,
-    UKCoreModelSerializer,
+    ProfileSerializer,
+    BaseModelSerializer,
 )
 
 
-class PractitionerRoleIdentifierSerializer(UKCoreModelSerializer):
+class PractitionerRoleIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "practitioner_role", "created_at", "updated_at")
         model = PractitionerRoleIdentifier
 
 
-class PractitionerRoleTelecomSerializer(UKCoreModelSerializer):
+class PractitionerRoleTelecomSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "practitioner_role", "created_at", "updated_at")
         model = PractitionerRoleTelecom
 
 
-class PractitionerRoleSerializer(UKCoreProfileSerializer):
+class PractitionerRoleSerializer(ProfileSerializer):
     identifier = PractitionerRoleIdentifierSerializer(
         many=True, required=False, source="practitionerroleidentifier_set"
     )

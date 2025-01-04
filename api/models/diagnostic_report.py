@@ -1,11 +1,10 @@
-from api.models import Patient, Observation, Organization, Specimen
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from django.db import models
 
 from api.models.datatypes import Concept, Identifier
 
 
-class DiagnosticReport(UKCore):
+class DiagnosticReportProfile(BaseProfile):
     """This profile allows exchange of the findings and interpretation of diagnostic tests performed on individuals,
     groups of individuals, devices and locations and/or specimens derived from these. The report includes clinical
     context such as requesting and provider information and some mix of atomic results, images, textual and coded
@@ -32,7 +31,7 @@ class DiagnosticReport(UKCore):
         Concept,
         limit_choices_to={"valueset": Concept.VALUESET.DIAGNOSTIC_SERVICE_SECTION_CODE},
         help_text="A code that classifies the clinical discipline, department or diagnostic service that created the report.",
-        related_name="diagnosticreportcategory_set",
+        related_name="DiagnosticReport_category_set",
     )
     code = models.ForeignKey(
         Concept,
@@ -41,11 +40,13 @@ class DiagnosticReport(UKCore):
         help_text="A code or name that describes this diagnostic report.",
     )
     subject = models.ForeignKey(
-        Patient,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["patientprofile"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="The subject of the report - usually, but not always, the patient",
+        related_name="DiagnosticReport_patient",
     )
 
     # DiagnosticReport.encounter	Health care event when test ordered.
@@ -55,16 +56,23 @@ class DiagnosticReport(UKCore):
         help_text="Clinically relevant time/time-period for report.",
     )
     result = models.ManyToManyField(
-        Observation, help_text="that are part of this diagnostic report."
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["observationprofile"]},
+        help_text="that are part of this diagnostic report.",
+        related_name="DiagnosticReport_result",
     )
     performer = models.ManyToManyField(
-        Organization,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["organizationprofile"]},
         help_text="Who is responsible for the observation",
+        related_name="DiagnosticReport_performer",
     )
     specimen = models.ManyToManyField(
-        Specimen,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["specimenprofile"]},
         blank=True,
         help_text="Who is responsible for the observation",
+        related_name="DiagnosticReport_specimen",
     )
 
 
@@ -81,6 +89,6 @@ class DiagnosticReportIdentifier(Identifier):
     )
 
     diagnostic_report = models.ForeignKey(
-        DiagnosticReport,
+        DiagnosticReportProfile,
         on_delete=models.CASCADE,
     )
