@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "polymorphic",
     "rest_framework",
     "api.apps.ApiConfig",
     "django.contrib.admin",

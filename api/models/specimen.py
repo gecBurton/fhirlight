@@ -1,6 +1,5 @@
 from django.db import models
 
-from api.models import UKCorePatient, UKCorePractitioner
 from api.models.common import UKCore
 from api.models.datatypes import Concept
 
@@ -36,11 +35,13 @@ class UKCoreSpecimen(UKCore):
         help_text="The kind of material that forms the specimen.",
     )
     subject = models.ForeignKey(
-        UKCorePatient,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorepatient"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="Where the specimen came from.",
+        related_name="specimen_patient",
     )
     receivedTime = models.DateTimeField(
         null=True,
@@ -57,7 +58,12 @@ class UKCoreSpecimen(UKCore):
         related_name="specimenmethod",
     )
     collector = models.ForeignKey(
-        UKCorePractitioner, on_delete=models.CASCADE, null=True, blank=True
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorepractitioner"]},
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="specimen_practitioner",
     )
     collectedDateTime = models.DateTimeField(null=True, blank=True)
     bodySite = models.ForeignKey(

@@ -1,6 +1,5 @@
 from django.db import models
 
-from api.models import UKCoreLocation
 from api.models.common import UKCore
 from api.models.datatypes import Identifier, Concept
 
@@ -47,8 +46,10 @@ class UKCoreSchedule(UKCore):
         null=True, blank=True, help_text="Period of time covered by schedule."
     )
     actor = models.ManyToManyField(
-        UKCoreLocation,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorelocation"]},
         help_text="Resource(s) that availability information is being provided for",
+        related_name="schedule_actor",
     )
 
 

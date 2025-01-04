@@ -37,6 +37,15 @@ def doctor_paul_rastall():
 
 
 @pytest.fixture
+def pharmacist_jimmy_chuck():
+    practitioner = UKCorePractitioner.objects.create(
+        id="UKCore-Practitioner-PharmacistJimmyChuck-Example"
+    )
+    yield practitioner
+    practitioner.delete()
+
+
+@pytest.fixture
 def leeds_teaching_hospital():
     organization = UKCoreOrganization.objects.create(
         id="UKCore-Organization-LeedsTeachingHospital-Example"

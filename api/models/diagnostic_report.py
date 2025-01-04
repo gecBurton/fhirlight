@@ -1,9 +1,3 @@
-from api.models import (
-    UKCorePatient,
-    UKCoreObservation,
-    UKCoreOrganization,
-    UKCoreSpecimen,
-)
 from api.models.common import UKCore
 from django.db import models
 
@@ -46,11 +40,13 @@ class UKCoreDiagnosticReport(UKCore):
         help_text="A code or name that describes this diagnostic report.",
     )
     subject = models.ForeignKey(
-        UKCorePatient,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorepatient"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="The subject of the report - usually, but not always, the patient",
+        related_name="diagnosticreport_patient",
     )
 
     # DiagnosticReport.encounter	Health care event when test ordered.
@@ -60,16 +56,23 @@ class UKCoreDiagnosticReport(UKCore):
         help_text="Clinically relevant time/time-period for report.",
     )
     result = models.ManyToManyField(
-        UKCoreObservation, help_text="that are part of this diagnostic report."
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcoreobservation"]},
+        help_text="that are part of this diagnostic report.",
+        related_name="DiagnosticReport_result",
     )
     performer = models.ManyToManyField(
-        UKCoreOrganization,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcoreorganization"]},
         help_text="Who is responsible for the observation",
+        related_name="diagnosticreport_performer",
     )
     specimen = models.ManyToManyField(
-        UKCoreSpecimen,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorespecimen"]},
         blank=True,
         help_text="Who is responsible for the observation",
+        related_name="diagnosticreport_specimen",
     )
 
 

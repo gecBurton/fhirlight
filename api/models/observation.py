@@ -1,6 +1,5 @@
 from django.db import models
 
-from api.models import UKCoreOrganization, UKCorePatient
 from api.models.common import UKCore
 from api.models.datatypes import Concept, Identifier
 
@@ -40,16 +39,26 @@ class UKCoreObservation(UKCore):
         related_name="observationcode",
     )
     performer = models.ManyToManyField(
-        UKCoreOrganization,
+        UKCore,
+        limit_choices_to={
+            "polymorphic_ctype__model__in": ["ukcoreorganization", "ukcorepractitioner"]
+        },
         blank=True,
         help_text="Who is responsible for the observation",
+        related_name="observation_performer",
     )
     subject = models.ForeignKey(
-        UKCorePatient,
+        UKCore,
+        limit_choices_to={
+            "polymorphic_ctype__model__in": [
+                "ukcorepatient",
+            ]
+        },
         on_delete=models.CASCADE,
         null=True,
         blank=True,
         help_text="Who and/or what the observation is about",
+        related_name="observation_subject",
     )
 
     effectiveDateTime = models.DateTimeField(
@@ -63,7 +72,16 @@ class UKCoreObservation(UKCore):
         help_text="Clinically relevant time/time-period for observation",
     )
     valueQuantity = models.JSONField(null=True, blank=True)
-    hasMember = models.ManyToManyField("self", blank=True)
+    hasMember = models.ManyToManyField(
+        UKCore,
+        limit_choices_to={
+            "polymorphic_ctype__model__in": [
+                "ukcoreobservation",
+            ]
+        },
+        blank=True,
+        related_name="Observation_result",
+    )
     bodySite = models.ForeignKey(
         Concept,
         null=True,

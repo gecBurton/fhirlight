@@ -1,6 +1,5 @@
 from django.db import models
 
-from api.models import UKCorePractitioner, UKCoreOrganization, UKCoreLocation
 from api.models.common import UKCore
 from api.models.datatypes import ContactPoint, Concept, Identifier
 
@@ -22,18 +21,24 @@ class UKCorePractitionerRole(UKCore):
         related_name="practitionerrole_code",
     )
     practitioner = models.ForeignKey(
-        UKCorePractitioner,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorepractitioner"]},
         on_delete=models.CASCADE,
         help_text="Practitioner that is able to provide the defined services for the organization.",
+        related_name="PractitionerRole_practitioner",
     )
     organization = models.ForeignKey(
-        UKCoreOrganization,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcoreorganization"]},
         on_delete=models.CASCADE,
         help_text="Organization where the roles are available.",
+        related_name="PractitionerRole_organization",
     )
     location = models.ManyToManyField(
-        UKCoreLocation,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorelocation"]},
         help_text="The location(s) at which this practitioner provides care",
+        related_name="PractitionerRole_location",
     )
 
     period_start = models.DateTimeField(

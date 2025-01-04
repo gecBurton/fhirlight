@@ -1,6 +1,5 @@
 from django.db import models
 
-from api.models import UKCorePatient
 from api.models.common import UKCore
 from api.models.datatypes import Concept
 
@@ -45,7 +44,9 @@ class UKCoreProcedure(UKCore):
         null=True, blank=True, help_text="Date and time the procedure was performed."
     )
     subject = models.ForeignKey(
-        UKCorePatient,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorepatient"]},
         on_delete=models.CASCADE,
         help_text="Who the procedure was performed on",
+        related_name="Procedure_subject",
     )

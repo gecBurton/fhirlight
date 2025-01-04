@@ -1,6 +1,5 @@
 from django.db import models
 
-from api.models import UKCorePatient
 from api.models.common import UKCore
 from api.models.datatypes import Concept, Name, Address, ContactPoint
 
@@ -16,9 +15,11 @@ class UKCoreRelatedPerson(UKCore):
     # Description	This profile defines the UK constraints and extensions on the International FHIR resource RelatedPerson.
 
     patient = models.ForeignKey(
-        UKCorePatient,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorepatient"]},
         on_delete=models.CASCADE,
         help_text="The patient this person is related to.",
+        related_name="RelatedPerson_patient",
     )
     relationship = models.ManyToManyField(
         Concept,

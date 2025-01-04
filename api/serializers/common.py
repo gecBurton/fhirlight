@@ -1,3 +1,4 @@
+
 from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework.relations import RelatedField
@@ -61,10 +62,7 @@ class RelatedResourceSerializer(RelatedField):
         if model_name == "Concept":
             if not (isinstance(data, dict) and "coding" in data):
                 self.fail("required")
-            try:
-                internal_value = self.coding.to_internal_value(data=data["coding"])
-            except Exception:
-                raise
+            internal_value = self.coding.to_internal_value(data=data["coding"])
             code = internal_value[0]["code"]
 
             try:
@@ -73,16 +71,27 @@ class RelatedResourceSerializer(RelatedField):
                 self.fail("does_not_exist", pk_value=code)
         else:
             resource_type, id = data["reference"].split("/", 2)
-            if resource_type != model_name:
+
+            if field_name := self.source:
+                parent = self.parent
+            else:
+                field_name = self.parent.field_name
+                parent = self.parent.parent
+
+            field = parent.Meta.model._meta.get_field(field_name)
+            resource_types = field.remote_field.limit_choices_to[
+                "polymorphic_ctype__model__in"
+            ]
+            if "ukcore" + resource_type.lower() not in resource_types:
                 self.fail("incorrect_resource_type", resource_type=model_name)
+
             try:
                 return qs.get(id=id)
             except qs.model.DoesNotExist:
                 self.fail("does_not_exist", pk_value=id)
 
     def to_representation(self, value):
-        qs = self.get_queryset()
-        model_name = qs.model.__name__.removeprefix("UKCore")
+        model_name = value._meta.object_name.removeprefix("UKCore")
         if model_name == "Concept":
             representation = self.coding.to_representation([value])
             return {"coding": representation}

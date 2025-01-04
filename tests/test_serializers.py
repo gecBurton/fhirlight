@@ -107,7 +107,7 @@ def test_medication(resource):
         "UKCore-Observation-BreathingNormally-Example",
         "UKCore-Observation-DrugUse-Example",
         "UKCore-Observation-FastingTest-Example",
-        # "UKCore-Observation-FingerJointInflamed-Example",performer=Practitioner
+        "UKCore-Observation-FingerJointInflamed-Example",
         "UKCore-Observation-Group-FullBloodCount-Example",
         "UKCore-Observation-HeavyDrinker-Example",
         # "UKCore-Observation-Lab-RedCellCount-Example", missing referenceRange and specimen
@@ -124,7 +124,12 @@ def test_medication(resource):
     ],
 )
 def test_observation(
-    resource, richard_smith, leeds_teaching_hospital, white_cell_count, red_cell_count
+    resource,
+    richard_smith,
+    leeds_teaching_hospital,
+    white_cell_count,
+    red_cell_count,
+    pharmacist_jimmy_chuck,
 ):
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)

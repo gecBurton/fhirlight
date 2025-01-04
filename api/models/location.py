@@ -1,6 +1,5 @@
 from django.db import models
 
-from api.models import UKCoreOrganization
 from api.models.common import UKCore
 from api.models.datatypes import Address, Identifier, ContactPoint, Concept
 
@@ -43,11 +42,13 @@ class UKCoreLocation(UKCore):
         help_text="Name of the location as used by humans. This does not need to be unique.",
     )
     managingOrganization = models.ForeignKey(
-        UKCoreOrganization,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcoreorganization"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="Organization responsible for provisioning and upkeep",
+        related_name="Location_organization",
     )
     type = models.ManyToManyField(
         Concept,

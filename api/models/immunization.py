@@ -1,6 +1,5 @@
 from django.db import models
 
-from api.models import UKCorePatient, UKCoreOrganization, UKCoreLocation
 from api.models.common import UKCore
 from api.models.datatypes import Concept
 
@@ -36,26 +35,32 @@ class UKCoreImmunization(UKCore):
         help_text="Vaccine that was administered or was to be administered.",
     )
     patient = models.ForeignKey(
-        UKCorePatient,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorepatient"]},
         on_delete=models.CASCADE,
         help_text="The patient who either received or did not receive the immunization.",
+        related_name="Immunization_patient",
     )
     occurrenceDateTime = models.DateTimeField(
         help_text="vaccine administered or was to be administered."
     )
     manufacturer = models.ForeignKey(
-        UKCoreOrganization,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcoreorganization"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="Name of vaccine manufacturer.",
+        related_name="Immunization_manufacturer",
     )
     location = models.ForeignKey(
-        UKCoreLocation,
+        UKCore,
+        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorelocation"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="Where immunization occurred",
+        related_name="Immunization_location",
     )
     lotNumber = models.CharField(
         max_length=256, blank=True, null=True, help_text="Lot number of the vaccine."
