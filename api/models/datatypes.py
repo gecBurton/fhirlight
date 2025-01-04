@@ -234,6 +234,11 @@ class Concept(models.Model):
         UK_CORE_PERSON_RELATIONSHIP_TYPE = "UKCorePersonRelationshipType"
         DIAGNOSTIC_SERVICE_SECTION_CODE = "DiagnosticServiceSectionCodes"
         UK_CORE_REPORT_CODE = "UKCoreReportCode"
+        CONDITION_CLINICAL_STATUS_CODE = "ConditionClinicalStatusCodes"
+        CONDITION_VERIFICATION_STATUS = "ConditionVerificationStatus"
+        UK_CORE_CONDITION_CATEGORY = "UKCoreConditionCategory"
+        CONDITION_DIAGNOSIS_Severity = "Condition/DiagnosisSeverity"
+        UK_CORE_CONDITION_CODE = "UKCoreConditionCode"
 
     system = models.CharField(
         null=True,
