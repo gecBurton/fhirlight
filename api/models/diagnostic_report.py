@@ -31,7 +31,7 @@ class UKCoreDiagnosticReport(UKCore):
         Concept,
         limit_choices_to={"valueset": Concept.VALUESET.DIAGNOSTIC_SERVICE_SECTION_CODE},
         help_text="A code that classifies the clinical discipline, department or diagnostic service that created the report.",
-        related_name="diagnosticreportcategory_set",
+        related_name="DiagnosticReport_category_set",
     )
     code = models.ForeignKey(
         Concept,
@@ -46,7 +46,7 @@ class UKCoreDiagnosticReport(UKCore):
         blank=True,
         on_delete=models.CASCADE,
         help_text="The subject of the report - usually, but not always, the patient",
-        related_name="diagnosticreport_patient",
+        related_name="DiagnosticReport_patient",
     )
 
     # DiagnosticReport.encounter	Health care event when test ordered.
@@ -65,14 +65,14 @@ class UKCoreDiagnosticReport(UKCore):
         UKCore,
         limit_choices_to={"polymorphic_ctype__model__in": ["ukcoreorganization"]},
         help_text="Who is responsible for the observation",
-        related_name="diagnosticreport_performer",
+        related_name="DiagnosticReport_performer",
     )
     specimen = models.ManyToManyField(
         UKCore,
         limit_choices_to={"polymorphic_ctype__model__in": ["ukcorespecimen"]},
         blank=True,
         help_text="Who is responsible for the observation",
-        related_name="diagnosticreport_specimen",
+        related_name="DiagnosticReport_specimen",
     )
 
 

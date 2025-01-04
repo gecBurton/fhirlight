@@ -18,7 +18,7 @@ class UKCorePractitionerRole(UKCore):
         Concept,
         limit_choices_to={"valueset": Concept.VALUESET.PRACTITIONER_ROLE},
         help_text="Roles which this practitioner may perform",
-        related_name="practitionerrole_code",
+        related_name="PractitionerRole_code",
     )
     practitioner = models.ForeignKey(
         UKCore,

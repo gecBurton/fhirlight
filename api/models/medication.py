@@ -32,7 +32,7 @@ class UKCoreMedication(UKCore):
         on_delete=models.CASCADE,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_MEDICATION_CODE},
         help_text="Codes that identify this medication",
-        related_name="medicationcode",
+        related_name="Medication_code",
     )
     form = models.ForeignKey(
         Concept,
@@ -41,7 +41,7 @@ class UKCoreMedication(UKCore):
         on_delete=models.CASCADE,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_MEDICATION_FORM},
         help_text="Codes that identify this medication",
-        related_name="medicationform",
+        related_name="Medication_form",
     )
     batchLotNumber = models.CharField(
         max_length=256, null=True, blank=True, help_text="Identifier assigned to batch"

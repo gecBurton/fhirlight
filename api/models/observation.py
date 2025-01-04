@@ -29,14 +29,14 @@ class UKCoreObservation(UKCore):
         blank=True,
         limit_choices_to={"valueset": Concept.VALUESET.OBSERVATION_CATEGORY_CODE},
         help_text="A code that classifies the general type of observation being made.",
-        related_name="observationcategory",
+        related_name="Observation_category",
     )
     code = models.ForeignKey(
         Concept,
         on_delete=models.CASCADE,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_OBSERVATION_TYPE},
         help_text="Type of observation (code / type)",
-        related_name="observationcode",
+        related_name="Observation_code",
     )
     performer = models.ManyToManyField(
         UKCore,
@@ -45,7 +45,7 @@ class UKCoreObservation(UKCore):
         },
         blank=True,
         help_text="Who is responsible for the observation",
-        related_name="observation_performer",
+        related_name="Observation_performer",
     )
     subject = models.ForeignKey(
         UKCore,
@@ -58,7 +58,7 @@ class UKCoreObservation(UKCore):
         null=True,
         blank=True,
         help_text="Who and/or what the observation is about",
-        related_name="observation_subject",
+        related_name="Observation_subject",
     )
 
     effectiveDateTime = models.DateTimeField(
@@ -89,7 +89,7 @@ class UKCoreObservation(UKCore):
         on_delete=models.CASCADE,
         limit_choices_to={"valueset": Concept.VALUESET.SNOMED_CT_BODY_STRUCTURES},
         help_text="Type of observation (code / type)",
-        related_name="observationbodysite",
+        related_name="Observation_bodySite",
     )
 
 
