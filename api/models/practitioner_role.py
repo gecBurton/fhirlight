@@ -4,7 +4,7 @@ from api.models.common import BaseProfile
 from api.models.datatypes import ContactPoint, Concept, Identifier
 
 
-class PractitionerRole(BaseProfile):
+class PractitionerRoleProfile(BaseProfile):
     """This profile allows exchange of a specific set of roles, specialties and services that a practitioner may
     perform at an organisation for a period of time.
     """
@@ -61,7 +61,7 @@ class PractitionerRole(BaseProfile):
 class PractitionerRoleTelecom(ContactPoint):
     """Contact details that are specific to the role/location/service"""
 
-    practitioner_role = models.ForeignKey(PractitionerRole, on_delete=models.CASCADE)
+    practitioner_role = models.ForeignKey(PractitionerRoleProfile, on_delete=models.CASCADE)
 
 
 class PractitionerRoleIdentifier(Identifier):
@@ -73,4 +73,4 @@ class PractitionerRoleIdentifier(Identifier):
         choices=SYSTEM,
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
-    practitioner_role = models.ForeignKey(PractitionerRole, on_delete=models.CASCADE)
+    practitioner_role = models.ForeignKey(PractitionerRoleProfile, on_delete=models.CASCADE)

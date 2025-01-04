@@ -9,7 +9,7 @@ from api.models import (
     ImmunizationProfile,
     OperationOutcomeProfile,
     SlotProfile,
-    PractitionerRole,
+    PractitionerRoleProfile,
     ScheduleProfile,
     QuestionnaireProfile,
     ProcedureProfile,
@@ -97,7 +97,7 @@ class SlotViewSet(ModelViewSet):
 
 
 class PractitionerRoleViewSet(ModelViewSet):
-    queryset = PractitionerRole.objects.all()
+    queryset = PractitionerRoleProfile.objects.all()
     serializer_class = PractitionerRoleSerializer
     lookup_field = "id"
 

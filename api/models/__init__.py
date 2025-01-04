@@ -19,7 +19,7 @@ from .location import LocationProfile
 from .immunization import ImmunizationProfile
 from .operation_outcome import OperationOutcomeProfile
 from .slot import SlotProfile
-from .practitioner_role import PractitionerRole
+from .practitioner_role import PractitionerRoleProfile
 from .schedule import ScheduleProfile
 from .questionnaire import QuestionnaireProfile
 from .procedure import ProcedureProfile
@@ -32,7 +32,7 @@ __all__ = [
     "ProcedureProfile",
     "QuestionnaireProfile",
     "ScheduleProfile",
-    "PractitionerRole",
+    "PractitionerRoleProfile",
     "SlotProfile",
     "OperationOutcomeProfile",
     "ImmunizationProfile",
