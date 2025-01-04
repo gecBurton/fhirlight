@@ -2,15 +2,15 @@ from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer
 
 from api.models.encounter import (
-    Encounter,
+    EncounterProfile,
     EncounterParticipant,
     EncounterLocation,
     EncounterIdentifier,
     EncounterHospitalization,
 )
 from api.serializers.common import (
-    UKCoreProfileSerializer,
-    UKCoreModelSerializer,
+    ProfileSerializer,
+    BaseModelSerializer,
 )
 
 
@@ -19,31 +19,31 @@ class PeriodSerializer(Serializer):
     end = DateTimeField(required=False, source="periodEnd")
 
 
-class EncounterLocationSerializer(UKCoreModelSerializer):
+class EncounterLocationSerializer(BaseModelSerializer):
     class Meta:
         fields = ("location",)
         model = EncounterLocation
 
 
-class EncounterIdentifierSerializer(UKCoreModelSerializer):
+class EncounterIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "encounter", "created_at", "updated_at")
         model = EncounterIdentifier
 
 
-class EncounterParticipantSerializer(UKCoreModelSerializer):
+class EncounterParticipantSerializer(BaseModelSerializer):
     class Meta:
         fields = ("individual", "type")
         model = EncounterParticipant
 
 
-class EncounterHospitalizationSerializer(UKCoreModelSerializer):
+class EncounterHospitalizationSerializer(BaseModelSerializer):
     class Meta:
         fields = ("dischargeDisposition",)
         model = EncounterHospitalization
 
 
-class EncounterSerializer(UKCoreProfileSerializer):
+class EncounterSerializer(ProfileSerializer):
     hospitalization = EncounterHospitalizationSerializer(
         required=False, source="encounterhospitalization_set"
     )
@@ -89,4 +89,4 @@ class EncounterSerializer(UKCoreProfileSerializer):
             "participant",
             "hospitalization",
         )
-        model = Encounter
+        model = EncounterProfile

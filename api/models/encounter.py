@@ -1,11 +1,10 @@
 from django.db import models
 
-from api.models import Patient, Practitioner, Organization, Location
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Concept, Identifier
 
 
-class Encounter(UKCore):
+class EncounterProfile(BaseProfile):
     """dance or caveats to be aware of when following a protocol (subject = PlanDefinition)
     * Warnings about using a drug in a formulary requires special approval (subject = Medication)
     """
@@ -41,7 +40,9 @@ class Encounter(UKCore):
         related_name="encountertype_set",
     )
     subject = models.ForeignKey(
-        Patient,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["patientprofile"]},
+        related_name="Encounter_subject",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
@@ -60,7 +61,9 @@ class Encounter(UKCore):
         related_name="encounterreasoncode_set",
     )
     serviceProvider = models.ForeignKey(
-        Organization,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["organizationprofile"]},
+        related_name="Encounter_serviceProvider",
         null=True,
         blank=True,
         on_delete=models.CASCADE,
@@ -70,7 +73,7 @@ class Encounter(UKCore):
 
 class EncounterHospitalization(models.Model):
     encounter = models.ForeignKey(
-        Encounter,
+        EncounterProfile,
         on_delete=models.CASCADE,
     )
     dischargeDisposition = models.ForeignKey(
@@ -85,11 +88,13 @@ class EncounterHospitalization(models.Model):
 
 class EncounterParticipant(models.Model):
     encounter = models.ForeignKey(
-        Encounter,
+        EncounterProfile,
         on_delete=models.CASCADE,
     )
     individual = models.ForeignKey(
-        Practitioner,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["practitionerprofile"]},
+        related_name="Encounter_individual",
         on_delete=models.CASCADE,
     )
     type = models.ManyToManyField(
@@ -103,12 +108,14 @@ class EncounterLocation(models.Model):
     """List of locations where the patient has been"""
 
     encounter = models.ForeignKey(
-        Encounter,
+        EncounterProfile,
         on_delete=models.CASCADE,
     )
     location = models.ForeignKey(
-        Location,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["locationprofile"]},
         on_delete=models.CASCADE,
+        related_name="EncounterLocation_location",
     )
 
 
@@ -125,6 +132,6 @@ class EncounterIdentifier(Identifier):
     )
 
     encounter = models.ForeignKey(
-        Encounter,
+        EncounterProfile,
         on_delete=models.CASCADE,
     )

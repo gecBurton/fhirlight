@@ -1,10 +1,10 @@
 from django.db import models
 
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Concept, Identifier
 
 
-class Slot(UKCore):
+class SlotProfile(BaseProfile):
     """Slot resources are used to provide time-slots that can be booked using an appointment. They do not provide any
     information about appointments that are available, just the time, and optionally what the time can be used for.
     These are effectively spaces of free/busy time. Slots can also be marked as busy without having appointments
@@ -78,6 +78,6 @@ class SlotIdentifier(Identifier):
     )
 
     slot = models.ForeignKey(
-        Slot,
+        SlotProfile,
         on_delete=models.CASCADE,
     )

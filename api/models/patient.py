@@ -1,10 +1,10 @@
 from django.db import models
 
 from api.models.datatypes import Name, Identifier, ContactPoint, Address, Concept
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 
 
-class Patient(UKCore):
+class PatientProfile(BaseProfile):
     """This profile allows exchange of demographics and other administrative information about an individual receiving
     care or other health-related services.
     """
@@ -50,7 +50,7 @@ class PatientIdentifier(Identifier):
     )
 
     patient = models.ForeignKey(
-        Patient,
+        PatientProfile,
         on_delete=models.CASCADE,
     )
 
@@ -58,12 +58,12 @@ class PatientIdentifier(Identifier):
 class PatientTelecom(ContactPoint):
     """An identifier for this patient."""
 
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    patient = models.ForeignKey(PatientProfile, on_delete=models.CASCADE)
 
 
 class PatientName(Name):
     patient = models.ForeignKey(
-        Patient,
+        PatientProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
     )
@@ -71,7 +71,7 @@ class PatientName(Name):
 
 class PatientAddress(Address):
     patient = models.ForeignKey(
-        Patient,
+        PatientProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
     )

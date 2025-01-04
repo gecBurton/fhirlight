@@ -21,13 +21,8 @@ def strip_none(obj):
         return {k: strip_none(v) for k, v in obj.items() if not is_none(v)}
     if isinstance(obj, list):
         return list(map(strip_none, obj))
-
     if isinstance(obj, str):
         return obj.removesuffix("T00:00:00Z")
-
-    if isinstance(obj, str):
-        if obj.endswith(":00Z"):
-            return obj.replace(":00Z", "00+00:00")
     return obj
 
 
@@ -54,16 +49,14 @@ class RelatedResourceSerializer(RelatedField):
 
     def to_internal_value(self, data):
         qs = self.get_queryset()
+        model_name = qs.model.__name__.removesuffix("Profile")
         if not isinstance(data, dict):
             self.fail("incorrect_type", type=dict)
 
-        if qs.model.__name__ == "Concept":
+        if model_name == "Concept":
             if not (isinstance(data, dict) and "coding" in data):
                 self.fail("required")
-            try:
-                internal_value = self.coding.to_internal_value(data=data["coding"])
-            except Exception:
-                raise
+            internal_value = self.coding.to_internal_value(data=data["coding"])
             code = internal_value[0]["code"]
 
             try:
@@ -72,16 +65,27 @@ class RelatedResourceSerializer(RelatedField):
                 self.fail("does_not_exist", pk_value=code)
         else:
             resource_type, id = data["reference"].split("/", 2)
-            if resource_type != qs.model.__name__:
-                self.fail("incorrect_resource_type", resource_type=qs.model.__name__)
+
+            if field_name := self.source:
+                parent = self.parent
+            else:
+                field_name = self.parent.field_name
+                parent = self.parent.parent
+
+            field = parent.Meta.model._meta.get_field(field_name)
+            resource_types = field.remote_field.limit_choices_to[
+                "polymorphic_ctype__model__in"
+            ]
+            if resource_type.lower() + "profile" not in resource_types:
+                self.fail("incorrect_resource_type", resource_type=model_name)
+
             try:
                 return qs.get(id=id)
             except qs.model.DoesNotExist:
                 self.fail("does_not_exist", pk_value=id)
 
     def to_representation(self, value):
-        qs = self.get_queryset()
-        model_name = qs.model.__name__
+        model_name = value._meta.object_name.removesuffix("Profile")
         if model_name == "Concept":
             representation = self.coding.to_representation([value])
             return {"coding": representation}
@@ -89,7 +93,7 @@ class RelatedResourceSerializer(RelatedField):
             return {"reference": model_name + "/" + value.id}
 
 
-class UKCoreModelSerializer(WritableNestedModelSerializer):
+class BaseModelSerializer(WritableNestedModelSerializer):
     serializer_related_field = RelatedResourceSerializer
 
     def to_representation(self, instance):
@@ -97,9 +101,9 @@ class UKCoreModelSerializer(WritableNestedModelSerializer):
         return strip_none(representation)
 
 
-class UKCoreProfileSerializer(UKCoreModelSerializer):
+class ProfileSerializer(BaseModelSerializer):
     id = CharField()
     resourceType = SerializerMethodField()
 
     def get_resourceType(self, _obj):
-        return self.Meta.model.__name__
+        return self.Meta.model.__name__.removesuffix("Profile")

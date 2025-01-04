@@ -1,31 +1,31 @@
 from api.models import (
     OrganizationAddress,
     OrganizationIdentifier,
-    Organization,
+    OrganizationProfile,
     OrganizationContactPoint,
 )
-from api.serializers.common import UKCoreModelSerializer, UKCoreProfileSerializer
+from api.serializers.common import BaseModelSerializer, ProfileSerializer
 
 
-class OrganizationAddressSerializer(UKCoreModelSerializer):
+class OrganizationAddressSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "organization", "created_at", "updated_at")
         model = OrganizationAddress
 
 
-class OrganizationTelecomSerializer(UKCoreModelSerializer):
+class OrganizationTelecomSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "organization", "created_at", "updated_at")
         model = OrganizationContactPoint
 
 
-class OrganizationIdentifierSerializer(UKCoreModelSerializer):
+class OrganizationIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "organization", "created_at", "updated_at")
         model = OrganizationIdentifier
 
 
-class OrganizationSerializer(UKCoreProfileSerializer):
+class OrganizationSerializer(ProfileSerializer):
     address = OrganizationAddressSerializer(
         required=False, many=True, source="organizationaddress_set"
     )
@@ -38,4 +38,4 @@ class OrganizationSerializer(UKCoreProfileSerializer):
 
     class Meta:
         fields = ("resourceType", "id", "identifier", "name", "address", "telecom")
-        model = Organization
+        model = OrganizationProfile

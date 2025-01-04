@@ -1,10 +1,10 @@
 from django.db import models
 
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Concept
 
 
-class Medication(UKCore):
+class MedicationProfile(BaseProfile):
     """This profile is primarily used for the identification and definition of a medication for the purposes of
     prescribing, dispensing, and administering a medication as well as for making statements about medication use.
     """
@@ -32,7 +32,7 @@ class Medication(UKCore):
         on_delete=models.CASCADE,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_MEDICATION_CODE},
         help_text="Codes that identify this medication",
-        related_name="medicationcode",
+        related_name="Medication_code",
     )
     form = models.ForeignKey(
         Concept,
@@ -41,7 +41,7 @@ class Medication(UKCore):
         on_delete=models.CASCADE,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_MEDICATION_FORM},
         help_text="Codes that identify this medication",
-        related_name="medicationform",
+        related_name="Medication_form",
     )
     batchLotNumber = models.CharField(
         max_length=256, null=True, blank=True, help_text="Identifier assigned to batch"

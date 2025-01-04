@@ -1,11 +1,10 @@
 from django.db import models
 
-from api.models import Patient, Practitioner
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Concept
 
 
-class Specimen(UKCore):
+class SpecimenProfile(BaseProfile):
     """This profile allows exchange of information about a sample to be used for analysis."""
 
     # Canonical URL	https://fhir.hl7.org.uk/StructureDefinition/UKCore-Specimen
@@ -36,11 +35,13 @@ class Specimen(UKCore):
         help_text="The kind of material that forms the specimen.",
     )
     subject = models.ForeignKey(
-        Patient,
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["patientprofile"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="Where the specimen came from.",
+        related_name="specimen_patient",
     )
     receivedTime = models.DateTimeField(
         null=True,
@@ -57,7 +58,12 @@ class Specimen(UKCore):
         related_name="specimenmethod",
     )
     collector = models.ForeignKey(
-        Practitioner, on_delete=models.CASCADE, null=True, blank=True
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["practitionerprofile"]},
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="specimen_practitioner",
     )
     collectedDateTime = models.DateTimeField(null=True, blank=True)
     bodySite = models.ForeignKey(
