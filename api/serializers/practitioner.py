@@ -1,38 +1,38 @@
 from api.models import (
-    UKCorePractitioner,
+    PractitionerProfile,
     PractitionerName,
     PractitionerIdentifier,
     PractitionerTelecom,
     PractitionerAddress,
 )
-from api.serializers.common import UKCoreModelSerializer, UKCoreProfileSerializer
+from api.serializers.common import BaseModelSerializer, ProfileSerializer
 
 
-class PractitionerNameSerializer(UKCoreModelSerializer):
+class PractitionerNameSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "practitioner", "created_at", "updated_at")
         model = PractitionerName
 
 
-class PractitionerAddressSerializer(UKCoreModelSerializer):
+class PractitionerAddressSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "practitioner", "created_at", "updated_at")
         model = PractitionerAddress
 
 
-class PractitionerTelecomSerializer(UKCoreModelSerializer):
+class PractitionerTelecomSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "practitioner", "created_at", "updated_at")
         model = PractitionerTelecom
 
 
-class PractitionerIdentifierSerializer(UKCoreModelSerializer):
+class PractitionerIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "practitioner", "created_at", "updated_at")
         model = PractitionerIdentifier
 
 
-class PractitionerSerializer(UKCoreProfileSerializer):
+class PractitionerSerializer(ProfileSerializer):
     name = PractitionerNameSerializer(
         required=False, many=True, source="practitionername_set"
     )
@@ -57,4 +57,4 @@ class PractitionerSerializer(UKCoreProfileSerializer):
             "name",
             "telecom",
         )
-        model = UKCorePractitioner
+        model = PractitionerProfile

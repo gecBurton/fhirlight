@@ -1,10 +1,10 @@
 from django.db import models
 
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Concept
 
 
-class UKCoreImmunization(UKCore):
+class ImmunizationProfile(BaseProfile):
     """This profile is intended to cover the recording of current and historical administration of vaccines to
     individuals across all healthcare disciplines in all care settings and all regions.
 
@@ -35,8 +35,8 @@ class UKCoreImmunization(UKCore):
         help_text="Vaccine that was administered or was to be administered.",
     )
     patient = models.ForeignKey(
-        UKCore,
-        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorepatient"]},
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["patientprofile"]},
         on_delete=models.CASCADE,
         help_text="The patient who either received or did not receive the immunization.",
         related_name="Immunization_patient",
@@ -45,8 +45,8 @@ class UKCoreImmunization(UKCore):
         help_text="vaccine administered or was to be administered."
     )
     manufacturer = models.ForeignKey(
-        UKCore,
-        limit_choices_to={"polymorphic_ctype__model__in": ["ukcoreorganization"]},
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["organizationprofile"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,
@@ -54,8 +54,8 @@ class UKCoreImmunization(UKCore):
         related_name="Immunization_manufacturer",
     )
     location = models.ForeignKey(
-        UKCore,
-        limit_choices_to={"polymorphic_ctype__model__in": ["ukcorelocation"]},
+        BaseProfile,
+        limit_choices_to={"polymorphic_ctype__model__in": ["locationprofile"]},
         null=True,
         blank=True,
         on_delete=models.CASCADE,

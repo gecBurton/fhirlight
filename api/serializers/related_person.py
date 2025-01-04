@@ -1,34 +1,34 @@
-from api.models import UKCoreRelatedPerson
+from api.models import RelatedPersonProfile
 from api.models.related_person import (
     RelatedPersonAddress,
     RelatedPersonTelecom,
     RelatedPersonName,
 )
 from api.serializers.common import (
-    UKCoreProfileSerializer,
-    UKCoreModelSerializer,
+    ProfileSerializer,
+    BaseModelSerializer,
 )
 
 
-class RelatedPersonAddressSerializer(UKCoreModelSerializer):
+class RelatedPersonAddressSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "related_person", "created_at", "updated_at")
         model = RelatedPersonAddress
 
 
-class RelatedPersonTelecomSerializer(UKCoreModelSerializer):
+class RelatedPersonTelecomSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "related_person", "created_at", "updated_at")
         model = RelatedPersonTelecom
 
 
-class RelatedPersonNameSerializer(UKCoreModelSerializer):
+class RelatedPersonNameSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "related_person", "created_at", "updated_at")
         model = RelatedPersonName
 
 
-class RelatedPersonSerializer(UKCoreProfileSerializer):
+class RelatedPersonSerializer(ProfileSerializer):
     name = RelatedPersonNameSerializer(
         required=False, many=True, source="relatedpersonname_set"
     )
@@ -45,4 +45,4 @@ class RelatedPersonSerializer(UKCoreProfileSerializer):
             "telecom",
             "address",
         )
-        model = UKCoreRelatedPerson
+        model = RelatedPersonProfile

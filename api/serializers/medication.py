@@ -4,8 +4,8 @@ from rest_framework.fields import (
 )
 from rest_framework.serializers import Serializer
 
-from api.models.medication import UKCoreMedication
-from api.serializers.common import UKCoreProfileSerializer
+from api.models.medication import MedicationProfile
+from api.serializers.common import ProfileSerializer
 
 
 class BatchSerializer(Serializer):
@@ -13,7 +13,7 @@ class BatchSerializer(Serializer):
     lotNumber = CharField(source="batchLotNumber", required=False)
 
 
-class MedicationSerializer(UKCoreProfileSerializer):
+class MedicationSerializer(ProfileSerializer):
     batch = BatchSerializer(required=False, source="*")
 
     class Meta:
@@ -24,4 +24,4 @@ class MedicationSerializer(UKCoreProfileSerializer):
             "form",
             "batch",
         ]
-        model = UKCoreMedication
+        model = MedicationProfile

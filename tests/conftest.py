@@ -1,26 +1,26 @@
 import pytest
 
 from api.models import (
-    UKCorePatient,
-    UKCoreOrganization,
-    UKCoreObservation,
-    UKCorePractitioner,
-    UKCoreLocation,
-    UKCoreSpecimen,
+    PatientProfile,
+    OrganizationProfile,
+    ObservationProfile,
+    PractitionerProfile,
+    LocationProfile,
+    SpecimenProfile,
 )
 from api.models.datatypes import Concept
 
 
 @pytest.fixture
 def richard_smith():
-    patient = UKCorePatient.objects.create(id="UKCore-Patient-RichardSmith-Example")
+    patient = PatientProfile.objects.create(id="UKCore-Patient-RichardSmith-Example")
     yield patient
     patient.delete()
 
 
 @pytest.fixture
 def consultant_sandra_gose():
-    practitioner = UKCorePractitioner.objects.create(
+    practitioner = PractitionerProfile.objects.create(
         id="UKCore-Practitioner-ConsultantSandraGose-Example"
     )
     yield practitioner
@@ -29,7 +29,7 @@ def consultant_sandra_gose():
 
 @pytest.fixture
 def doctor_paul_rastall():
-    practitioner = UKCorePractitioner.objects.create(
+    practitioner = PractitionerProfile.objects.create(
         id="UKCore-Practitioner-DoctorPaulRastall-Example"
     )
     yield practitioner
@@ -38,7 +38,7 @@ def doctor_paul_rastall():
 
 @pytest.fixture
 def pharmacist_jimmy_chuck():
-    practitioner = UKCorePractitioner.objects.create(
+    practitioner = PractitionerProfile.objects.create(
         id="UKCore-Practitioner-PharmacistJimmyChuck-Example"
     )
     yield practitioner
@@ -47,7 +47,7 @@ def pharmacist_jimmy_chuck():
 
 @pytest.fixture
 def leeds_teaching_hospital():
-    organization = UKCoreOrganization.objects.create(
+    organization = OrganizationProfile.objects.create(
         id="UKCore-Organization-LeedsTeachingHospital-Example"
     )
     yield organization
@@ -56,7 +56,7 @@ def leeds_teaching_hospital():
 
 @pytest.fixture
 def white_rose_medical_centre():
-    organization = UKCoreOrganization.objects.create(
+    organization = OrganizationProfile.objects.create(
         id="UKCore-Organization-WhiteRoseMedicalCentre-Example"
     )
     yield organization
@@ -72,7 +72,7 @@ def observation_type():
 
 @pytest.fixture
 def white_cell_count(observation_type):
-    observation = UKCoreObservation.objects.create(
+    observation = ObservationProfile.objects.create(
         id="UKCore-Observation-Lab-WhiteCellCount-Example", code=observation_type
     )
     yield observation
@@ -81,7 +81,7 @@ def white_cell_count(observation_type):
 
 @pytest.fixture
 def red_cell_count(observation_type):
-    observation = UKCoreObservation.objects.create(
+    observation = ObservationProfile.objects.create(
         id="UKCore-Observation-Lab-RedCellCount-Example", code=observation_type
     )
     yield observation
@@ -90,7 +90,7 @@ def red_cell_count(observation_type):
 
 @pytest.fixture
 def finger_joint_inflamed(observation_type):
-    observation = UKCoreObservation.objects.create(
+    observation = ObservationProfile.objects.create(
         id="UKCore-Observation-FingerJointInflamed-Example", code=observation_type
     )
     yield observation
@@ -99,7 +99,7 @@ def finger_joint_inflamed(observation_type):
 
 @pytest.fixture
 def full_blood_count(observation_type):
-    observation = UKCoreObservation.objects.create(
+    observation = ObservationProfile.objects.create(
         id="UKCore-Observation-Group-FullBloodCount-Example", code=observation_type
     )
     yield observation
@@ -108,7 +108,7 @@ def full_blood_count(observation_type):
 
 @pytest.fixture
 def general_practice_nurse_clinic():
-    location = UKCoreLocation.objects.create(
+    location = LocationProfile.objects.create(
         id="UKCore-Location-GeneralPracticeNurseClinic-Example"
     )
     yield location
@@ -117,6 +117,8 @@ def general_practice_nurse_clinic():
 
 @pytest.fixture
 def blood_specimen():
-    location = UKCoreSpecimen.objects.create(id="UKCore-Specimen-BloodSpecimen-Example")
+    location = SpecimenProfile.objects.create(
+        id="UKCore-Specimen-BloodSpecimen-Example"
+    )
     yield location
     location.delete()

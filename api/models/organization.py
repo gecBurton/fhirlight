@@ -1,10 +1,10 @@
 from django.db import models
 
 from api.models.datatypes import Identifier, ContactPoint, Address
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 
 
-class UKCoreOrganization(UKCore):
+class OrganizationProfile(BaseProfile):
     """This profile allows exchange of a formally or informally recognised grouping of people or organisations formed
     for the purpose of achieving some form of collective action. Includes companies, institutions, corporations,
     departments, community groups, healthcare practice groups, etc.
@@ -21,13 +21,13 @@ class UKCoreOrganization(UKCore):
 class OrganizationContactPoint(ContactPoint):
     """A contact detail (e.g. a telephone number or an email address) by which the organisation may be contacted."""
 
-    organization = models.ForeignKey(UKCoreOrganization, on_delete=models.CASCADE)
+    organization = models.ForeignKey(OrganizationProfile, on_delete=models.CASCADE)
 
 
 class OrganizationAddress(Address):
     """The address of the organisation using the Address datatype."""
 
-    organization = models.ForeignKey(UKCoreOrganization, on_delete=models.CASCADE)
+    organization = models.ForeignKey(OrganizationProfile, on_delete=models.CASCADE)
 
 
 class OrganizationIdentifier(Identifier):
@@ -44,6 +44,6 @@ class OrganizationIdentifier(Identifier):
     )
 
     organization = models.ForeignKey(
-        UKCoreOrganization,
+        OrganizationProfile,
         on_delete=models.CASCADE,
     )

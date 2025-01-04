@@ -2,9 +2,9 @@ from django.contrib import admin
 from django.contrib.admin import StackedInline
 from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModelAdmin
 
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.organization import (
-    UKCoreOrganization,
+    OrganizationProfile,
     OrganizationContactPoint,
     OrganizationAddress,
     OrganizationIdentifier,
@@ -12,7 +12,7 @@ from api.models.organization import (
 
 
 class UKCoreAdmin(PolymorphicParentModelAdmin):
-    child_models = (UKCoreOrganization,)
+    child_models = (OrganizationProfile,)
 
 
 class OrganizationContactPointInline(StackedInline):
@@ -31,7 +31,7 @@ class OrganizationIdentifierInline(StackedInline):
 
 
 class OrganizationAdmin(PolymorphicChildModelAdmin):
-    base_model = UKCore
+    base_model = BaseProfile
 
     inlines = [
         OrganizationContactPointInline,
@@ -40,5 +40,5 @@ class OrganizationAdmin(PolymorphicChildModelAdmin):
     ]
 
 
-admin.site.register(UKCore, UKCoreAdmin)
-admin.site.register(UKCoreOrganization, OrganizationAdmin)
+admin.site.register(BaseProfile, UKCoreAdmin)
+admin.site.register(OrganizationProfile, OrganizationAdmin)

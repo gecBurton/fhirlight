@@ -1,30 +1,30 @@
-from api.models import UKCoreLocation
+from api.models import LocationProfile
 from api.models.location import LocationIdentifier, LocationAddress, LocationTelecom
 from api.serializers.common import (
-    UKCoreProfileSerializer,
-    UKCoreModelSerializer,
+    ProfileSerializer,
+    BaseModelSerializer,
 )
 
 
-class LocationIdentifierSerializer(UKCoreModelSerializer):
+class LocationIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "location", "created_at", "updated_at")
         model = LocationIdentifier
 
 
-class LocationAddressSerializer(UKCoreModelSerializer):
+class LocationAddressSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "created_at", "updated_at")
         model = LocationAddress
 
 
-class LocationTelecomSerializer(UKCoreModelSerializer):
+class LocationTelecomSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "location", "created_at", "updated_at")
         model = LocationTelecom
 
 
-class LocationSerializer(UKCoreProfileSerializer):
+class LocationSerializer(ProfileSerializer):
     identifier = LocationIdentifierSerializer(
         many=True, required=False, source="locationidentifier_set"
     )
@@ -45,4 +45,4 @@ class LocationSerializer(UKCoreProfileSerializer):
             "telecom",
             "managingOrganization",
         ]
-        model = UKCoreLocation
+        model = LocationProfile

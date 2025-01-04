@@ -1,12 +1,12 @@
 from api.models.datatypes import Concept
-from api.models.immunization import UKCoreImmunization
+from api.models.immunization import ImmunizationProfile
 from api.serializers.common import (
-    UKCoreProfileSerializer,
+    ProfileSerializer,
     RelatedResourceSerializer,
 )
 
 
-class ImmunizationSerializer(UKCoreProfileSerializer):
+class ImmunizationSerializer(ProfileSerializer):
     vaccineCode = RelatedResourceSerializer(
         queryset=Concept.objects.filter(valueset=Concept.VALUESET.UK_CORE_VACCINE_CODE)
     )
@@ -22,4 +22,4 @@ class ImmunizationSerializer(UKCoreProfileSerializer):
             "patient",
             "vaccineCode",
         )
-        model = UKCoreImmunization
+        model = ImmunizationProfile

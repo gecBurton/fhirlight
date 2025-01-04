@@ -1,10 +1,10 @@
-from api.models.specimen import UKCoreSpecimen
+from api.models.specimen import SpecimenProfile
 from api.serializers.common import (
-    UKCoreProfileSerializer,
+    ProfileSerializer,
 )
 
 
-class SpecimenCollectionSerializer(UKCoreProfileSerializer):
+class SpecimenCollectionSerializer(ProfileSerializer):
     class Meta:
         fields = (
             "method",
@@ -12,10 +12,10 @@ class SpecimenCollectionSerializer(UKCoreProfileSerializer):
             "bodySite",
             "collectedDateTime",
         )
-        model = UKCoreSpecimen
+        model = SpecimenProfile
 
 
-class SpecimenSerializer(UKCoreProfileSerializer):
+class SpecimenSerializer(ProfileSerializer):
     collection = SpecimenCollectionSerializer(required=False, source="*")
 
     class Meta:
@@ -28,4 +28,4 @@ class SpecimenSerializer(UKCoreProfileSerializer):
             "subject",
             "collection",
         )
-        model = UKCoreSpecimen
+        model = SpecimenProfile

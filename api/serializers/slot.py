@@ -1,17 +1,17 @@
-from api.models.slot import UKCoreSlot, SlotIdentifier
+from api.models.slot import SlotProfile, SlotIdentifier
 from api.serializers.common import (
-    UKCoreProfileSerializer,
-    UKCoreModelSerializer,
+    ProfileSerializer,
+    BaseModelSerializer,
 )
 
 
-class SlotIdentifierSerializer(UKCoreModelSerializer):
+class SlotIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "slot", "created_at", "updated_at")
         model = SlotIdentifier
 
 
-class SlotSerializer(UKCoreProfileSerializer):
+class SlotSerializer(ProfileSerializer):
     identifier = SlotIdentifierSerializer(
         many=True, required=False, source="slotidentifier_set"
     )
@@ -30,4 +30,4 @@ class SlotSerializer(UKCoreProfileSerializer):
             "end",
             "status",
         )
-        model = UKCoreSlot
+        model = SlotProfile

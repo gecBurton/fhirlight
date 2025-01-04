@@ -1,20 +1,20 @@
 from api.models.diagnostic_report import (
-    UKCoreDiagnosticReport,
+    DiagnosticReportProfile,
     DiagnosticReportIdentifier,
 )
 from api.serializers.common import (
-    UKCoreProfileSerializer,
-    UKCoreModelSerializer,
+    ProfileSerializer,
+    BaseModelSerializer,
 )
 
 
-class DiagnosticReportIdentifierSerializer(UKCoreModelSerializer):
+class DiagnosticReportIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "diagnostic_report", "created_at", "updated_at")
         model = DiagnosticReportIdentifier
 
 
-class DiagnosticReportSerializer(UKCoreProfileSerializer):
+class DiagnosticReportSerializer(ProfileSerializer):
     identifier = DiagnosticReportIdentifierSerializer(
         many=True, required=False, source="diagnosticreportidentifier_set"
     )
@@ -33,4 +33,4 @@ class DiagnosticReportSerializer(UKCoreProfileSerializer):
             "subject",
             "result",
         )
-        model = UKCoreDiagnosticReport
+        model = DiagnosticReportProfile

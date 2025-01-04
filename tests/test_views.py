@@ -5,12 +5,12 @@ import pytest
 from django.urls import reverse
 
 from api.models import (
-    UKCorePatient,
-    UKCoreOrganization,
-    UKCorePractitioner,
-    UKCoreLocation,
-    UKCoreObservation,
-    UKCoreSpecimen,
+    PatientProfile,
+    OrganizationProfile,
+    PractitionerProfile,
+    LocationProfile,
+    ObservationProfile,
+    SpecimenProfile,
 )
 from api.models.datatypes import Concept
 
@@ -197,12 +197,12 @@ def test_resource(client, resource, dependants):
     for dependant in dependants:
         dependant_resource_type = dependant.split("-")[1].lower()
         resource_types = {
-            "patient": UKCorePatient,
-            "organization": UKCoreOrganization,
-            "practitioner": UKCorePractitioner,
-            "location": UKCoreLocation,
-            "observation": UKCoreObservation,
-            "specimen": UKCoreSpecimen,
+            "patient": PatientProfile,
+            "organization": OrganizationProfile,
+            "practitioner": PractitionerProfile,
+            "location": LocationProfile,
+            "observation": ObservationProfile,
+            "specimen": SpecimenProfile,
         }
         code = Concept.objects.filter(
             valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE

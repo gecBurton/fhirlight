@@ -4,7 +4,7 @@ from django.db import models
 from polymorphic.models import PolymorphicModel
 
 
-class UKCore(PolymorphicModel):
+class BaseProfile(PolymorphicModel):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     id = models.CharField(

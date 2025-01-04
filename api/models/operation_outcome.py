@@ -1,11 +1,11 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Concept, DataTypeWithPeriod
 
 
-class UKCoreOperationOutcome(UKCore):
+class OperationOutcomeProfile(BaseProfile):
     """The purpose of this profile is to provide detailed information about the outcome of an attempted system
     operation. Operation outcomes are sets of error, warning and information messages provided as a direct system
     response, or part of one, and provide information about the outcome of the operation.
@@ -19,7 +19,7 @@ class UKCoreOperationOutcome(UKCore):
 
 class OperationOutcomeIssue(DataTypeWithPeriod):
     operation_outcome = models.ForeignKey(
-        UKCoreOperationOutcome, on_delete=models.CASCADE
+        OperationOutcomeProfile, on_delete=models.CASCADE
     )
 
     class SEVERITY(models.TextChoices):

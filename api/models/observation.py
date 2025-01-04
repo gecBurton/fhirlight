@@ -1,10 +1,10 @@
 from django.db import models
 
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Concept, Identifier
 
 
-class UKCoreObservation(UKCore):
+class ObservationProfile(BaseProfile):
     """This profile allows exchange of information of Measurements and simple assertions made about an individual,
     device or other subject.
     Note: this profile SHALL NOT be used where a more specific UK Core profile exists."""
@@ -39,19 +39,22 @@ class UKCoreObservation(UKCore):
         related_name="Observation_code",
     )
     performer = models.ManyToManyField(
-        UKCore,
+        BaseProfile,
         limit_choices_to={
-            "polymorphic_ctype__model__in": ["ukcoreorganization", "ukcorepractitioner"]
+            "polymorphic_ctype__model__in": [
+                "organizationprofile",
+                "practitionerprofile",
+            ]
         },
         blank=True,
         help_text="Who is responsible for the observation",
         related_name="Observation_performer",
     )
     subject = models.ForeignKey(
-        UKCore,
+        BaseProfile,
         limit_choices_to={
             "polymorphic_ctype__model__in": [
-                "ukcorepatient",
+                "patientprofile",
             ]
         },
         on_delete=models.CASCADE,
@@ -73,10 +76,10 @@ class UKCoreObservation(UKCore):
     )
     valueQuantity = models.JSONField(null=True, blank=True)
     hasMember = models.ManyToManyField(
-        UKCore,
+        BaseProfile,
         limit_choices_to={
             "polymorphic_ctype__model__in": [
-                "ukcoreobservation",
+                "observationprofile",
             ]
         },
         blank=True,
@@ -94,7 +97,7 @@ class UKCoreObservation(UKCore):
 
 
 class ObservationComponent(models.Model):
-    observation = models.ForeignKey(UKCoreObservation, on_delete=models.CASCADE)
+    observation = models.ForeignKey(ObservationProfile, on_delete=models.CASCADE)
     code = models.ForeignKey(
         Concept,
         on_delete=models.CASCADE,
@@ -129,6 +132,6 @@ class ObservationIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
     observation = models.ForeignKey(
-        UKCoreObservation,
+        ObservationProfile,
         on_delete=models.CASCADE,
     )

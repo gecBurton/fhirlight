@@ -1,6 +1,6 @@
 from rest_framework.serializers import Serializer, RelatedField
 
-from api.models import UKCorePatient
+from api.models import PatientProfile
 from api.models.datatypes import Concept
 from api.models.patient import (
     PatientIdentifier,
@@ -9,33 +9,33 @@ from api.models.patient import (
     PatientAddress,
 )
 from api.serializers.common import (
-    UKCoreModelSerializer,
-    UKCoreProfileSerializer,
+    BaseModelSerializer,
+    ProfileSerializer,
     ConceptSerializer,
 )
 
 from django.utils.translation import gettext_lazy as _
 
 
-class PatientIdentifierSerializer(UKCoreModelSerializer):
+class PatientIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "patient", "created_at", "updated_at")
         model = PatientIdentifier
 
 
-class PatientAddressSerializer(UKCoreModelSerializer):
+class PatientAddressSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "patient", "created_at", "updated_at")
         model = PatientAddress
 
 
-class PatientTelecomSerializer(UKCoreModelSerializer):
+class PatientTelecomSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "patient", "created_at", "updated_at")
         model = PatientTelecom
 
 
-class PatientNameSerializer(UKCoreModelSerializer):
+class PatientNameSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "patient", "created_at", "updated_at")
         model = PatientName
@@ -79,7 +79,7 @@ class PatientCommunicationSerializer(RelatedField):
         }
 
 
-class PatientSerializer(UKCoreProfileSerializer):
+class PatientSerializer(ProfileSerializer):
     identifier = PatientIdentifierSerializer(
         required=False, many=True, source="patientidentifier_set"
     )
@@ -111,4 +111,4 @@ class PatientSerializer(UKCoreProfileSerializer):
             "birthDate",
             "communication",
         ]
-        model = UKCorePatient
+        model = PatientProfile

@@ -1,22 +1,22 @@
 from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer, ModelSerializer
 
-from api.models import UKCoreQuestionnaire
+from api.models import QuestionnaireProfile
 from api.models.questionnaire import (
     QuestionnaireIdentifier,
     QuestionnaireContactPoint,
     QuestionnaireItem,
 )
-from api.serializers.common import UKCoreProfileSerializer, UKCoreModelSerializer
+from api.serializers.common import ProfileSerializer, BaseModelSerializer
 
 
-class QuestionnaireIdentifierSerializer(UKCoreModelSerializer):
+class QuestionnaireIdentifierSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "questionnaire", "created_at", "updated_at")
         model = QuestionnaireIdentifier
 
 
-class QuestionnaireChildItemSerializer(UKCoreModelSerializer):
+class QuestionnaireChildItemSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "questionnaire", "parent", "created_at", "updated_at")
         model = QuestionnaireItem
@@ -50,7 +50,7 @@ class effectivePeriodSerializer(Serializer):
     end = DateTimeField(required=False, source="effectivePeriodEnd")
 
 
-class QuestionnaireSerializer(UKCoreProfileSerializer):
+class QuestionnaireSerializer(ProfileSerializer):
     effectivePeriod = effectivePeriodSerializer(required=False, source="*")
     identifier = QuestionnaireIdentifierSerializer(
         many=True, required=False, source="questionnaireidentifier_set"
@@ -79,4 +79,4 @@ class QuestionnaireSerializer(UKCoreProfileSerializer):
             "effectivePeriod",
             "item",
         )
-        model = UKCoreQuestionnaire
+        model = QuestionnaireProfile

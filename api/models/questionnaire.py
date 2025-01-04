@@ -1,11 +1,11 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-from api.models.common import UKCore
+from api.models.common import BaseProfile
 from api.models.datatypes import Identifier, ContactPoint, DataTypeWithPeriod
 
 
-class UKCoreQuestionnaire(UKCore):
+class QuestionnaireProfile(BaseProfile):
     """This profile is used to organise a collection of questions intended to solicit information from patients,
     providers or other individuals involved in the healthcare domain.
     """
@@ -113,7 +113,7 @@ class QuestionnaireItem(DataTypeWithPeriod):
     """Questions and sections within the Questionnaire"""
 
     questionnaire = models.ForeignKey(
-        UKCoreQuestionnaire,
+        QuestionnaireProfile,
         null=True,
         blank=True,
         on_delete=models.CASCADE,
@@ -157,13 +157,13 @@ class QuestionnaireIdentifier(Identifier):
     )
 
     questionnaire = models.ForeignKey(
-        UKCoreQuestionnaire,
+        QuestionnaireProfile,
         on_delete=models.CASCADE,
     )
 
 
 class QuestionnaireContactPoint(ContactPoint):
-    questionnaire = models.ForeignKey(UKCoreQuestionnaire, on_delete=models.CASCADE)
+    questionnaire = models.ForeignKey(QuestionnaireProfile, on_delete=models.CASCADE)
     name = models.CharField(
         max_length=256,
         null=True,

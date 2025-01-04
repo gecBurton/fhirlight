@@ -54,7 +54,7 @@ class RelatedResourceSerializer(RelatedField):
 
     def to_internal_value(self, data):
         qs = self.get_queryset()
-        model_name = qs.model.__name__.removeprefix("UKCore")
+        model_name = qs.model.__name__.removesuffix("Profile")
         if not isinstance(data, dict):
             self.fail("incorrect_type", type=dict)
 
@@ -81,7 +81,7 @@ class RelatedResourceSerializer(RelatedField):
             resource_types = field.remote_field.limit_choices_to[
                 "polymorphic_ctype__model__in"
             ]
-            if "ukcore" + resource_type.lower() not in resource_types:
+            if resource_type.lower() + "profile" not in resource_types:
                 self.fail("incorrect_resource_type", resource_type=model_name)
 
             try:
@@ -90,7 +90,7 @@ class RelatedResourceSerializer(RelatedField):
                 self.fail("does_not_exist", pk_value=id)
 
     def to_representation(self, value):
-        model_name = value._meta.object_name.removeprefix("UKCore")
+        model_name = value._meta.object_name.removesuffix("Profile")
         if model_name == "Concept":
             representation = self.coding.to_representation([value])
             return {"coding": representation}
@@ -98,7 +98,7 @@ class RelatedResourceSerializer(RelatedField):
             return {"reference": model_name + "/" + value.id}
 
 
-class UKCoreModelSerializer(WritableNestedModelSerializer):
+class BaseModelSerializer(WritableNestedModelSerializer):
     serializer_related_field = RelatedResourceSerializer
 
     def to_representation(self, instance):
@@ -106,9 +106,9 @@ class UKCoreModelSerializer(WritableNestedModelSerializer):
         return strip_none(representation)
 
 
-class UKCoreProfileSerializer(UKCoreModelSerializer):
+class ProfileSerializer(BaseModelSerializer):
     id = CharField()
     resourceType = SerializerMethodField()
 
     def get_resourceType(self, _obj):
-        return self.Meta.model.__name__.removeprefix("UKCore")
+        return self.Meta.model.__name__.removesuffix("Profile")

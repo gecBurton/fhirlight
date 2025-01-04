@@ -1,54 +1,54 @@
 from .organization import (
     OrganizationAddress,
     OrganizationIdentifier,
-    UKCoreOrganization,
+    OrganizationProfile,
     OrganizationContactPoint,
 )
-from .patient import UKCorePatient
+from .patient import PatientProfile
 from .practitioner import (
     PractitionerName,
     PractitionerIdentifier,
     PractitionerTelecom,
     PractitionerAddress,
-    UKCorePractitioner,
+    PractitionerProfile,
 )
-from .medication import UKCoreMedication
-from .observation import UKCoreObservation, ObservationIdentifier
-from .specimen import UKCoreSpecimen
-from .location import UKCoreLocation
-from .immunization import UKCoreImmunization
-from .operation_outcome import UKCoreOperationOutcome
-from .slot import UKCoreSlot
-from .practitioner_role import UKCorePractitionerRole
-from .schedule import UKCoreSchedule
-from .questionnaire import UKCoreQuestionnaire
-from .procedure import UKCoreProcedure
-from .related_person import UKCoreRelatedPerson
-from .diagnostic_report import UKCoreDiagnosticReport
+from .medication import MedicationProfile
+from .observation import ObservationProfile, ObservationIdentifier
+from .specimen import SpecimenProfile
+from .location import LocationProfile
+from .immunization import ImmunizationProfile
+from .operation_outcome import OperationOutcomeProfile
+from .slot import SlotProfile
+from .practitioner_role import PractitionerRole
+from .schedule import ScheduleProfile
+from .questionnaire import QuestionnaireProfile
+from .procedure import ProcedureProfile
+from .related_person import RelatedPersonProfile
+from .diagnostic_report import DiagnosticReportProfile
 
 __all__ = [
-    "UKCoreDiagnosticReport",
-    "UKCoreRelatedPerson",
-    "UKCoreProcedure",
-    "UKCoreQuestionnaire",
-    "UKCoreSchedule",
-    "UKCorePractitionerRole",
-    "UKCoreSlot",
-    "UKCoreOperationOutcome",
-    "UKCoreImmunization",
-    "UKCoreLocation",
-    "UKCorePatient",
+    "DiagnosticReportProfile",
+    "RelatedPersonProfile",
+    "ProcedureProfile",
+    "QuestionnaireProfile",
+    "ScheduleProfile",
+    "PractitionerRole",
+    "SlotProfile",
+    "OperationOutcomeProfile",
+    "ImmunizationProfile",
+    "LocationProfile",
+    "PatientProfile",
     "OrganizationAddress",
     "OrganizationIdentifier",
-    "UKCoreOrganization",
+    "OrganizationProfile",
     "OrganizationContactPoint",
-    "UKCorePractitioner",
+    "PractitionerProfile",
     "PractitionerName",
     "PractitionerIdentifier",
     "PractitionerTelecom",
     "PractitionerAddress",
-    "UKCoreMedication",
-    "UKCoreObservation",
+    "MedicationProfile",
+    "ObservationProfile",
     "ObservationIdentifier",
-    "UKCoreSpecimen",
+    "SpecimenProfile",
 ]

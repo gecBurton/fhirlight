@@ -1,10 +1,10 @@
-from api.models.procedure import UKCoreProcedure
+from api.models.procedure import ProcedureProfile
 from api.serializers.common import (
-    UKCoreProfileSerializer,
+    ProfileSerializer,
 )
 
 
-class ProcedureSerializer(UKCoreProfileSerializer):
+class ProcedureSerializer(ProfileSerializer):
     class Meta:
         fields = (
             "id",
@@ -14,4 +14,4 @@ class ProcedureSerializer(UKCoreProfileSerializer):
             "performedDateTime",
             "status",
         )
-        model = UKCoreProcedure
+        model = ProcedureProfile
