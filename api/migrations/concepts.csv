@@ -744,3 +744,7 @@
 "PHY", "http://terminology.hl7.org/CodeSystem/v2-0074", "Physician (Hx. Dx, admission note, etc.)", "DiagnosticServiceSectionCodes"
 "LAB", "http://terminology.hl7.org/CodeSystem/v2-0074", "Laboratory", "DiagnosticServiceSectionCodes"
 "721981007", "http://snomed.info/sct", "Diagnostic studies report", "UKCoreReportCode"
+"active", "http://terminology.hl7.org/CodeSystem/condition-clinical", "Active", "ConditionClinicalStatusCodes"
+"confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", "Confirmed", "ConditionVerificationStatus"
+"encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category", "Encounter Diagnosis", "UKCoreConditionCategory"
+"26322001", "http://snomed.info/sct", "Bleeding from ear", "UKCoreConditionCode"

@@ -17,6 +17,7 @@ tested examples
 * UKCore-Appointment
 * UKCore-Composition
 * UKCore-Condition
+  * [Bleeding From Ear](tests/data/UKCore-Condition-BleedingFromEar-Example.json)
 * UKCore-Consent
 * UKCore-Device
 * UKCore-DiagnosticReport

@@ -11,8 +11,7 @@ def is_none(obj) -> bool:
     if isinstance(obj, (bool, int, float)):
         return False
     if isinstance(obj, dict):
-        if all(map(is_none, obj.values())):
-            return True
+        return all(map(is_none, obj.values()))
     return not obj
 
 

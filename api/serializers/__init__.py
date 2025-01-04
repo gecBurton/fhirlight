@@ -14,9 +14,11 @@ from .practitioner_role import PractitionerRoleSerializer
 from .schedule import ScheduleSerializer
 from .immunization import ImmunizationSerializer
 from .diagnostic_report import DiagnosticReportSerializer
+from .condition import ConditionSerializer
 
 
 __all__ = [
+    "ConditionSerializer",
     "PatientSerializer",
     "OrganizationSerializer",
     "PractitionerSerializer",

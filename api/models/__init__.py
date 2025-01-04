@@ -25,8 +25,10 @@ from .questionnaire import QuestionnaireProfile
 from .procedure import ProcedureProfile
 from .related_person import RelatedPersonProfile
 from .diagnostic_report import DiagnosticReportProfile
+from .condition import ConditionProfile
 
 __all__ = [
+    "ConditionProfile",
     "DiagnosticReportProfile",
     "RelatedPersonProfile",
     "ProcedureProfile",
