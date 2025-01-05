@@ -70,13 +70,7 @@ class EncounterProfile(BaseProfile):
         help_text="The organization (facility) responsible for this encounter",
     )
 
-
-class EncounterHospitalization(models.Model):
-    encounter = models.ForeignKey(
-        EncounterProfile,
-        on_delete=models.CASCADE,
-    )
-    dischargeDisposition = models.ForeignKey(
+    hospitalizationDischargeDisposition = models.ForeignKey(
         Concept,
         null=True,
         blank=True,

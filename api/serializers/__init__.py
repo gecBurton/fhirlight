@@ -20,6 +20,7 @@ from .consent import ConsentSerializer
 from .encounter import EncounterSerializer
 
 __all__ = [
+    "EncounterSerializer",
     "ConsentSerializer",
     "DeviceSerializer",
     "ConditionSerializer",

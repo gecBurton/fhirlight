@@ -1,16 +1,18 @@
 from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer
 
+from api.models.datatypes import Concept
 from api.models.encounter import (
     EncounterProfile,
     EncounterParticipant,
     EncounterLocation,
     EncounterIdentifier,
-    EncounterHospitalization,
 )
 from api.serializers.common import (
     ProfileSerializer,
     BaseModelSerializer,
+    ConceptModelSerializer,
+    RelatedResourceSerializer,
 )
 
 
@@ -37,17 +39,26 @@ class EncounterParticipantSerializer(BaseModelSerializer):
         model = EncounterParticipant
 
 
-class EncounterHospitalizationSerializer(BaseModelSerializer):
+class EncounterHospitalizationSerializer(ProfileSerializer):
+    dischargeDisposition = RelatedResourceSerializer(
+        queryset=Concept.objects.filter(
+            valueset=Concept.VALUESET.UK_CORE_DISCHARGE_DESTINATION
+        ),
+        required=False,
+        source="hospitalizationDischargeDisposition",
+    )
+
     class Meta:
         fields = ("dischargeDisposition",)
-        model = EncounterHospitalization
+        model = EncounterProfile
 
 
 class EncounterSerializer(ProfileSerializer):
-    hospitalization = EncounterHospitalizationSerializer(
-        required=False, source="encounterhospitalization_set"
+    klass = ConceptModelSerializer(
+        queryset=Concept.objects.filter(valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE)
     )
-    period = PeriodSerializer(required=False)
+    hospitalization = EncounterHospitalizationSerializer(required=False, source="*")
+    period = PeriodSerializer(required=False, source="*")
     participant = EncounterParticipantSerializer(
         many=True, required=False, source="encounterparticipant_set"
     )
@@ -57,21 +68,6 @@ class EncounterSerializer(ProfileSerializer):
     identifier = EncounterIdentifierSerializer(
         many=True, required=False, source="encounteridentifier_set"
     )
-
-    def to_internal_value(self, data):
-        data["klass"] = data.pop("class", None)
-        return super().to_internal_value(data)
-
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation["class"] = representation.pop("klass")
-        return representation
-
-    #    'period',
-
-    def create(self, validated_data):
-        validated_data.pop("period", None)
-        return super().create(validated_data)
 
     class Meta:
         fields = (
