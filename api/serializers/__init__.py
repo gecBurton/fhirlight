@@ -16,8 +16,10 @@ from .immunization import ImmunizationSerializer
 from .diagnostic_report import DiagnosticReportSerializer
 from .condition import ConditionSerializer
 from .device import DeviceSerializer
+from .consent import ConsentSerializer
 
 __all__ = [
+    "ConsentSerializer",
     "DeviceSerializer",
     "ConditionSerializer",
     "PatientSerializer",

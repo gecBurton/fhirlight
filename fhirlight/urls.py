@@ -21,6 +21,7 @@ from api.views import (
     DiagnosticReportViewSet,
     ConditionViewSet,
     DeviceViewSet,
+    ConsentViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -48,6 +49,7 @@ router.register(
 )
 router.register(r"Condition", ConditionViewSet, basename="condition")
 router.register(r"Device", DeviceViewSet, basename="device")
+router.register(r"Consent", ConsentViewSet, basename="consent")
 
 
 urlpatterns = [

@@ -11,7 +11,8 @@ def is_none(obj) -> bool:
     if isinstance(obj, (bool, int, float)):
         return False
     if isinstance(obj, dict):
-        return all(map(is_none, obj.values()))
+        if all(map(is_none, obj.values())):
+            return True
     return not obj
 
 
@@ -29,6 +30,25 @@ class ConceptSerializer(Serializer):
     code = CharField()
     system = CharField(required=False)
     display = CharField(required=False)
+
+
+class ConceptModelSerializer(RelatedField):
+    default_error_messages = {
+        "required": _("This field is required."),
+        "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
+    }
+    concept = ConceptSerializer()
+
+    def to_internal_value(self, data):
+        data = self.concept.to_internal_value(data)
+        qs = self.get_queryset()
+        try:
+            return qs.get(code=data["code"])
+        except Concept.DoesNotExist:
+            self.fail("does_not_exist", pk_value=data["code"])
+
+    def to_representation(self, instance):
+        return self.concept.to_representation(instance)
 
 
 class RelatedResourceSerializer(RelatedField):

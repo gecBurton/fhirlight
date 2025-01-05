@@ -17,10 +17,11 @@ from api.models import (
     DiagnosticReportProfile,
     ConditionProfile,
     DeviceProfile,
+    ConsentProfile,
 )
 from api.models.organization import OrganizationProfile
 from api.models.practitioner import PractitionerProfile
-from api.serializers import DeviceSerializer
+from api.serializers import DeviceSerializer, ConsentSerializer
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
 from api.serializers.immunization import ImmunizationSerializer
@@ -145,4 +146,10 @@ class ConditionViewSet(ModelViewSet):
 class DeviceViewSet(ModelViewSet):
     queryset = DeviceProfile.objects.all()
     serializer_class = DeviceSerializer
+    lookup_field = "id"
+
+
+class ConsentViewSet(ModelViewSet):
+    queryset = ConsentProfile.objects.all()
+    serializer_class = ConsentSerializer
     lookup_field = "id"
