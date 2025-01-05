@@ -16,10 +16,15 @@ from api.models import (
     RelatedPersonProfile,
     DiagnosticReportProfile,
     EncounterProfile,
+    ConditionProfile,
+    DeviceProfile,
+    ConsentProfile,
 )
 from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
 from api.models.practitioner import PractitionerProfile
+from api.serializers import DeviceSerializer, ConsentSerializer
+from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
@@ -131,6 +136,24 @@ class RelatedPersonViewSet(ModelViewSet):
 class DiagnosticReportViewSet(ModelViewSet):
     queryset = DiagnosticReportProfile.objects.all()
     serializer_class = DiagnosticReportSerializer
+    lookup_field = "id"
+
+
+class ConditionViewSet(ModelViewSet):
+    queryset = ConditionProfile.objects.all()
+    serializer_class = ConditionSerializer
+    lookup_field = "id"
+
+
+class DeviceViewSet(ModelViewSet):
+    queryset = DeviceProfile.objects.all()
+    serializer_class = DeviceSerializer
+    lookup_field = "id"
+
+
+class ConsentViewSet(ModelViewSet):
+    queryset = ConsentProfile.objects.all()
+    serializer_class = ConsentSerializer
     lookup_field = "id"
 
 

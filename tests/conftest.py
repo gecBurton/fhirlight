@@ -55,15 +55,6 @@ def leeds_teaching_hospital():
 
 
 @pytest.fixture
-def cardiology_sjuh():
-    location = LocationProfile.objects.create(
-        id="UKCore-Location-CardiologySJUH-Example"
-    )
-    yield location
-    location.delete()
-
-
-@pytest.fixture
 def white_rose_medical_centre():
     organization = OrganizationProfile.objects.create(
         id="UKCore-Organization-WhiteRoseMedicalCentre-Example"
@@ -125,9 +116,18 @@ def general_practice_nurse_clinic():
 
 
 @pytest.fixture
-def blood_specimen():
-    location = SpecimenProfile.objects.create(
-        id="UKCore-Specimen-BloodSpecimen-Example"
+def cardiology_sjuh():
+    location = LocationProfile.objects.create(
+        id="UKCore-Location-CardiologySJUH-Example"
     )
     yield location
     location.delete()
+
+
+@pytest.fixture
+def blood_specimen():
+    specimen = SpecimenProfile.objects.create(
+        id="UKCore-Specimen-BloodSpecimen-Example"
+    )
+    yield specimen
+    specimen.delete()

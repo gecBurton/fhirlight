@@ -4,6 +4,9 @@ import os
 
 import pytest
 
+from api.serializers.condition import ConditionSerializer
+from api.serializers.consent import ConsentSerializer
+from api.serializers.device import DeviceSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
 from api.serializers.encounter import EncounterSerializer
 from api.serializers.immunization import ImmunizationSerializer
@@ -331,6 +334,60 @@ def test_diagnostic_report(
         payload = json.load(f)
 
     serializer = DiagnosticReportSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Condition-BleedingFromEar-Example",
+    ],
+)
+def test_condition(resource, richard_smith):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = ConditionSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Device-SoftwareAsAMedicalDevice-Example",
+        "UKCore-Device-Sphygmomanometer-Example",
+    ],
+)
+def test_device(resource, leeds_teaching_hospital, cardiology_sjuh):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = DeviceSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Consent-ForInformationAccess-Example",
+    ],
+)
+def test_consent(
+    resource, richard_smith, doctor_paul_rastall, white_rose_medical_centre
+):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = ConsentSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

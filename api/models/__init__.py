@@ -26,15 +26,22 @@ from .procedure import ProcedureProfile
 from .related_person import RelatedPersonProfile
 from .diagnostic_report import DiagnosticReportProfile
 from .encounter import EncounterProfile
+from .condition import ConditionProfile
+from .device import DeviceProfile
+from .consent import ConsentProfile
 
 __all__ = [
     "EncounterProfile",
     "PractitionerRoleProfile",
+    "ConsentProfile",
+    "DeviceProfile",
+    "ConditionProfile",
     "DiagnosticReportProfile",
     "RelatedPersonProfile",
     "ProcedureProfile",
     "QuestionnaireProfile",
     "ScheduleProfile",
+    "PractitionerRoleProfile",
     "SlotProfile",
     "OperationOutcomeProfile",
     "ImmunizationProfile",

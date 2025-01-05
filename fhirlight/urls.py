@@ -20,6 +20,9 @@ from api.views import (
     RelatedPersonViewSet,
     DiagnosticReportViewSet,
     EncounterViewSet,
+    ConditionViewSet,
+    DeviceViewSet,
+    ConsentViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -45,6 +48,9 @@ router.register(r"RelatedPerson", RelatedPersonViewSet, basename="relatedperson"
 router.register(
     r"DiagnosticReport", DiagnosticReportViewSet, basename="diagnosticreport"
 )
+router.register(r"Condition", ConditionViewSet, basename="condition")
+router.register(r"Device", DeviceViewSet, basename="device")
+router.register(r"Consent", ConsentViewSet, basename="consent")
 router.register(r"Encounter", EncounterViewSet, basename="encounter")
 
 
