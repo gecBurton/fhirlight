@@ -240,6 +240,10 @@ class Concept(models.Model):
         CONDITION_DIAGNOSIS_Severity = "Condition/DiagnosisSeverity"
         UK_CORE_CONDITION_CODE = "UKCoreConditionCode"
         UK_CORE_DEVICE_TYPE = "UKCoreDeviceType"
+        CONSENT_STATE = "ConsentState"
+        CONSENT_SCOPE_CODE = "ConsentScopeCodes"
+        CONSENT_CATEGORY_CODE = "ConsentCategoryCodes"
+        V3_PURPOSE_OF_USE = "v3.PurposeOfUse"
 
     system = models.CharField(
         null=True,

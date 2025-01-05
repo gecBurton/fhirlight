@@ -27,8 +27,10 @@ from .related_person import RelatedPersonProfile
 from .diagnostic_report import DiagnosticReportProfile
 from .condition import ConditionProfile
 from .device import DeviceProfile
+from .consent import ConsentProfile
 
 __all__ = [
+    "ConsentProfile",
     "DeviceProfile",
     "ConditionProfile",
     "DiagnosticReportProfile",
