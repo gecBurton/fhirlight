@@ -18,8 +18,10 @@ from .condition import ConditionSerializer
 from .device import DeviceSerializer
 from .consent import ConsentSerializer
 from .encounter import EncounterSerializer
+from .episode_of_care import EpisodeOfCareSerializer
 
 __all__ = [
+    "EpisodeOfCareSerializer",
     "EncounterSerializer",
     "ConsentSerializer",
     "DeviceSerializer",

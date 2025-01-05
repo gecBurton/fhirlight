@@ -29,8 +29,10 @@ from .encounter import EncounterProfile
 from .condition import ConditionProfile
 from .device import DeviceProfile
 from .consent import ConsentProfile
+from .episode_of_care import EpisodeOfCareProfile
 
 __all__ = [
+    "EpisodeOfCareProfile",
     "EncounterProfile",
     "PractitionerRoleProfile",
     "ConsentProfile",

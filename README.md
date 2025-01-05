@@ -29,6 +29,7 @@ tested examples
 * UKCore-Encounter
   * [Inpatient Encounter](tests/data/UKCore-Encounter-InpatientEncounter-Example.json)
 * UKCore-EpisodeOfCare
+  * [Smoking Cessation Therapy](tests/data/UKCore-EpisodeOfCare-SmokingCessationTherapy-Example.json)
 * UKCore-FamilyMemberHistory
 * UKCore-Flag
 * UKCore-HealthcareService

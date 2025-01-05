@@ -769,3 +769,4 @@
 "patient-privacy", "http://terminology.hl7.org/CodeSystem/consentscope", "Privacy Consent", "ConsentScopeCodes"
 "INFA", "http://terminology.hl7.org/CodeSystem/v3-ActCode", "information access", "ConsentCategoryCodes"
 "GOV", "http://terminology.hl7.org/CodeSystem/v3-ActReason", "government", "v3.PurposeOfUse"
+"710081004", "http://snomed.info/sct", "Smoking cessation therapy", "EpisodeOfCareType"

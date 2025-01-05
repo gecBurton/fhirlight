@@ -249,6 +249,7 @@ class Concept(models.Model):
         PARTICIPANT_TYPE = "ParticipantType"
         ENCOUNTER_REASON_CODE = "EncounterReasonCodes"
         UK_CORE_DISCHARGE_DESTINATION = "UKCoreDischargeDestination"
+        EPISODE_OF_CARE_TYPE = "EpisodeOfCareType"
 
     system = models.CharField(
         null=True,
