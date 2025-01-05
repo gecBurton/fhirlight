@@ -5,6 +5,7 @@ import os
 import pytest
 
 from api.serializers.condition import ConditionSerializer
+from api.serializers.device import DeviceSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
@@ -348,6 +349,24 @@ def test_condition(resource, richard_smith):
         payload = json.load(f)
 
     serializer = ConditionSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Device-SoftwareAsAMedicalDevice-Example",
+        "UKCore-Device-Sphygmomanometer-Example",
+    ],
+)
+def test_device(resource, leeds_teaching_hospital, cardiology_sjuh):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = DeviceSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

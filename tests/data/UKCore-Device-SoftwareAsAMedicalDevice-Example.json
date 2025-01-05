@@ -1,0 +1,26 @@
+{
+    "resourceType": "Device",
+    "id": "UKCore-Device-SoftwareAsAMedicalDevice-Example",
+    "identifier":  [
+        {
+            "system": "https://www.leedsth.nhs.uk/identifier/devices",
+            "value": "DEV1999990567"
+        }
+    ],
+    "status": "active",
+    "type": {
+        "coding":  [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "467892009",
+                "display": "Cardiac mapping system application software"
+            }
+        ]
+    },
+    "owner": {
+        "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
+    },
+    "location": {
+        "reference": "Location/UKCore-Location-CardiologySJUH-Example"
+    }
+}
