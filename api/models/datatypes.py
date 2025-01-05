@@ -239,6 +239,7 @@ class Concept(models.Model):
         UK_CORE_CONDITION_CATEGORY = "UKCoreConditionCategory"
         CONDITION_DIAGNOSIS_Severity = "Condition/DiagnosisSeverity"
         UK_CORE_CONDITION_CODE = "UKCoreConditionCode"
+        UK_CORE_DEVICE_TYPE = "UKCoreDeviceType"
 
     system = models.CharField(
         null=True,

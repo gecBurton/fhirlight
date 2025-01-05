@@ -15,9 +15,10 @@ from .schedule import ScheduleSerializer
 from .immunization import ImmunizationSerializer
 from .diagnostic_report import DiagnosticReportSerializer
 from .condition import ConditionSerializer
-
+from .device import DeviceSerializer
 
 __all__ = [
+    "DeviceSerializer",
     "ConditionSerializer",
     "PatientSerializer",
     "OrganizationSerializer",

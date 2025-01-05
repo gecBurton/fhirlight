@@ -116,9 +116,18 @@ def general_practice_nurse_clinic():
 
 
 @pytest.fixture
-def blood_specimen():
-    location = SpecimenProfile.objects.create(
-        id="UKCore-Specimen-BloodSpecimen-Example"
+def cardiology_sjuh():
+    location = LocationProfile.objects.create(
+        id="UKCore-Location-CardiologySJUH-Example"
     )
     yield location
     location.delete()
+
+
+@pytest.fixture
+def blood_specimen():
+    specimen = SpecimenProfile.objects.create(
+        id="UKCore-Specimen-BloodSpecimen-Example"
+    )
+    yield specimen
+    specimen.delete()

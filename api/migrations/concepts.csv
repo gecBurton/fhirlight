@@ -748,3 +748,5 @@
 "confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", "Confirmed", "ConditionVerificationStatus"
 "encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category", "Encounter Diagnosis", "UKCoreConditionCategory"
 "26322001", "http://snomed.info/sct", "Bleeding from ear", "UKCoreConditionCode"
+"467892009", "http://snomed.info/sct", "Cardiac mapping system application software", "UKCoreDeviceType"
+"466086009", "http://snomed.info/sct", "Automatic-inflation electronic sphygmomanometer, portable, arm/wrist", "UKCoreDeviceType"
