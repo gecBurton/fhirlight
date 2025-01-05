@@ -17,8 +17,10 @@ from .diagnostic_report import DiagnosticReportSerializer
 from .condition import ConditionSerializer
 from .device import DeviceSerializer
 from .consent import ConsentSerializer
+from .encounter import EncounterSerializer
 
 __all__ = [
+    "EncounterSerializer",
     "ConsentSerializer",
     "DeviceSerializer",
     "ConditionSerializer",

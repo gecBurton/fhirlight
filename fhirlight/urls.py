@@ -19,6 +19,7 @@ from api.views import (
     ProcedureViewSet,
     RelatedPersonViewSet,
     DiagnosticReportViewSet,
+    EncounterViewSet,
     ConditionViewSet,
     DeviceViewSet,
     ConsentViewSet,
@@ -50,6 +51,7 @@ router.register(
 router.register(r"Condition", ConditionViewSet, basename="condition")
 router.register(r"Device", DeviceViewSet, basename="device")
 router.register(r"Consent", ConsentViewSet, basename="consent")
+router.register(r"Encounter", EncounterViewSet, basename="encounter")
 
 
 urlpatterns = [

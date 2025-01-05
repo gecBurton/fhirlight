@@ -15,10 +15,12 @@ from api.models import (
     ProcedureProfile,
     RelatedPersonProfile,
     DiagnosticReportProfile,
+    EncounterProfile,
     ConditionProfile,
     DeviceProfile,
     ConsentProfile,
 )
+from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
 from api.models.practitioner import PractitionerProfile
 from api.serializers import DeviceSerializer, ConsentSerializer
@@ -152,4 +154,10 @@ class DeviceViewSet(ModelViewSet):
 class ConsentViewSet(ModelViewSet):
     queryset = ConsentProfile.objects.all()
     serializer_class = ConsentSerializer
+    lookup_field = "id"
+
+
+class EncounterViewSet(ModelViewSet):
+    queryset = EncounterProfile.objects.all()
+    serializer_class = EncounterSerializer
     lookup_field = "id"

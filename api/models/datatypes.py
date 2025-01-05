@@ -244,6 +244,11 @@ class Concept(models.Model):
         CONSENT_SCOPE_CODE = "ConsentScopeCodes"
         CONSENT_CATEGORY_CODE = "ConsentCategoryCodes"
         V3_PURPOSE_OF_USE = "v3.PurposeOfUse"
+        V3_ACT_ENCOUNTER_CODE = "v3.ActEncounterCode"
+        UK_CORE_ENCOUNTER_TYPE = "UKCoreEncounterType"
+        PARTICIPANT_TYPE = "ParticipantType"
+        ENCOUNTER_REASON_CODE = "EncounterReasonCodes"
+        UK_CORE_DISCHARGE_DESTINATION = "UKCoreDischargeDestination"
 
     system = models.CharField(
         null=True,

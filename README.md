@@ -19,6 +19,7 @@ tested examples
 * UKCore-Condition
   * [Bleeding From Ear](tests/data/UKCore-Condition-BleedingFromEar-Example.json)
 * UKCore-Consent
+  * [For Information Access](tests/data/UKCore-Consent-ForInformationAccess-Example.json)
 * UKCore-Device
   * [Software As A Medical Device](tests/data/UKCore-Device-SoftwareAsAMedicalDevice-Example.json)
   * [Sphygmomanometer](tests/data/UKCore-Device-Sphygmomanometer-Example.json)
@@ -26,6 +27,7 @@ tested examples
   * [Diagnostic Studies Report](tests/data/UKCore-DiagnosticReport-DiagnosticStudiesReport-Example.json)
   * [Diagnostic Studies Report](tests/data/UKCore-DiagnosticReport-Lab-DiagnosticStudiesReport-Example.json)
 * UKCore-Encounter
+  * [Inpatient Encounter](tests/data/UKCore-Encounter-InpatientEncounter-Example.json)
 * UKCore-EpisodeOfCare
 * UKCore-FamilyMemberHistory
 * UKCore-Flag

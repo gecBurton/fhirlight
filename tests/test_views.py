@@ -192,6 +192,15 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
             ],
         ),
         (
+            "UKCore-Encounter-InpatientEncounter-Example",
+            [
+                "UKCore-Location-CardiologySJUH-Example",
+                "UKCore-Practitioner-ConsultantSandraGose-Example",
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
             "UKCore-Condition-BleedingFromEar-Example",
             ["UKCore-Patient-RichardSmith-Example"],
         ),

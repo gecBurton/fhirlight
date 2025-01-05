@@ -18,7 +18,7 @@ class ConsentProvisionSerializer(ProfileSerializer):
         many=True,
         required=False,
         source="provisionPurpose",
-        queryset=Concept.objects.all(),
+        queryset=Concept.objects.filter(valueset=Concept.VALUESET.V3_PURPOSE_OF_USE),
     )
 
     class Meta:
