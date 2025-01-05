@@ -69,6 +69,15 @@ class EncounterSerializer(ProfileSerializer):
         many=True, required=False, source="encounteridentifier_set"
     )
 
+    def to_internal_value(self, data):
+        data["klass"] = data.pop("class", None)
+        return super().to_internal_value(data)
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["class"] = representation.pop("klass", None)
+        return representation
+
     class Meta:
         fields = (
             "id",
