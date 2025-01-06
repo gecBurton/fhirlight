@@ -20,8 +20,10 @@ from .consent import ConsentSerializer
 from .encounter import EncounterSerializer
 from .episode_of_care import EpisodeOfCareSerializer
 from .message_header import MessageHeaderSerializer
+from .service_request import ServiceRequestSerializer
 
 __all__ = [
+    "ServiceRequestSerializer",
     "MessageHeaderSerializer",
     "EpisodeOfCareSerializer",
     "EncounterSerializer",

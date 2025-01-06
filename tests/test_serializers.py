@@ -4,6 +4,7 @@ import os
 
 import pytest
 
+from api.serializers import ServiceRequestSerializer
 from api.serializers.condition import ConditionSerializer
 from api.serializers.consent import ConsentSerializer
 from api.serializers.device import DeviceSerializer
@@ -447,6 +448,36 @@ def test_message_header(resource, inpatient_encounter, leeds_teaching_hospital):
         payload = json.load(f)
 
     serializer = MessageHeaderSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-ServiceRequest-Lab-CReactiveProtein-Example",
+        "UKCore-ServiceRequest-ColonoscopyRequest-Example",
+    ],
+)
+def test_service_request(
+    resource,
+    richard_smith,
+    pharmacist_jimmy_chuck,
+    inpatient_encounter,
+    doctor_paul_rastall,
+    consultant_sandra_gose,
+    hospital_sjuh,
+    white_cell_count,
+    diagnostic_studies_report,
+    leeds_teaching_hospital,
+    finger_joint_inflamed,
+):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = ServiceRequestSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

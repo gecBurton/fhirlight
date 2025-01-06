@@ -250,6 +250,9 @@ class Concept(models.Model):
         ENCOUNTER_REASON_CODE = "EncounterReasonCodes"
         UK_CORE_DISCHARGE_DESTINATION = "UKCoreDischargeDestination"
         EPISODE_OF_CARE_TYPE = "EpisodeOfCareType"
+        UK_CORE_SERVICE_REQUEST_REASON_CODE = "UKCoreServiceRequestReasonCode"
+        SERVICE_REQUEST_CATEGORY_CODE = "ServiceRequestCategoryCodes"
+        V3_SERVICE_DELIVERY_LOCATION_ROLE_TYPE = "v3.ServiceDeliveryLocationRoleType"
 
     system = models.CharField(
         null=True,

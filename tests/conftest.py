@@ -8,6 +8,7 @@ from api.models import (
     LocationProfile,
     SpecimenProfile,
     EncounterProfile,
+    DiagnosticReportProfile,
 )
 from api.models.datatypes import Concept
 
@@ -79,6 +80,11 @@ def encounter_code():
 
 
 @pytest.fixture
+def report_code():
+    return Concept.objects.filter(valueset=Concept.VALUESET.UK_CORE_REPORT_CODE).first()
+
+
+@pytest.fixture
 def white_cell_count(observation_type):
     observation = ObservationProfile.objects.create(
         id="UKCore-Observation-Lab-WhiteCellCount-Example", code=observation_type
@@ -133,6 +139,13 @@ def cardiology_sjuh():
 
 
 @pytest.fixture
+def hospital_sjuh():
+    location = LocationProfile.objects.create(id="UKCore-Location-HospitalSJUH-Example")
+    yield location
+    location.delete()
+
+
+@pytest.fixture
 def blood_specimen():
     specimen = SpecimenProfile.objects.create(
         id="UKCore-Specimen-BloodSpecimen-Example"
@@ -145,6 +158,15 @@ def blood_specimen():
 def inpatient_encounter(encounter_code):
     encounter = EncounterProfile.objects.create(
         id="UKCore-Encounter-InpatientEncounter-Example", klass=encounter_code
+    )
+    yield encounter
+    encounter.delete()
+
+
+@pytest.fixture
+def diagnostic_studies_report(report_code):
+    encounter = DiagnosticReportProfile.objects.create(
+        id="UKCore-DiagnosticReport-DiagnosticStudiesReport-Example", code=report_code
     )
     yield encounter
     encounter.delete()
