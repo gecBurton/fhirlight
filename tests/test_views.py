@@ -290,24 +290,25 @@ def test_resource(client, resource, dependants):
                 id=dependant, code=code
             )
         else:
-            try:
-                resource_types[dependant_resource_type].objects.create(id=dependant)
-            except Exception:
-                raise
+            resource_types[dependant_resource_type].objects.create(id=dependant)
 
     resource_type = resource.split("-")[1].lower()
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)
 
-    url = reverse(f"{resource_type}-list")
+    url_list = reverse(f"{resource_type}-list")
 
     post_response = client.post(
-        url, json.dumps(payload), content_type="application/json"
+        url_list, json.dumps(payload), content_type="application/json"
     )
     assert post_response.status_code == 201, post_response.json()
     assert post_response.json() == payload
 
-    url = reverse(f"{resource_type}-detail", kwargs={"id": payload["id"]})
-    get_response = client.get(url)
+    url_detail = reverse(f"{resource_type}-detail", kwargs={"id": payload["id"]})
+    get_response = client.get(url_detail)
     assert get_response.status_code == 200
     assert get_response.json() == payload
+
+    get_response = client.get(url_list)
+    assert get_response.status_code == 200
+    assert payload in [entry["resource"] for entry in get_response.json()["entry"]]
