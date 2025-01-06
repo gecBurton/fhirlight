@@ -21,9 +21,6 @@ class ConsentProfile(BaseProfile):
     # Last Updated	2023-04-28
     # Description	This profile defines the UK constraints and extensions on the International FHIR resource Consent.
 
-    # Consent.
-    # Consent.source[x]	The source from which this consent is taken
-
     class STATUS(models.TextChoices):
         DRAFT = "draft"
         PROPOSED = "proposed"

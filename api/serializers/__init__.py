@@ -19,8 +19,10 @@ from .device import DeviceSerializer
 from .consent import ConsentSerializer
 from .encounter import EncounterSerializer
 from .episode_of_care import EpisodeOfCareSerializer
+from .message_header import MessageHeaderSerializer
 
 __all__ = [
+    "MessageHeaderSerializer",
     "EpisodeOfCareSerializer",
     "EncounterSerializer",
     "ConsentSerializer",

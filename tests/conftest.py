@@ -7,6 +7,7 @@ from api.models import (
     PractitionerProfile,
     LocationProfile,
     SpecimenProfile,
+    EncounterProfile,
 )
 from api.models.datatypes import Concept
 
@@ -71,6 +72,13 @@ def observation_type():
 
 
 @pytest.fixture
+def encounter_code():
+    return Concept.objects.filter(
+        valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE
+    ).first()
+
+
+@pytest.fixture
 def white_cell_count(observation_type):
     observation = ObservationProfile.objects.create(
         id="UKCore-Observation-Lab-WhiteCellCount-Example", code=observation_type
@@ -131,3 +139,12 @@ def blood_specimen():
     )
     yield specimen
     specimen.delete()
+
+
+@pytest.fixture
+def inpatient_encounter(encounter_code):
+    encounter = EncounterProfile.objects.create(
+        id="UKCore-Encounter-InpatientEncounter-Example", klass=encounter_code
+    )
+    yield encounter
+    encounter.delete()
