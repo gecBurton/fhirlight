@@ -12,6 +12,7 @@ from api.models import (
     ObservationProfile,
     SpecimenProfile,
     EncounterProfile,
+    DiagnosticReportProfile,
 )
 from api.models.datatypes import Concept
 
@@ -227,6 +228,27 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
                 "UKCore-Encounter-InpatientEncounter-Example",
             ],
         ),
+        (
+            "UKCore-ServiceRequest-Lab-CReactiveProtein-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Observation-FingerJointInflamed-Example",
+                "UKCore-Practitioner-PharmacistJimmyChuck-Example",
+                "UKCore-Patient-RichardSmith-Example",
+            ],
+        ),
+        (
+            "UKCore-ServiceRequest-ColonoscopyRequest-Example",
+            [
+                "UKCore-Observation-Lab-WhiteCellCount-Example",
+                "UKCore-Patient-RichardSmith-Example",
+                "UKCore-Encounter-InpatientEncounter-Example",
+                "UKCore-Location-HospitalSJUH-Example",
+                "UKCore-Practitioner-ConsultantSandraGose-Example",
+                "UKCore-DiagnosticReport-DiagnosticStudiesReport-Example",
+                "UKCore-Practitioner-DoctorPaulRastall-Example",
+            ],
+        ),
     ],
 )
 def test_resource(client, resource, dependants):
@@ -240,20 +262,28 @@ def test_resource(client, resource, dependants):
             "observation": ObservationProfile,
             "specimen": SpecimenProfile,
             "encounter": EncounterProfile,
+            "diagnosticreport": DiagnosticReportProfile,
         }
         if dependant_resource_type == "observation":
-            observation_code = Concept.objects.filter(
+            code = Concept.objects.filter(
                 valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE
             ).first()
             resource_types[dependant_resource_type].objects.create(
-                id=dependant, code=observation_code
+                id=dependant, code=code
             )
         elif dependant_resource_type == "encounter":
-            encounter_code = Concept.objects.filter(
+            code = Concept.objects.filter(
                 valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE
             ).first()
             resource_types[dependant_resource_type].objects.create(
-                id=dependant, klass=encounter_code
+                id=dependant, klass=code
+            )
+        elif dependant_resource_type == "diagnosticreport":
+            code = Concept.objects.filter(
+                valueset=Concept.VALUESET.UK_CORE_REPORT_CODE
+            ).first()
+            resource_types[dependant_resource_type].objects.create(
+                id=dependant, code=code
             )
         else:
             try:
