@@ -22,6 +22,7 @@ from api.models import (
     EpisodeOfCareProfile,
     MessageHeaderProfile,
     ServiceRequestProfile,
+    ImagingStudyProfile,
 )
 from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
@@ -32,6 +33,7 @@ from api.serializers import (
     EpisodeOfCareSerializer,
     MessageHeaderSerializer,
     ServiceRequestSerializer,
+    ImagingStudySerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
@@ -187,4 +189,10 @@ class MessageHeaderViewSet(ModelViewSet):
 class ServiceRequestViewSet(ModelViewSet):
     queryset = ServiceRequestProfile.objects.all()
     serializer_class = ServiceRequestSerializer
+    lookup_field = "id"
+
+
+class ImagingStudyViewSet(ModelViewSet):
+    queryset = ImagingStudyProfile.objects.all()
+    serializer_class = ImagingStudySerializer
     lookup_field = "id"

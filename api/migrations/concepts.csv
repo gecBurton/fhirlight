@@ -776,3 +776,6 @@
 "135842001", "http://snomed.info/sct", "Serum C reactive protein level", "UKCoreProcedureCode"
 "108252007", "http://snomed.info/sct", "Laboratory procedure", "ServiceRequestCategoryCodes"
 "OUTLAB", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", "outpatient laboratory", "v3.ServiceDeliveryLocationRoleType"
+"CT", "http://dicom.nema.org/resources/ontology/DCM", "Computed Tomography", "CID29AcquisitionModality"
+"67734004", "http://snomed.info/sct", "Thoracic segment of trunk", "SNOMEDCTBodyStructures"
+"urn:oid:1.2.840.10008.5.1.4.1.1.2", "urn:ietf:rfc:3986", "CT Image Storage", "StandardSOPClasses"

@@ -32,8 +32,10 @@ from .consent import ConsentProfile
 from .episode_of_care import EpisodeOfCareProfile
 from .message_header import MessageHeaderProfile
 from .service_request import ServiceRequestProfile
+from .imaging_study import ImagingStudyProfile
 
 __all__ = [
+    "ImagingStudyProfile",
     "ServiceRequestProfile",
     "MessageHeaderProfile",
     "EpisodeOfCareProfile",

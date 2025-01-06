@@ -253,6 +253,8 @@ class Concept(models.Model):
         UK_CORE_SERVICE_REQUEST_REASON_CODE = "UKCoreServiceRequestReasonCode"
         SERVICE_REQUEST_CATEGORY_CODE = "ServiceRequestCategoryCodes"
         V3_SERVICE_DELIVERY_LOCATION_ROLE_TYPE = "v3.ServiceDeliveryLocationRoleType"
+        CID_29_ACQUISITION_MODALITY = "CID29AcquisitionModality"
+        B5_STANDARD_SOP_CLASSES = "StandardSOPClasses"
 
     system = models.CharField(
         null=True,

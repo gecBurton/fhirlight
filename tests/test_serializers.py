@@ -11,6 +11,7 @@ from api.serializers.device import DeviceSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
 from api.serializers.encounter import EncounterSerializer
 from api.serializers.episode_of_care import EpisodeOfCareSerializer
+from api.serializers.imaging_study import ImagingStudySerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
@@ -478,6 +479,23 @@ def test_service_request(
         payload = json.load(f)
 
     serializer = ServiceRequestSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-ImagingStudy-CTChestScan-Example",
+    ],
+)
+def test_imaging_study(resource, richard_smith):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = ImagingStudySerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload
