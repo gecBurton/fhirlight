@@ -20,11 +20,17 @@ from api.models import (
     DeviceProfile,
     ConsentProfile,
     EpisodeOfCareProfile,
+    MessageHeaderProfile,
 )
 from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
 from api.models.practitioner import PractitionerProfile
-from api.serializers import DeviceSerializer, ConsentSerializer, EpisodeOfCareSerializer
+from api.serializers import (
+    DeviceSerializer,
+    ConsentSerializer,
+    EpisodeOfCareSerializer,
+    MessageHeaderSerializer,
+)
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
 from api.serializers.immunization import ImmunizationSerializer
@@ -167,4 +173,10 @@ class EncounterViewSet(ModelViewSet):
 class EpisodeOfCareViewSet(ModelViewSet):
     queryset = EpisodeOfCareProfile.objects.all()
     serializer_class = EpisodeOfCareSerializer
+    lookup_field = "id"
+
+
+class MessageHeaderViewSet(ModelViewSet):
+    queryset = MessageHeaderProfile.objects.all()
+    serializer_class = MessageHeaderSerializer
     lookup_field = "id"

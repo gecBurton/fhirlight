@@ -92,10 +92,13 @@ class RelatedResourceSerializer(RelatedField):
                 parent = self.parent.parent
 
             field = parent.Meta.model._meta.get_field(field_name)
-            resource_types = field.remote_field.limit_choices_to[
+            resource_types = field.remote_field.limit_choices_to.get(
                 "polymorphic_ctype__model__in"
-            ]
-            if resource_type.lower() + "profile" not in resource_types:
+            )
+            if (
+                resource_types
+                and resource_type.lower() + "profile" not in resource_types
+            ):
                 self.fail("incorrect_resource_type", resource_type=model_name)
 
             try:

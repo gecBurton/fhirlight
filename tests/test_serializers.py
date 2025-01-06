@@ -13,6 +13,7 @@ from api.serializers.episode_of_care import EpisodeOfCareSerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
+from api.serializers.message_header import MessageHeaderSerializer
 from api.serializers.observation import ObservationSerializer
 from api.serializers.operation_outcome import OperationOutcomeSerializer
 from api.serializers.organization import OrganizationSerializer
@@ -429,6 +430,23 @@ def test_episode_of_care(resource, richard_smith, leeds_teaching_hospital):
         payload = json.load(f)
 
     serializer = EpisodeOfCareSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-MessageHeader-Discharge-Example",
+    ],
+)
+def test_message_header(resource, inpatient_encounter, leeds_teaching_hospital):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = MessageHeaderSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

@@ -30,8 +30,10 @@ from .condition import ConditionProfile
 from .device import DeviceProfile
 from .consent import ConsentProfile
 from .episode_of_care import EpisodeOfCareProfile
+from .message_header import MessageHeaderProfile
 
 __all__ = [
+    "MessageHeaderProfile",
     "EpisodeOfCareProfile",
     "EncounterProfile",
     "PractitionerRoleProfile",

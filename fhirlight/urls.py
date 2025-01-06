@@ -24,6 +24,7 @@ from api.views import (
     DeviceViewSet,
     ConsentViewSet,
     EpisodeOfCareViewSet,
+    MessageHeaderViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -54,6 +55,7 @@ router.register(r"Device", DeviceViewSet, basename="device")
 router.register(r"Consent", ConsentViewSet, basename="consent")
 router.register(r"Encounter", EncounterViewSet, basename="encounter")
 router.register(r"EpisodeOfCare", EpisodeOfCareViewSet, basename="episodeofcare")
+router.register(r"MessageHeader", MessageHeaderViewSet, basename="messageheader")
 
 
 urlpatterns = [

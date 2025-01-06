@@ -1,10 +1,10 @@
 https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=1.7.0
 
 intentional exclusions:
-code-able concepts - only one, no text
-text is ignored
-datetimes - UTC only
-the only allowed field in a Resource Reference is `reference`
+1. code-able concepts - only one, no text
+2. text is ignored
+3. datetimes - UTC only
+4. the only allowed field in a Resource Reference is `reference`
 
 incomplete:
 - Observation -> Specimen
@@ -49,7 +49,8 @@ tested examples
 * UKCore-MedicationDispense
 * UKCore-MedicationRequest
 * UKCore-MedicationStatement
-* UKCore-MessageHeader
+* UKCore-MessageHeader [4]
+  * [Discharge](tests/data/UKCore-MessageHeader-Discharge-Example.json)
 * UKCore-Observation
   * [24 Hour Blood Pressure](tests/data/UKCore-Observation-24HourBloodPressure-Example.json)
   * [Awareness Of Diagnosis](tests/data/UKCore-Observation-AwarenessOfDiagnosis-Example.json)

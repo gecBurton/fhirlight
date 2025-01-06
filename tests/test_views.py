@@ -11,6 +11,7 @@ from api.models import (
     LocationProfile,
     ObservationProfile,
     SpecimenProfile,
+    EncounterProfile,
 )
 from api.models.datatypes import Concept
 
@@ -219,6 +220,13 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
                 "UKCore-Patient-RichardSmith-Example",
             ],
         ),
+        (
+            "UKCore-MessageHeader-Discharge-Example",
+            [
+                "UKCore-Organization-LeedsTeachingHospital-Example",
+                "UKCore-Encounter-InpatientEncounter-Example",
+            ],
+        ),
     ],
 )
 def test_resource(client, resource, dependants):
@@ -231,16 +239,27 @@ def test_resource(client, resource, dependants):
             "location": LocationProfile,
             "observation": ObservationProfile,
             "specimen": SpecimenProfile,
+            "encounter": EncounterProfile,
         }
-        code = Concept.objects.filter(
-            valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE
-        ).first()
         if dependant_resource_type == "observation":
+            observation_code = Concept.objects.filter(
+                valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE
+            ).first()
             resource_types[dependant_resource_type].objects.create(
-                id=dependant, code=code
+                id=dependant, code=observation_code
+            )
+        elif dependant_resource_type == "encounter":
+            encounter_code = Concept.objects.filter(
+                valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE
+            ).first()
+            resource_types[dependant_resource_type].objects.create(
+                id=dependant, klass=encounter_code
             )
         else:
-            resource_types[dependant_resource_type].objects.create(id=dependant)
+            try:
+                resource_types[dependant_resource_type].objects.create(id=dependant)
+            except Exception:
+                raise
 
     resource_type = resource.split("-")[1].lower()
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
