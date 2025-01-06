@@ -34,6 +34,7 @@ tested examples
 * UKCore-Flag
 * UKCore-HealthcareService
 * UKCore-ImagingStudy
+  * [CT Chest Scan](tests/data/UKCore-ImagingStudy-CTChestScan-Example.json)
 * UKCore-Immunization
   * [Influenza Vaccine](tests/data/UKCore-Immunization-InfluenzaVaccine-Example.json)
 * UKCore-List

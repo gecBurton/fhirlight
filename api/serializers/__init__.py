@@ -21,8 +21,10 @@ from .encounter import EncounterSerializer
 from .episode_of_care import EpisodeOfCareSerializer
 from .message_header import MessageHeaderSerializer
 from .service_request import ServiceRequestSerializer
+from .imaging_study import ImagingStudySerializer
 
 __all__ = [
+    "ImagingStudySerializer",
     "ServiceRequestSerializer",
     "MessageHeaderSerializer",
     "EpisodeOfCareSerializer",
