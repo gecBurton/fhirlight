@@ -15,3 +15,6 @@ clean:
 
 test:
 	poetry run pytest --cov=api --cov-report term-missing --cov-fail-under=95 tests
+
+examples:
+	poetry run python manage.py load_example_data
