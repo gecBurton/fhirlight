@@ -34,8 +34,10 @@ from .message_header import MessageHeaderProfile
 from .service_request import ServiceRequestProfile
 from .imaging_study import ImagingStudyProfile
 from .allergy_intolerance import AllergyIntoleranceProfile
+from .appointment import AppointmentProfile
 
 __all__ = [
+    "AppointmentProfile",
     "AllergyIntoleranceProfile",
     "ImagingStudyProfile",
     "ServiceRequestProfile",

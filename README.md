@@ -17,6 +17,7 @@ tested examples
   * [Amoxicillin](tests/data/UKCore-AllergyIntolerance-Amoxicillin-Example.json)
   * [Entered In Error](tests/data/UKCore-AllergyIntolerance-EnteredInError-Example.json)
 * UKCore-Appointment
+  * [Orthopaedic Surgery](tests/data/UKCore-Appointment-OrthopaedicSurgery-Example.json)
 * UKCore-Composition
 * UKCore-Condition
   * [Bleeding From Ear](tests/data/UKCore-Condition-BleedingFromEar-Example.json)
