@@ -96,6 +96,8 @@ tested examples
 * UKCore-Schedule
   * [Immunization](tests/data/UKCore-Schedule-Immunization-Example.json)
 * UKCore-ServiceRequest
+  * [Colonoscopy Request](tests/data/UKCore-ServiceRequest-ColonoscopyRequest-Example.json)
+  * [CReactive Protein](tests/data/UKCore-ServiceRequest-Lab-CReactiveProtein-Example.json)
 * UKCore-Slot
   * [Available Walk-in Visit](tests/data/UKCore-Slot-AvailableWalkInVisit-Example.json)
 * UKCore-Specimen
