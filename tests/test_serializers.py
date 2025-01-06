@@ -4,7 +4,7 @@ import os
 
 import pytest
 
-from api.serializers import ServiceRequestSerializer
+from api.serializers import ServiceRequestSerializer, AllergyIntoleranceSerializer
 from api.serializers.condition import ConditionSerializer
 from api.serializers.consent import ConsentSerializer
 from api.serializers.device import DeviceSerializer
@@ -496,6 +496,26 @@ def test_imaging_study(resource, richard_smith):
         payload = json.load(f)
 
     serializer = ImagingStudySerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-AllergyIntolerance-EnteredInError-Example",
+        "UKCore-AllergyIntolerance-Amoxicillin-Example",
+    ],
+)
+def test_allergy_intolerance(
+    resource, richard_smith, inpatient_encounter, consultant_sandra_gose
+):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = AllergyIntoleranceSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

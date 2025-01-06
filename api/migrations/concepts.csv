@@ -779,3 +779,8 @@
 "CT", "http://dicom.nema.org/resources/ontology/DCM", "Computed Tomography", "CID29AcquisitionModality"
 "67734004", "http://snomed.info/sct", "Thoracic segment of trunk", "SNOMEDCTBodyStructures"
 "urn:oid:1.2.840.10008.5.1.4.1.1.2", "urn:ietf:rfc:3986", "CT Image Storage", "StandardSOPClasses"
+"372687004", "http://snomed.info/sct", "Amoxicillin", "UKCoreAllergyCode"
+"entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", "Entered in Error", "AllergyIntoleranceVerificationStatusCodes"
+"active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", "Active", "AllergyIntoleranceClinicalStatusCodes"
+"confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", "Confirmed", "AllergyIntoleranceVerificationStatusCodes"
+"247472004", "http://snomed.info/sct", "Urticarial rash", "AllergyIntoleranceVerificationStatusCodes"

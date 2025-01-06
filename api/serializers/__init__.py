@@ -22,8 +22,10 @@ from .episode_of_care import EpisodeOfCareSerializer
 from .message_header import MessageHeaderSerializer
 from .service_request import ServiceRequestSerializer
 from .imaging_study import ImagingStudySerializer
+from .allergy_intolerance import AllergyIntoleranceSerializer
 
 __all__ = [
+    "AllergyIntoleranceSerializer",
     "ImagingStudySerializer",
     "ServiceRequestSerializer",
     "MessageHeaderSerializer",
