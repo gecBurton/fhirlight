@@ -13,4 +13,4 @@ def test_get_examples():
 def test_load_examples():
     assert BaseProfile.objects.count() == 0
     load_examples()
-    assert BaseProfile.objects.count() == 54
+    assert BaseProfile.objects.count() == 56

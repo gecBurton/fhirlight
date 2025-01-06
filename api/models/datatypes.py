@@ -255,6 +255,13 @@ class Concept(models.Model):
         V3_SERVICE_DELIVERY_LOCATION_ROLE_TYPE = "v3.ServiceDeliveryLocationRoleType"
         CID_29_ACQUISITION_MODALITY = "CID29AcquisitionModality"
         B5_STANDARD_SOP_CLASSES = "StandardSOPClasses"
+        ALLERGY_INTOLERANCE_CLINICAL_STATUS_CODE = (
+            "AllergyIntoleranceClinicalStatusCodes"
+        )
+        ALLERGY_INTOLERANCE_VERIFICATION_STATUS_CODE = (
+            "AllergyIntoleranceVerificationStatusCodes"
+        )
+        UK_CORE_ALLERGY_CODE = "UKCoreAllergyCode"
 
     system = models.CharField(
         null=True,
