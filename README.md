@@ -14,6 +14,8 @@ incomplete:
 tested examples
 
 * UKCore-AllergyIntolerance
+  * [Amoxicillin](tests/data/UKCore-AllergyIntolerance-Amoxicillin-Example.json)
+  * [Entered In Error](tests/data/UKCore-AllergyIntolerance-EnteredInError-Example.json)
 * UKCore-Appointment
 * UKCore-Composition
 * UKCore-Condition
