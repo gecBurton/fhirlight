@@ -806,3 +806,5 @@
 "general-practitioner-practice", "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings", "General practitioner practice", "UKCoreCompositionSectionCode"
 "discharge-details", "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings", "Discharge details", "UKCoreCompositionSectionCode"
 "diagnoses", "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings", "Diagnoses", "UKCoreCompositionSectionCode"
+"male", "http://hl7.org/fhir/administrative-gender", "Male", "AdministrativeGender"
+"430678008", "http://snomed.info/sct", "Family history of diabetes mellitus type 1", "Condition/Problem/DiagnosisCodes"

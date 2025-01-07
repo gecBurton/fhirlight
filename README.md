@@ -34,6 +34,7 @@ tested examples
 * UKCore-EpisodeOfCare
   * [Smoking Cessation Therapy](tests/data/UKCore-EpisodeOfCare-SmokingCessationTherapy-Example.json)
 * UKCore-FamilyMemberHistory
+  * [Father Diabetes](tests/data/UKCore-FamilyMemberHistory-FatherDiabetes-Example.json)
 * UKCore-Flag
 * UKCore-HealthcareService
 * UKCore-ImagingStudy

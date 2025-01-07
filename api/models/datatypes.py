@@ -265,6 +265,8 @@ class Concept(models.Model):
         UK_CORE_APPOINTMENT_REASON_CODE = "UKCoreAppointmentReasonCode"
         UK_CORE_DOCUMENT_TYPE = "UKCoreDocumentType"
         UK_CORE_COMPOSITION_SECTION_CODE = "UKCoreCompositionSectionCode"
+        ADMINISTRATIVE_GENDER = "AdministrativeGender"
+        CONDITION_PROBLEM_DIAGNOSIS_CODE = "Condition/Problem/DiagnosisCodes"
 
     system = models.CharField(
         null=True,
