@@ -11,6 +11,9 @@ from api.models import (
     DiagnosticReportProfile,
     ConditionProfile,
     ServiceRequestProfile,
+    ProcedureProfile,
+    AllergyIntoleranceProfile,
+    MedicationProfile,
 )
 from api.models.datatypes import Concept
 
@@ -85,6 +88,20 @@ def observation_type():
 def encounter_code():
     return Concept.objects.filter(
         valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE
+    ).first()
+
+
+@pytest.fixture
+def allergy_code():
+    return Concept.objects.filter(
+        valueset=Concept.VALUESET.UK_CORE_ALLERGY_CODE
+    ).first()
+
+
+@pytest.fixture
+def medication_code():
+    return Concept.objects.filter(
+        valueset=Concept.VALUESET.UK_CORE_MEDICATION_CODE
     ).first()
 
 
@@ -197,3 +214,32 @@ def colonoscopy_request():
     )
     yield service_request
     service_request.delete()
+
+
+@pytest.fixture
+def examination_of_skin(richard_smith):
+    procedure = ProcedureProfile.objects.create(
+        id="UKCore-Procedure-ExaminationOfSkin-Example", subject=richard_smith
+    )
+    yield procedure
+    procedure.delete()
+
+
+@pytest.fixture
+def amoxicillin(allergy_code, richard_smith):
+    allergy_intolerance = AllergyIntoleranceProfile.objects.create(
+        id="UKCore-AllergyIntolerance-Amoxicillin-Example",
+        code=allergy_code,
+        patient=richard_smith,
+    )
+    yield allergy_intolerance
+    allergy_intolerance.delete()
+
+
+@pytest.fixture
+def timolol_vtm(medication_code):
+    medication = MedicationProfile.objects.create(
+        id="UKCore-Medication-TimololVTM-Example", code=medication_code
+    )
+    yield medication
+    medication.delete()

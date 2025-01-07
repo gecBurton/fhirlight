@@ -35,8 +35,10 @@ from .service_request import ServiceRequestProfile
 from .imaging_study import ImagingStudyProfile
 from .allergy_intolerance import AllergyIntoleranceProfile
 from .appointment import AppointmentProfile
+from .composition import CompositionProfile
 
 __all__ = [
+    "CompositionProfile",
     "AppointmentProfile",
     "AllergyIntoleranceProfile",
     "ImagingStudyProfile",

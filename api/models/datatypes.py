@@ -263,6 +263,8 @@ class Concept(models.Model):
         )
         UK_CORE_ALLERGY_CODE = "UKCoreAllergyCode"
         UK_CORE_APPOINTMENT_REASON_CODE = "UKCoreAppointmentReasonCode"
+        UK_CORE_DOCUMENT_TYPE = "UKCoreDocumentType"
+        UK_CORE_COMPOSITION_SECTION_CODE = "UKCoreCompositionSectionCode"
 
     system = models.CharField(
         null=True,
