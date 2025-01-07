@@ -23,6 +23,13 @@ def richard_smith():
 
 
 @pytest.fixture
+def example_patient():
+    patient = PatientProfile.objects.create(id="example-patient")
+    yield patient
+    patient.delete()
+
+
+@pytest.fixture
 def consultant_sandra_gose():
     practitioner = PractitionerProfile.objects.create(
         id="UKCore-Practitioner-ConsultantSandraGose-Example"

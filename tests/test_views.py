@@ -14,8 +14,9 @@ from api.models import (
     SpecimenProfile,
     EncounterProfile,
     DiagnosticReportProfile,
+    ConditionProfile,
+    ServiceRequestProfile,
 )
-from api.models.datatypes import Concept
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -70,11 +71,11 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
         "UKCore-ServiceRequest-Lab-CReactiveProtein-Example",
         "UKCore-ServiceRequest-ColonoscopyRequest-Example",
         "UKCore-ImagingStudy-CTChestScan-Example",
+        "UKCore-Appointment-OrthopaedicSurgery-Example",
     ],
 )
 def test_resource(
-    client,
-    resource,
+    client, resource, report_code, observation_type, encounter_code, example_patient
 ):
     resource_type = resource.split("-")[1].lower()
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
@@ -83,38 +84,20 @@ def test_resource(
     for dependant in extract_reference(payload):
         dependant_resource_type = dependant.split("-")[1].lower()
         resource_types = {
-            "patient": PatientProfile,
-            "organization": OrganizationProfile,
-            "practitioner": PractitionerProfile,
-            "location": LocationProfile,
-            "observation": ObservationProfile,
-            "specimen": SpecimenProfile,
-            "encounter": EncounterProfile,
-            "diagnosticreport": DiagnosticReportProfile,
+            "patient": (PatientProfile, {}),
+            "organization": (OrganizationProfile, {}),
+            "practitioner": (PractitionerProfile, {}),
+            "location": (LocationProfile, {}),
+            "observation": (ObservationProfile, {"code": observation_type}),
+            "specimen": (SpecimenProfile, {}),
+            "encounter": (EncounterProfile, {"klass": encounter_code}),
+            "diagnosticreport": (DiagnosticReportProfile, {"code": report_code}),
+            "condition": (ConditionProfile, {"subject": example_patient}),
+            "servicerequest": (ServiceRequestProfile, {}),
         }
-        if dependant_resource_type == "observation":
-            code = Concept.objects.filter(
-                valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE
-            ).first()
-            resource_types[dependant_resource_type].objects.create(
-                id=dependant, code=code
-            )
-        elif dependant_resource_type == "encounter":
-            code = Concept.objects.filter(
-                valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE
-            ).first()
-            resource_types[dependant_resource_type].objects.create(
-                id=dependant, klass=code
-            )
-        elif dependant_resource_type == "diagnosticreport":
-            code = Concept.objects.filter(
-                valueset=Concept.VALUESET.UK_CORE_REPORT_CODE
-            ).first()
-            resource_types[dependant_resource_type].objects.create(
-                id=dependant, code=code
-            )
-        else:
-            resource_types[dependant_resource_type].objects.create(id=dependant)
+
+        resource_class, kwargs = resource_types[dependant_resource_type]
+        resource_class.objects.create(id=dependant, **kwargs)
 
     url_list = reverse(f"{resource_type}-list")
 
