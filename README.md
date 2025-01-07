@@ -1,4 +1,4 @@
-[https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=1.7.0
+https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=1.7.0
 
 incomplete:
 - Specimen -> ServiceRequest
@@ -263,3 +263,6 @@ The only reference type supported is:
 all other fields such as `type`, `identifier`, `display` are not allowed and will result in an error. Note that this 
 means that it is not possible to reference an external entity.
 )
+
+### extensions
+`extension` fields are currently not supported but they will be in the future.
