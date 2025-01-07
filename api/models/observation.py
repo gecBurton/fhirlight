@@ -74,7 +74,7 @@ class ObservationProfile(BaseProfile):
         blank=True,
         help_text="Clinically relevant time/time-period for observation",
     )
-    valueQuantity = models.JSONField(null=True, blank=True)
+    valueQuantity = models.JSONField(null=True, blank=True)  # SimpleQuantity
     hasMember = models.ManyToManyField(
         BaseProfile,
         limit_choices_to={
@@ -94,6 +94,30 @@ class ObservationProfile(BaseProfile):
         help_text="Type of observation (code / type)",
         related_name="Observation_bodySite",
     )
+    specimen = models.ForeignKey(
+        BaseProfile,
+        limit_choices_to={
+            "polymorphic_ctype__model__in": [
+                "specimenprofile",
+            ]
+        },
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="Observation_specimen",
+    )
+
+
+class ObservationReferenceRange(models.Model):
+    """Provides guide for interpretation"""
+
+    observation = models.ForeignKey(ObservationProfile, on_delete=models.CASCADE)
+    low = models.JSONField(
+        null=True, blank=True, help_text="Low Range, if relevant"
+    )  # SimpleQuantity
+    high = models.JSONField(
+        null=True, blank=True, help_text="High Range, if relevant"
+    )  # SimpleQuantity
 
 
 class ObservationComponent(models.Model):
@@ -103,7 +127,7 @@ class ObservationComponent(models.Model):
         on_delete=models.CASCADE,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_OBSERVATION_TYPE},
     )
-    valueQuantity = models.JSONField(null=True, blank=True)
+    valueQuantity = models.JSONField(null=True, blank=True)  # Quantity
 
 
 class ObservationIdentifier(Identifier):

@@ -1,14 +1,13 @@
 from rest_framework.fields import (
-    CharField,
     DateTimeField,
     JSONField,
 )
-from rest_framework.serializers import Serializer
 
 from api.models.observation import (
     ObservationProfile,
     ObservationComponent,
     ObservationIdentifier,
+    ObservationReferenceRange,
 )
 from api.serializers.common import (
     BaseModelSerializer,
@@ -30,12 +29,10 @@ class ObservationIdentifierSerializer(BaseModelSerializer):
         model = ObservationIdentifier
 
 
-class ReferenceRangeSerializer(Serializer):
-    low = DateTimeField(source="batchExpirationDate", required=False)
-    high = CharField(source="batchLotNumber", required=False)
-
-    def to_internal_value(self, data):
-        raise ValueError(data)
+class ObservationReferenceRangeSerializer(BaseModelSerializer):
+    class Meta:
+        fields = ("low", "high")
+        model = ObservationReferenceRange
 
 
 class ObservationSerializer(ProfileSerializer):
@@ -49,6 +46,9 @@ class ObservationSerializer(ProfileSerializer):
         required=False, many=True, source="observationidentifier_set"
     )
     valueQuantity = JSONField(required=False)
+    referenceRange = ObservationReferenceRangeSerializer(
+        many=True, required=False, source="observationreferencerange_set"
+    )
 
     class Meta:
         fields = (
@@ -66,5 +66,7 @@ class ObservationSerializer(ProfileSerializer):
             "valueQuantity",
             "hasMember",
             "bodySite",
+            "referenceRange",
+            "specimen",
         )
         model = ObservationProfile

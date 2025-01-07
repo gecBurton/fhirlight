@@ -48,6 +48,8 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
         "UKCore-Observation-VitalSigns-HeartRate-Example",
         "UKCore-Observation-VitalSigns-OxygenSaturation-Example",
         "UKCore-Observation-VitalSigns-RespiratoryRate-Example",
+        "UKCore-Observation-Lab-RedCellCount-Example",
+        "UKCore-Observation-Lab-WhiteCellCount-Example",
         "UKCore-Specimen-UrineSpecimen-Example",
         "UKCore-Specimen-BloodSpecimen-Example",
         "UKCore-Location-GeneralPracticeNurseClinic-Example",
