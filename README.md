@@ -7,7 +7,6 @@ intentional exclusions:
 4. the only allowed field in a Resource Reference is `reference`
 
 incomplete:
-- Observation -> Specimen
 - Specimen -> ServiceRequest
 - Slot -> Schedule
 
