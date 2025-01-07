@@ -36,8 +36,10 @@ from .imaging_study import ImagingStudyProfile
 from .allergy_intolerance import AllergyIntoleranceProfile
 from .appointment import AppointmentProfile
 from .composition import CompositionProfile
+from .family_member_history import FamilyMemberHistoryProfile
 
 __all__ = [
+    "FamilyMemberHistoryProfile",
     "CompositionProfile",
     "AppointmentProfile",
     "AllergyIntoleranceProfile",

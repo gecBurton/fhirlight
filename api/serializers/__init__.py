@@ -25,8 +25,10 @@ from .imaging_study import ImagingStudySerializer
 from .allergy_intolerance import AllergyIntoleranceSerializer
 from .appointment import AppointmentSerializer
 from .composition import CompositionSerializer
+from .family_member_history import FamilyMemberHistorySerializer
 
 __all__ = [
+    "FamilyMemberHistorySerializer",
     "CompositionSerializer",
     "AppointmentSerializer",
     "AllergyIntoleranceSerializer",
