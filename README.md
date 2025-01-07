@@ -18,6 +18,8 @@ tested examples
 * UKCore-Appointment
   * [Orthopaedic Surgery](tests/data/UKCore-Appointment-OrthopaedicSurgery-Example.json)
 * UKCore-Composition
+* UKCore-Composition [2, 4]
+  * [Discharge](tests/data/UKCore-Composition-Discharge-Example.json)
 * UKCore-Condition
   * [Bleeding From Ear](tests/data/UKCore-Condition-BleedingFromEar-Example.json)
 * UKCore-Consent
