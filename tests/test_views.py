@@ -16,6 +16,9 @@ from api.models import (
     DiagnosticReportProfile,
     ConditionProfile,
     ServiceRequestProfile,
+    AllergyIntoleranceProfile,
+    MedicationProfile,
+    ProcedureProfile,
 )
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -74,10 +77,18 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
         "UKCore-ServiceRequest-ColonoscopyRequest-Example",
         "UKCore-ImagingStudy-CTChestScan-Example",
         "UKCore-Appointment-OrthopaedicSurgery-Example",
+        "UKCore-Composition-Discharge-Example",
     ],
 )
 def test_resource(
-    client, resource, report_code, observation_type, encounter_code, example_patient
+    client,
+    resource,
+    report_code,
+    observation_type,
+    encounter_code,
+    example_patient,
+    medication_code,
+    allergy_code,
 ):
     resource_type = resource.split("-")[1].lower()
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
@@ -96,6 +107,12 @@ def test_resource(
             "diagnosticreport": (DiagnosticReportProfile, {"code": report_code}),
             "condition": (ConditionProfile, {"subject": example_patient}),
             "servicerequest": (ServiceRequestProfile, {}),
+            "allergyintolerance": (
+                AllergyIntoleranceProfile,
+                {"code": allergy_code, "patient": example_patient},
+            ),
+            "medication": (MedicationProfile, {"code": medication_code}),
+            "procedure": (ProcedureProfile, {"subject": example_patient}),
         }
 
         resource_class, kwargs = resource_types[dependant_resource_type]

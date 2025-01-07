@@ -28,6 +28,7 @@ from api.views import (
     ServiceRequestViewSet,
     ImagingStudyViewSet,
     AppointmentViewSet,
+    CompositionViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -62,6 +63,7 @@ router.register(r"MessageHeader", MessageHeaderViewSet, basename="messageheader"
 router.register(r"ServiceRequest", ServiceRequestViewSet, basename="servicerequest")
 router.register(r"ImagingStudy", ImagingStudyViewSet, basename="imagingstudy")
 router.register(r"Appointment", AppointmentViewSet, basename="appointment")
+router.register(r"Composition", CompositionViewSet, basename="composition")
 
 
 urlpatterns = [

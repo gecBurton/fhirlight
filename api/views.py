@@ -24,6 +24,7 @@ from api.models import (
     ServiceRequestProfile,
     ImagingStudyProfile,
     AppointmentProfile,
+    CompositionProfile,
 )
 from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
@@ -36,6 +37,7 @@ from api.serializers import (
     ServiceRequestSerializer,
     ImagingStudySerializer,
     AppointmentSerializer,
+    CompositionSerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
@@ -203,4 +205,10 @@ class ImagingStudyViewSet(ModelViewSet):
 class AppointmentViewSet(ModelViewSet):
     queryset = AppointmentProfile.objects.all()
     serializer_class = AppointmentSerializer
+    lookup_field = "id"
+
+
+class CompositionViewSet(ModelViewSet):
+    queryset = CompositionProfile.objects.all()
+    serializer_class = CompositionSerializer
     lookup_field = "id"
