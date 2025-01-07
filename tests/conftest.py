@@ -9,6 +9,8 @@ from api.models import (
     SpecimenProfile,
     EncounterProfile,
     DiagnosticReportProfile,
+    ConditionProfile,
+    ServiceRequestProfile,
 )
 from api.models.datatypes import Concept
 
@@ -16,6 +18,13 @@ from api.models.datatypes import Concept
 @pytest.fixture
 def richard_smith():
     patient = PatientProfile.objects.create(id="UKCore-Patient-RichardSmith-Example")
+    yield patient
+    patient.delete()
+
+
+@pytest.fixture
+def example_patient():
+    patient = PatientProfile.objects.create(id="example-patient")
     yield patient
     patient.delete()
 
@@ -170,3 +179,21 @@ def diagnostic_studies_report(report_code):
     )
     yield encounter
     encounter.delete()
+
+
+@pytest.fixture
+def bleeding_from_ear(richard_smith):
+    condition = ConditionProfile.objects.create(
+        id="UKCore-Condition-BleedingFromEar-Example", subject=richard_smith
+    )
+    yield condition
+    condition.delete()
+
+
+@pytest.fixture
+def colonoscopy_request():
+    service_request = ServiceRequestProfile.objects.create(
+        id="UKCore-ServiceRequest-ColonoscopyRequest-Example"
+    )
+    yield service_request
+    service_request.delete()

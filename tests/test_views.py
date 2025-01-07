@@ -4,6 +4,7 @@ import os.path
 import pytest
 from django.urls import reverse
 
+from api.management.commands.load_example_data import extract_reference
 from api.models import (
     PatientProfile,
     OrganizationProfile,
@@ -13,288 +14,90 @@ from api.models import (
     SpecimenProfile,
     EncounterProfile,
     DiagnosticReportProfile,
+    ConditionProfile,
+    ServiceRequestProfile,
 )
-from api.models.datatypes import Concept
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 @pytest.mark.django_db
 @pytest.mark.parametrize(
-    "resource, dependants",
+    "resource",
     [
-        ("UKCore-Organization-LeedsTeachingHospital-Example", []),
-        ("UKCore-Organization-WhiteRoseMedicalCentre-Example", []),
-        ("UKCore-Practitioner-ConsultantSandraGose-Example", []),
-        ("UKCore-Practitioner-DoctorPaulRastall-Example", []),
-        ("UKCore-Practitioner-PharmacistJimmyChuck-Example", []),
-        ("UKCore-Patient-BabyPatient-Example", []),
-        ("UKCore-Patient-RichardSmith-Example", []),
-        ("UKCore-Medication-COVID-Vaccine-Example", []),
-        ("UKCore-Medication-TimololVTM-Example", []),
-        ("UKCore-Medication-TimoptolEyeDrops-Example", []),
-        (
-            "UKCore-Observation-24HourBloodPressure-Example",
-            [
-                "UKCore-Patient-RichardSmith-Example",
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-AwarenessOfDiagnosis-Example",
-            ["UKCore-Patient-RichardSmith-Example"],
-        ),
-        (
-            "UKCore-Observation-BreathingNormally-Example",
-            [
-                "UKCore-Patient-RichardSmith-Example",
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-DrugUse-Example",
-            [
-                "UKCore-Patient-RichardSmith-Example",
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-VitalSigns-BloodPressure-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-VitalSigns-BMI-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-VitalSigns-BodyHeight-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-VitalSigns-BodyTemperature-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-VitalSigns-BodyWeight-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-VitalSigns-HeadCircumference-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-VitalSigns-HeartRate-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-VitalSigns-OxygenSaturation-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Observation-VitalSigns-RespiratoryRate-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Specimen-UrineSpecimen-Example",
-            [
-                "UKCore-Practitioner-ConsultantSandraGose-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Specimen-BloodSpecimen-Example",
-            [
-                "UKCore-Practitioner-ConsultantSandraGose-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Location-GeneralPracticeNurseClinic-Example",
-            ["UKCore-Organization-WhiteRoseMedicalCentre-Example"],
-        ),
-        (
-            "UKCore-Location-CardiologySJUH-Example",
-            ["UKCore-Organization-LeedsTeachingHospital-Example"],
-        ),
-        (
-            "UKCore-Location-HospitalSJUH-Example",
-            ["UKCore-Organization-LeedsTeachingHospital-Example"],
-        ),
-        (
-            "UKCore-Immunization-InfluenzaVaccine-Example",
-            [
-                "UKCore-Location-GeneralPracticeNurseClinic-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        ("UKCore-OperationOutcome-DateError-Example", []),
-        ("UKCore-Slot-AvailableWalkInVisit-Example", []),
-        (
-            "UKCore-PractitionerRole-GeneralPractitioner-Example",
-            [
-                "UKCore-Practitioner-DoctorPaulRastall-Example",
-                "UKCore-Organization-WhiteRoseMedicalCentre-Example",
-            ],
-        ),
-        (
-            "UKCore-Schedule-Immunization-Example",
-            ["UKCore-Location-GeneralPracticeNurseClinic-Example"],
-        ),
-        ("UKCore-Questionnaire-InpatientSurvey-Example", []),
-        (
-            "UKCore-Procedure-ExaminationOfSkin-Example",
-            ["UKCore-Patient-RichardSmith-Example"],
-        ),
-        (
-            "UKCore-RelatedPerson-JoySmith-Example",
-            ["UKCore-Patient-RichardSmith-Example"],
-        ),
-        (
-            "UKCore-DiagnosticReport-DiagnosticStudiesReport-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Observation-FingerJointInflamed-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-DiagnosticReport-Lab-DiagnosticStudiesReport-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Observation-Group-FullBloodCount-Example",
-                "UKCore-Specimen-BloodSpecimen-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Encounter-InpatientEncounter-Example",
-            [
-                "UKCore-Location-CardiologySJUH-Example",
-                "UKCore-Practitioner-ConsultantSandraGose-Example",
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-Condition-BleedingFromEar-Example",
-            ["UKCore-Patient-RichardSmith-Example"],
-        ),
-        (
-            "UKCore-Consent-ForInformationAccess-Example",
-            [
-                "UKCore-Organization-WhiteRoseMedicalCentre-Example",
-                "UKCore-Patient-RichardSmith-Example",
-                "UKCore-Practitioner-DoctorPaulRastall-Example",
-            ],
-        ),
-        (
-            "UKCore-EpisodeOfCare-SmokingCessationTherapy-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-MessageHeader-Discharge-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Encounter-InpatientEncounter-Example",
-            ],
-        ),
-        (
-            "UKCore-ServiceRequest-Lab-CReactiveProtein-Example",
-            [
-                "UKCore-Organization-LeedsTeachingHospital-Example",
-                "UKCore-Observation-FingerJointInflamed-Example",
-                "UKCore-Practitioner-PharmacistJimmyChuck-Example",
-                "UKCore-Patient-RichardSmith-Example",
-            ],
-        ),
-        (
-            "UKCore-ServiceRequest-ColonoscopyRequest-Example",
-            [
-                "UKCore-Observation-Lab-WhiteCellCount-Example",
-                "UKCore-Patient-RichardSmith-Example",
-                "UKCore-Encounter-InpatientEncounter-Example",
-                "UKCore-Location-HospitalSJUH-Example",
-                "UKCore-Practitioner-ConsultantSandraGose-Example",
-                "UKCore-DiagnosticReport-DiagnosticStudiesReport-Example",
-                "UKCore-Practitioner-DoctorPaulRastall-Example",
-            ],
-        ),
-        (
-            "UKCore-ImagingStudy-CTChestScan-Example",
-            ["UKCore-Patient-RichardSmith-Example"],
-        ),
+        "UKCore-Organization-LeedsTeachingHospital-Example",
+        "UKCore-Organization-WhiteRoseMedicalCentre-Example",
+        "UKCore-Practitioner-ConsultantSandraGose-Example",
+        "UKCore-Practitioner-DoctorPaulRastall-Example",
+        "UKCore-Practitioner-PharmacistJimmyChuck-Example",
+        "UKCore-Patient-BabyPatient-Example",
+        "UKCore-Patient-RichardSmith-Example",
+        "UKCore-Medication-COVID-Vaccine-Example",
+        "UKCore-Medication-TimololVTM-Example",
+        "UKCore-Medication-TimoptolEyeDrops-Example",
+        "UKCore-Observation-24HourBloodPressure-Example",
+        "UKCore-Observation-AwarenessOfDiagnosis-Example",
+        "UKCore-Observation-BreathingNormally-Example",
+        "UKCore-Observation-DrugUse-Example",
+        "UKCore-Observation-VitalSigns-BloodPressure-Example",
+        "UKCore-Observation-VitalSigns-BMI-Example",
+        "UKCore-Observation-VitalSigns-BodyHeight-Example",
+        "UKCore-Observation-VitalSigns-BodyTemperature-Example",
+        "UKCore-Observation-VitalSigns-BodyWeight-Example",
+        "UKCore-Observation-VitalSigns-HeadCircumference-Example",
+        "UKCore-Observation-VitalSigns-HeartRate-Example",
+        "UKCore-Observation-VitalSigns-OxygenSaturation-Example",
+        "UKCore-Observation-VitalSigns-RespiratoryRate-Example",
+        "UKCore-Specimen-UrineSpecimen-Example",
+        "UKCore-Specimen-BloodSpecimen-Example",
+        "UKCore-Location-GeneralPracticeNurseClinic-Example",
+        "UKCore-Location-CardiologySJUH-Example",
+        "UKCore-Location-HospitalSJUH-Example",
+        "UKCore-Immunization-InfluenzaVaccine-Example",
+        "UKCore-OperationOutcome-DateError-Example",
+        "UKCore-Slot-AvailableWalkInVisit-Example",
+        "UKCore-PractitionerRole-GeneralPractitioner-Example",
+        "UKCore-Schedule-Immunization-Example",
+        "UKCore-Questionnaire-InpatientSurvey-Example",
+        "UKCore-Procedure-ExaminationOfSkin-Example",
+        "UKCore-RelatedPerson-JoySmith-Example",
+        "UKCore-DiagnosticReport-DiagnosticStudiesReport-Example",
+        "UKCore-DiagnosticReport-Lab-DiagnosticStudiesReport-Example",
+        "UKCore-Encounter-InpatientEncounter-Example",
+        "UKCore-Condition-BleedingFromEar-Example",
+        "UKCore-Consent-ForInformationAccess-Example",
+        "UKCore-EpisodeOfCare-SmokingCessationTherapy-Example",
+        "UKCore-MessageHeader-Discharge-Example",
+        "UKCore-ServiceRequest-Lab-CReactiveProtein-Example",
+        "UKCore-ServiceRequest-ColonoscopyRequest-Example",
+        "UKCore-ImagingStudy-CTChestScan-Example",
+        "UKCore-Appointment-OrthopaedicSurgery-Example",
     ],
 )
-def test_resource(client, resource, dependants):
-    for dependant in dependants:
-        dependant_resource_type = dependant.split("-")[1].lower()
-        resource_types = {
-            "patient": PatientProfile,
-            "organization": OrganizationProfile,
-            "practitioner": PractitionerProfile,
-            "location": LocationProfile,
-            "observation": ObservationProfile,
-            "specimen": SpecimenProfile,
-            "encounter": EncounterProfile,
-            "diagnosticreport": DiagnosticReportProfile,
-        }
-        if dependant_resource_type == "observation":
-            code = Concept.objects.filter(
-                valueset=Concept.VALUESET.UK_CORE_OBSERVATION_TYPE
-            ).first()
-            resource_types[dependant_resource_type].objects.create(
-                id=dependant, code=code
-            )
-        elif dependant_resource_type == "encounter":
-            code = Concept.objects.filter(
-                valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE
-            ).first()
-            resource_types[dependant_resource_type].objects.create(
-                id=dependant, klass=code
-            )
-        elif dependant_resource_type == "diagnosticreport":
-            code = Concept.objects.filter(
-                valueset=Concept.VALUESET.UK_CORE_REPORT_CODE
-            ).first()
-            resource_types[dependant_resource_type].objects.create(
-                id=dependant, code=code
-            )
-        else:
-            resource_types[dependant_resource_type].objects.create(id=dependant)
-
+def test_resource(
+    client, resource, report_code, observation_type, encounter_code, example_patient
+):
     resource_type = resource.split("-")[1].lower()
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)
+
+    for dependant in extract_reference(payload):
+        dependant_resource_type = dependant.split("-")[1].lower()
+        resource_types = {
+            "patient": (PatientProfile, {}),
+            "organization": (OrganizationProfile, {}),
+            "practitioner": (PractitionerProfile, {}),
+            "location": (LocationProfile, {}),
+            "observation": (ObservationProfile, {"code": observation_type}),
+            "specimen": (SpecimenProfile, {}),
+            "encounter": (EncounterProfile, {"klass": encounter_code}),
+            "diagnosticreport": (DiagnosticReportProfile, {"code": report_code}),
+            "condition": (ConditionProfile, {"subject": example_patient}),
+            "servicerequest": (ServiceRequestProfile, {}),
+        }
+
+        resource_class, kwargs = resource_types[dependant_resource_type]
+        resource_class.objects.create(id=dependant, **kwargs)
 
     url_list = reverse(f"{resource_type}-list")
 

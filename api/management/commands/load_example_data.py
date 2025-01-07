@@ -11,14 +11,14 @@ EXAMPLE_DIR = os.path.join(
 )
 
 
-def extract_reference(document) -> list[str]:
-    references = []
+def extract_reference(document) -> set[str]:
+    references = set()
 
     def _extract_reference(doc):
         if isinstance(doc, dict):
             for k, v in doc.items():
                 if k == "reference":
-                    references.append(v.split("/")[-1])
+                    references.add(v.split("/")[-1])
                 else:
                     _extract_reference(v)
         elif isinstance(doc, list):

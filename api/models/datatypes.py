@@ -262,6 +262,7 @@ class Concept(models.Model):
             "AllergyIntoleranceVerificationStatusCodes"
         )
         UK_CORE_ALLERGY_CODE = "UKCoreAllergyCode"
+        UK_CORE_APPOINTMENT_REASON_CODE = "UKCoreAppointmentReasonCode"
 
     system = models.CharField(
         null=True,

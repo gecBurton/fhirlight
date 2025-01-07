@@ -784,3 +784,8 @@
 "active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", "Active", "AllergyIntoleranceClinicalStatusCodes"
 "confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", "Confirmed", "AllergyIntoleranceVerificationStatusCodes"
 "247472004", "http://snomed.info/sct", "Urticarial rash", "AllergyIntoleranceVerificationStatusCodes"
+"31", "http://terminology.hl7.org/CodeSystem/service-category", "Specialist Surgical", "ServiceCategory"
+"218", "http://terminology.hl7.org/CodeSystem/service-type", "Orthopaedic Surgery", "ServiceType"
+"394801008", "http://snomed.info/sct", "Trauma & orthopaedics", "UKCorePracticeSettingCode"
+"FOLLOWUP", "http://terminology.hl7.org/CodeSystem/v2-0276", "A follow up visit from a previous appointment", "UKCoreAppointmentReasonCode"
+"ATND", "http://terminology.hl7.org/CodeSystem/v3-ParticipationType", "attender", "UKCorePracticeSettingCode"
