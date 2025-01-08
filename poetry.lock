@@ -100,6 +100,21 @@ files = [
 toml = ["tomli"]
 
 [[package]]
+name = "crispy-forms-gds"
+version = "2.0.0"
+description = "Django application to add 'django-crispy-forms' layout objects for the GOV.UK Design System."
+optional = false
+python-versions = ">=3.10"
+files = [
+    {file = "crispy_forms_gds-2.0.0-py3-none-any.whl", hash = "sha256:a03a259983847d5e173c66ed43de94462aeaff00e1f85a49c044cb90ee12af69"},
+    {file = "crispy_forms_gds-2.0.0.tar.gz", hash = "sha256:6d273461d170606174256b7f9590bda1d21a0ca1a75a2bcb265cfaa0ec4ec36f"},
+]
+
+[package.dependencies]
+django = ">=5.0"
+django-crispy-forms = ">=2.0,<2.3"
+
+[[package]]
 name = "django"
 version = "5.1.4"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
@@ -118,6 +133,20 @@ tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 [package.extras]
 argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
+
+[[package]]
+name = "django-crispy-forms"
+version = "2.2"
+description = "Best way to have Django DRY forms"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_crispy_forms-2.2-py3-none-any.whl", hash = "sha256:a681cffd5af270b3082bda02cf8f81bdb5717ed66d2265e87e3df2f4ccf46277"},
+    {file = "django_crispy_forms-2.2.tar.gz", hash = "sha256:92cb7b7786fb82646bad739343fd17a99a04b0b736a09e34f3b91f26cbca7e4a"},
+]
+
+[package.dependencies]
+django = ">=4.2"
 
 [[package]]
 name = "django-polymorphic"
@@ -426,4 +455,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.13"
-content-hash = "e6fa9229498f2312bddff84666eee14ed9aebc33b00a9e2bd57c3952df3388d0"
+content-hash = "304fe625549edb702cffc6e5db666a7f24b00e6a687afe42fe1b99bf7cbc8fdc"
