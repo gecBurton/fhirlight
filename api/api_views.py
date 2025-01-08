@@ -1,6 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
 
-from api.forms.organization import OrganizationForm
 from api.models import (
     PatientProfile,
     MedicationProfile,
@@ -49,7 +48,9 @@ from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
 from api.serializers.observation import ObservationSerializer
 from api.serializers.operation_outcome import OperationOutcomeSerializer
-from api.serializers.organization import OrganizationSerializer
+from api.serializers.organization import (
+    OrganizationSerializer,
+)
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
 from api.serializers.practitioner_role import PractitionerRoleSerializer
@@ -59,8 +60,6 @@ from api.serializers.related_person import RelatedPersonSerializer
 from api.serializers.schedule import ScheduleSerializer
 from api.serializers.slot import SlotSerializer
 from api.serializers.specimen import SpecimenSerializer
-from django.urls import reverse_lazy
-from django.views.generic import FormView
 
 
 class OrganizationViewSet(ModelViewSet):
@@ -223,9 +222,3 @@ class FamilyMemberHistoryViewSet(ModelViewSet):
     queryset = FamilyMemberHistoryProfile.objects.all()
     serializer_class = FamilyMemberHistorySerializer
     lookup_field = "id"
-
-
-class OrganizationView(FormView):
-    template_name = "api/organization.html"
-    form_class = OrganizationForm
-    success_url = reverse_lazy("home")

@@ -15,7 +15,9 @@ class OrganizationProfile(BaseProfile):
     # Last Updated	2023-04-28
     # Description	This profile defines the UK constraints and extensions on the International FHIR resource Organization.
 
-    name = models.TextField(help_text="A name associated with the organization.")
+    name = models.CharField(
+        max_length=526, help_text="A name associated with the organization."
+    )
 
 
 class OrganizationContactPoint(ContactPoint):

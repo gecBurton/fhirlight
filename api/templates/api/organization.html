@@ -3,17 +3,36 @@
 
 {% block content %}
 
-  {% error_summary form %}
+{% error_summary form %}
 
-  <span class="govuk-caption-xl">
-    Tutorial
-  </span>
-  <h1 class="govuk-heading-xl">
-    Form
-  </h1>
+<span class="govuk-caption-xl">Organization</span>
+<div class="govuk-body">
+    <form method="post">
+       {% csrf_token %}
+       {{ organization_form|crispy }}
+        <h2 class="govuk-heading-xl">telecom</h2>
 
-  <div class="govuk-body">
-    {% crispy form %}
-  </div>
+       {{ contact_point_formset.management_form }}
+       {% for form in contact_point_formset %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <h2 class="govuk-heading-xl">telecom</h2>
+
+       {{ address_formset.management_form }}
+       {% for form in address_formset %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <h2 class="govuk-heading-xl">telecom</h2>
+
+       {{ identifier_formset.management_form }}
+       {% for form in identifier_formset %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
 
 {% endblock %}

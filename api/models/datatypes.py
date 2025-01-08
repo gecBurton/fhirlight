@@ -5,9 +5,9 @@ from django.db import models
 
 class Coding(models.Model):
     system = models.URLField(null=True, blank=True)
-    version = models.TextField(null=True, blank=True)
+    version = models.CharField(max_length=32, null=True, blank=True)
     code = models.CharField(max_length=256, null=True, blank=True)
-    display = models.TextField(null=True, blank=True)
+    display = models.CharField(max_length=128, null=True, blank=True)
     userSelected = models.BooleanField(null=True, blank=True)
 
     class Meta:
@@ -55,7 +55,9 @@ class ContactPoint(DataTypeWithPeriod):
         choices=SYSTEM,
         help_text="Telecommunications form for contact point - what communications system is required to make use of the contact.",
     )
-    value = models.TextField(help_text="The actual contact point details.")
+    value = models.CharField(
+        max_length=256, help_text="The actual contact point details."
+    )
     use = models.CharField(
         null=True,
         blank=True,
@@ -109,30 +111,37 @@ class Address(DataTypeWithPeriod):
         help_text="Distinguishes between physical addresses (those you can visit) and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses are both.",
     )
     line = ArrayField(
-        models.TextField(),
+        models.CharField(max_length=256),
         null=True,
         blank=True,
         help_text="This component contains the house number, apartment number, street name, street direction, P.O. Box number, delivery hints, and similar address information.",
     )
-    city = models.TextField(
+    city = models.CharField(
+        max_length=526,
         null=True,
         blank=True,
         help_text="The name of the city, town, suburb, village or other community or delivery center.",
     )
-    district = models.TextField(
-        null=True, blank=True, help_text="The name of the administrative area (county)."
+    district = models.CharField(
+        max_length=526,
+        null=True,
+        blank=True,
+        help_text="The name of the administrative area (county).",
     )
-    state = models.TextField(
+    state = models.CharField(
+        max_length=526,
         null=True,
         blank=True,
         help_text="Sub-unit of a country with limited sovereignty in a federally organized country. A code may be used if codes are in common use (e.g. US 2 letter state codes).",
     )
-    postalCode = models.TextField(
+    postalCode = models.CharField(
+        max_length=526,
         null=True,
         blank=True,
         help_text="A postal code designating a region defined by the postal service.",
     )
-    country = models.TextField(
+    country = models.CharField(
+        max_length=32,
         null=True,
         blank=True,
         help_text="Country - a nation as commonly understood or generally accepted.",
@@ -158,8 +167,9 @@ class Identifier(DataTypeWithPeriod):
         help_text="The purpose of this identifier.",
     )
     # type This is not required with ODS
-    value = models.TextField(
-        help_text="The portion of the identifier typically relevant to the user and which is unique within the context of the system."
+    value = models.CharField(
+        max_length=526,
+        help_text="The portion of the identifier typically relevant to the user and which is unique within the context of the system.",
     )
 
     class Meta:
@@ -185,23 +195,26 @@ class Name(DataTypeWithPeriod):
         choices=USE,
         help_text="The purpose of this identifier.",
     )
-    family = models.TextField(
-        null=True, blank=True, help_text="Family name (often called 'Surname')."
+    family = models.CharField(
+        max_length=526,
+        null=True,
+        blank=True,
+        help_text="Family name (often called 'Surname').",
     )
     given = ArrayField(
-        models.TextField(),
+        models.CharField(max_length=526),
         null=True,
         blank=True,
         help_text="Given names (not always 'first'). Includes middle names.",
     )
     prefix = ArrayField(
-        models.TextField(),
+        models.CharField(max_length=16),
         null=True,
         blank=True,
         help_text="Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the start of the name.",
     )
     suffix = ArrayField(
-        models.TextField(),
+        models.CharField(max_length=16),
         null=True,
         blank=True,
         help_text="Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name.",
@@ -286,7 +299,8 @@ class Concept(models.Model):
         max_length=128,
         help_text="Symbol in syntax defined by the system",
     )
-    display = models.TextField(
+    display = models.CharField(
+        max_length=526,
         null=True,
         blank=True,
         help_text="A representation of the meaning of the code in the system, following the rules of the system.",
