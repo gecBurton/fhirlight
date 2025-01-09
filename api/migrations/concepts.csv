@@ -808,3 +808,5 @@
 "diagnoses", "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings", "Diagnoses", "UKCoreCompositionSectionCode"
 "male", "http://hl7.org/fhir/administrative-gender", "Male", "AdministrativeGender"
 "430678008", "http://snomed.info/sct", "Family history of diabetes mellitus type 1", "Condition/Problem/DiagnosisCodes"
+"226201008", "http://snomed.info/sct", "Peanut-free diet", "FlagCode"
+"diet", "http://terminology.hl7.org/CodeSystem/flag-category", "Diet", "FlagCategory"

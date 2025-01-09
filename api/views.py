@@ -26,6 +26,7 @@ from api.models import (
     AppointmentProfile,
     CompositionProfile,
     FamilyMemberHistoryProfile,
+    FlagProfile,
 )
 from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
@@ -40,6 +41,7 @@ from api.serializers import (
     AppointmentSerializer,
     CompositionSerializer,
     FamilyMemberHistorySerializer,
+    FlagSerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
@@ -219,4 +221,10 @@ class CompositionViewSet(ModelViewSet):
 class FamilyMemberHistoryViewSet(ModelViewSet):
     queryset = FamilyMemberHistoryProfile.objects.all()
     serializer_class = FamilyMemberHistorySerializer
+    lookup_field = "id"
+
+
+class FlagViewSet(ModelViewSet):
+    queryset = FlagProfile.objects.all()
+    serializer_class = FlagSerializer
     lookup_field = "id"

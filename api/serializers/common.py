@@ -112,7 +112,7 @@ class RelatedResourceSerializer(RelatedField):
             representation = self.coding.to_representation([value])
             return {"coding": representation}
         else:
-            return {"reference": model_name + "/" + value.id}
+            return {"reference": model_name + "/" + str(value.id)}
 
 
 class BaseModelSerializer(WritableNestedModelSerializer):
