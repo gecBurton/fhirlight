@@ -31,7 +31,7 @@ from api.api_views import (
     CompositionViewSet,
     FamilyMemberHistoryViewSet,
 )
-from api.form_views import organization_view
+from api.form_views import organization_view, patient_view
 
 router = routers.DefaultRouter()
 router.register(r"Organization", OrganizationViewSet, basename="organization")
@@ -75,6 +75,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("api/", include(router.urls)),
-    path(r"organization", organization_view, name="organization"),
     path(r"organization/<str:pk>", organization_view, name="organization-detail"),
+    path(r"patient/<str:pk>", patient_view, name="patient-detail"),
 ]
