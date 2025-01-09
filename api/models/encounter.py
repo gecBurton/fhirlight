@@ -1,7 +1,7 @@
 from django.db import models
 
 from api.models.common import BaseProfile
-from api.models.datatypes import Concept, Identifier
+from api.models.datatypes import Concept, Identifier, DataTypeWithPeriod
 
 
 class EncounterProfile(BaseProfile):
@@ -80,8 +80,8 @@ class EncounterProfile(BaseProfile):
     )
 
 
-class EncounterParticipant(models.Model):
-    encounter = models.ForeignKey(
+class EncounterParticipant(DataTypeWithPeriod):
+    profile = models.ForeignKey(
         EncounterProfile,
         on_delete=models.CASCADE,
     )
@@ -98,10 +98,10 @@ class EncounterParticipant(models.Model):
     )
 
 
-class EncounterLocation(models.Model):
+class EncounterLocation(DataTypeWithPeriod):
     """List of locations where the patient has been"""
 
-    encounter = models.ForeignKey(
+    profile = models.ForeignKey(
         EncounterProfile,
         on_delete=models.CASCADE,
     )
@@ -125,7 +125,7 @@ class EncounterIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    encounter = models.ForeignKey(
+    profile = models.ForeignKey(
         EncounterProfile,
         on_delete=models.CASCADE,
     )

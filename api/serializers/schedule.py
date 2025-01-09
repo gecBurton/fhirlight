@@ -10,7 +10,7 @@ from api.serializers.common import (
 
 class ScheduleIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "schedule", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = ScheduleIdentifier
 
 

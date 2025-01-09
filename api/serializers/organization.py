@@ -9,19 +9,19 @@ from api.serializers.common import BaseModelSerializer, ProfileSerializer
 
 class OrganizationAddressSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "organization", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = OrganizationAddress
 
 
 class OrganizationTelecomSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "organization", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = OrganizationContactPoint
 
 
 class OrganizationIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "organization", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = OrganizationIdentifier
 
 

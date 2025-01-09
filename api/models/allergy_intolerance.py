@@ -122,7 +122,7 @@ class AllergyIntoleranceReaction(DataTypeWithPeriod):
     severity = models.CharField(
         max_length=16, choices=SEVERITY, null=True, blank=True, help_text=""
     )
-    allergy_intolerance = models.ForeignKey(
+    profile = models.ForeignKey(
         AllergyIntoleranceProfile,
         on_delete=models.CASCADE,
     )

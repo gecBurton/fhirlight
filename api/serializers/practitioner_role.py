@@ -11,13 +11,13 @@ from api.serializers.common import (
 
 class PractitionerRoleIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "practitioner_role", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PractitionerRoleIdentifier
 
 
 class PractitionerRoleTelecomSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "practitioner_role", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PractitionerRoleTelecom
 
 

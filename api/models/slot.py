@@ -77,7 +77,7 @@ class SlotIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    slot = models.ForeignKey(
+    profile = models.ForeignKey(
         SlotProfile,
         on_delete=models.CASCADE,
     )

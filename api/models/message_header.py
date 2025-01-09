@@ -69,7 +69,7 @@ class MessageHeaderDestination(DataTypeWithPeriod):
         related_name="MessageHeaderDestination_receiver",
     )
 
-    message_header = models.ForeignKey(
+    profile = models.ForeignKey(
         MessageHeaderProfile,
         on_delete=models.CASCADE,
     )

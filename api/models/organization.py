@@ -21,13 +21,13 @@ class OrganizationProfile(BaseProfile):
 class OrganizationContactPoint(ContactPoint):
     """A contact detail (e.g. a telephone number or an email address) by which the organisation may be contacted."""
 
-    organization = models.ForeignKey(OrganizationProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(OrganizationProfile, on_delete=models.CASCADE)
 
 
 class OrganizationAddress(Address):
     """The address of the organisation using the Address datatype."""
 
-    organization = models.ForeignKey(OrganizationProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(OrganizationProfile, on_delete=models.CASCADE)
 
 
 class OrganizationIdentifier(Identifier):
@@ -43,7 +43,7 @@ class OrganizationIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    organization = models.ForeignKey(
+    profile = models.ForeignKey(
         OrganizationProfile,
         on_delete=models.CASCADE,
     )

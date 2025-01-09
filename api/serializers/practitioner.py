@@ -10,25 +10,25 @@ from api.serializers.common import BaseModelSerializer, ProfileSerializer
 
 class PractitionerNameSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "practitioner", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PractitionerName
 
 
 class PractitionerAddressSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "practitioner", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PractitionerAddress
 
 
 class PractitionerTelecomSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "practitioner", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PractitionerTelecom
 
 
 class PractitionerIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "practitioner", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PractitionerIdentifier
 
 

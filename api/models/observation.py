@@ -1,7 +1,7 @@
 from django.db import models
 
 from api.models.common import BaseProfile
-from api.models.datatypes import Concept, Identifier
+from api.models.datatypes import Concept, Identifier, DataTypeWithPeriod
 
 
 class ObservationProfile(BaseProfile):
@@ -108,10 +108,10 @@ class ObservationProfile(BaseProfile):
     )
 
 
-class ObservationReferenceRange(models.Model):
+class ObservationReferenceRange(DataTypeWithPeriod):
     """Provides guide for interpretation"""
 
-    observation = models.ForeignKey(ObservationProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(ObservationProfile, on_delete=models.CASCADE)
     low = models.JSONField(
         null=True, blank=True, help_text="Low Range, if relevant"
     )  # SimpleQuantity
@@ -120,8 +120,8 @@ class ObservationReferenceRange(models.Model):
     )  # SimpleQuantity
 
 
-class ObservationComponent(models.Model):
-    observation = models.ForeignKey(ObservationProfile, on_delete=models.CASCADE)
+class ObservationComponent(DataTypeWithPeriod):
+    profile = models.ForeignKey(ObservationProfile, on_delete=models.CASCADE)
     code = models.ForeignKey(
         Concept,
         on_delete=models.CASCADE,
@@ -155,7 +155,7 @@ class ObservationIdentifier(Identifier):
         choices=SYSTEM,
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
-    observation = models.ForeignKey(
+    profile = models.ForeignKey(
         ObservationProfile,
         on_delete=models.CASCADE,
     )

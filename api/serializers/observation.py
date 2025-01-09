@@ -19,19 +19,19 @@ class ObservationComponentSerializer(BaseModelSerializer):
     valueQuantity = JSONField(required=False)
 
     class Meta:
-        fields = ("code", "valueQuantity")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = ObservationComponent
 
 
 class ObservationIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "observation", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = ObservationIdentifier
 
 
 class ObservationReferenceRangeSerializer(BaseModelSerializer):
     class Meta:
-        fields = ("low", "high")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = ObservationReferenceRange
 
 

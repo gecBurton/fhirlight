@@ -112,7 +112,7 @@ class QuestionnaireProfile(BaseProfile):
 class QuestionnaireItem(DataTypeWithPeriod):
     """Questions and sections within the Questionnaire"""
 
-    questionnaire = models.ForeignKey(
+    profile = models.ForeignKey(
         QuestionnaireProfile,
         null=True,
         blank=True,
@@ -156,14 +156,14 @@ class QuestionnaireIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    questionnaire = models.ForeignKey(
+    profile = models.ForeignKey(
         QuestionnaireProfile,
         on_delete=models.CASCADE,
     )
 
 
 class QuestionnaireContactPoint(ContactPoint):
-    questionnaire = models.ForeignKey(QuestionnaireProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(QuestionnaireProfile, on_delete=models.CASCADE)
     name = models.CharField(
         max_length=256,
         null=True,

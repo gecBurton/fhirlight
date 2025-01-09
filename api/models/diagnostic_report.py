@@ -88,7 +88,7 @@ class DiagnosticReportIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    diagnostic_report = models.ForeignKey(
+    profile = models.ForeignKey(
         DiagnosticReportProfile,
         on_delete=models.CASCADE,
     )

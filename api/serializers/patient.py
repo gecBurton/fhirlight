@@ -19,25 +19,25 @@ from django.utils.translation import gettext_lazy as _
 
 class PatientIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "patient", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PatientIdentifier
 
 
 class PatientAddressSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "patient", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PatientAddress
 
 
 class PatientTelecomSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "patient", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PatientTelecom
 
 
 class PatientNameSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "patient", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = PatientName
 
 

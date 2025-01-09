@@ -33,11 +33,11 @@ class RelatedPersonProfile(BaseProfile):
 class RelatedPersonTelecom(ContactPoint):
     """A contact detail for the person."""
 
-    related_person = models.ForeignKey(RelatedPersonProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(RelatedPersonProfile, on_delete=models.CASCADE)
 
 
 class RelatedPersonName(Name):
-    related_person = models.ForeignKey(
+    profile = models.ForeignKey(
         RelatedPersonProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
@@ -45,7 +45,7 @@ class RelatedPersonName(Name):
 
 
 class RelatedPersonAddress(Address):
-    related_person = models.ForeignKey(
+    profile = models.ForeignKey(
         RelatedPersonProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",

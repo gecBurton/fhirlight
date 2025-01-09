@@ -64,7 +64,7 @@ class FamilyMemberHistoryProfile(BaseProfile):
 class FamilyMemberHistoryCondition(models.Model):
     """Condition that the related person had."""
 
-    family_member_history = models.ForeignKey(
+    profile = models.ForeignKey(
         FamilyMemberHistoryProfile,
         on_delete=models.CASCADE,
     )

@@ -10,7 +10,7 @@ from api.serializers.common import (
 
 class DiagnosticReportIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "diagnostic_report", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = DiagnosticReportIdentifier
 
 

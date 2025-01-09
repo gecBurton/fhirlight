@@ -5,7 +5,7 @@ from api.serializers.common import ProfileSerializer, BaseModelSerializer
 
 class AllergyIntoleranceReactionSerializer(BaseModelSerializer):
     class Meta:
-        fields = ("manifestation", "severity")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = AllergyIntoleranceReaction
 
 

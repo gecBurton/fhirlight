@@ -16,7 +16,7 @@ class IdentifierSerializer(Serializer):
 
 class CompositionSectionSerializer(BaseModelSerializer):
     class Meta:
-        fields = ("title", "code", "entry")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = CompositionSection
 
 

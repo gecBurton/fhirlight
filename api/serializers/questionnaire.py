@@ -12,13 +12,13 @@ from api.serializers.common import ProfileSerializer, BaseModelSerializer
 
 class QuestionnaireIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "questionnaire", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = QuestionnaireIdentifier
 
 
 class QuestionnaireChildItemSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "questionnaire", "parent", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "parent", "created_at", "updated_at")
         model = QuestionnaireItem
 
 
@@ -41,7 +41,7 @@ class QuestionnaireContactDetailSerializer(ModelSerializer):
         return {"telecom": [representation], "name": representation.pop("name", None)}
 
     class Meta:
-        exclude = ("uuid", "questionnaire", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = QuestionnaireContactPoint
 
 
