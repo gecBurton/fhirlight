@@ -17,6 +17,7 @@ from api.serializers.diagnostic_report import DiagnosticReportSerializer
 from api.serializers.encounter import EncounterSerializer
 from api.serializers.episode_of_care import EpisodeOfCareSerializer
 from api.serializers.family_member_history import FamilyMemberHistorySerializer
+from api.serializers.flag import FlagSerializer
 from api.serializers.imaging_study import ImagingStudySerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
@@ -591,6 +592,23 @@ def test_family_member_history(resource, richard_smith):
         payload = json.load(f)
 
     serializer = FamilyMemberHistorySerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Flag-FoodAllergy-Example",
+    ],
+)
+def test_flag(resource, inpatient_encounter, richard_smith, doctor_paul_rastall):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = FlagSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

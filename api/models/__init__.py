@@ -37,8 +37,10 @@ from .allergy_intolerance import AllergyIntoleranceProfile
 from .appointment import AppointmentProfile
 from .composition import CompositionProfile
 from .family_member_history import FamilyMemberHistoryProfile
+from .flag import FlagProfile
 
 __all__ = [
+    "FlagProfile",
     "FamilyMemberHistoryProfile",
     "CompositionProfile",
     "AppointmentProfile",

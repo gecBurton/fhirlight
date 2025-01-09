@@ -30,6 +30,7 @@ from api.views import (
     AppointmentViewSet,
     CompositionViewSet,
     FamilyMemberHistoryViewSet,
+    FlagViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -68,6 +69,7 @@ router.register(r"Composition", CompositionViewSet, basename="composition")
 router.register(
     r"FamilyMemberHistory", FamilyMemberHistoryViewSet, basename="familymemberhistory"
 )
+router.register(r"Flag", FlagViewSet, basename="flag")
 
 
 urlpatterns = [
