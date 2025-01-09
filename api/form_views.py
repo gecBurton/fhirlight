@@ -1,14 +1,17 @@
+from crispy_forms_gds.helper import FormHelper
+from crispy_forms_gds.layout import Submit
 from django.forms import modelformset_factory
 from django.shortcuts import redirect, render, get_object_or_404
 from django import forms
 
-from api.forms.organization import OrganizationForm
+from api.models import PatientProfile
 from api.models.organization import (
     OrganizationProfile,
     OrganizationContactPoint,
     OrganizationAddress,
     OrganizationIdentifier,
 )
+from api.models.patient import PatientIdentifier, PatientName, PatientAddress, PatientTelecom
 
 
 def build_related_forms(related_instances: dict) -> list:
@@ -33,23 +36,29 @@ def build_related_forms(related_instances: dict) -> list:
 
     return related_forms
 
-
-def organization_view(request, pk=None):
-    related_models = [
-        OrganizationContactPoint,
-        OrganizationAddress,
-        OrganizationIdentifier,
-    ]
+def form_builder(main_model, related_models, success_url, request, pk=None):
+    print("pk=", pk)
     if pk:
-        organization = get_object_or_404(OrganizationProfile, id=pk)
+        main_instance = get_object_or_404(main_model, id=pk)
         related_instances = {
-            f: f.objects.filter(organization=organization).all() for f in related_models
+            f: f.objects.filter(organization=main_instance).all() for f in related_models
         }
     else:
-        organization = None
+        main_instance = None
         related_instances = {f: f.objects.none() for f in related_models}
+    print(related_instances)
 
-    organization_form = OrganizationForm(instance=organization)
+    class MainForm(forms.ModelForm):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.helper = FormHelper()
+            self.helper.add_input(Submit("submit", "Submit"))
+
+        class Meta:
+            model = main_model
+            exclude = ("id",)
+
+    organization_form = MainForm(instance=main_instance)
     related_forms = build_related_forms(related_instances)
 
     if request.method == "POST":
@@ -63,8 +72,31 @@ def organization_view(request, pk=None):
                 for instance in related_form.queryset():
                     instance.organization = organization
                     instance.save()
-            return redirect("success_url")
+            return redirect(success_url)
 
     context = {form.model.__name__: form for form in related_forms}
-    context["organization_form"] = organization_form
+    context["main_form"] = organization_form
+    return context
+
+
+def organization_view(request, pk=None):
+    main_model = OrganizationProfile
+    related_models = [
+        OrganizationContactPoint,
+        OrganizationAddress,
+        OrganizationIdentifier,
+    ]
+    context = form_builder(main_model, related_models, "success_url", request, pk)
     return render(request, "api/organization.html", context)
+
+
+def patient_view(request, pk=None):
+    main_model = PatientProfile
+    related_models = [
+        PatientIdentifier,
+        PatientTelecom,
+        PatientName,
+        PatientAddress,
+    ]
+    context = form_builder(main_model, related_models, "success_url", request, pk)
+    return render(request, "api/patient.html", context)
