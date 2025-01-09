@@ -10,24 +10,24 @@
     <form method="post">
        {% csrf_token %}
        {{ organization_form|crispy }}
-        <h2 class="govuk-heading-xl">telecom</h2>
+        <h2 class="govuk-heading-xl">ContactPoints</h2>
 
-       {{ contact_point_formset.management_form }}
-       {% for form in contact_point_formset %}
+       {{ OrganizationContactPoint.management_form }}
+       {% for form in OrganizationContactPoint %}
            {{ form|crispy }}
        {% endfor %}
 
-        <h2 class="govuk-heading-xl">telecom</h2>
+        <h2 class="govuk-heading-xl">Addresses</h2>
 
-       {{ address_formset.management_form }}
-       {% for form in address_formset %}
+       {{ OrganizationAddress.management_form }}
+       {% for form in OrganizationAddress %}
            {{ form|crispy }}
        {% endfor %}
 
-        <h2 class="govuk-heading-xl">telecom</h2>
+        <h2 class="govuk-heading-xl">Identifiers</h2>
 
-       {{ identifier_formset.management_form }}
-       {% for form in identifier_formset %}
+       {{ OrganizationIdentifier.management_form }}
+       {% for form in OrganizationIdentifier %}
            {{ form|crispy }}
        {% endfor %}
 
