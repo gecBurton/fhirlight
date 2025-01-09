@@ -5,13 +5,13 @@ from api.serializers.common import ProfileSerializer, BaseModelSerializer
 
 class AppointmentIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "appointment", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = AppointmentIdentifier
 
 
 class AppointmentParticipantSerializer(BaseModelSerializer):
     class Meta:
-        fields = ("type", "actor", "required", "status")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = AppointmentParticipant
 
 

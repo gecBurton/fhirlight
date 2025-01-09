@@ -9,7 +9,7 @@ from api.serializers.common import (
 
 class ConsentPolicySerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "consent", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = ConsentPolicy
 
 

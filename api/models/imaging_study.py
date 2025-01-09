@@ -61,7 +61,7 @@ class ImagingStudyProfile(BaseProfile):
 
 
 class ImagingStudySeries(DataTypeWithPeriod):
-    imaging_study = models.ForeignKey(
+    profile = models.ForeignKey(
         ImagingStudyProfile,
         on_delete=models.CASCADE,
     )

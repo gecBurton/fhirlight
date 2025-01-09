@@ -8,7 +8,7 @@ from api.serializers.common import (
 
 class DeviceIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "device", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = DeviceIdentifier
 
 

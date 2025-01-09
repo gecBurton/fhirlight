@@ -49,7 +49,7 @@ class PatientIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    patient = models.ForeignKey(
+    profile = models.ForeignKey(
         PatientProfile,
         on_delete=models.CASCADE,
     )
@@ -58,11 +58,11 @@ class PatientIdentifier(Identifier):
 class PatientTelecom(ContactPoint):
     """An identifier for this patient."""
 
-    patient = models.ForeignKey(PatientProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(PatientProfile, on_delete=models.CASCADE)
 
 
 class PatientName(Name):
-    patient = models.ForeignKey(
+    profile = models.ForeignKey(
         PatientProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
@@ -70,7 +70,7 @@ class PatientName(Name):
 
 
 class PatientAddress(Address):
-    patient = models.ForeignKey(
+    profile = models.ForeignKey(
         PatientProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",

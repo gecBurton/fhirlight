@@ -12,19 +12,19 @@ from api.serializers.common import (
 
 class RelatedPersonAddressSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "related_person", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = RelatedPersonAddress
 
 
 class RelatedPersonTelecomSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "related_person", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = RelatedPersonTelecom
 
 
 class RelatedPersonNameSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "related_person", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = RelatedPersonName
 
 

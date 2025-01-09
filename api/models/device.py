@@ -66,7 +66,7 @@ class DeviceIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    device = models.ForeignKey(
+    profile = models.ForeignKey(
         DeviceProfile,
         on_delete=models.CASCADE,
     )

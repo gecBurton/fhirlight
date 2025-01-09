@@ -124,7 +124,7 @@ class CompositionSection(DataTypeWithPeriod):
         related_name="CompositionSection_entry",
     )
 
-    composition = models.ForeignKey(
+    profile = models.ForeignKey(
         CompositionProfile,
         on_delete=models.CASCADE,
     )
