@@ -119,7 +119,7 @@ class AppointmentIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    appointment = models.ForeignKey(
+    profile = models.ForeignKey(
         AppointmentProfile,
         on_delete=models.CASCADE,
     )
@@ -137,7 +137,7 @@ class AppointmentParticipant(DataTypeWithPeriod):
         TENTATIVE = "tentative"
         NEEDS_ACTION = "needs-action"
 
-    appointment = models.ForeignKey(
+    profile = models.ForeignKey(
         AppointmentProfile,
         on_delete=models.CASCADE,
     )

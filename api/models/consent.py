@@ -102,7 +102,7 @@ class ConsentPolicy(DataTypeWithPeriod):
         null=True, blank=True, help_text="Specific policy covered by this consent."
     )
 
-    consent = models.ForeignKey(
+    profile = models.ForeignKey(
         ConsentProfile,
         on_delete=models.CASCADE,
     )

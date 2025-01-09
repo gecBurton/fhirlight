@@ -62,4 +62,4 @@ class ScheduleIdentifier(Identifier):
         choices=SYSTEM,
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
-    schedule = models.ForeignKey(ScheduleProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(ScheduleProfile, on_delete=models.CASCADE)

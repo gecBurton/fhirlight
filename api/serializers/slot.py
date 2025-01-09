@@ -7,7 +7,7 @@ from api.serializers.common import (
 
 class SlotIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "slot", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = SlotIdentifier
 
 

@@ -18,9 +18,7 @@ class OperationOutcomeProfile(BaseProfile):
 
 
 class OperationOutcomeIssue(DataTypeWithPeriod):
-    operation_outcome = models.ForeignKey(
-        OperationOutcomeProfile, on_delete=models.CASCADE
-    )
+    profile = models.ForeignKey(OperationOutcomeProfile, on_delete=models.CASCADE)
 
     class SEVERITY(models.TextChoices):
         FATAL = "fatal"

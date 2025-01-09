@@ -77,14 +77,14 @@ class LocationIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    location = models.ForeignKey(
+    profile = models.ForeignKey(
         LocationProfile,
         on_delete=models.CASCADE,
     )
 
 
 class LocationTelecom(ContactPoint):
-    location = models.ForeignKey(
+    profile = models.ForeignKey(
         LocationProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",

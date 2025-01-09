@@ -29,13 +29,13 @@ class EncounterLocationSerializer(BaseModelSerializer):
 
 class EncounterIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "encounter", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = EncounterIdentifier
 
 
 class EncounterParticipantSerializer(BaseModelSerializer):
     class Meta:
-        fields = ("individual", "type")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = EncounterParticipant
 
 

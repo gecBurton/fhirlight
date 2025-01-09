@@ -32,7 +32,7 @@ class PractitionerProfile(BaseProfile):
 class PractitionerAddress(Address):
     """The address of the practitioner using the Address datatype."""
 
-    practitioner = models.ForeignKey(PractitionerProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(PractitionerProfile, on_delete=models.CASCADE)
 
 
 class PractitionerIdentifier(Identifier):
@@ -60,7 +60,7 @@ class PractitionerIdentifier(Identifier):
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )
 
-    practitioner = models.ForeignKey(
+    profile = models.ForeignKey(
         PractitionerProfile,
         on_delete=models.CASCADE,
     )
@@ -69,10 +69,10 @@ class PractitionerIdentifier(Identifier):
 class PractitionerName(Name):
     """The name(s) associated with the practitioner."""
 
-    practitioner = models.ForeignKey(PractitionerProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(PractitionerProfile, on_delete=models.CASCADE)
 
 
 class PractitionerTelecom(ContactPoint):
     """A contact detail for the practitioner, e.g. a telephone number or an email address."""
 
-    practitioner = models.ForeignKey(PractitionerProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(PractitionerProfile, on_delete=models.CASCADE)

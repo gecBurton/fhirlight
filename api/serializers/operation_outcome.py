@@ -7,7 +7,7 @@ from api.serializers.common import (
 
 class OperationOutcomeIssueSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "operation_outcome", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = OperationOutcomeIssue
 
 

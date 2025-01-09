@@ -8,7 +8,7 @@ from api.serializers.common import (
 
 class LocationIdentifierSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "location", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = LocationIdentifier
 
 
@@ -20,7 +20,7 @@ class LocationAddressSerializer(BaseModelSerializer):
 
 class LocationTelecomSerializer(BaseModelSerializer):
     class Meta:
-        exclude = ("uuid", "location", "created_at", "updated_at")
+        exclude = ("uuid", "profile", "created_at", "updated_at")
         model = LocationTelecom
 
 

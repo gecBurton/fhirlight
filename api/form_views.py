@@ -11,7 +11,12 @@ from api.models.organization import (
     OrganizationAddress,
     OrganizationIdentifier,
 )
-from api.models.patient import PatientIdentifier, PatientName, PatientAddress, PatientTelecom
+from api.models.patient import (
+    PatientIdentifier,
+    PatientName,
+    PatientAddress,
+    PatientTelecom,
+)
 
 
 def build_related_forms(related_instances: dict) -> list:
@@ -36,12 +41,14 @@ def build_related_forms(related_instances: dict) -> list:
 
     return related_forms
 
+
 def form_builder(main_model, related_models, success_url, request, pk=None):
     print("pk=", pk)
     if pk:
         main_instance = get_object_or_404(main_model, id=pk)
         related_instances = {
-            f: f.objects.filter(organization=main_instance).all() for f in related_models
+            f: f.objects.filter(organization=main_instance).all()
+            for f in related_models
         }
     else:
         main_instance = None
