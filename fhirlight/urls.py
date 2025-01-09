@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from api.views import (
+from api.api_views import (
     OrganizationViewSet,
     PractitionerViewSet,
     PatientViewSet,
@@ -31,6 +31,7 @@ from api.views import (
     CompositionViewSet,
     FamilyMemberHistoryViewSet,
 )
+from api.form_views import organization_view, patient_view
 
 router = routers.DefaultRouter()
 router.register(r"Organization", OrganizationViewSet, basename="organization")
@@ -74,4 +75,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
     path("api/", include(router.urls)),
+    path(r"organization/<str:pk>", organization_view, name="organization-detail"),
+    path(r"patient/<str:pk>", patient_view, name="patient-detail"),
 ]

@@ -48,7 +48,9 @@ from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
 from api.serializers.observation import ObservationSerializer
 from api.serializers.operation_outcome import OperationOutcomeSerializer
-from api.serializers.organization import OrganizationSerializer
+from api.serializers.organization import (
+    OrganizationSerializer,
+)
 from api.serializers.patient import PatientSerializer
 from api.serializers.practitioner import PractitionerSerializer
 from api.serializers.practitioner_role import PractitionerRoleSerializer

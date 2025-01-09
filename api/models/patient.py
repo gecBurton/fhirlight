@@ -33,7 +33,7 @@ class PatientProfile(BaseProfile):
     communication = models.ManyToManyField(
         Concept,
         limit_choices_to={"system": Concept.VALUESET.UK_CORE_HUMAN_LANGUAGE},
-        help_text="",
+        help_text="A language which may be used to communicate with the patient about his or her health",
     )
 
 

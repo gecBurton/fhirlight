@@ -1,0 +1,38 @@
+{% extends "api/base.html" %}
+{% load crispy_forms_tags crispy_forms_gds %}
+
+{% block content %}
+
+{% error_summary form %}
+
+<span class="govuk-caption-xl">Organization</span>
+<div class="govuk-body">
+    <form method="post">
+       {% csrf_token %}
+       {{ organization_form|crispy }}
+        <h2 class="govuk-heading-xl">ContactPoints</h2>
+
+       {{ OrganizationContactPoint.management_form }}
+       {% for form in OrganizationContactPoint %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <h2 class="govuk-heading-xl">Addresses</h2>
+
+       {{ OrganizationAddress.management_form }}
+       {% for form in OrganizationAddress %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <h2 class="govuk-heading-xl">Identifiers</h2>
+
+       {{ OrganizationIdentifier.management_form }}
+       {% for form in OrganizationIdentifier %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -18,3 +18,6 @@ test:
 
 examples:
 	poetry run python manage.py load_example_data
+
+collectstatic:
+	poetry run python manage.py collectstatic --no-input

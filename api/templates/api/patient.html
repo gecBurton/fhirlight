@@ -1,0 +1,45 @@
+{% extends "api/base.html" %}
+{% load crispy_forms_tags crispy_forms_gds %}
+
+{% block content %}
+
+{% error_summary form %}
+
+<span class="govuk-caption-xl">Organization</span>
+<div class="govuk-body">
+    <form method="post">
+       {% csrf_token %}
+       {{ main_form|crispy }}
+        <h2 class="govuk-heading-xl">Address</h2>
+
+       {{ PatientAddress.management_form }}
+       {% for form in PatientAddress %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <h2 class="govuk-heading-xl">Name</h2>
+
+       {{ PatientName.management_form }}
+       {% for form in PatientName %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <h2 class="govuk-heading-xl">Telecom</h2>
+
+       {{ PatientTelecom.management_form }}
+       {% for form in PatientTelecom %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <h2 class="govuk-heading-xl">Identifier</h2>
+
+       {{ PatientIdentifier.management_form }}
+       {% for form in PatientIdentifier %}
+           {{ form|crispy }}
+       {% endfor %}
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

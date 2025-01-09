@@ -15,6 +15,7 @@ drf-writable-nested = "^0.7.1"
 psycopg2-binary = "^2.9.10"
 setuptools = "^75.6.0"
 uuid = "^1.30"
+crispy-forms-gds = "^2.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
