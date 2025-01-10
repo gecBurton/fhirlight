@@ -29,8 +29,10 @@ from .family_member_history import FamilyMemberHistorySerializer
 from .flag import FlagSerializer
 from .healthcare_service import HealthcareServiceSerializer
 from .task import TaskSerializer
+from .list import ListSerializer
 
 __all__ = [
+    "ListSerializer",
     "TaskSerializer",
     "HealthcareServiceSerializer",
     "FlagSerializer",
