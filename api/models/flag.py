@@ -37,7 +37,6 @@ class FlagProfile(BaseProfile):
         max_length=16, choices=STATUS, help_text="Supports basic workflow."
     )
 
-    #
     code = models.ForeignKey(
         Concept,
         limit_choices_to={"valueset": Concept.VALUESET.FLAG_CODE},
