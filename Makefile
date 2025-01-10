@@ -14,7 +14,7 @@ clean:
 	docker-compose up -d
 
 test:
-	poetry run pytest --cov=api --cov-report term-missing --cov-fail-under=95 tests
+	poetry run pytest --cov=api --cov-report term-missing --cov-fail-under=99 tests
 
 examples:
 	poetry run python manage.py load_example_data
