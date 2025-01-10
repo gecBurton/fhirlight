@@ -1,7 +1,7 @@
 from django.db import models
 
 from api.models.common import BaseProfile
-from api.models.datatypes import Concept
+from api.models.datatypes import Concept, DataTypeWithPeriod
 
 
 class ListProfile(BaseProfile):
@@ -73,4 +73,13 @@ class ListProfile(BaseProfile):
         blank=True,
         help_text="The common subject (or patient) of the resources that are in the list if there is one.",
         related_name="List_subject",
+    )
+
+
+class ListEntry(DataTypeWithPeriod):
+    profile = models.ForeignKey(
+        BaseProfile, on_delete=models.CASCADE, related_name="ListEntry_profile"
+    )
+    item = models.ForeignKey(
+        BaseProfile, on_delete=models.CASCADE, related_name="ListEntry_item"
     )
