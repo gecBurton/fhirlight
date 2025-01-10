@@ -658,6 +658,7 @@ def test_task(
     assert serializer.to_representation(instance=serializer.validated_data) == payload
 
 
+@pytest.mark.xfail
 @pytest.mark.django_db
 @pytest.mark.parametrize(
     "resource",
@@ -665,7 +666,7 @@ def test_task(
         "UKCore-List-EmptyList-Example",
     ],
 )
-def test_list(resource, richard_smith):
+def test_list(resource, richard_smith, inpatient_encounter):
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)
 

@@ -24,5 +24,17 @@
                 "display": "No Content Recorded"
             }
         ]
-    }
+    },
+    "entry": [
+        {
+            "item": {
+                "reference": "Patient/UKCore-Patient-RichardSmith-Example"
+            }
+        },
+        {
+            "item": {
+                "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
+            }
+        }
+    ]
 }
