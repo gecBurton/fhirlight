@@ -14,7 +14,7 @@ https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=
 * UKCore-HealthcareService
 * UKCore-ImagingStudy ✅
 * UKCore-Immunization ✅
-* UKCore-List ❌
+* UKCore-List ✅
 * UKCore-Location ✅
 * UKCore-Medication ✅
 * UKCore-MedicationAdministration ❌
