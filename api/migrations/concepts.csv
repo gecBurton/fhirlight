@@ -814,3 +814,5 @@
 "310161006", "http://snomed.info/sct", "Orthopaedic service", "ServiceType"
 "free", "http://terminology.hl7.org/CodeSystem/service-provision-conditions", "This service is available for no patient cost.", "ServiceProvisionConditions"
 "phone", "", "Phone", "ReferralMethod"
+"fulfill", "http://hl7.org/fhir/CodeSystem/task-code", "Fulfill the focal request", "TaskCode"
+"71838004", "http://snomed.info/sct", "Gastroenterologist", "ProcedurePerformerRoleCodes"

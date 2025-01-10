@@ -28,8 +28,10 @@ from .composition import CompositionSerializer
 from .family_member_history import FamilyMemberHistorySerializer
 from .flag import FlagSerializer
 from .healthcare_service import HealthcareServiceSerializer
+from .task import TaskSerializer
 
 __all__ = [
+    "TaskSerializer",
     "HealthcareServiceSerializer",
     "FlagSerializer",
     "FamilyMemberHistorySerializer",

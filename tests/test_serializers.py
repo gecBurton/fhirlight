@@ -36,6 +36,7 @@ from api.serializers.related_person import RelatedPersonSerializer
 from api.serializers.schedule import ScheduleSerializer
 from api.serializers.slot import SlotSerializer
 from api.serializers.specimen import SpecimenSerializer
+from api.serializers.task import TaskSerializer
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -627,6 +628,30 @@ def test_healthcare_service(resource, leeds_teaching_hospital, hospital_sjuh):
         payload = json.load(f)
 
     serializer = HealthcareServiceSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-Task-Colonoscopy-Example",
+    ],
+)
+def test_task(
+    resource,
+    doctor_paul_rastall,
+    consultant_sandra_gose,
+    colonoscopy_request,
+    inpatient_encounter,
+    richard_smith,
+):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = TaskSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

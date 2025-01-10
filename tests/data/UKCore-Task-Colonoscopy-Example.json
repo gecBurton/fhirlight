@@ -1,0 +1,67 @@
+{
+    "resourceType": "Task",
+    "id": "UKCore-Task-Colonoscopy-Example",
+    "identifier":  [
+        {
+            "system": "https://tools.ietf.org/html/rfc4122",
+            "value": "b269d1d7-1acf-47bb-8b3c-e38b583d9a07"
+        }
+    ],
+    "status": "in-progress",
+    "intent": "order",
+    "priority": "routine",
+    "code": {
+        "coding":  [
+            {
+                "system": "http://hl7.org/fhir/CodeSystem/task-code",
+                "code": "fulfill",
+                "display": "Fulfill the focal request"
+            }
+        ]
+    },
+    "focus": {
+        "reference": "ServiceRequest/UKCore-ServiceRequest-ColonoscopyRequest-Example"
+    },
+    "for": {
+        "reference": "Patient/UKCore-Patient-RichardSmith-Example"
+    },
+    "encounter": {
+        "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
+    },
+    "executionPeriod": {
+        "start": "2021-10-13T09:20:27Z",
+        "end": "2021-10-13T11:20:27Z"
+    },
+    "authoredOn": "2021-10-13T09:20:27Z",
+    "lastModified": "2021-10-13T09:20:27Z",
+    "requester": {
+        "reference": "Practitioner/UKCore-Practitioner-DoctorPaulRastall-Example"
+    },
+    "performerType":  [
+        {
+            "coding":  [
+                {
+                    "system": "http://snomed.info/sct",
+                    "code": "71838004",
+                    "display": "Gastroenterologist"
+                }
+            ]
+        }
+    ],
+    "owner": {
+        "reference": "Practitioner/UKCore-Practitioner-ConsultantSandraGose-Example"
+    },
+    "restriction": {
+        "repetitions": 1,
+        "period": {
+            "end": "2021-10-13T11:30:00Z"
+        }
+    },
+    "output":  [
+        {
+            "valueReference": {
+                "reference": "ServiceRequest/UKCore-ServiceRequest-ColonoscopyRequest-Example"
+            }
+        }
+    ]
+}
