@@ -32,6 +32,7 @@ tested examples
 * UKCore-Flag
   * [Food Allergy](tests/data/UKCore-Flag-FoodAllergy-Example.json)
 * UKCore-HealthcareService
+  * [Orthopaedic Service](tests/data/UKCore-HealthcareService-OrthopaedicService-Example)
 * UKCore-ImagingStudy
   * [CT Chest Scan](tests/data/UKCore-ImagingStudy-CTChestScan-Example.json)
 * UKCore-Immunization
@@ -116,7 +117,7 @@ tables is high, and the benefit of being able to encode the same thing two diffe
 
 i.e. POSTing the following would result in an error because there are two encodings:
 ```json
-"code": {
+"code" : {
   "coding":  [
     {
       "system": "http://snomed.info/sct",

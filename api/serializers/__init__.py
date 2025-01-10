@@ -27,8 +27,10 @@ from .appointment import AppointmentSerializer
 from .composition import CompositionSerializer
 from .family_member_history import FamilyMemberHistorySerializer
 from .flag import FlagSerializer
+from .healthcare_service import HealthcareServiceSerializer
 
 __all__ = [
+    "HealthcareServiceSerializer",
     "FlagSerializer",
     "FamilyMemberHistorySerializer",
     "CompositionSerializer",

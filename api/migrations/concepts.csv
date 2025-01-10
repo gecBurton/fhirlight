@@ -810,3 +810,7 @@
 "430678008", "http://snomed.info/sct", "Family history of diabetes mellitus type 1", "Condition/Problem/DiagnosisCodes"
 "226201008", "http://snomed.info/sct", "Peanut-free diet", "FlagCode"
 "diet", "http://terminology.hl7.org/CodeSystem/flag-category", "Diet", "FlagCategory"
+"35", "http://terminology.hl7.org/CodeSystem/service-category", "Hospital", "ServiceCategory"
+"310161006", "http://snomed.info/sct", "Orthopaedic service", "ServiceType"
+"free", "http://terminology.hl7.org/CodeSystem/service-provision-conditions", "This service is available for no patient cost.", "ServiceProvisionConditions"
+"phone", "", "Phone", "ReferralMethod"

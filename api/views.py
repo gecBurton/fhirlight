@@ -27,6 +27,7 @@ from api.models import (
     CompositionProfile,
     FamilyMemberHistoryProfile,
     FlagProfile,
+    HealthcareServiceProfile,
 )
 from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
@@ -45,6 +46,7 @@ from api.serializers import (
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
+from api.serializers.healthcare_service import HealthcareServiceSerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
@@ -227,4 +229,10 @@ class FamilyMemberHistoryViewSet(ModelViewSet):
 class FlagViewSet(ModelViewSet):
     queryset = FlagProfile.objects.all()
     serializer_class = FlagSerializer
+    lookup_field = "id"
+
+
+class HealthcareServiceViewSet(ModelViewSet):
+    queryset = HealthcareServiceProfile.objects.all()
+    serializer_class = HealthcareServiceSerializer
     lookup_field = "id"
