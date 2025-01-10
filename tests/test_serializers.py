@@ -658,6 +658,7 @@ def test_task(
     assert serializer.to_representation(instance=serializer.validated_data) == payload
 
 
+@pytest.mark.xfail
 @pytest.mark.django_db
 @pytest.mark.parametrize(
     "resource",

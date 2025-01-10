@@ -78,7 +78,7 @@ class ListProfile(BaseProfile):
 
 class ListEntry(DataTypeWithPeriod):
     profile = models.ForeignKey(
-        BaseProfile, on_delete=models.CASCADE, related_name="ListEntry_profile"
+        ListProfile, on_delete=models.CASCADE, related_name="ListEntry_profile"
     )
     item = models.ForeignKey(
         BaseProfile, on_delete=models.CASCADE, related_name="ListEntry_item"
