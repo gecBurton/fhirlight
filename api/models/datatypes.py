@@ -272,6 +272,9 @@ class Concept(models.Model):
         REFERRAL_METHOD = "ReferralMethod"
         HEALTHCARE_SERVICE_CHARACTERISTIC = "HealthcareServiceCharacteristic"
         SERVICE_PROVISION_CONDITIONS = "ServiceProvisionConditions"
+        TASK_CODE = "TaskCode"
+        PROCEDURE_PERFORMER_ROLE_CODE = "ProcedurePerformerRoleCodes"
+        TASK_OUTPUT_TYPE_CODE = "TaskOutput"
 
     system = models.CharField(
         null=True,

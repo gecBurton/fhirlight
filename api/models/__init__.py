@@ -39,8 +39,10 @@ from .composition import CompositionProfile
 from .family_member_history import FamilyMemberHistoryProfile
 from .flag import FlagProfile
 from .healthcare_service import HealthcareServiceProfile
+from .task import TaskProfile
 
 __all__ = [
+    "TaskProfile",
     "HealthcareServiceProfile",
     "FlagProfile",
     "FamilyMemberHistoryProfile",
