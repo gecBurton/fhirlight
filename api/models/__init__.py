@@ -38,8 +38,10 @@ from .appointment import AppointmentProfile
 from .composition import CompositionProfile
 from .family_member_history import FamilyMemberHistoryProfile
 from .flag import FlagProfile
+from .healthcare_service import HealthcareServiceProfile
 
 __all__ = [
+    "HealthcareServiceProfile",
     "FlagProfile",
     "FamilyMemberHistoryProfile",
     "CompositionProfile",

@@ -38,7 +38,6 @@ https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=
 * UKCore-Specimen ✅
 * UKCore-Task ❌
 
-
 ## intentional exclusions
 fhirlight does not support the full UK-Core specification. Generally this is because the cost of some features outweighs
 the benefits.
@@ -49,7 +48,7 @@ tables is high, and the benefit of being able to encode the same thing two diffe
 
 i.e. POSTing the following would result in an error because there are two encodings:
 ```json
-"code": {
+"code" : {
   "coding":  [
     {
       "system": "http://snomed.info/sct",

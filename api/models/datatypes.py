@@ -269,6 +269,9 @@ class Concept(models.Model):
         CONDITION_PROBLEM_DIAGNOSIS_CODE = "Condition/Problem/DiagnosisCodes"
         FLAG_CODE = "FlagCode"
         FLAG_CATEGORY = "FlagCategory"
+        REFERRAL_METHOD = "ReferralMethod"
+        HEALTHCARE_SERVICE_CHARACTERISTIC = "HealthcareServiceCharacteristic"
+        SERVICE_PROVISION_CONDITIONS = "ServiceProvisionConditions"
 
     system = models.CharField(
         null=True,
