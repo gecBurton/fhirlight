@@ -40,8 +40,10 @@ from .family_member_history import FamilyMemberHistoryProfile
 from .flag import FlagProfile
 from .healthcare_service import HealthcareServiceProfile
 from .task import TaskProfile
+from .list import ListProfile
 
 __all__ = [
+    "ListProfile",
     "TaskProfile",
     "HealthcareServiceProfile",
     "FlagProfile",

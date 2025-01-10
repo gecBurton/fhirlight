@@ -21,6 +21,7 @@ from api.serializers.flag import FlagSerializer
 from api.serializers.healthcare_service import HealthcareServiceSerializer
 from api.serializers.imaging_study import ImagingStudySerializer
 from api.serializers.immunization import ImmunizationSerializer
+from api.serializers.list import ListSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
 from api.serializers.message_header import MessageHeaderSerializer
@@ -652,6 +653,23 @@ def test_task(
         payload = json.load(f)
 
     serializer = TaskSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-List-EmptyList-Example",
+    ],
+)
+def test_list(resource, richard_smith):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = ListSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

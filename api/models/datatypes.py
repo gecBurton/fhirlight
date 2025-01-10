@@ -275,6 +275,8 @@ class Concept(models.Model):
         TASK_CODE = "TaskCode"
         PROCEDURE_PERFORMER_ROLE_CODE = "ProcedurePerformerRoleCodes"
         TASK_OUTPUT_TYPE_CODE = "TaskOutput"
+        UK_CORE_LIST_CODE = "UKCoreListCode"
+        UK_CORE_LIST_EMPTY_REASON_CODE = "UKCoreListEmptyReasonCode"
 
     system = models.CharField(
         null=True,

@@ -33,6 +33,7 @@ from api.views import (
     FlagViewSet,
     HealthcareServiceViewSet,
     TaskViewSet,
+    ListViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -76,6 +77,7 @@ router.register(
     r"HealthCareService", HealthcareServiceViewSet, basename="healthcareservice"
 )
 router.register(r"Task", TaskViewSet, basename="task")
+router.register(r"List", ListViewSet, basename="list")
 
 
 urlpatterns = [
