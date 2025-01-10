@@ -7,13 +7,6 @@ from api.serializers.common import ProfileSerializer, BaseModelSerializer
 
 
 class TaskOutputSerializer(BaseModelSerializer):
-    def to_internal_value(self, data):
-        try:
-            d = super().to_internal_value(data)
-            return d
-        except Exception:
-            raise ValueError(data)
-
     class Meta:
         exclude = ("uuid", "profile", "created_at", "updated_at")
         model = TaskOutput
@@ -65,5 +58,8 @@ class TaskSerializer(ProfileSerializer):
             "restrictionRepetitions",
             "executionPeriodStart",
             "executionPeriodEnd",
+            "active",
+            "updated_at",
+            "polymorphic_ctype",
         )
         model = TaskProfile

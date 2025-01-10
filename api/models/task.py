@@ -1,7 +1,7 @@
 from django.db import models
 
 from api.models.common import BaseProfile
-from api.models.datatypes import Concept, Identifier
+from api.models.datatypes import Concept, Identifier, DataTypeWithPeriod
 
 
 class TaskProfile(BaseProfile):
@@ -170,7 +170,7 @@ class TaskIdentifier(Identifier):
     )
 
 
-class TaskOutput(Identifier):
+class TaskOutput(DataTypeWithPeriod):
     """Information produced as part of task"""
 
     profile = models.ForeignKey(
