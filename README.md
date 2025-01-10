@@ -36,7 +36,7 @@ https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=
 * UKCore-ServiceRequest ✅
 * UKCore-Slot ✅
 * UKCore-Specimen ✅
-* UKCore-Task ❌
+* UKCore-Task ✅
 
 ## intentional exclusions
 fhirlight does not support the full UK-Core specification. Generally this is because the cost of some features outweighs
