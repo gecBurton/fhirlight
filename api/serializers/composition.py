@@ -2,8 +2,7 @@ from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework.serializers import Serializer
 
 from api.models import CompositionProfile
-from api.models.composition import CompositionSection
-from api.serializers.common import ProfileSerializer, BaseModelSerializer
+from api.serializers.common import ProfileSerializer
 
 
 class IdentifierSerializer(Serializer):
@@ -14,31 +13,9 @@ class IdentifierSerializer(Serializer):
         return "https://tools.ietf.org/html/rfc4122"
 
 
-class CompositionSectionSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = CompositionSection
-
-
 class CompositionSerializer(ProfileSerializer):
     identifier = IdentifierSerializer(source="*", required=False)
-    section = CompositionSectionSerializer(
-        many=True, required=False, source="compositionsection_set"
-    )
 
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "identifier",
-            "status",
-            "type",
-            "date",
-            "title",
-            "subject",
-            "author",
-            "encounter",
-            "custodian",
-            "section",
-        )
+        exclude = ("created_at", "updated_at", "polymorphic_ctype", "identifierValue")
         model = CompositionProfile
