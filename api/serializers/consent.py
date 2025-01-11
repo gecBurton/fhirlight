@@ -21,16 +21,11 @@ class ConsentSerializer(ProfileSerializer):
     provision = ConsentProvisionSerializer(required=False, source="*")
 
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "status",
-            "dateTime",
-            "scope",
-            "category",
-            "patient",
-            "performer",
-            "organization",
-            "provision",
+        exclude = (
+            "created_at",
+            "updated_at",
+            "polymorphic_ctype",
+            "provisionPurpose",
+            "active",
         )
         model = ConsentProfile

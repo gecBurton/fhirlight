@@ -4,7 +4,7 @@ from rest_framework.serializers import Serializer, ModelSerializer
 from api.models import QuestionnaireProfile
 from api.models.questionnaire import (
     QuestionnaireIdentifier,
-    QuestionnaireTelecom,
+    QuestionnaireContact,
     QuestionnaireItem,
 )
 from api.serializers.common import ProfileSerializer, BaseModelSerializer
@@ -42,7 +42,7 @@ class QuestionnaireTelecomSerializer(ModelSerializer):
 
     class Meta:
         exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = QuestionnaireTelecom
+        model = QuestionnaireContact
 
 
 class effectivePeriodSerializer(Serializer):
@@ -56,7 +56,7 @@ class QuestionnaireSerializer(ProfileSerializer):
         many=True, required=False, source="questionnaireidentifier_set"
     )
     contact = QuestionnaireTelecomSerializer(
-        required=False, many=True, source="questionnairetelecom_set"
+        required=False, many=True, source="questionnairecontact_set"
     )
     item = QuestionnaireItemSerializer(
         many=True, required=False, source="questionnaireitem_set"

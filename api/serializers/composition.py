@@ -17,5 +17,11 @@ class CompositionSerializer(ProfileSerializer):
     identifier = IdentifierSerializer(source="*", required=False)
 
     class Meta:
-        exclude = ("created_at", "updated_at", "polymorphic_ctype", "identifierValue")
+        exclude = (
+            "created_at",
+            "updated_at",
+            "polymorphic_ctype",
+            "identifierValue",
+            "active",
+        )
         model = CompositionProfile
