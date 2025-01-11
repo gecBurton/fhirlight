@@ -1,19 +1,14 @@
-from api.models.consent import ConsentProfile, ConsentPolicy
+from rest_framework.serializers import Serializer
+
+from api.models.consent import ConsentProfile
 from api.models.datatypes import Concept
 from api.serializers.common import (
     ProfileSerializer,
-    BaseModelSerializer,
     ConceptModelSerializer,
 )
 
 
-class ConsentPolicySerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = ConsentPolicy
-
-
-class ConsentProvisionSerializer(ProfileSerializer):
+class ConsentProvisionSerializer(Serializer):
     purpose = ConceptModelSerializer(
         many=True,
         required=False,
@@ -21,15 +16,8 @@ class ConsentProvisionSerializer(ProfileSerializer):
         queryset=Concept.objects.filter(valueset=Concept.VALUESET.V3_PURPOSE_OF_USE),
     )
 
-    class Meta:
-        fields = ("purpose",)
-        model = ConsentProfile
-
 
 class ConsentSerializer(ProfileSerializer):
-    policy = ConsentPolicySerializer(
-        required=False, many=True, source="consentpolicy_set"
-    )
     provision = ConsentProvisionSerializer(required=False, source="*")
 
     class Meta:
@@ -44,6 +32,5 @@ class ConsentSerializer(ProfileSerializer):
             "performer",
             "organization",
             "provision",
-            "policy",
         )
         model = ConsentProfile

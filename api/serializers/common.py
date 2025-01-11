@@ -1,3 +1,4 @@
+from django.db.models import ForeignKey
 from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework.relations import RelatedField
@@ -129,3 +130,29 @@ class ProfileSerializer(BaseModelSerializer):
 
     def get_resourceType(self, _obj):
         return self.Meta.model.__name__.removesuffix("Profile")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        this_name = self.get_resourceType(None)
+
+        model = self.Meta.model
+        for related_object in model._meta.related_objects:
+            related_name = related_object.get_accessor_name()
+            if "range" in related_name.lower():
+                pass
+            related_model = related_object.related_model
+            m = related_model.__name__
+            field_name = m.removeprefix(this_name)
+            field_name = field_name[0].lower() + field_name[1:]
+
+            class ChildSerializer(BaseModelSerializer):
+                class Meta:
+                    exclude = ("uuid", "profile", "created_at", "updated_at")
+                    model = related_model
+
+            if isinstance(related_object.field, ForeignKey):
+                if field_name not in self.fields:
+                    self.fields[field_name] = ChildSerializer(
+                        many=True, required=False, source=related_name
+                    )

@@ -5,7 +5,7 @@ from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModel
 from api.models.common import BaseProfile
 from api.models.organization import (
     OrganizationProfile,
-    OrganizationContactPoint,
+    OrganizationTelecom,
     OrganizationAddress,
     OrganizationIdentifier,
 )
@@ -16,7 +16,7 @@ class UKCoreAdmin(PolymorphicParentModelAdmin):
 
 
 class OrganizationContactPointInline(StackedInline):
-    model = OrganizationContactPoint
+    model = OrganizationTelecom
     extra = 0
 
 

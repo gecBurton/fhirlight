@@ -2,7 +2,7 @@ from api.models import (
     OrganizationAddress,
     OrganizationIdentifier,
     OrganizationProfile,
-    OrganizationContactPoint,
+    OrganizationTelecom,
 )
 from api.serializers.common import BaseModelSerializer, ProfileSerializer
 
@@ -16,7 +16,7 @@ class OrganizationAddressSerializer(BaseModelSerializer):
 class OrganizationTelecomSerializer(BaseModelSerializer):
     class Meta:
         exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = OrganizationContactPoint
+        model = OrganizationTelecom
 
 
 class OrganizationIdentifierSerializer(BaseModelSerializer):
@@ -30,7 +30,7 @@ class OrganizationSerializer(ProfileSerializer):
         required=False, many=True, source="organizationaddress_set"
     )
     telecom = OrganizationTelecomSerializer(
-        required=False, many=True, source="organizationcontactpoint_set"
+        required=False, many=True, source="organizationtelecom_set"
     )
     identifier = OrganizationIdentifierSerializer(
         required=False, many=True, source="organizationidentifier_set"

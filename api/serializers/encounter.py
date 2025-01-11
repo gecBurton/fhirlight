@@ -39,7 +39,7 @@ class EncounterParticipantSerializer(BaseModelSerializer):
         model = EncounterParticipant
 
 
-class EncounterHospitalizationSerializer(ProfileSerializer):
+class EncounterHospitalizationSerializer(Serializer):
     dischargeDisposition = RelatedResourceSerializer(
         queryset=Concept.objects.filter(
             valueset=Concept.VALUESET.UK_CORE_DISCHARGE_DESTINATION
@@ -47,10 +47,6 @@ class EncounterHospitalizationSerializer(ProfileSerializer):
         required=False,
         source="hospitalizationDischargeDisposition",
     )
-
-    class Meta:
-        fields = ("dischargeDisposition",)
-        model = EncounterProfile
 
 
 class EncounterSerializer(ProfileSerializer):
