@@ -14,25 +14,12 @@ class ServiceRequestSerializer(ProfileSerializer):
     occurrencePeriod = PeriodSerializer(source="*", required=False)
 
     class Meta:
-        fields = [
-            "resourceType",
-            "id",
-            "status",
-            "basedOn",
-            "intent",
-            "occurrencePeriod",
-            "authoredOn",
-            "subject",
-            "encounter",
-            "requester",
-            "performer",
-            "locationReference",
-            "reasonReference",
-            "supportingInfo",
-            "patientInstruction",
-            "code",
-            "reasonCode",
-            "category",
-            "locationCode",
-        ]
+        exclude = (
+            "created_at",
+            "updated_at",
+            "polymorphic_ctype",
+            "active",
+            "occurrencePeriodStart",
+            "occurrencePeriodEnd",
+        )
         model = ServiceRequestProfile

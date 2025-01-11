@@ -17,11 +17,12 @@ class MedicationSerializer(ProfileSerializer):
     batch = BatchSerializer(required=False, source="*")
 
     class Meta:
-        fields = [
-            "id",
-            "resourceType",
-            "code",
-            "form",
-            "batch",
-        ]
+        exclude = (
+            "created_at",
+            "updated_at",
+            "polymorphic_ctype",
+            "active",
+            "batchExpirationDate",
+            "batchLotNumber",
+        )
         model = MedicationProfile

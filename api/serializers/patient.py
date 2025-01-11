@@ -2,43 +2,12 @@ from rest_framework.serializers import Serializer, RelatedField
 
 from api.models import PatientProfile
 from api.models.datatypes import Concept
-from api.models.patient import (
-    PatientIdentifier,
-    PatientTelecom,
-    PatientName,
-    PatientAddress,
-)
 from api.serializers.common import (
-    BaseModelSerializer,
     ProfileSerializer,
     ConceptSerializer,
 )
 
 from django.utils.translation import gettext_lazy as _
-
-
-class PatientIdentifierSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = PatientIdentifier
-
-
-class PatientAddressSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = PatientAddress
-
-
-class PatientTelecomSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = PatientTelecom
-
-
-class PatientNameSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = PatientName
 
 
 class LanguageSerializer(Serializer):
@@ -80,17 +49,6 @@ class PatientCommunicationSerializer(RelatedField):
 
 
 class PatientSerializer(ProfileSerializer):
-    identifier = PatientIdentifierSerializer(
-        required=False, many=True, source="patientidentifier_set"
-    )
-    address = PatientAddressSerializer(
-        required=False, many=True, source="patientaddress_set"
-    )
-    telecom = PatientTelecomSerializer(
-        required=False, many=True, source="patienttelecom_set"
-    )
-    name = PatientNameSerializer(required=False, many=True, source="patientname_set")
-
     communication = PatientCommunicationSerializer(
         required=False,
         many=True,
@@ -100,15 +58,5 @@ class PatientSerializer(ProfileSerializer):
     )
 
     class Meta:
-        fields = [
-            "id",
-            "resourceType",
-            "gender",
-            "identifier",
-            "address",
-            "telecom",
-            "name",
-            "birthDate",
-            "communication",
-        ]
+        exclude = ("created_at", "updated_at", "polymorphic_ctype", "active")
         model = PatientProfile

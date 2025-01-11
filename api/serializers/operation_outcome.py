@@ -1,21 +1,10 @@
-from api.models.operation_outcome import OperationOutcomeProfile, OperationOutcomeIssue
+from api.models.operation_outcome import OperationOutcomeProfile
 from api.serializers.common import (
     ProfileSerializer,
-    BaseModelSerializer,
 )
 
 
-class OperationOutcomeIssueSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = OperationOutcomeIssue
-
-
 class OperationOutcomeSerializer(ProfileSerializer):
-    issue = OperationOutcomeIssueSerializer(
-        many=True, source="operationoutcomeissue_set"
-    )
-
     class Meta:
-        fields = ("id", "resourceType", "issue")
+        exclude = ("created_at", "updated_at", "polymorphic_ctype", "active")
         model = OperationOutcomeProfile
