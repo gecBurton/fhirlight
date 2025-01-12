@@ -1,4 +1,4 @@
-from django.db.models import ForeignKey
+from django.db.models import ForeignKey, OneToOneField
 from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework.relations import RelatedField
@@ -150,8 +150,14 @@ class ProfileSerializer(BaseModelSerializer):
                     exclude = ("uuid", "profile", "created_at", "updated_at")
                     model = related_model
 
-            if isinstance(related_object.field, ForeignKey):
-                if field_name not in self.fields:
+            if field_name not in self.fields:
+                if isinstance(related_object.field, OneToOneField):
+                    self.fields[field_name] = ChildSerializer(
+                        many=False,
+                        required=False,
+                        source=f"{this_name}{field_name}".lower(),
+                    )
+                elif isinstance(related_object.field, ForeignKey):
                     self.fields[field_name] = ChildSerializer(
                         many=True,
                         required=False,

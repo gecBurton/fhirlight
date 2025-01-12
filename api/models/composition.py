@@ -1,7 +1,7 @@
 from django.db import models
 
 from api.models.common import BaseProfile
-from api.models.datatypes import Concept, DataTypeWithPeriod
+from api.models.datatypes import Concept, DataTypeWithPeriod, Identifier
 
 
 class CompositionProfile(BaseProfile):
@@ -28,12 +28,6 @@ class CompositionProfile(BaseProfile):
         FINAL = "final"
         AMENDED = "amended"
         ENTERED_IN_ERROR = "entered-in-error"
-
-    identifierValue = models.UUIDField(
-        null=True,
-        blank=True,
-        help_text="Version-independent identifier for the Composition",
-    )
 
     status = models.CharField(
         max_length=32,
@@ -125,6 +119,22 @@ class CompositionSection(DataTypeWithPeriod):
     )
 
     profile = models.ForeignKey(
+        CompositionProfile,
+        on_delete=models.CASCADE,
+    )
+
+
+class CompositionIdentifier(Identifier):
+    """An identifier that applies to this person in this role."""
+
+    system = models.URLField(
+        max_length=64,
+        null=True,
+        blank=True,
+        help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
+    )
+
+    profile = models.OneToOneField(
         CompositionProfile,
         on_delete=models.CASCADE,
     )
