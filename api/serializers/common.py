@@ -136,11 +136,12 @@ class ProfileSerializer(BaseModelSerializer):
         this_name = self.get_resourceType(None)
 
         for related_object in self.Meta.model._meta.related_objects:
-            related_name = related_object.get_accessor_name()
             related_model = related_object.related_model
 
             field_name = related_model.__name__.removeprefix(this_name)
             field_name = field_name[0].lower() + field_name[1:]
+
+            # source = related_object.get_accessor_name()
 
             class ChildSerializer(BaseModelSerializer):
                 class Meta:
@@ -150,5 +151,7 @@ class ProfileSerializer(BaseModelSerializer):
             if isinstance(related_object.field, ForeignKey):
                 if field_name not in self.fields:
                     self.fields[field_name] = ChildSerializer(
-                        many=True, required=False, source=related_name
+                        many=True,
+                        required=False,
+                        source=f"{this_name}{field_name}_set".lower(),
                     )

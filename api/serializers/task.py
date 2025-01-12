@@ -2,8 +2,7 @@ from rest_framework.fields import DateTimeField, IntegerField
 from rest_framework.serializers import Serializer
 
 from api.models import TaskProfile
-from api.models.task import TaskOutput
-from api.serializers.common import ProfileSerializer, BaseModelSerializer
+from api.serializers.common import ProfileSerializer
 
 
 class ExecutionPeriodSerializer(Serializer):
@@ -21,16 +20,9 @@ class RestrictionSerializer(Serializer):
     repetitions = IntegerField(required=False, source="restrictionRepetitions")
 
 
-class TaskOutputSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = TaskOutput
-
-
 class TaskSerializer(ProfileSerializer):
     executionPeriod = ExecutionPeriodSerializer(required=False, source="*")
     restriction = RestrictionSerializer(required=False, source="*")
-    output = TaskOutputSerializer(many=True, required=False, source="taskoutput_set")
 
     def to_internal_value(self, data):
         data["_for"] = data.pop("for", None)

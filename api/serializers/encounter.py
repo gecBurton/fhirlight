@@ -4,14 +4,11 @@ from rest_framework.serializers import Serializer
 from api.models.datatypes import Concept
 from api.models.encounter import (
     EncounterProfile,
-    EncounterParticipant,
-    EncounterLocation,
 )
 from api.serializers.common import (
     ProfileSerializer,
     ConceptModelSerializer,
     RelatedResourceSerializer,
-    BaseModelSerializer,
 )
 
 
@@ -30,27 +27,9 @@ class EncounterHospitalizationSerializer(Serializer):
     )
 
 
-class EncounterParticipantSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = EncounterParticipant
-
-
-class EncounterLocationSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = EncounterLocation
-
-
 class EncounterSerializer(ProfileSerializer):
     klass = ConceptModelSerializer(
         queryset=Concept.objects.filter(valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE)
-    )
-    participant = EncounterParticipantSerializer(
-        many=True, required=False, source="encounterparticipant_set"
-    )
-    location = EncounterLocationSerializer(
-        many=True, required=False, source="encounterlocation_set"
     )
     hospitalization = EncounterHospitalizationSerializer(required=False, source="*")
     period = PeriodSerializer(required=False, source="*")
