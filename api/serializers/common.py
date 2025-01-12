@@ -123,6 +123,16 @@ class BaseModelSerializer(WritableNestedModelSerializer):
         representation = super().to_representation(instance)
         return strip_none(representation)
 
+    def to_internal_value(self, data):
+        d = super().to_internal_value(data)
+        return d
+
+    def create(self, validated_data):
+        try:
+            return super().create(validated_data)
+        except Exception as e:
+            raise e
+
 
 class ProfileSerializer(BaseModelSerializer):
     id = CharField()
@@ -134,16 +144,15 @@ class ProfileSerializer(BaseModelSerializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        this_name = self.get_resourceType(None)
-
         model = self.Meta.model
         for related_object in model._meta.related_objects:
             related_name = related_object.get_accessor_name()
             if "range" in related_name.lower():
                 pass
             related_model = related_object.related_model
-            m = related_model.__name__
-            field_name = m.removeprefix(this_name)
+
+            this_name = self.get_resourceType(None)
+            field_name = related_model.__name__.removeprefix(this_name)
             field_name = field_name[0].lower() + field_name[1:]
 
             class ChildSerializer(BaseModelSerializer):
