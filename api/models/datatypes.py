@@ -1,6 +1,7 @@
 import uuid
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django.db.models import UniqueConstraint
 
 
 class Coding(models.Model):
@@ -291,8 +292,6 @@ class Concept(models.Model):
         help_text="Version of the system - if relevant",
     )
     code = models.CharField(
-        null=True,
-        blank=True,
         max_length=128,
         help_text="Symbol in syntax defined by the system",
     )
@@ -303,3 +302,8 @@ class Concept(models.Model):
     )
     valueset = models.CharField(max_length=128, choices=VALUESET)
     # userSelected	Σ	0..1	boolean
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=["code", "valueset"], name="unique_code_valueset")
+        ]
