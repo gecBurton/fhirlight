@@ -84,6 +84,8 @@ class RelatedResourceSerializer(RelatedField):
             except Concept.DoesNotExist:
                 self.fail("does_not_exist", pk_value=code)
         else:
+            if not (isinstance(data, dict) and "reference" in data):
+                self.fail("required")
             resource_type, id = data["reference"].split("/", 2)
 
             if field_name := self.source:

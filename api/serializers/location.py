@@ -1,5 +1,5 @@
 from api.models import LocationProfile
-from api.models.location import LocationAddress, LocationTelecom
+from api.models.location import LocationAddress
 from api.serializers.common import (
     ProfileSerializer,
     BaseModelSerializer,
@@ -7,32 +7,15 @@ from api.serializers.common import (
 
 
 class LocationAddressSerializer(BaseModelSerializer):
+    # required as this is a 1:1 relationship
     class Meta:
         exclude = ("uuid", "created_at", "updated_at")
         model = LocationAddress
 
 
-class LocationTelecomSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = LocationTelecom
-
-
 class LocationSerializer(ProfileSerializer):
     address = LocationAddressSerializer(required=False)
-    telecom = LocationTelecomSerializer(
-        required=False, many=True, source="locationtelecom_set"
-    )
 
     class Meta:
-        fields = [
-            "id",
-            "resourceType",
-            "status",
-            "name",
-            "address",
-            "type",
-            "telecom",
-            "managingOrganization",
-        ]
+        exclude = ["created_at", "updated_at", "polymorphic_ctype", "active"]
         model = LocationProfile
