@@ -1,36 +1,12 @@
 from api.models.diagnostic_report import (
     DiagnosticReportProfile,
-    DiagnosticReportIdentifier,
 )
 from api.serializers.common import (
     ProfileSerializer,
-    BaseModelSerializer,
 )
 
 
-class DiagnosticReportIdentifierSerializer(BaseModelSerializer):
-    class Meta:
-        exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = DiagnosticReportIdentifier
-
-
 class DiagnosticReportSerializer(ProfileSerializer):
-    identifier = DiagnosticReportIdentifierSerializer(
-        many=True, required=False, source="diagnosticreportidentifier_set"
-    )
-
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "identifier",
-            "performer",
-            "specimen",
-            "status",
-            "effectiveDateTime",
-            "category",
-            "code",
-            "subject",
-            "result",
-        )
+        exclude = ("created_at", "updated_at", "polymorphic_ctype", "active")
         model = DiagnosticReportProfile

@@ -2,7 +2,7 @@ from .organization import (
     OrganizationAddress,
     OrganizationIdentifier,
     OrganizationProfile,
-    OrganizationContactPoint,
+    OrganizationTelecom,
 )
 from .patient import PatientProfile
 from .practitioner import (
@@ -74,7 +74,7 @@ __all__ = [
     "OrganizationAddress",
     "OrganizationIdentifier",
     "OrganizationProfile",
-    "OrganizationContactPoint",
+    "OrganizationTelecom",
     "PractitionerProfile",
     "PractitionerName",
     "PractitionerIdentifier",

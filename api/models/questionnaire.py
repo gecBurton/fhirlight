@@ -162,7 +162,7 @@ class QuestionnaireIdentifier(Identifier):
     )
 
 
-class QuestionnaireContactPoint(ContactPoint):
+class QuestionnaireContact(ContactPoint):
     profile = models.ForeignKey(QuestionnaireProfile, on_delete=models.CASCADE)
     name = models.CharField(
         max_length=256,

@@ -6,12 +6,5 @@ from api.serializers.common import (
 
 class ProcedureSerializer(ProfileSerializer):
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "code",
-            "subject",
-            "performedDateTime",
-            "status",
-        )
+        exclude = ("created_at", "updated_at", "polymorphic_ctype", "active")
         model = ProcedureProfile

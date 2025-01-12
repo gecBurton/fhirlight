@@ -12,14 +12,5 @@ class ImmunizationSerializer(ProfileSerializer):
     )
 
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "manufacturer",
-            "occurrenceDateTime",
-            "status",
-            "location",
-            "patient",
-            "vaccineCode",
-        )
+        exclude = ("created_at", "updated_at", "polymorphic_ctype", "active")
         model = ImmunizationProfile

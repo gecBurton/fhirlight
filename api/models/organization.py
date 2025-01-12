@@ -18,7 +18,7 @@ class OrganizationProfile(BaseProfile):
     name = models.TextField(help_text="A name associated with the organization.")
 
 
-class OrganizationContactPoint(ContactPoint):
+class OrganizationTelecom(ContactPoint):
     """A contact detail (e.g. a telephone number or an email address) by which the organisation may be contacted."""
 
     profile = models.ForeignKey(OrganizationProfile, on_delete=models.CASCADE)

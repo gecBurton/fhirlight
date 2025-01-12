@@ -4,7 +4,7 @@ from rest_framework.serializers import Serializer, ModelSerializer
 from api.models import QuestionnaireProfile
 from api.models.questionnaire import (
     QuestionnaireIdentifier,
-    QuestionnaireContactPoint,
+    QuestionnaireContact,
     QuestionnaireItem,
 )
 from api.serializers.common import ProfileSerializer, BaseModelSerializer
@@ -30,7 +30,7 @@ class QuestionnaireItemSerializer(QuestionnaireChildItemSerializer):
     )
 
 
-class QuestionnaireContactDetailSerializer(ModelSerializer):
+class QuestionnaireTelecomSerializer(ModelSerializer):
     def to_internal_value(self, data):
         _data = data["telecom"][0]
         _data["name"] = data["name"]
@@ -42,7 +42,7 @@ class QuestionnaireContactDetailSerializer(ModelSerializer):
 
     class Meta:
         exclude = ("uuid", "profile", "created_at", "updated_at")
-        model = QuestionnaireContactPoint
+        model = QuestionnaireContact
 
 
 class effectivePeriodSerializer(Serializer):
@@ -55,8 +55,8 @@ class QuestionnaireSerializer(ProfileSerializer):
     identifier = QuestionnaireIdentifierSerializer(
         many=True, required=False, source="questionnaireidentifier_set"
     )
-    contact = QuestionnaireContactDetailSerializer(
-        required=False, many=True, source="questionnairecontactpoint_set"
+    contact = QuestionnaireTelecomSerializer(
+        required=False, many=True, source="questionnairecontact_set"
     )
     item = QuestionnaireItemSerializer(
         many=True, required=False, source="questionnaireitem_set"

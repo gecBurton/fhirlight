@@ -1,3 +1,4 @@
+from django.db.models import ForeignKey
 from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework.relations import RelatedField
@@ -83,6 +84,8 @@ class RelatedResourceSerializer(RelatedField):
             except Concept.DoesNotExist:
                 self.fail("does_not_exist", pk_value=code)
         else:
+            if not (isinstance(data, dict) and "reference" in data):
+                self.fail("required")
             resource_type, id = data["reference"].split("/", 2)
 
             if field_name := self.source:
@@ -129,3 +132,28 @@ class ProfileSerializer(BaseModelSerializer):
 
     def get_resourceType(self, _obj):
         return self.Meta.model.__name__.removesuffix("Profile")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        this_name = self.get_resourceType(None)
+
+        for related_object in self.Meta.model._meta.related_objects:
+            related_model = related_object.related_model
+
+            field_name = related_model.__name__.removeprefix(this_name)
+            field_name = field_name[0].lower() + field_name[1:]
+
+            # source = related_object.get_accessor_name()
+
+            class ChildSerializer(BaseModelSerializer):
+                class Meta:
+                    exclude = ("uuid", "profile", "created_at", "updated_at")
+                    model = related_model
+
+            if isinstance(related_object.field, ForeignKey):
+                if field_name not in self.fields:
+                    self.fields[field_name] = ChildSerializer(
+                        many=True,
+                        required=False,
+                        source=f"{this_name}{field_name}_set".lower(),
+                    )

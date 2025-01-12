@@ -4,13 +4,5 @@ from api.serializers.common import ProfileSerializer
 
 class EpisodeOfCareSerializer(ProfileSerializer):
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "status",
-            "type",
-            "patient",
-            "careManager",
-            "managingOrganization",
-        )
+        exclude = ("created_at", "updated_at", "polymorphic_ctype", "active")
         model = EpisodeOfCareProfile

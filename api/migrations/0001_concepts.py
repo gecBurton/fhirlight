@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                     models.CharField(
                         blank=True,
                         help_text="The identification of the code system that defines the meaning of the symbol in the code.",
-                        max_length=128,
+                        max_length=256,
                         null=True,
                     ),
                 ),
@@ -59,10 +59,8 @@ class Migration(migrations.Migration):
                 (
                     "code",
                     models.CharField(
-                        blank=True,
                         help_text="Symbol in syntax defined by the system",
                         max_length=128,
-                        null=True,
                     ),
                 ),
                 (
@@ -88,11 +86,133 @@ class Migration(migrations.Migration):
                                 "Fhir Specimen Collection Method",
                             ),
                             ("UKCoreSpecimenBodySite", "Uk Core Specimen Body Site"),
+                            (
+                                "ServiceDeliveryLocationRoleType",
+                                "Service Delivery Location Role Type",
+                            ),
+                            ("SNOMEDCTBodyStructures", "Snomed Ct Body Structures"),
+                            ("UKCoreVaccineCode", "Uk Core Vaccine Code"),
+                            (
+                                "UKCoreOperationOutcomeIssueDetails",
+                                "Uk Core Operation Outcome Issue Details",
+                            ),
+                            (
+                                "UKCorePracticeSettingCode",
+                                "Uk Core Practice Settings Code",
+                            ),
+                            ("v2.0276", "V2 0276"),
+                            ("ServiceCategory", "Service Category"),
+                            ("ServiceType", "Service Type"),
+                            ("PractitionerRole", "Practitioner Role"),
+                            ("UKCoreProcedureCode", "Uk Core Procedure Code"),
+                            (
+                                "UKCorePersonRelationshipType",
+                                "Uk Core Person Relationship Type",
+                            ),
+                            (
+                                "DiagnosticServiceSectionCodes",
+                                "Diagnostic Service Section Code",
+                            ),
+                            ("UKCoreReportCode", "Uk Core Report Code"),
+                            (
+                                "ConditionClinicalStatusCodes",
+                                "Condition Clinical Status Code",
+                            ),
+                            (
+                                "ConditionVerificationStatus",
+                                "Condition Verification Status",
+                            ),
+                            ("UKCoreConditionCategory", "Uk Core Condition Category"),
+                            (
+                                "Condition/DiagnosisSeverity",
+                                "Condition Diagnosis Severity",
+                            ),
+                            ("UKCoreConditionCode", "Uk Core Condition Code"),
+                            ("UKCoreDeviceType", "Uk Core Device Type"),
+                            ("ConsentState", "Consent State"),
+                            ("ConsentScopeCodes", "Consent Scope Code"),
+                            ("ConsentCategoryCodes", "Consent Category Code"),
+                            ("v3.PurposeOfUse", "V3 Purpose Of Use"),
+                            ("v3.ActEncounterCode", "V3 Act Encounter Code"),
+                            ("UKCoreEncounterType", "Uk Core Encounter Type"),
+                            ("ParticipantType", "Participant Type"),
+                            ("EncounterReasonCodes", "Encounter Reason Code"),
+                            (
+                                "UKCoreDischargeDestination",
+                                "Uk Core Discharge Destination",
+                            ),
+                            ("EpisodeOfCareType", "Episode Of Care Type"),
+                            (
+                                "UKCoreServiceRequestReasonCode",
+                                "Uk Core Service Request Reason Code",
+                            ),
+                            (
+                                "ServiceRequestCategoryCodes",
+                                "Service Request Category Code",
+                            ),
+                            (
+                                "v3.ServiceDeliveryLocationRoleType",
+                                "V3 Service Delivery Location Role Type",
+                            ),
+                            ("CID29AcquisitionModality", "Cid 29 Acquisition Modality"),
+                            ("StandardSOPClasses", "B5 Standard Sop Classes"),
+                            (
+                                "AllergyIntoleranceClinicalStatusCodes",
+                                "Allergy Intolerance Clinical Status Code",
+                            ),
+                            (
+                                "AllergyIntoleranceVerificationStatusCodes",
+                                "Allergy Intolerance Verification Status Code",
+                            ),
+                            ("UKCoreAllergyCode", "Uk Core Allergy Code"),
+                            (
+                                "UKCoreAppointmentReasonCode",
+                                "Uk Core Appointment Reason Code",
+                            ),
+                            ("UKCoreDocumentType", "Uk Core Document Type"),
+                            (
+                                "UKCoreCompositionSectionCode",
+                                "Uk Core Composition Section Code",
+                            ),
+                            ("AdministrativeGender", "Administrative Gender"),
+                            (
+                                "Condition/Problem/DiagnosisCodes",
+                                "Condition Problem Diagnosis Code",
+                            ),
+                            ("FlagCode", "Flag Code"),
+                            ("FlagCategory", "Flag Category"),
+                            ("ReferralMethod", "Referral Method"),
+                            (
+                                "HealthcareServiceCharacteristic",
+                                "Healthcare Service Characteristic",
+                            ),
+                            (
+                                "ServiceProvisionConditions",
+                                "Service Provision Conditions",
+                            ),
+                            ("TaskCode", "Task Code"),
+                            (
+                                "ProcedurePerformerRoleCodes",
+                                "Procedure Performer Role Code",
+                            ),
+                            ("TaskOutput", "Task Output Type Code"),
+                            ("UKCoreListCode", "Uk Core List Code"),
+                            (
+                                "UKCoreListEmptyReasonCode",
+                                "Uk Core List Empty Reason Code",
+                            ),
                         ],
                         max_length=128,
                     ),
                 ),
             ],
+            options={
+                "constraints": [
+                    models.UniqueConstraint(
+                        fields=("code", "valueset"), name="unique_code_valueset"
+                    )
+                ],
+            },
         ),
         migrations.RunPython(load_concepts, migrations.RunPython.noop),
     ]

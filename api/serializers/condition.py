@@ -4,15 +4,5 @@ from api.serializers.common import ProfileSerializer
 
 class ConditionSerializer(ProfileSerializer):
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "clinicalStatus",
-            "verificationStatus",
-            "category",
-            "severity",
-            "code",
-            "subject",
-            "recorder",
-        )
+        exclude = ("created_at", "updated_at", "polymorphic_ctype", "active")
         model = ConditionProfile

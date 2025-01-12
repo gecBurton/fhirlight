@@ -36,6 +36,7 @@ class PractitionerRoleProfile(BaseProfile):
     )
     location = models.ManyToManyField(
         BaseProfile,
+        blank=True,
         limit_choices_to={"polymorphic_ctype__model__in": ["locationprofile"]},
         help_text="The location(s) at which this practitioner provides care",
         related_name="PractitionerRole_location",
