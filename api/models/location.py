@@ -4,10 +4,6 @@ from api.models.common import BaseProfile
 from api.models.datatypes import Address, Identifier, ContactPoint, Concept
 
 
-class LocationAddress(Address):
-    pass
-
-
 class LocationProfile(BaseProfile):
     """This profile can be used to exchange details and position information for a physical place where services are
     provided and resources and participants may be stored, found, contained, or accommodated.
@@ -58,14 +54,6 @@ class LocationProfile(BaseProfile):
         help_text="Type of function performed",
     )
 
-    address = models.OneToOneField(
-        LocationAddress,
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
-        help_text="If locations can be visited, we need to keep track of their address.",
-    )
-
 
 class LocationIdentifier(Identifier):
     class SYSTEM(models.TextChoices):
@@ -85,6 +73,16 @@ class LocationIdentifier(Identifier):
 
 class LocationTelecom(ContactPoint):
     profile = models.ForeignKey(
+        LocationProfile,
+        on_delete=models.CASCADE,
+        help_text="A name associated with the contact person.",
+    )
+
+
+class LocationAddress(Address):
+    "If locations can be visited, we need to keep track of their address."
+
+    profile = models.OneToOneField(
         LocationProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
