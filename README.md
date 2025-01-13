@@ -1,3 +1,5 @@
+# fhirlight
+
 This is a set of django models that conform to the NHS FHIR standards https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=1.7.0
 
 * Models are hand-written
@@ -15,7 +17,7 @@ This might be useful to you if you want:
 * Some FHIR models to use in your app
 * To see how it is possible to tackle some of the trickier aspects of FHIR such as polymorphism.
 
-models includes:
+## models included
 
 * UKCore-AllergyIntolerance ✅
 * UKCore-Appointment ✅
