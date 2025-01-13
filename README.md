@@ -17,7 +17,7 @@ https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=
 * UKCore-List ✅
 * UKCore-Location ✅
 * UKCore-Medication ✅
-* UKCore-MedicationAdministration ❌
+* UKCore-MedicationAdministration ✅
 * UKCore-MedicationDispense ❌
 * UKCore-MedicationRequest ✅
 * UKCore-MedicationStatement ❌

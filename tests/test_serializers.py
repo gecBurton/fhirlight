@@ -10,6 +10,7 @@ from api.serializers import (
     AppointmentSerializer,
     CompositionSerializer,
     MedicationRequestSerializer,
+    MedicationAdministrationSerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.consent import ConsentSerializer
@@ -691,6 +692,25 @@ def test_medication_request(
         payload = json.load(f)
 
     serializer = MedicationRequestSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-MedicationAdministration-TimoptolEyeDrops-Example",
+    ],
+)
+def test_medication_administration(
+    resource, richard_smith, timoptol_eye_drops, eye_drops
+):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = MedicationAdministrationSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

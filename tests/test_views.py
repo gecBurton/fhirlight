@@ -19,6 +19,7 @@ from api.models import (
     AllergyIntoleranceProfile,
     MedicationProfile,
     ProcedureProfile,
+    MedicationRequestProfile,
 )
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -84,6 +85,7 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
         "UKCore-Task-Colonoscopy-Example",
         "UKCore-List-EmptyList-Example",
         "UKCore-MedicationRequest-EyeDrops-Example",
+        "UKCore-MedicationAdministration-TimoptolEyeDrops-Example",
     ],
 )
 def test_resource(
@@ -119,6 +121,10 @@ def test_resource(
             ),
             "medication": (MedicationProfile, {"code": medication_code}),
             "procedure": (ProcedureProfile, {"subject": example_patient}),
+            "medicationrequest": (
+                MedicationRequestProfile,
+                {"subject": example_patient},
+            ),
         }
 
         resource_class, kwargs = resource_types[dependant_resource_type]

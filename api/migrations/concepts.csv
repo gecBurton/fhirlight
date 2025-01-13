@@ -845,4 +845,4 @@
 "58831000052108", "http://snomed.info/sct", "Subretinal route", "UKCoreSubstanceOrProductAdministrationRoute"
 "421984009", "http://snomed.info/sct", "Until finished", "UKCoreMedicationDosageMethod"
 "ordered", "http://terminology.hl7.org/CodeSystem/dose-rate-type", "Ordered", "DoseAndRateType"
-
+"362508001", "http://snomed.info/sct", "Both eyes, entire", "UKCoreBodySite"

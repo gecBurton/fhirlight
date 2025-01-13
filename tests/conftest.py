@@ -14,6 +14,7 @@ from api.models import (
     ProcedureProfile,
     AllergyIntoleranceProfile,
     MedicationProfile,
+    MedicationRequestProfile,
 )
 from api.models.datatypes import Concept
 
@@ -249,6 +250,15 @@ def timolol_vtm(medication_code):
 def timoptol_eye_drops(medication_code):
     medication = MedicationProfile.objects.create(
         id="UKCore-Medication-TimoptolEyeDrops-Example", code=medication_code
+    )
+    yield medication
+    medication.delete()
+
+
+@pytest.fixture
+def eye_drops(richard_smith):
+    medication = MedicationRequestProfile.objects.create(
+        id="UKCore-MedicationRequest-EyeDrops-Example", subject=richard_smith
     )
     yield medication
     medication.delete()

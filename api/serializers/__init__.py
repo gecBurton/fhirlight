@@ -31,8 +31,10 @@ from .healthcare_service import HealthcareServiceSerializer
 from .task import TaskSerializer
 from .list import ListSerializer
 from .medication_request import MedicationRequestSerializer
+from .medication_administration import MedicationAdministrationSerializer
 
 __all__ = [
+    "MedicationAdministrationSerializer",
     "MedicationRequestSerializer",
     "ListSerializer",
     "TaskSerializer",
