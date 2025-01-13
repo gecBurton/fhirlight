@@ -278,6 +278,13 @@ class Concept(models.Model):
         TASK_OUTPUT_TYPE_CODE = "TaskOutput"
         UK_CORE_LIST_CODE = "UKCoreListCode"
         UK_CORE_LIST_EMPTY_REASON_CODE = "UKCoreListEmptyReasonCode"
+        UK_CORE_MEDICATION_REQUEST_CATEGORY_CODE = "UKCoreMedicationRequestCategory"
+        UK_CORE_BODY_SITE = "UKCoreBodySite"
+        UK_CORE_SUBSTANCE_OR_PRODUCT_ADMINISTRATION_ROUTE = (
+            "UKCoreSubstanceOrProductAdministrationRoute"
+        )
+        UK_CORE_MEDICATION_DOSAGE_METHOD = "UKCoreMedicationDosageMethod"
+        DOSE_AND_RATE_TYPE_CODE = "DoseAndRateType"
 
     system = models.CharField(
         null=True,

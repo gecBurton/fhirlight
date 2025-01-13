@@ -145,6 +145,9 @@ class ProfileSerializer(BaseModelSerializer):
 
             # source = related_object.get_accessor_name()
 
+            if this_name == "MedicationRequest" and "Profile" not in field_name:
+                pass
+
             class ChildSerializer(BaseModelSerializer):
                 class Meta:
                     exclude = ("uuid", "profile", "created_at", "updated_at")

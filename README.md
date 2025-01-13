@@ -19,7 +19,7 @@ https://simplifier.net/guide/uk-core-implementation-guide-stu3-sequence?version=
 * UKCore-Medication ✅
 * UKCore-MedicationAdministration ❌
 * UKCore-MedicationDispense ❌
-* UKCore-MedicationRequest ❌
+* UKCore-MedicationRequest ✅
 * UKCore-MedicationStatement ❌
 * UKCore-MessageHeader ✅ [4]
 * UKCore-Observation ✅
