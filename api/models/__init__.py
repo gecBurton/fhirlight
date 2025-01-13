@@ -42,8 +42,10 @@ from .healthcare_service import HealthcareServiceProfile
 from .task import TaskProfile
 from .list import ListProfile
 from .medication_request import MedicationRequestProfile
+from .medication_administration import MedicationAdministrationProfile
 
 __all__ = [
+    "MedicationAdministrationProfile",
     "MedicationRequestProfile",
     "ListProfile",
     "TaskProfile",
