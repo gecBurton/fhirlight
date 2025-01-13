@@ -839,3 +839,10 @@
 "notasked", "http://terminology.hl7.org/CodeSystem/list-empty-reason", "Not Asked", "UKCoreListEmptyReasonCode"
 "notstarted", "http://terminology.hl7.org/CodeSystem/list-empty-reason", "Not Started", "UKCoreListEmptyReasonCode"
 "unavailable", "http://terminology.hl7.org/CodeSystem/list-empty-reason", "Unavailable", "UKCoreListEmptyReasonCode"
+"outpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", "Outpatient", "UKCoreMedicationRequestCategory"
+"acute", "http://terminology.hl7.org/CodeSystem/medicationrequest-course-of-therapy", "Short course (acute) therapy", "UKCoreMedicationRequestCategory"
+"8966001", "http://snomed.info/sct", "Left eye structure", "UKCoreBodySite"
+"58831000052108", "http://snomed.info/sct", "Subretinal route", "UKCoreSubstanceOrProductAdministrationRoute"
+"421984009", "http://snomed.info/sct", "Until finished", "UKCoreMedicationDosageMethod"
+"ordered", "http://terminology.hl7.org/CodeSystem/dose-rate-type", "Ordered", "DoseAndRateType"
+

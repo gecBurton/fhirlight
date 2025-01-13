@@ -30,6 +30,7 @@ from api.models import (
     HealthcareServiceProfile,
     TaskProfile,
     ListProfile,
+    MedicationRequestProfile,
 )
 from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
@@ -47,6 +48,7 @@ from api.serializers import (
     FlagSerializer,
     TaskSerializer,
     ListSerializer,
+    MedicationRequestSerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
@@ -251,4 +253,10 @@ class TaskViewSet(ModelViewSet):
 class ListViewSet(ModelViewSet):
     queryset = ListProfile.objects.all()
     serializer_class = ListSerializer
+    lookup_field = "id"
+
+
+class MedicationRequestViewSet(ModelViewSet):
+    queryset = MedicationRequestProfile.objects.all()
+    serializer_class = MedicationRequestSerializer
     lookup_field = "id"

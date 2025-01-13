@@ -41,8 +41,10 @@ from .flag import FlagProfile
 from .healthcare_service import HealthcareServiceProfile
 from .task import TaskProfile
 from .list import ListProfile
+from .medication_request import MedicationRequestProfile
 
 __all__ = [
+    "MedicationRequestProfile",
     "ListProfile",
     "TaskProfile",
     "HealthcareServiceProfile",

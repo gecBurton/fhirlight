@@ -243,3 +243,12 @@ def timolol_vtm(medication_code):
     )
     yield medication
     medication.delete()
+
+
+@pytest.fixture
+def timoptol_eye_drops(medication_code):
+    medication = MedicationProfile.objects.create(
+        id="UKCore-Medication-TimoptolEyeDrops-Example", code=medication_code
+    )
+    yield medication
+    medication.delete()
