@@ -48,7 +48,6 @@ class EncounterSerializer(ProfileSerializer):
             "created_at",
             "updated_at",
             "polymorphic_ctype",
-            "active",
             "hospitalizationDischargeDisposition",
             "periodStart",
             "periodEnd",

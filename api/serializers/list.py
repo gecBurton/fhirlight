@@ -14,7 +14,6 @@ class ListSerializer(ProfileSerializer):
     class Meta:
         exclude = (
             "created_at",
-            "active",
             "updated_at",
             "polymorphic_ctype",
         )

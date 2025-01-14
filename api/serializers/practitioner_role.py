@@ -6,5 +6,9 @@ from api.serializers.common import (
 
 class PractitionerRoleSerializer(ProfileSerializer):
     class Meta:
-        exclude = ("created_at", "updated_at", "polymorphic_ctype", "active")
+        exclude = (
+            "created_at",
+            "updated_at",
+            "polymorphic_ctype",
+        )
         model = PractitionerRoleProfile

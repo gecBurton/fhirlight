@@ -63,20 +63,11 @@ class QuestionnaireSerializer(ProfileSerializer):
     )
 
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "identifier",
-            "url",
-            "contact",
-            "status",
-            "title",
-            "experimental",
-            "date",
-            "publisher",
-            "purpose",
-            "subjectType",
-            "effectivePeriod",
-            "item",
+        exclude = (
+            "created_at",
+            "updated_at",
+            "polymorphic_ctype",
+            "effectivePeriodEnd",
+            "effectivePeriodStart",
         )
         model = QuestionnaireProfile

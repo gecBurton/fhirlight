@@ -21,6 +21,7 @@ from api.models import (
     ProcedureProfile,
     MedicationRequestProfile,
 )
+from tests.utils import prepare_payload
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -140,13 +141,15 @@ def test_resource(
         url_list, json.dumps(payload), content_type="application/json"
     )
     assert post_response.status_code == 201, post_response.json()
-    assert post_response.json() == payload
+    assert post_response.json() == prepare_payload(payload)
 
     url_detail = reverse(f"{resource_type}-detail", kwargs={"id": payload["id"]})
     get_response = client.get(url_detail)
     assert get_response.status_code == 200
-    assert get_response.json() == payload
+    assert get_response.json() == prepare_payload(payload)
 
     get_response = client.get(url_list)
     assert get_response.status_code == 200
-    assert payload in [entry["resource"] for entry in get_response.json()["entry"]]
+    assert prepare_payload(payload) in [
+        entry["resource"] for entry in get_response.json()["entry"]
+    ]

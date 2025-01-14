@@ -19,13 +19,13 @@ class SpecimenSerializer(ProfileSerializer):
     collection = SpecimenCollectionSerializer(required=False, source="*")
 
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "receivedTime",
-            "status",
-            "type",
-            "subject",
-            "collection",
-        )
+        exclude = [
+            "created_at",
+            "updated_at",
+            "polymorphic_ctype",
+            "collector",
+            "method",
+            "bodySite",
+            "collectedDateTime",
+        ]
         model = SpecimenProfile
