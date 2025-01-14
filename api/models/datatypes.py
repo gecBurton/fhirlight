@@ -285,6 +285,8 @@ class Concept(models.Model):
         )
         UK_CORE_MEDICATION_DOSAGE_METHOD = "UKCoreMedicationDosageMethod"
         DOSE_AND_RATE_TYPE_CODE = "DoseAndRateType"
+        MEDICATION_CODEABLE_CONCEPT = "MedicationCodeableConcept"
+        UK_CORE_MEDICATION_STATEMENT_CATEGORY_CODE = "UKCoreMedicationStatementCategory"
 
     system = models.CharField(
         null=True,

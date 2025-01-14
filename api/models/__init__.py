@@ -43,8 +43,10 @@ from .task import TaskProfile
 from .list import ListProfile
 from .medication_request import MedicationRequestProfile
 from .medication_administration import MedicationAdministrationProfile
+from .medication_statement import MedicationStatementProfile
 
 __all__ = [
+    "MedicationStatementProfile",
     "MedicationAdministrationProfile",
     "MedicationRequestProfile",
     "ListProfile",

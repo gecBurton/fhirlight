@@ -846,3 +846,6 @@
 "421984009", "http://snomed.info/sct", "Until finished", "UKCoreMedicationDosageMethod"
 "ordered", "http://terminology.hl7.org/CodeSystem/dose-rate-type", "Ordered", "DoseAndRateType"
 "362508001", "http://snomed.info/sct", "Both eyes, entire", "UKCoreBodySite"
+"outpatient", "http://terminology.hl7.org/CodeSystem/medication-statement-category", "Outpatient", "UKCoreMedicationStatementCategory"
+"39732311000001104", "https://dmd.nhs.uk", "Amoxicillin 250mg capsules", "MedicationCodeableConcept"
+"65363002", "http://snomed.info/sct", "Otitis media", "Condition/Problem/DiagnosisCodes"
