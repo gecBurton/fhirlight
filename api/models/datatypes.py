@@ -314,3 +314,122 @@ class Concept(models.Model):
         constraints = [
             UniqueConstraint(fields=["code", "valueset"], name="unique_code_valueset")
         ]
+
+
+class Dosage(DataTypeWithPeriod):
+    """Dosage instructions for the medication"""
+
+    class UCUM(models.TextChoices):
+        """unit of time"""
+
+        SECOND = "s"
+        MINUTE = "min"
+        HOUR = "h"
+        DAY = "d"
+        WEEK = "wk"
+        MONTH = "mo"
+        ANNUAL = "a"
+
+    # dispenseRequest	Specific dispensing quantity instructions.
+    dispenseRequestQuantityValue = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        help_text="Amount of medication to supply per dispense. Numerical value (with implicit precision)",
+    )
+    dispenseRequestQuantityUnit = models.CharField(
+        max_length=16,
+        null=True,
+        blank=True,
+        help_text="Amount of medication to supply per dispense. Unit representation",
+    )
+    dispenseRequestQuantitySystem = models.URLField(
+        null=True,
+        blank=True,
+        help_text="Amount of medication to supply per dispense. System that defines coded unit form",
+    )
+    dispenseRequestQuantityCode = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+        help_text="Amount of medication to supply per dispense. Coded form of the unit",
+    )
+
+    text = models.TextField(
+        null=True, blank=True, help_text="Free text dosage instructions."
+    )
+
+    site = models.ForeignKey(
+        Concept,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_BODY_SITE},
+        help_text="Body site to administer to",
+        related_name="MedicationRequestDosageInstruction_site",
+    )
+    route = models.ForeignKey(
+        Concept,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        limit_choices_to={
+            "valueset": Concept.VALUESET.UK_CORE_SUBSTANCE_OR_PRODUCT_ADMINISTRATION_ROUTE
+        },
+        help_text="How drug should enter body",
+        related_name="MedicationRequestDosageInstruction_route",
+    )
+    method = models.ForeignKey(
+        Concept,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        limit_choices_to={
+            "valueset": Concept.VALUESET.UK_CORE_MEDICATION_DOSAGE_METHOD
+        },
+        help_text="Technique for administering medication",
+        related_name="MedicationRequestDosageInstruction_method",
+    )
+
+    timingRepeatFrequency = models.PositiveIntegerField(
+        null=True, blank=True, help_text="Event occurs frequency times per period"
+    )
+    timingRepeatPeriod = models.FloatField(
+        null=True, blank=True, help_text="Event occurs frequency times per period"
+    )
+    timingRepeatPeriodUnit = models.CharField(
+        choices=UCUM,
+        max_length=8,
+        null=True,
+        blank=True,
+        help_text="The units of time for the period in UCUM units.",
+    )
+
+    class Meta:
+        abstract = True
+
+
+class DoseAndRate(DataTypeWithPeriod):
+    type = models.ForeignKey(
+        Concept,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        limit_choices_to={"valueset": Concept.VALUESET.DOSE_AND_RATE_TYPE_CODE},
+        help_text="The kind of dose or rate specified",
+        related_name="MedicationRequestDosageInstructionDoseAndRate_type",
+    )
+    doseQuantityValue = models.PositiveIntegerField(
+        null=True, blank=True, help_text="Numerical value (with implicit precision)"
+    )
+    doseQuantityUnit = models.CharField(
+        max_length=16, null=True, blank=True, help_text="Unit representation"
+    )
+    doseQuantitySystem = models.URLField(
+        null=True, blank=True, help_text="System that defines coded unit form"
+    )
+    doseQuantityCode = models.CharField(
+        max_length=32, null=True, blank=True, help_text="Coded form of the unit"
+    )
+
+    class Meta:
+        abstract = True

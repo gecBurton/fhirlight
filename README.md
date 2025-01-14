@@ -37,7 +37,7 @@ This might be useful to you if you want:
 * UKCore-Location ✅
 * UKCore-Medication ✅
 * UKCore-MedicationAdministration ✅
-* UKCore-MedicationDispense ❌
+* UKCore-MedicationDispense ✅
 * UKCore-MedicationRequest ✅
 * UKCore-MedicationStatement ❌
 * UKCore-MessageHeader ✅ [4]

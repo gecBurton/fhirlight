@@ -33,6 +33,7 @@ from api.models import (
     MedicationRequestProfile,
     MedicationAdministrationProfile,
 )
+from api.models.medication_dispense import MedicationDispenseProfile
 from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
 from api.models.practitioner import PractitionerProfile
@@ -51,6 +52,7 @@ from api.serializers import (
     ListSerializer,
     MedicationRequestSerializer,
     MedicationAdministrationSerializer,
+    MedicationDispenseSerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
@@ -267,4 +269,10 @@ class MedicationRequestViewSet(ModelViewSet):
 class MedicationAdministrationViewSet(ModelViewSet):
     queryset = MedicationAdministrationProfile.objects.all()
     serializer_class = MedicationAdministrationSerializer
+    lookup_field = "id"
+
+
+class MedicationDispenseViewSet(ModelViewSet):
+    queryset = MedicationDispenseProfile.objects.all()
+    serializer_class = MedicationDispenseSerializer
     lookup_field = "id"
