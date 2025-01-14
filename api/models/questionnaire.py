@@ -5,22 +5,7 @@ from api.models.common import BaseProfile
 from api.models.datatypes import Identifier, ContactPoint, DataTypeWithPeriod
 
 
-class QuestionnaireProfile(BaseProfile):
-    """This profile is used to organise a collection of questions intended to solicit information from patients,
-    providers or other individuals involved in the healthcare domain.
-    """
-
-    # Canonical URL	https://fhir.hl7.org.uk/StructureDefinition/UKCore-Questionnaire
-    # Current Version	1.2.0
-    # Last Updated	2022-12-16
-    # Description	This profile defines the UK constraints and extensions on the International FHIR resource Questionnaire.
-
-    class STATUS(models.TextChoices):
-        DRAFT = "draft"
-        ACTIVE = "active"
-        RETIRED = "retired"
-        UNKNOWN = "unknown"
-
+class QuestionnaireBase(BaseProfile):
     class SUBJECT_TYPE(models.TextChoices):
         ALLERGY_INTOLERANCE = "AllergyIntolerance"
         APPOINTMENT = "Appointment"
@@ -66,11 +51,6 @@ class QuestionnaireProfile(BaseProfile):
         help_text="Canonical identifier for this questionnaire, represented as a URI (globally unique).",
         unique=True,
     )
-    status = models.CharField(
-        max_length=8,
-        choices=STATUS,
-        help_text="The status of this questionnaire. Enables tracking the life-cycle of the content.",
-    )
     title = models.CharField(
         null=True,
         blank=True,
@@ -106,6 +86,31 @@ class QuestionnaireProfile(BaseProfile):
     )
     effectivePeriodEnd = models.DateTimeField(
         null=True, blank=True, help_text="When the questionnaire is expected to be used"
+    )
+
+    class Meta:
+        abstract = True
+
+
+class QuestionnaireProfile(QuestionnaireBase):
+    """This profile is used to organise a collection of questions intended to solicit information from patients,
+    providers or other individuals involved in the healthcare domain.
+    """
+
+    # Canonical URL	https://fhir.hl7.org.uk/StructureDefinition/UKCore-Questionnaire
+    # Current Version	1.2.0
+    # Last Updated	2022-12-16
+    # Description	This profile defines the UK constraints and extensions on the International FHIR resource Questionnaire.
+    class STATUS(models.TextChoices):
+        DRAFT = "draft"
+        ACTIVE = "active"
+        RETIRED = "retired"
+        UNKNOWN = "unknown"
+
+    status = models.CharField(
+        max_length=8,
+        choices=STATUS,
+        help_text="The status of this questionnaire. Enables tracking the life-cycle of the content.",
     )
 
 

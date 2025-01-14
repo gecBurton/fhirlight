@@ -38,6 +38,7 @@ from api.views import (
     MedicationAdministrationViewSet,
     MedicationDispenseViewSet,
     MedicationStatementViewSet,
+    QuestionnaireResponseViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -62,6 +63,11 @@ router.register(
 )
 router.register(r"ScheduleRole", ScheduleViewSet, basename="schedule")
 router.register(r"Questionnaire", QuestionnaireViewSet, basename="questionnaire")
+router.register(
+    r"QuestionnaireResponse",
+    QuestionnaireResponseViewSet,
+    basename="questionnaireresponse",
+)
 router.register(r"Procedure", ProcedureViewSet, basename="procedure")
 router.register(r"RelatedPerson", RelatedPersonViewSet, basename="relatedperson")
 router.register(

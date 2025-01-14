@@ -33,6 +33,7 @@ from api.models import (
     MedicationRequestProfile,
     MedicationAdministrationProfile,
     MedicationStatementProfile,
+    QuestionnaireResponseProfile,
 )
 from api.models.medication_dispense import MedicationDispenseProfile
 from api.serializers.encounter import EncounterSerializer
@@ -55,6 +56,7 @@ from api.serializers import (
     MedicationAdministrationSerializer,
     MedicationDispenseSerializer,
     MedicationStatementSerializer,
+    QuestionnaireResponseSerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
@@ -151,6 +153,12 @@ class ScheduleViewSet(ModelViewSet):
 class QuestionnaireViewSet(ModelViewSet):
     queryset = QuestionnaireProfile.objects.all()
     serializer_class = QuestionnaireSerializer
+    lookup_field = "id"
+
+
+class QuestionnaireResponseViewSet(ModelViewSet):
+    queryset = QuestionnaireResponseProfile.objects.all()
+    serializer_class = QuestionnaireResponseSerializer
     lookup_field = "id"
 
 

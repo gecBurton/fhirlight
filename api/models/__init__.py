@@ -22,6 +22,7 @@ from .slot import SlotProfile
 from .practitioner_role import PractitionerRoleProfile
 from .schedule import ScheduleProfile
 from .questionnaire import QuestionnaireProfile
+from .questionnaire_response import QuestionnaireResponseProfile
 from .procedure import ProcedureProfile
 from .related_person import RelatedPersonProfile
 from .diagnostic_report import DiagnosticReportProfile
@@ -46,6 +47,7 @@ from .medication_administration import MedicationAdministrationProfile
 from .medication_statement import MedicationStatementProfile
 
 __all__ = [
+    "QuestionnaireResponseProfile",
     "MedicationStatementProfile",
     "MedicationAdministrationProfile",
     "MedicationRequestProfile",
