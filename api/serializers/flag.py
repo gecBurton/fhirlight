@@ -20,6 +20,5 @@ class FlagSerializer(ProfileSerializer):
             "created_at",
             "updated_at",
             "polymorphic_ctype",
-            "active",
         )
         model = FlagProfile

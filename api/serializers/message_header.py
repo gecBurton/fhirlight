@@ -29,13 +29,13 @@ class MessageHeaderSerializer(ProfileSerializer):
     source = MessageHeaderSourceSerializer(source="*")
 
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "eventCoding",
-            "focus",
-            "source",
-            "sender",
-            "destination",
-        )
+        exclude = [
+            "created_at",
+            "updated_at",
+            "polymorphic_ctype",
+            "eventCodingCode",
+            "sourceEndpoint",
+            "eventCodingDisplay",
+            "eventCodingSystem",
+        ]
         model = MessageHeaderProfile

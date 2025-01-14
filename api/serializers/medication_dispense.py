@@ -97,7 +97,6 @@ class MedicationDispenseSerializer(ProfileSerializer):
             "created_at",
             "updated_at",
             "polymorphic_ctype",
-            "active",
             "daysSupplyValue",
             "daysSupplyUnit",
             "daysSupplySystem",

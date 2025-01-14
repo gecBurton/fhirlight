@@ -26,6 +26,5 @@ class ConsentSerializer(ProfileSerializer):
             "updated_at",
             "polymorphic_ctype",
             "provisionPurpose",
-            "active",
         )
         model = ConsentProfile

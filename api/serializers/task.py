@@ -41,7 +41,6 @@ class TaskSerializer(ProfileSerializer):
             "restrictionRepetitions",
             "executionPeriodStart",
             "executionPeriodEnd",
-            "active",
             "updated_at",
             "polymorphic_ctype",
         )

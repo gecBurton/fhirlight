@@ -27,16 +27,5 @@ class FamilyMemberHistorySerializer(ProfileSerializer):
     )
 
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "status",
-            "patient",
-            "date",
-            "bornDate",
-            "relationship",
-            "sex",
-            "name",
-            "condition",
-        )
+        exclude = ["created_at", "updated_at", "polymorphic_ctype"]
         model = FamilyMemberHistoryProfile

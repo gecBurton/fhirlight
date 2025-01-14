@@ -58,16 +58,5 @@ class ImagingStudySerializer(ProfileSerializer):
     )
 
     class Meta:
-        fields = (
-            "id",
-            "resourceType",
-            "series",
-            "status",
-            "subject",
-            "started",
-            "numberOfSeries",
-            "numberOfInstances",
-            "encounter",
-            "modality",
-        )
+        exclude = ["created_at", "updated_at", "polymorphic_ctype"]
         model = ImagingStudyProfile

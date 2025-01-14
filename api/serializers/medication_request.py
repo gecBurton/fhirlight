@@ -84,7 +84,6 @@ class MedicationRequestSerializer(ProfileSerializer):
             "created_at",
             "updated_at",
             "polymorphic_ctype",
-            "active",
             "substitutionAllowedBoolean",
         )
         model = MedicationRequestProfile
