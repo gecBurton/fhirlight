@@ -70,6 +70,15 @@ def leeds_teaching_hospital():
 
 
 @pytest.fixture
+def minimal_organization():
+    organization = OrganizationProfile.objects.create(
+        id="UKCore-Organization-Minimal-Example"
+    )
+    yield organization
+    organization.delete()
+
+
+@pytest.fixture
 def white_rose_medical_centre():
     organization = OrganizationProfile.objects.create(
         id="UKCore-Organization-WhiteRoseMedicalCentre-Example"

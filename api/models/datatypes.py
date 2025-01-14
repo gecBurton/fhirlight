@@ -288,6 +288,7 @@ class Concept(models.Model):
         MEDICATION_CODEABLE_CONCEPT = "MedicationCodeableConcept"
         UK_CORE_MEDICATION_STATEMENT_CATEGORY_CODE = "UKCoreMedicationStatementCategory"
         AS_NEEDED_CODEABLE_CONCEPT = "asNeededCodeableConcept"
+        UK_CORE_ORGANIZATION_TYPE = "UKCoreOrganizationType"
 
     system = models.CharField(
         null=True,

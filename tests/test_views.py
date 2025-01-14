@@ -89,6 +89,7 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
         "UKCore-MedicationDispense-EyeDrops-Example",
         "UKCore-MedicationStatement-Amoxicillin-Example",
         "UKCore-QuestionnaireResponse-InpatientSurvey-Example",
+        "UKCore-Organization-Maximal-Example",
     ],
 )
 def test_resource(
