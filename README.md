@@ -32,45 +32,45 @@ This might be useful to you if you want:
 ## models included
 
 
-| profile                         | minimal spec  | maximal spec  |
-|---------------------------------|---------------|---------------|
-| UKCore-AllergyIntolerance       | ✅             | ❌             |
-| UKCore-Appointment              | ✅             | ❌             |
-| UKCore-Composition              | ✅             | ❌             |
-| UKCore-Condition                | ✅             | ❌             |
-| UKCore-Consent                  | ✅             | ❌             |
-| UKCore-Device                   | ✅             | ❌             |
-| UKCore-DiagnosticReport         | ✅             | ❌             |
-| UKCore-Encounter                | ✅             | ❌             |
-| UKCore-EpisodeOfCare            | ✅             | ❌             |
-| UKCore-FamilyMemberHistory      | ✅             | ❌             |
-| UKCore-Flag                     | ✅             | ❌             |
-| UKCore-HealthcareService        | ✅             | ❌             |
-| UKCore-ImagingStudy             | ✅             | ❌             |
-| UKCore-Immunization             | ✅             | ❌             |
-| UKCore-List                     | ✅             | ❌             |
-| UKCore-Location                 | ✅             | ❌             |
-| UKCore-Medication               | ✅             | ❌             |
-| UKCore-MedicationAdministration | ✅             | ❌             |
-| UKCore-MedicationDispense       | ✅             | ❌             |
-| UKCore-MedicationRequest        | ✅             | ❌             |
-| UKCore-MedicationStatement      | ✅             | ❌             |
-| UKCore-MessageHeader            | ✅             | ❌             |
-| UKCore-Observation              | ✅             | ❌             |
-| UKCore-OperationOutcome         | ✅             | ❌             |
-| UKCore-Organization             | ✅             | ❌             |
-| UKCore-Patient                  | ✅             | ❌             |
-| UKCore-Practitioner             | ✅             | ❌             |
-| UKCore-PractitionerRole         | ✅             | ❌             |
-| UKCore-Procedure                | ✅             | ❌             |
-| UKCore-Questionnaire            | ✅             | ❌             |
-| UKCore-QuestionnaireResponse    | ✅             | ❌             |
-| UKCore-RelatedPerson            | ✅             | ❌             |
-| UKCore-Schedule                 | ✅             | ❌             |
-| UKCore-ServiceRequest           | ✅             | ❌             |
-| UKCore-Slot                     | ✅             | ❌             |
-| UKCore-Specimen                 | ✅             | ❌             |
-| UKCore-Task                     | ✅             | ❌             |
+| profile                         | minimal spec  | maximal spec |
+|---------------------------------|---------------|--------------|
+| UKCore-AllergyIntolerance       | ✅             | ❌            |
+| UKCore-Appointment              | ✅             | ❌            |
+| UKCore-Composition              | ✅             | ❌            |
+| UKCore-Condition                | ✅             | ❌            |
+| UKCore-Consent                  | ✅             | ❌            |
+| UKCore-Device                   | ✅             | ❌            |
+| UKCore-DiagnosticReport         | ✅             | ❌            |
+| UKCore-Encounter                | ✅             | ❌            |
+| UKCore-EpisodeOfCare            | ✅             | ❌            |
+| UKCore-FamilyMemberHistory      | ✅             | ❌            |
+| UKCore-Flag                     | ✅             | ❌            |
+| UKCore-HealthcareService        | ✅             | ❌            |
+| UKCore-ImagingStudy             | ✅             | ❌            |
+| UKCore-Immunization             | ✅             | ❌            |
+| UKCore-List                     | ✅             | ❌            |
+| UKCore-Location                 | ✅             | ❌            |
+| UKCore-Medication               | ✅             | ❌            |
+| UKCore-MedicationAdministration | ✅             | ❌            |
+| UKCore-MedicationDispense       | ✅             | ❌            |
+| UKCore-MedicationRequest        | ✅             | ❌            |
+| UKCore-MedicationStatement      | ✅             | ❌            |
+| UKCore-MessageHeader            | ✅             | ❌            |
+| UKCore-Observation              | ✅             | ❌            |
+| UKCore-OperationOutcome         | ✅             | ❌            |
+| UKCore-Organization             | ✅             | ✅            |
+| UKCore-Patient                  | ✅             | ❌            |
+| UKCore-Practitioner             | ✅             | ❌            |
+| UKCore-PractitionerRole         | ✅             | ❌            |
+| UKCore-Procedure                | ✅             | ❌            |
+| UKCore-Questionnaire            | ✅             | ❌            |
+| UKCore-QuestionnaireResponse    | ✅             | ❌            |
+| UKCore-RelatedPerson            | ✅             | ❌            |
+| UKCore-Schedule                 | ✅             | ❌            |
+| UKCore-ServiceRequest           | ✅             | ❌            |
+| UKCore-Slot                     | ✅             | ❌            |
+| UKCore-Specimen                 | ✅             | ❌            |
+| UKCore-Task                     | ✅             | ❌            |
 
 
 ## intentional exclusions
@@ -126,3 +126,8 @@ The only reference type supported is:
 all other fields such as `type`, `identifier`, `display` are not allowed and will result in an error. Note that this 
 means that it is not possible to reference an external entity.
 )
+
+
+### endpoint
+
+Endpoints are excluded

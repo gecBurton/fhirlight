@@ -53,9 +53,10 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
     [
         "UKCore-Organization-LeedsTeachingHospital-Example",
         "UKCore-Organization-WhiteRoseMedicalCentre-Example",
+        "UKCore-Organization-Maximal-Example",
     ],
 )
-def test_organizations(resource):
+def test_organizations(resource, minimal_organization):
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)
 

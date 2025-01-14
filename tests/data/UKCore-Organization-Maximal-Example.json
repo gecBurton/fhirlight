@@ -1,0 +1,43 @@
+{
+    "resourceType": "Organization",
+    "id": "UKCore-Organization-Maximal-Example",
+    "identifier":  [
+        {
+            "use": "official",
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "RVJ"
+        }
+    ],
+    "type": [
+        {
+            "coding": [
+                {
+                    "code":  "GLH",
+                    "system":  "https://fhir.hl7.org.uk/CodeSystem/UKCore-OrganizationTypeGenomics",
+                    "display":  "Genomic Lab Hub"
+                }
+            ]
+        }
+    ],
+    "name": "Bristol Genetics Laboratory",
+    "alias": ["BGL"],
+    "telecom":  [
+        {
+            "system": "phone",
+            "value": "01174146168"
+        }
+    ],
+    "address":  [
+        {
+            "line":  [
+                "Bristol Genetics Laboratory",
+                "Southmead Hospital",
+                "Westbury-on-Trym"
+            ],
+            "city": "Bristol",
+            "postalCode": "BS10 5NB",
+            "country": "ENGLAND"
+        }
+    ],
+    "partOf" : {"reference":  "Organization/UKCore-Organization-Minimal-Example"}
+}
