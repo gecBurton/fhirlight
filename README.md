@@ -24,7 +24,7 @@ This might be useful to you if you want:
 * All profiles now have a minimal model-serializer-view and are tested against the UK Core examples for API:
   * GET ✅
   * POST ✅
-  * DELETE ❌
+  * DELETE ✅
   * PUT ❌
 * All profiles will be extended to include the full UK FHIR spec, once this milestone has been achieved the project will
   be considered to be in v1 and future changes will be backward compatible.

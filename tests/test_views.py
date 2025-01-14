@@ -153,3 +153,15 @@ def test_resource(
     assert prepare_payload(payload) in [
         entry["resource"] for entry in get_response.json()["entry"]
     ]
+
+    delete_response = client.delete(url_detail)
+    assert delete_response.status_code == 204
+    assert not delete_response.content
+
+    get_response = client.get(url_detail)
+    assert get_response.status_code == 404
+
+    profile_name = payload["resourceType"] + "Profile"
+    assert get_response.json() == {
+        "detail": f"No {profile_name} matches the given query."
+    }
