@@ -17,45 +17,61 @@ This might be useful to you if you want:
 * Some FHIR models to use in your app
 * To see how it is possible to tackle some of the trickier aspects of FHIR such as polymorphism.
 
+## status
+
+* This project is in alpha. 
+* A strict subset of the UK Core FHIR spec has been identified.
+* All profiles now have a minimal model-serializer-view and are tested against the UK Core examples for API:
+  * GET ✅
+  * POST ✅
+  * DELETE ❌
+  * PUT ❌
+* All profiles will be extended to include the full UK FHIR spec, once this milestone has been achieved the project will
+  be considered to be in v1 and future changes will be backward compatible.
+
 ## models included
 
-* UKCore-AllergyIntolerance ✅
-* UKCore-Appointment ✅
-* UKCore-Composition ✅ [2, 4]
-* UKCore-Condition ✅
-* UKCore-Consent ✅
-* UKCore-Device ✅
-* UKCore-DiagnosticReport ✅
-* UKCore-Encounter ✅
-* UKCore-EpisodeOfCare ✅
-* UKCore-FamilyMemberHistory ✅
-* UKCore-Flag ✅
-* UKCore-HealthcareService
-* UKCore-ImagingStudy ✅
-* UKCore-Immunization ✅
-* UKCore-List ✅
-* UKCore-Location ✅
-* UKCore-Medication ✅
-* UKCore-MedicationAdministration ✅
-* UKCore-MedicationDispense ✅
-* UKCore-MedicationRequest ✅
-* UKCore-MedicationStatement ✅
-* UKCore-MessageHeader ✅ [4]
-* UKCore-Observation ✅
-* UKCore-OperationOutcome ✅
-* UKCore-Organization ✅
-* UKCore-Patient ✅
-* UKCore-Practitioner ✅
-* UKCore-PractitionerRole ✅
-* UKCore-Procedure ✅
-* UKCore-Questionnaire ✅
-* UKCore-QuestionnaireResponse ❌
-* UKCore-RelatedPerson ✅
-* UKCore-Schedule ✅
-* UKCore-ServiceRequest ✅
-* UKCore-Slot ✅
-* UKCore-Specimen ✅
-* UKCore-Task ✅
+
+| profile                         | minimal spec  | maximal spec  |
+|---------------------------------|---------------|---------------|
+| UKCore-AllergyIntolerance       | ✅             | ❌             |
+| UKCore-Appointment              | ✅             | ❌             |
+| UKCore-Composition              | ✅             | ❌             |
+| UKCore-Condition                | ✅             | ❌             |
+| UKCore-Consent                  | ✅             | ❌             |
+| UKCore-Device                   | ✅             | ❌             |
+| UKCore-DiagnosticReport         | ✅             | ❌             |
+| UKCore-Encounter                | ✅             | ❌             |
+| UKCore-EpisodeOfCare            | ✅             | ❌             |
+| UKCore-FamilyMemberHistory      | ✅             | ❌             |
+| UKCore-Flag                     | ✅             | ❌             |
+| UKCore-HealthcareService        | ✅             | ❌             |
+| UKCore-ImagingStudy             | ✅             | ❌             |
+| UKCore-Immunization             | ✅             | ❌             |
+| UKCore-List                     | ✅             | ❌             |
+| UKCore-Location                 | ✅             | ❌             |
+| UKCore-Medication               | ✅             | ❌             |
+| UKCore-MedicationAdministration | ✅             | ❌             |
+| UKCore-MedicationDispense       | ✅             | ❌             |
+| UKCore-MedicationRequest        | ✅             | ❌             |
+| UKCore-MedicationStatement      | ✅             | ❌             |
+| UKCore-MessageHeader            | ✅             | ❌             |
+| UKCore-Observation              | ✅             | ❌             |
+| UKCore-OperationOutcome         | ✅             | ❌             |
+| UKCore-Organization             | ✅             | ❌             |
+| UKCore-Patient                  | ✅             | ❌             |
+| UKCore-Practitioner             | ✅             | ❌             |
+| UKCore-PractitionerRole         | ✅             | ❌             |
+| UKCore-Procedure                | ✅             | ❌             |
+| UKCore-Questionnaire            | ✅             | ❌             |
+| UKCore-QuestionnaireResponse    | ✅             | ❌             |
+| UKCore-RelatedPerson            | ✅             | ❌             |
+| UKCore-Schedule                 | ✅             | ❌             |
+| UKCore-ServiceRequest           | ✅             | ❌             |
+| UKCore-Slot                     | ✅             | ❌             |
+| UKCore-Specimen                 | ✅             | ❌             |
+| UKCore-Task                     | ✅             | ❌             |
+
 
 ## intentional exclusions
 fhirlight does not support the full UK-Core specification. Generally this is because the cost of some features outweighs

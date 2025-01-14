@@ -37,6 +37,7 @@ from api.serializers.practitioner import PractitionerSerializer
 from api.serializers.practitioner_role import PractitionerRoleSerializer
 from api.serializers.procedure import ProcedureSerializer
 from api.serializers.questionnaire import QuestionnaireSerializer
+from api.serializers.questionnaire_response import QuestionnaireResponseSerializer
 from api.serializers.related_person import RelatedPersonSerializer
 from api.serializers.schedule import ScheduleSerializer
 from api.serializers.slot import SlotSerializer
@@ -749,6 +750,25 @@ def test_medication_statement(resource, richard_smith):
         payload = json.load(f)
 
     serializer = MedicationStatementSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-QuestionnaireResponse-InpatientSurvey-Example",
+    ],
+)
+def test_questionare_response(
+    resource, consultant_sandra_gose, inpatient_encounter, richard_smith
+):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = QuestionnaireResponseSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload

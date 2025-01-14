@@ -3,6 +3,7 @@ from .organization import OrganizationSerializer
 from .practitioner import PractitionerSerializer
 from .operation_outcome import OperationOutcomeSerializer
 from .questionnaire import QuestionnaireSerializer
+from .questionnaire_response import QuestionnaireResponseSerializer
 from .slot import SlotSerializer
 from .medication import MedicationSerializer
 from .related_person import RelatedPersonSerializer
@@ -61,6 +62,7 @@ __all__ = [
     "PractitionerSerializer",
     "OperationOutcomeSerializer",
     "QuestionnaireSerializer",
+    "QuestionnaireResponseSerializer",
     "SlotSerializer",
     "MedicationSerializer",
     "RelatedPersonSerializer",
