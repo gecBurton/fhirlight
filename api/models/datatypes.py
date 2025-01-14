@@ -285,6 +285,9 @@ class Concept(models.Model):
         )
         UK_CORE_MEDICATION_DOSAGE_METHOD = "UKCoreMedicationDosageMethod"
         DOSE_AND_RATE_TYPE_CODE = "DoseAndRateType"
+        MEDICATION_CODEABLE_CONCEPT = "MedicationCodeableConcept"
+        UK_CORE_MEDICATION_STATEMENT_CATEGORY_CODE = "UKCoreMedicationStatementCategory"
+        AS_NEEDED_CODEABLE_CONCEPT = "asNeededCodeableConcept"
 
     system = models.CharField(
         null=True,
@@ -365,7 +368,7 @@ class Dosage(DataTypeWithPeriod):
         blank=True,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_BODY_SITE},
         help_text="Body site to administer to",
-        related_name="MedicationRequestDosageInstruction_site",
+        related_name="Dosage_site",
     )
     route = models.ForeignKey(
         Concept,
@@ -376,7 +379,7 @@ class Dosage(DataTypeWithPeriod):
             "valueset": Concept.VALUESET.UK_CORE_SUBSTANCE_OR_PRODUCT_ADMINISTRATION_ROUTE
         },
         help_text="How drug should enter body",
-        related_name="MedicationRequestDosageInstruction_route",
+        related_name="Dosage_route",
     )
     method = models.ForeignKey(
         Concept,
@@ -387,7 +390,7 @@ class Dosage(DataTypeWithPeriod):
             "valueset": Concept.VALUESET.UK_CORE_MEDICATION_DOSAGE_METHOD
         },
         help_text="Technique for administering medication",
-        related_name="MedicationRequestDosageInstruction_method",
+        related_name="Dosage_method",
     )
 
     timingRepeatFrequency = models.PositiveIntegerField(
@@ -404,8 +407,15 @@ class Dosage(DataTypeWithPeriod):
         help_text="The units of time for the period in UCUM units.",
     )
 
-    class Meta:
-        abstract = True
+    asNeededCodeableConcept = models.ForeignKey(
+        Concept,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        limit_choices_to={"valueset": Concept.VALUESET.AS_NEEDED_CODEABLE_CONCEPT},
+        help_text="The kind of dose or rate specified",
+        related_name="Dosage_asNeededCodeableConcept",
+    )
 
 
 class DoseAndRate(DataTypeWithPeriod):
@@ -430,6 +440,3 @@ class DoseAndRate(DataTypeWithPeriod):
     doseQuantityCode = models.CharField(
         max_length=32, null=True, blank=True, help_text="Coded form of the unit"
     )
-
-    class Meta:
-        abstract = True
