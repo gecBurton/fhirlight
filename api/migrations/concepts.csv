@@ -849,3 +849,6 @@
 "outpatient", "http://terminology.hl7.org/CodeSystem/medication-statement-category", "Outpatient", "UKCoreMedicationStatementCategory"
 "39732311000001104", "https://dmd.nhs.uk", "Amoxicillin 250mg capsules", "MedicationCodeableConcept"
 "65363002", "http://snomed.info/sct", "Otitis media", "Condition/Problem/DiagnosisCodes"
+"123851003", "http://snomed.info/sct", "Mouth region structure", "UKCoreBodySite"
+"26643006", "http://snomed.info/sct", "Oral", "UKCoreSubstanceOrProductAdministrationRoute"
+"301354004", "http://snomed.info/sct", "Pain of ear", "asNeededCodeableConcept"

@@ -2,8 +2,15 @@ from rest_framework.fields import IntegerField, CharField, URLField, DateTimeFie
 from rest_framework.serializers import Serializer
 
 from api.models import MedicationStatementProfile
+from api.models.datatypes import Concept
+from api.models.medication_statement import (
+    MedicationStatementDosage,
+    MedicationStatementDosageDoseAndRate,
+)
 from api.serializers.common import (
     ProfileSerializer,
+    BaseModelSerializer,
+    RelatedResourceSerializer,
 )
 
 
@@ -14,21 +21,27 @@ class DoseQuantitySerializer(Serializer):
     code = CharField(source="doseQuantityCode", required=False)
 
 
-# class MedicationStatementDosageInstructionDoseAndRateSerializer(BaseModelSerializer):
-#     doseQuantity = DoseQuantitySerializer(source="*", required=False)
-#
-#     class Meta:
-#         exclude = (
-#             "uuid",
-#             "dosageInstruction",
-#             "created_at",
-#             "updated_at",
-#             "doseQuantityValue",
-#             "doseQuantityUnit",
-#             "doseQuantitySystem",
-#             "doseQuantityCode",
-#         )
-#         model = MedicationStatementDosageInstructionDoseAndRate
+class MedicationStatementDosageDoseAndRateSerializer(BaseModelSerializer):
+    doseQuantity = DoseQuantitySerializer(source="*", required=False)
+    asNeededCodeableConcept = RelatedResourceSerializer(
+        required=False,
+        queryset=Concept.objects.filter(
+            valueset=Concept.VALUESET.AS_NEEDED_CODEABLE_CONCEPT
+        ),
+    )
+
+    class Meta:
+        exclude = (
+            "uuid",
+            "created_at",
+            "updated_at",
+            "doseQuantityValue",
+            "doseQuantityUnit",
+            "doseQuantitySystem",
+            "doseQuantityCode",
+            "dosage",
+        )
+        model = MedicationStatementDosageDoseAndRate
 
 
 class RepeatSerializer(Serializer):
@@ -41,25 +54,25 @@ class TimingSerializer(Serializer):
     repeat = RepeatSerializer(required=False, source="*")
 
 
-# class DosageInstructionSerializer(BaseModelSerializer):
-#     timing = TimingSerializer(required=False, source="*")
-#     doseAndRate = MedicationStatementDosageInstructionDoseAndRateSerializer(
-#         required=False,
-#         many=True,
-#         source="medicationstatementdosageinstructiondoseandrate_set",
-#     )
-#
-#     class Meta:
-#         exclude = (
-#             "uuid",
-#             "profile",
-#             "created_at",
-#             "updated_at",
-#             "timingRepeatFrequency",
-#             "timingRepeatPeriod",
-#             "timingRepeatPeriodUnit",
-#         )
-#         model = MedicationStatementDosageInstruction
+class DosageSerializer(BaseModelSerializer):
+    timing = TimingSerializer(required=False, source="*")
+    doseAndRate = MedicationStatementDosageDoseAndRateSerializer(
+        required=False,
+        many=True,
+        source="medicationstatementdosagedoseandrate_set",
+    )
+
+    class Meta:
+        exclude = (
+            "uuid",
+            "profile",
+            "created_at",
+            "updated_at",
+            "timingRepeatFrequency",
+            "timingRepeatPeriod",
+            "timingRepeatPeriodUnit",
+        )
+        model = MedicationStatementDosage
 
 
 class EffectivePeriodSerializer(Serializer):
@@ -68,9 +81,9 @@ class EffectivePeriodSerializer(Serializer):
 
 
 class MedicationStatementSerializer(ProfileSerializer):
-    # dosageInstruction = DosageInstructionSerializer(
-    #     required=False, many=True, source="medicationdispensedosageinstruction_set"
-    # )
+    dosage = DosageSerializer(
+        required=False, many=True, source="medicationstatementdosage_set"
+    )
     # daysSupply = daysSupplySerializer(required=False, source="*")
     # quantity = quantitySerializer(required=False, source="*")
     effectivePeriod = EffectivePeriodSerializer(required=False, source="*")

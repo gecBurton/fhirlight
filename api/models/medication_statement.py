@@ -4,6 +4,8 @@ from api.models.common import BaseProfile
 from api.models.datatypes import (
     Concept,
     Identifier,
+    Dosage,
+    DoseAndRate,
 )
 
 
@@ -106,15 +108,14 @@ class MedicationStatementIdentifier(Identifier):
     profile = models.ForeignKey(MedicationStatementProfile, on_delete=models.CASCADE)
 
 
-# class MedicationStatementDosageInstruction(Dosage):
-#     """Dosage instructions for the medication"""
-#
-#     profile = models.ForeignKey(MedicationStatementProfile, on_delete=models.CASCADE,
-#                                 related_name="MedicationStatementdosageInstruction")
-#
-#
-# class MedicationStatementDosageInstructionDoseAndRate(DoseAndRate):
-#     dosageInstruction = models.ForeignKey(
-#         MedicationStatementDosageInstruction, on_delete=models.CASCADE,
-#         related_name="MedicationStatementDosageInstructiondoseAndRate"
-#     )
+class MedicationStatementDosage(Dosage):
+    """Dosage instructions for the medication"""
+
+    profile = models.ForeignKey(MedicationStatementProfile, on_delete=models.CASCADE)
+
+
+class MedicationStatementDosageDoseAndRate(DoseAndRate):
+    dosage = models.ForeignKey(
+        MedicationStatementDosage,
+        on_delete=models.CASCADE,
+    )
