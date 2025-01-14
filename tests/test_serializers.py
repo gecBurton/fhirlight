@@ -26,6 +26,7 @@ from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.list import ListSerializer
 from api.serializers.location import LocationSerializer
 from api.serializers.medication import MedicationSerializer
+from api.serializers.medication_dispense import MedicationDispenseSerializer
 from api.serializers.message_header import MessageHeaderSerializer
 from api.serializers.observation import ObservationSerializer
 from api.serializers.operation_outcome import OperationOutcomeSerializer
@@ -711,6 +712,25 @@ def test_medication_administration(
         payload = json.load(f)
 
     serializer = MedicationAdministrationSerializer(data=copy.deepcopy(payload))
+    is_valid = serializer.is_valid()
+    assert is_valid, serializer.errors
+    assert serializer.to_representation(instance=serializer.validated_data) == payload
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "resource",
+    [
+        "UKCore-MedicationDispense-EyeDrops-Example",
+    ],
+)
+def test_medication_dispense(
+    resource, richard_smith, timoptol_eye_drops, eye_drops, pharmacist_jimmy_chuck
+):
+    with open(f"{TEST_DIR}/data/{resource}.json") as f:
+        payload = json.load(f)
+
+    serializer = MedicationDispenseSerializer(data=copy.deepcopy(payload))
     is_valid = serializer.is_valid()
     assert is_valid, serializer.errors
     assert serializer.to_representation(instance=serializer.validated_data) == payload
