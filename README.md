@@ -20,7 +20,7 @@ This might be useful to you if you want:
 ## status
 
 * This project is in alpha. 
-* A strict subset of the UK Core FHIR spec has been identified.
+* A strict subset of the UK Core FHIR spec to identify has been identified.
 * All profiles now have a minimal model-serializer-view and are tested against the UK Core examples for API:
   * GET ✅
   * POST ✅
@@ -78,7 +78,7 @@ fhirlight does not support the full UK-Core specification. Generally this is bec
 the benefits.
 
 ### Codeable-Concepts
-1. Codeable-Concepts will only ever have one coding. The reason for this is that the cost of having many join
+Codeable-Concepts will only ever have one coding. The reason for this is that the cost of having many join
 tables is high, and the benefit of being able to encode the same thing two different ways is low.
 
 i.e. POSTing the following would result in an error because there are two encodings:
