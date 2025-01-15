@@ -1,6 +1,3 @@
-from rest_framework.fields import DateTimeField
-from rest_framework.serializers import Serializer
-
 from api.models.questionnaire_response import (
     QuestionnaireResponseItem,
     QuestionnaireResponseProfile,
@@ -22,13 +19,7 @@ class QuestionnaireResponseItemSerializer(QuestionnaireResponseChildItemSerializ
     )
 
 
-class effectivePeriodSerializer(Serializer):
-    start = DateTimeField(required=False, source="effectivePeriodStart")
-    end = DateTimeField(required=False, source="effectivePeriodEnd")
-
-
 class QuestionnaireResponseSerializer(ProfileSerializer):
-    effectivePeriod = effectivePeriodSerializer(required=False, source="*")
     item = QuestionnaireResponseItemSerializer(
         many=True, required=False, source="questionnaireresponseitem_set"
     )

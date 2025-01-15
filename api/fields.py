@@ -28,3 +28,8 @@ class QuantityField(JSONField):
 class TimingField(FHIRDataTypeField):
     description = "https://build.fhir.org/datatypes.html#timing"
     types = {"repeat": dict}
+
+
+class PeriodField(FHIRDataTypeField):
+    description = "https://build.fhir.org/datatypes.html#timing"
+    types = {"start": str, "end": str}

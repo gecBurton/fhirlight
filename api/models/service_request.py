@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import Concept
 
@@ -59,12 +60,10 @@ class ServiceRequestProfile(BaseProfile):
         help_text="Whether the request is a proposal, plan, an original order or a reflex order.",
     )
 
-    occurrencePeriodStart = models.DateTimeField(
+    occurrencePeriod = PeriodField(
         null=True, blank=True, help_text="When service should start"
     )
-    occurrencePeriodEnd = models.DateTimeField(
-        null=True, blank=True, help_text="When service should end"
-    )
+
     authoredOn = models.DateTimeField(
         null=True, blank=True, help_text="Date request signed"
     )

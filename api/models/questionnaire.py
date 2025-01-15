@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import Identifier, ContactPoint, DataTypeWithPeriod
 
@@ -81,10 +82,7 @@ class QuestionnaireBase(BaseProfile):
         blank=True,
         help_text="Resource that can be subject of QuestionnaireResponse.",
     )
-    effectivePeriodStart = models.DateTimeField(
-        null=True, blank=True, help_text="When the questionnaire is expected to be used"
-    )
-    effectivePeriodEnd = models.DateTimeField(
+    effectivePeriod = PeriodField(
         null=True, blank=True, help_text="When the questionnaire is expected to be used"
     )
 

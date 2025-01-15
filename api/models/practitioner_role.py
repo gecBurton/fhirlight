@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import ContactPoint, Concept, Identifier
 
@@ -42,15 +43,10 @@ class PractitionerRoleProfile(BaseProfile):
         related_name="PractitionerRole_location",
     )
 
-    period_start = models.DateTimeField(
+    period = PeriodField(
         null=True,
         blank=True,
         help_text="Start time period when the resource was/is in use",
-    )
-    period_end = models.DateTimeField(
-        null=True,
-        blank=True,
-        help_text="End time period when the resource was/is in use",
     )
     specialty = models.ManyToManyField(
         Concept,

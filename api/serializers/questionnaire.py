@@ -1,5 +1,4 @@
-from rest_framework.fields import DateTimeField
-from rest_framework.serializers import Serializer, ModelSerializer
+from rest_framework.serializers import ModelSerializer
 
 from api.models import QuestionnaireProfile
 from api.models.questionnaire import (
@@ -45,13 +44,7 @@ class QuestionnaireTelecomSerializer(ModelSerializer):
         model = QuestionnaireContact
 
 
-class effectivePeriodSerializer(Serializer):
-    start = DateTimeField(required=False, source="effectivePeriodStart")
-    end = DateTimeField(required=False, source="effectivePeriodEnd")
-
-
 class QuestionnaireSerializer(ProfileSerializer):
-    effectivePeriod = effectivePeriodSerializer(required=False, source="*")
     identifier = QuestionnaireIdentifierSerializer(
         many=True, required=False, source="questionnaireidentifier_set"
     )
@@ -67,7 +60,5 @@ class QuestionnaireSerializer(ProfileSerializer):
             "created_at",
             "updated_at",
             "polymorphic_ctype",
-            "effectivePeriodEnd",
-            "effectivePeriodStart",
         )
         model = QuestionnaireProfile

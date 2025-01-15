@@ -1,4 +1,3 @@
-from rest_framework.fields import DateTimeField
 from rest_framework.serializers import Serializer
 
 from api.models.datatypes import Concept
@@ -10,11 +9,6 @@ from api.serializers.common import (
     ConceptModelSerializer,
     RelatedResourceSerializer,
 )
-
-
-class PeriodSerializer(Serializer):
-    start = DateTimeField(required=False, source="periodStart")
-    end = DateTimeField(required=False, source="periodEnd")
 
 
 class EncounterHospitalizationSerializer(Serializer):
@@ -32,7 +26,6 @@ class EncounterSerializer(ProfileSerializer):
         queryset=Concept.objects.filter(valueset=Concept.VALUESET.V3_ACT_ENCOUNTER_CODE)
     )
     hospitalization = EncounterHospitalizationSerializer(required=False, source="*")
-    period = PeriodSerializer(required=False, source="*")
 
     def to_internal_value(self, data):
         data["klass"] = data.pop("class", None)
@@ -49,7 +42,5 @@ class EncounterSerializer(ProfileSerializer):
             "updated_at",
             "polymorphic_ctype",
             "hospitalizationDischargeDisposition",
-            "periodStart",
-            "periodEnd",
         )
         model = EncounterProfile

@@ -3,7 +3,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models import UniqueConstraint
 
-from api.fields import QuantityField, TimingField
+from api.fields import QuantityField, TimingField, PeriodField
 
 
 class Coding(models.Model):
@@ -23,13 +23,10 @@ class DataTypeWithPeriod(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    period_start = models.DateTimeField(
+    period = PeriodField(
         null=True,
         blank=True,
         help_text="Start time period when the record was/is in use",
-    )
-    period_end = models.DateTimeField(
-        null=True, blank=True, help_text="End time period when the record was/is in use"
     )
 
     class Meta:
@@ -69,15 +66,10 @@ class ContactPoint(DataTypeWithPeriod):
     rank = models.PositiveIntegerField(
         null=True, blank=True, help_text="Specify preferred order of use (1 = highest)"
     )
-    period_start = models.DateTimeField(
+    period = PeriodField(
         null=True,
         blank=True,
         help_text="Start time period when the contact point was/is in use",
-    )
-    period_end = models.DateTimeField(
-        null=True,
-        blank=True,
-        help_text="End time period when the contact point was/is in use",
     )
 
     class Meta:

@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import (
     Concept,
@@ -68,12 +69,7 @@ class MedicationStatementProfile(BaseProfile):
         related_name="MedicationStatement_subject",
     )
 
-    effectivePeriodStart = models.DateTimeField(
-        null=True,
-        blank=True,
-        help_text="The interval of time during which it is being asserted that the patient is/was/will be taking the medication (or was not taking, when the MedicationStatement.taken element is No).",
-    )
-    effectivePeriodEnd = models.DateTimeField(
+    effectivePeriod = PeriodField(
         null=True,
         blank=True,
         help_text="The interval of time during which it is being asserted that the patient is/was/will be taking the medication (or was not taking, when the MedicationStatement.taken element is No).",

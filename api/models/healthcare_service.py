@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import Concept, ContactPoint, Identifier, DataTypeWithPeriod
 
@@ -163,11 +164,8 @@ class HealthcareServiceNotAvailable(DataTypeWithPeriod):
     description = models.CharField(
         max_length=128, help_text="Times the Service Site is available"
     )
-    duringStart = models.DateTimeField(
+    during = PeriodField(
         null=True, blank=True, help_text="Service not available from this date"
-    )
-    duringEnd = models.DateTimeField(
-        null=True, blank=True, help_text="Service not available to this date"
     )
 
     #     "program":  [
