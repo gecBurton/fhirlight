@@ -3,6 +3,8 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models import UniqueConstraint
 
+from api.fields import QuantityField, TimingField, PeriodField
+
 
 class Coding(models.Model):
     system = models.URLField(null=True, blank=True)
@@ -21,13 +23,10 @@ class DataTypeWithPeriod(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    period_start = models.DateTimeField(
+    period = PeriodField(
         null=True,
         blank=True,
         help_text="Start time period when the record was/is in use",
-    )
-    period_end = models.DateTimeField(
-        null=True, blank=True, help_text="End time period when the record was/is in use"
     )
 
     class Meta:
@@ -67,15 +66,10 @@ class ContactPoint(DataTypeWithPeriod):
     rank = models.PositiveIntegerField(
         null=True, blank=True, help_text="Specify preferred order of use (1 = highest)"
     )
-    period_start = models.DateTimeField(
+    period = PeriodField(
         null=True,
         blank=True,
         help_text="Start time period when the contact point was/is in use",
-    )
-    period_end = models.DateTimeField(
-        null=True,
-        blank=True,
-        help_text="End time period when the contact point was/is in use",
     )
 
     class Meta:
@@ -323,41 +317,6 @@ class Concept(models.Model):
 class Dosage(DataTypeWithPeriod):
     """Dosage instructions for the medication"""
 
-    class UCUM(models.TextChoices):
-        """unit of time"""
-
-        SECOND = "s"
-        MINUTE = "min"
-        HOUR = "h"
-        DAY = "d"
-        WEEK = "wk"
-        MONTH = "mo"
-        ANNUAL = "a"
-
-    # dispenseRequest	Specific dispensing quantity instructions.
-    dispenseRequestQuantityValue = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        help_text="Amount of medication to supply per dispense. Numerical value (with implicit precision)",
-    )
-    dispenseRequestQuantityUnit = models.CharField(
-        max_length=16,
-        null=True,
-        blank=True,
-        help_text="Amount of medication to supply per dispense. Unit representation",
-    )
-    dispenseRequestQuantitySystem = models.URLField(
-        null=True,
-        blank=True,
-        help_text="Amount of medication to supply per dispense. System that defines coded unit form",
-    )
-    dispenseRequestQuantityCode = models.CharField(
-        max_length=32,
-        null=True,
-        blank=True,
-        help_text="Amount of medication to supply per dispense. Coded form of the unit",
-    )
-
     text = models.TextField(
         null=True, blank=True, help_text="Free text dosage instructions."
     )
@@ -394,18 +353,8 @@ class Dosage(DataTypeWithPeriod):
         related_name="Dosage_method",
     )
 
-    timingRepeatFrequency = models.PositiveIntegerField(
+    timing = TimingField(
         null=True, blank=True, help_text="Event occurs frequency times per period"
-    )
-    timingRepeatPeriod = models.FloatField(
-        null=True, blank=True, help_text="Event occurs frequency times per period"
-    )
-    timingRepeatPeriodUnit = models.CharField(
-        choices=UCUM,
-        max_length=8,
-        null=True,
-        blank=True,
-        help_text="The units of time for the period in UCUM units.",
     )
 
     asNeededCodeableConcept = models.ForeignKey(
@@ -429,15 +378,6 @@ class DoseAndRate(DataTypeWithPeriod):
         help_text="The kind of dose or rate specified",
         related_name="MedicationRequestDosageInstructionDoseAndRate_type",
     )
-    doseQuantityValue = models.PositiveIntegerField(
+    doseQuantity = QuantityField(
         null=True, blank=True, help_text="Numerical value (with implicit precision)"
-    )
-    doseQuantityUnit = models.CharField(
-        max_length=16, null=True, blank=True, help_text="Unit representation"
-    )
-    doseQuantitySystem = models.URLField(
-        null=True, blank=True, help_text="System that defines coded unit form"
-    )
-    doseQuantityCode = models.CharField(
-        max_length=32, null=True, blank=True, help_text="Coded form of the unit"
     )

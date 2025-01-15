@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import Concept, Identifier, DataTypeWithPeriod
 
@@ -48,11 +49,8 @@ class EncounterProfile(BaseProfile):
         blank=True,
         help_text="The patient or group present at the encounter",
     )
-    periodStart = models.DateTimeField(
+    period = PeriodField(
         null=True, blank=True, help_text="The start time of the encounter."
-    )
-    periodEnd = models.DateTimeField(
-        null=True, blank=True, help_text="The end time of the encounter."
     )
     reasonCode = models.ManyToManyField(
         Concept,

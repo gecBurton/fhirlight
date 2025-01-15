@@ -1,10 +1,20 @@
+from datetime import datetime
+
 from django.db.models import ForeignKey, OneToOneField
 from drf_writable_nested import WritableNestedModelSerializer
-from rest_framework.fields import CharField, SerializerMethodField
+from rest_framework.fields import (
+    CharField,
+    SerializerMethodField,
+    FloatField,
+    URLField,
+    IntegerField,
+    DateTimeField,
+)
 from rest_framework.relations import RelatedField
 from django.utils.translation import gettext_lazy as _
-from rest_framework.serializers import Serializer
+from rest_framework.serializers import Serializer, ModelSerializer
 
+from api.fields import QuantityField, TimingField, PeriodField
 from api.models.datatypes import Concept
 
 
@@ -25,6 +35,50 @@ def strip_none(obj):
     if isinstance(obj, str):
         return obj.removesuffix("T00:00:00Z")
     return obj
+
+
+class FHIRDataTypeSerializer(Serializer):
+    value = FloatField(required=False)
+    code = CharField(required=False)
+    system = URLField(required=False)
+    unit = CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        for key in "encoder", "decoder":
+            kwargs.pop(key, None)
+        super().__init__(*args, **kwargs)
+
+
+class QuantitySerializer(FHIRDataTypeSerializer):
+    value = FloatField(required=False)
+    code = CharField(required=False)
+    system = URLField(required=False)
+    unit = CharField(required=False)
+
+
+class TimingRepeatSerializer(FHIRDataTypeSerializer):
+    frequency = IntegerField()
+    period = IntegerField()
+    periodUnit = CharField()
+
+
+class TimingSerializer(FHIRDataTypeSerializer):
+    repeat = TimingRepeatSerializer()
+
+
+class PeriodSerializer(FHIRDataTypeSerializer):
+    start = DateTimeField(required=False)
+    end = DateTimeField(required=False)
+
+    def to_internal_value(self, data):
+        internal_value = super().to_internal_value(data)
+
+        def f(x):
+            if isinstance(x, datetime):
+                return x.isoformat().replace("+00:00", "Z")
+            return x
+
+        return {k: f(v) for k, v in internal_value.items()}
 
 
 class ConceptSerializer(Serializer):
@@ -119,6 +173,11 @@ class RelatedResourceSerializer(RelatedField):
 
 
 class BaseModelSerializer(WritableNestedModelSerializer):
+    serializer_field_mapping = ModelSerializer.serializer_field_mapping.copy()
+    serializer_field_mapping[QuantityField] = QuantitySerializer
+    serializer_field_mapping[TimingField] = TimingSerializer
+    serializer_field_mapping[PeriodField] = PeriodSerializer
+
     serializer_related_field = RelatedResourceSerializer
 
     def to_representation(self, instance):

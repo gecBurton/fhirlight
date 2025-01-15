@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import Concept, Identifier
 
@@ -80,13 +81,10 @@ class FlagProfile(BaseProfile):
         help_text="Flag creator",
         related_name="Flag_author",
     )
-    periodStart = models.DateTimeField(
+    period = PeriodField(
         null=True,
         blank=True,
         help_text="Start time period when the record was/is in use",
-    )
-    periodEnd = models.DateTimeField(
-        null=True, blank=True, help_text="End time period when the record was/is in use"
     )
 
 

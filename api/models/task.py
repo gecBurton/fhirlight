@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import Concept, Identifier, DataTypeWithPeriod
 
@@ -122,12 +123,10 @@ class TaskProfile(BaseProfile):
         related_name="Task_owner",
     )
 
-    executionPeriodStart = models.DateTimeField(
+    executionPeriod = PeriodField(
         null=True, blank=True, help_text="Start time of execution"
     )
-    executionPeriodEnd = models.DateTimeField(
-        null=True, blank=True, help_text="End time of execution"
-    )
+
     authoredOn = models.DateTimeField(
         null=True, blank=True, help_text="Task creation date."
     )
@@ -136,11 +135,8 @@ class TaskProfile(BaseProfile):
         blank=True,
         help_text="The date and time of last modification to this task.",
     )
-    restrictionPeriodStart = models.DateTimeField(
+    restrictionPeriod = PeriodField(
         null=True, blank=True, help_text="When fulfillment should start."
-    )
-    restrictionPeriodEnd = models.DateTimeField(
-        null=True, blank=True, help_text="When fulfillment should end."
     )
     restrictionRepetitions = models.PositiveIntegerField(
         null=True,

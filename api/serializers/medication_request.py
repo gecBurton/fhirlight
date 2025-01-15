@@ -1,8 +1,5 @@
 from rest_framework.fields import (
     BooleanField,
-    IntegerField,
-    CharField,
-    URLField,
 )
 from rest_framework.serializers import Serializer
 
@@ -11,45 +8,26 @@ from api.models.medication_request import (
     MedicationRequestDosageInstruction,
     MedicationRequestDosageInstructionDoseAndRate,
 )
-from api.serializers.common import ProfileSerializer, BaseModelSerializer
-
-
-class DoseQuantitySerializer(Serializer):
-    value = IntegerField(source="doseQuantityValue", required=False)
-    unit = CharField(source="doseQuantityUnit", required=False)
-    system = URLField(source="doseQuantitySystem", required=False)
-    code = CharField(source="doseQuantityCode", required=False)
+from api.serializers.common import (
+    ProfileSerializer,
+    BaseModelSerializer,
+    TimingSerializer,
+)
 
 
 class MedicationRequestDosageInstructionDoseAndRateSerializer(BaseModelSerializer):
-    doseQuantity = DoseQuantitySerializer(source="*", required=False)
-
     class Meta:
         exclude = (
             "uuid",
             "dosageInstruction",
             "created_at",
             "updated_at",
-            "doseQuantityValue",
-            "doseQuantityUnit",
-            "doseQuantitySystem",
-            "doseQuantityCode",
         )
         model = MedicationRequestDosageInstructionDoseAndRate
 
 
-class RepeatSerializer(Serializer):
-    frequency = IntegerField(source="timingRepeatFrequency")
-    period = IntegerField(source="timingRepeatPeriod")
-    periodUnit = CharField(source="timingRepeatPeriodUnit")
-
-
-class TimingSerializer(Serializer):
-    repeat = RepeatSerializer(required=False, source="*")
-
-
 class DosageInstructionSerializer(BaseModelSerializer):
-    timing = TimingSerializer(required=False, source="*")
+    timing = TimingSerializer(required=False)
     doseAndRate = MedicationRequestDosageInstructionDoseAndRateSerializer(
         required=False,
         many=True,
@@ -62,9 +40,6 @@ class DosageInstructionSerializer(BaseModelSerializer):
             "profile",
             "created_at",
             "updated_at",
-            "timingRepeatFrequency",
-            "timingRepeatPeriod",
-            "timingRepeatPeriodUnit",
         )
         model = MedicationRequestDosageInstruction
 

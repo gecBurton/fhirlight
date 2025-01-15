@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import Identifier, Concept
 
@@ -39,10 +40,7 @@ class ScheduleProfile(BaseProfile):
         help_text="Type of specialty needed.",
         related_name="schedule_specialty_set",
     )
-    planningHorizonStart = models.DateTimeField(
-        null=True, blank=True, help_text="Period of time covered by schedule."
-    )
-    planningHorizonEnd = models.DateTimeField(
+    planningHorizon = PeriodField(
         null=True, blank=True, help_text="Period of time covered by schedule."
     )
     actor = models.ManyToManyField(
