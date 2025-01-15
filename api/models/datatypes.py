@@ -283,6 +283,7 @@ class Concept(models.Model):
         UK_CORE_MEDICATION_STATEMENT_CATEGORY_CODE = "UKCoreMedicationStatementCategory"
         AS_NEEDED_CODEABLE_CONCEPT = "asNeededCodeableConcept"
         UK_CORE_ORGANIZATION_TYPE = "UKCoreOrganizationType"
+        DEGREE_LICENSE_CERTIFICATE = "v2.0360.2.7"
 
     system = models.CharField(
         null=True,

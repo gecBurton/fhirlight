@@ -73,9 +73,10 @@ def test_organizations(resource, minimal_organization):
         "UKCore-Practitioner-ConsultantSandraGose-Example",
         "UKCore-Practitioner-DoctorPaulRastall-Example",
         "UKCore-Practitioner-PharmacistJimmyChuck-Example",
+        "UKCore-Practitioner-Maximal-Example",
     ],
 )
-def test_practitioner(resource):
+def test_practitioner(resource, minimal_organization):
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)
 

@@ -853,3 +853,4 @@
 "26643006", "http://snomed.info/sct", "Oral", "UKCoreSubstanceOrProductAdministrationRoute"
 "301354004", "http://snomed.info/sct", "Pain of ear", "asNeededCodeableConcept"
 "GLH", "https://fhir.hl7.org.uk/CodeSystem/UKCore-OrganizationTypeGenomics", "Genomic Lab Hub", "UKCoreOrganizationType"
+"BN", "http://terminology.hl7.org/CodeSystem/v2-0360", "Bachelor of Nursing", "v2.0360.2.7"
