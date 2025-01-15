@@ -1,4 +1,6 @@
 from django.db import models
+
+from api.fields import QuantityField
 from api.models.common import BaseProfile
 from api.models.datatypes import Concept
 
@@ -78,7 +80,4 @@ class FamilyMemberHistoryCondition(models.Model):
         related_name="FamilyMemberHistoryCondition_code",
     )
 
-    onsetAgeValue = models.PositiveIntegerField(null=True, blank=True)
-    onsetAgeUnit = models.CharField(max_length=256, null=True, blank=True)
-    onsetAgeSystem = models.URLField(null=True, blank=True)
-    onsetAgeCode = models.CharField(max_length=256, null=True, blank=True)
+    onsetAge = QuantityField(null=True, blank=True)
