@@ -1,10 +1,17 @@
 from django.db.models import ForeignKey, OneToOneField
 from drf_writable_nested import WritableNestedModelSerializer
-from rest_framework.fields import CharField, SerializerMethodField
+from rest_framework.fields import (
+    CharField,
+    SerializerMethodField,
+    FloatField,
+    URLField,
+    IntegerField,
+)
 from rest_framework.relations import RelatedField
 from django.utils.translation import gettext_lazy as _
-from rest_framework.serializers import Serializer
+from rest_framework.serializers import Serializer, ModelSerializer
 
+from api.fields import QuantityField, TimingField
 from api.models.datatypes import Concept
 
 
@@ -25,6 +32,28 @@ def strip_none(obj):
     if isinstance(obj, str):
         return obj.removesuffix("T00:00:00Z")
     return obj
+
+
+class QuantitySerializer(Serializer):
+    value = FloatField(required=False)
+    code = CharField(required=False)
+    system = URLField(required=False)
+    unit = CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        for key in "encoder", "decoder":
+            kwargs.pop(key, None)
+        super().__init__(*args, **kwargs)
+
+
+class TimingRepeatSerializer(Serializer):
+    frequency = IntegerField()
+    period = IntegerField()
+    periodUnit = CharField()
+
+
+class TimingSerializer(Serializer):
+    repeat = TimingRepeatSerializer()
 
 
 class ConceptSerializer(Serializer):
@@ -119,6 +148,10 @@ class RelatedResourceSerializer(RelatedField):
 
 
 class BaseModelSerializer(WritableNestedModelSerializer):
+    serializer_field_mapping = ModelSerializer.serializer_field_mapping.copy()
+    serializer_field_mapping[QuantityField] = QuantitySerializer
+    serializer_field_mapping[TimingField] = TimingSerializer
+
     serializer_related_field = RelatedResourceSerializer
 
     def to_representation(self, instance):

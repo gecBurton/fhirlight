@@ -1,27 +1,15 @@
 from rest_framework.fields import (
-    IntegerField,
     CharField,
-    URLField,
 )
 from rest_framework.serializers import Serializer
 
 from api.models import MedicationAdministrationProfile
 from api.models.datatypes import Concept
-from api.serializers.common import ProfileSerializer, RelatedResourceSerializer
-
-
-class RateQuantitySerializer(Serializer):
-    value = IntegerField(source="rateQuantityValue", required=False)
-    unit = CharField(source="rateQuantityUnit", required=False)
-    system = URLField(source="rateQuantitySystem", required=False)
-    code = CharField(source="rateQuantityCode", required=False)
-
-
-class DoseSerializer(Serializer):
-    value = IntegerField(source="dosageDoseQuantityValue", required=False)
-    unit = CharField(source="dosageDoseQuantityUnit", required=False)
-    system = URLField(source="dosageDoseQuantitySystem", required=False)
-    code = CharField(source="dosageDoseQuantityCode", required=False)
+from api.serializers.common import (
+    ProfileSerializer,
+    RelatedResourceSerializer,
+    QuantitySerializer,
+)
 
 
 class DosageSerializer(Serializer):
@@ -45,8 +33,8 @@ class DosageSerializer(Serializer):
         ),
         source="dosageMethod",
     )
-    rateQuantity = RateQuantitySerializer(source="*", required=False)
-    dose = DoseSerializer(source="*", required=False)
+    rateQuantity = QuantitySerializer(source="dosageRateQuantity", required=False)
+    dose = QuantitySerializer(source="dosageDose", required=False)
 
 
 class MedicationAdministrationSerializer(ProfileSerializer):
@@ -61,13 +49,6 @@ class MedicationAdministrationSerializer(ProfileSerializer):
             "dosageSite",
             "dosageRoute",
             "dosageMethod",
-            "dosageRateQuantityValue",
-            "dosageRateQuantityUnit",
-            "dosageRateQuantitySystem",
-            "dosageRateQuantityCode",
-            "dosageDoseQuantityValue",
-            "dosageDoseQuantityUnit",
-            "dosageDoseQuantitySystem",
-            "dosageDoseQuantityCode",
+            "dosageDose",
         )
         model = MedicationAdministrationProfile

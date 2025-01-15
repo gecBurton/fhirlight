@@ -2,7 +2,6 @@ from rest_framework.fields import (
     BooleanField,
     IntegerField,
     CharField,
-    URLField,
 )
 from rest_framework.serializers import Serializer
 
@@ -11,29 +10,19 @@ from api.models.medication_request import (
     MedicationRequestDosageInstruction,
     MedicationRequestDosageInstructionDoseAndRate,
 )
-from api.serializers.common import ProfileSerializer, BaseModelSerializer
-
-
-class DoseQuantitySerializer(Serializer):
-    value = IntegerField(source="doseQuantityValue", required=False)
-    unit = CharField(source="doseQuantityUnit", required=False)
-    system = URLField(source="doseQuantitySystem", required=False)
-    code = CharField(source="doseQuantityCode", required=False)
+from api.serializers.common import (
+    ProfileSerializer,
+    BaseModelSerializer,
+)
 
 
 class MedicationRequestDosageInstructionDoseAndRateSerializer(BaseModelSerializer):
-    doseQuantity = DoseQuantitySerializer(source="*", required=False)
-
     class Meta:
         exclude = (
             "uuid",
             "dosageInstruction",
             "created_at",
             "updated_at",
-            "doseQuantityValue",
-            "doseQuantityUnit",
-            "doseQuantitySystem",
-            "doseQuantityCode",
         )
         model = MedicationRequestDosageInstructionDoseAndRate
 

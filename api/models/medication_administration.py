@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import QuantityField
 from api.models.common import BaseProfile
 from api.models.datatypes import Concept, Identifier
 
@@ -99,29 +100,11 @@ class MedicationAdministrationProfile(BaseProfile):
         related_name="MedicationAdministrationDosage_method",
     )
 
-    dosageRateQuantityValue = models.PositiveIntegerField(
+    dosageRateQuantity = QuantityField(
         null=True, blank=True, help_text="Numerical value (with implicit precision)"
-    )
-    dosageRateQuantityUnit = models.CharField(
-        max_length=32, null=True, blank=True, help_text="Unit representation"
-    )
-    dosageRateQuantitySystem = models.URLField(
-        null=True, blank=True, help_text="System that defines coded unit form"
-    )
-    dosageRateQuantityCode = models.CharField(
-        max_length=32, null=True, blank=True, help_text="Coded form of the unit"
     )
 
-    dosageDoseQuantityValue = models.PositiveIntegerField(
-        null=True, blank=True, help_text="Numerical value (with implicit precision)"
-    )
-    dosageDoseQuantityUnit = models.CharField(
-        max_length=32, null=True, blank=True, help_text="Unit representation"
-    )
-    dosageDoseQuantitySystem = models.URLField(
-        null=True, blank=True, help_text="System that defines coded unit form"
-    )
-    dosageDoseQuantityCode = models.CharField(
+    dosageDose = QuantityField(
         max_length=32, null=True, blank=True, help_text="Coded form of the unit"
     )
 

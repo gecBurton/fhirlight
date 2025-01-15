@@ -1,4 +1,4 @@
-from rest_framework.fields import IntegerField, CharField, URLField, DateTimeField
+from rest_framework.fields import IntegerField, CharField, DateTimeField
 from rest_framework.serializers import Serializer
 
 from api.models import MedicationStatementProfile
@@ -11,18 +11,12 @@ from api.serializers.common import (
     ProfileSerializer,
     BaseModelSerializer,
     RelatedResourceSerializer,
+    QuantitySerializer,
 )
 
 
-class DoseQuantitySerializer(Serializer):
-    value = IntegerField(source="doseQuantityValue", required=False)
-    unit = CharField(source="doseQuantityUnit", required=False)
-    system = URLField(source="doseQuantitySystem", required=False)
-    code = CharField(source="doseQuantityCode", required=False)
-
-
 class MedicationStatementDosageDoseAndRateSerializer(BaseModelSerializer):
-    doseQuantity = DoseQuantitySerializer(source="*", required=False)
+    doseQuantity = QuantitySerializer(required=False)
     asNeededCodeableConcept = RelatedResourceSerializer(
         required=False,
         queryset=Concept.objects.filter(
@@ -35,10 +29,6 @@ class MedicationStatementDosageDoseAndRateSerializer(BaseModelSerializer):
             "uuid",
             "created_at",
             "updated_at",
-            "doseQuantityValue",
-            "doseQuantityUnit",
-            "doseQuantitySystem",
-            "doseQuantityCode",
             "dosage",
         )
         model = MedicationStatementDosageDoseAndRate

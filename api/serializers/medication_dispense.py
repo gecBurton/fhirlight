@@ -8,36 +8,11 @@ from rest_framework.serializers import Serializer
 from api.models.medication_dispense import (
     MedicationDispenseProfile,
     MedicationDispenseDosageInstruction,
-    MedicationDispenseDosageInstructionDoseAndRate,
 )
 from api.serializers.common import (
     ProfileSerializer,
     BaseModelSerializer,
 )
-
-
-class DoseQuantitySerializer(Serializer):
-    value = IntegerField(source="doseQuantityValue", required=False)
-    unit = CharField(source="doseQuantityUnit", required=False)
-    system = URLField(source="doseQuantitySystem", required=False)
-    code = CharField(source="doseQuantityCode", required=False)
-
-
-class MedicationRequestDosageInstructionDoseAndRateSerializer(BaseModelSerializer):
-    doseQuantity = DoseQuantitySerializer(source="*", required=False)
-
-    class Meta:
-        exclude = (
-            "uuid",
-            "dosageInstruction",
-            "created_at",
-            "updated_at",
-            "doseQuantityValue",
-            "doseQuantityUnit",
-            "doseQuantitySystem",
-            "doseQuantityCode",
-        )
-        model = MedicationDispenseDosageInstructionDoseAndRate
 
 
 class RepeatSerializer(Serializer):
@@ -52,11 +27,6 @@ class TimingSerializer(Serializer):
 
 class DosageInstructionSerializer(BaseModelSerializer):
     timing = TimingSerializer(required=False, source="*")
-    doseAndRate = MedicationRequestDosageInstructionDoseAndRateSerializer(
-        required=False,
-        many=True,
-        source="medicationrequestdosageinstructiondoseandrate_set",
-    )
 
     class Meta:
         exclude = (

@@ -3,6 +3,8 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models import UniqueConstraint
 
+from api.fields import QuantityField
+
 
 class Coding(models.Model):
     system = models.URLField(null=True, blank=True)
@@ -429,15 +431,6 @@ class DoseAndRate(DataTypeWithPeriod):
         help_text="The kind of dose or rate specified",
         related_name="MedicationRequestDosageInstructionDoseAndRate_type",
     )
-    doseQuantityValue = models.PositiveIntegerField(
+    doseQuantity = QuantityField(
         null=True, blank=True, help_text="Numerical value (with implicit precision)"
-    )
-    doseQuantityUnit = models.CharField(
-        max_length=16, null=True, blank=True, help_text="Unit representation"
-    )
-    doseQuantitySystem = models.URLField(
-        null=True, blank=True, help_text="System that defines coded unit form"
-    )
-    doseQuantityCode = models.CharField(
-        max_length=32, null=True, blank=True, help_text="Coded form of the unit"
     )
