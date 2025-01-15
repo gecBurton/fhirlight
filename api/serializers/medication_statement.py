@@ -62,8 +62,6 @@ class MedicationStatementSerializer(ProfileSerializer):
     dosage = DosageSerializer(
         required=False, many=True, source="medicationstatementdosage_set"
     )
-    # daysSupply = daysSupplySerializer(required=False, source="*")
-    # quantity = quantitySerializer(required=False, source="*")
     effectivePeriod = EffectivePeriodSerializer(required=False, source="*")
 
     class Meta:
@@ -73,13 +71,5 @@ class MedicationStatementSerializer(ProfileSerializer):
             "polymorphic_ctype",
             "effectivePeriodEnd",
             "effectivePeriodStart",
-            # "daysSupplyValue",
-            # "daysSupplyUnit",
-            # "daysSupplySystem",
-            # "daysSupplyCode",
-            # "quantityCode",
-            # "quantitySystem",
-            # "quantityUnit",
-            # "quantityValue",
         )
         model = MedicationStatementProfile

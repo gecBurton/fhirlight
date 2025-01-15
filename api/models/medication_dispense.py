@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import QuantityField
 from api.models.common import BaseProfile
 from api.models.datatypes import (
     DataTypeWithPeriod,
@@ -73,30 +74,12 @@ class MedicationDispenseProfile(BaseProfile):
         null=True, blank=True, help_text="Start and end time of administration"
     )
 
-    quantityValue = models.PositiveIntegerField(
+    quantity = QuantityField(
         null=True, blank=True, help_text="Numerical value (with implicit precision)"
-    )
-    quantityUnit = models.CharField(
-        max_length=32, null=True, blank=True, help_text="Unit representation"
-    )
-    quantitySystem = models.URLField(
-        null=True, blank=True, help_text="System that defines coded unit form"
-    )
-    quantityCode = models.CharField(
-        max_length=32, null=True, blank=True, help_text="Coded form of the unit"
     )
 
-    daysSupplyValue = models.PositiveIntegerField(
+    daysSupply = QuantityField(
         null=True, blank=True, help_text="Numerical value (with implicit precision)"
-    )
-    daysSupplyUnit = models.CharField(
-        max_length=32, null=True, blank=True, help_text="Unit representation"
-    )
-    daysSupplySystem = models.URLField(
-        null=True, blank=True, help_text="System that defines coded unit form"
-    )
-    daysSupplyCode = models.CharField(
-        max_length=32, null=True, blank=True, help_text="Coded form of the unit"
     )
 
     # {
