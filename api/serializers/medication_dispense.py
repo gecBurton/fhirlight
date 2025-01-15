@@ -12,21 +12,12 @@ from api.models.medication_dispense import (
 from api.serializers.common import (
     ProfileSerializer,
     BaseModelSerializer,
+    TimingSerializer,
 )
 
 
-class RepeatSerializer(Serializer):
-    frequency = IntegerField(source="timingRepeatFrequency")
-    period = IntegerField(source="timingRepeatPeriod")
-    periodUnit = CharField(source="timingRepeatPeriodUnit")
-
-
-class TimingSerializer(Serializer):
-    repeat = RepeatSerializer(required=False, source="*")
-
-
 class DosageInstructionSerializer(BaseModelSerializer):
-    timing = TimingSerializer(required=False, source="*")
+    timing = TimingSerializer(required=False)
 
     class Meta:
         exclude = (
@@ -34,9 +25,6 @@ class DosageInstructionSerializer(BaseModelSerializer):
             "profile",
             "created_at",
             "updated_at",
-            "timingRepeatFrequency",
-            "timingRepeatPeriod",
-            "timingRepeatPeriodUnit",
         )
         model = MedicationDispenseDosageInstruction
 

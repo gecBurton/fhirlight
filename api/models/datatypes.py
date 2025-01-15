@@ -3,7 +3,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models import UniqueConstraint
 
-from api.fields import QuantityField
+from api.fields import QuantityField, TimingField
 
 
 class Coding(models.Model):
@@ -325,41 +325,6 @@ class Concept(models.Model):
 class Dosage(DataTypeWithPeriod):
     """Dosage instructions for the medication"""
 
-    class UCUM(models.TextChoices):
-        """unit of time"""
-
-        SECOND = "s"
-        MINUTE = "min"
-        HOUR = "h"
-        DAY = "d"
-        WEEK = "wk"
-        MONTH = "mo"
-        ANNUAL = "a"
-
-    # dispenseRequest	Specific dispensing quantity instructions.
-    dispenseRequestQuantityValue = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        help_text="Amount of medication to supply per dispense. Numerical value (with implicit precision)",
-    )
-    dispenseRequestQuantityUnit = models.CharField(
-        max_length=16,
-        null=True,
-        blank=True,
-        help_text="Amount of medication to supply per dispense. Unit representation",
-    )
-    dispenseRequestQuantitySystem = models.URLField(
-        null=True,
-        blank=True,
-        help_text="Amount of medication to supply per dispense. System that defines coded unit form",
-    )
-    dispenseRequestQuantityCode = models.CharField(
-        max_length=32,
-        null=True,
-        blank=True,
-        help_text="Amount of medication to supply per dispense. Coded form of the unit",
-    )
-
     text = models.TextField(
         null=True, blank=True, help_text="Free text dosage instructions."
     )
@@ -396,18 +361,8 @@ class Dosage(DataTypeWithPeriod):
         related_name="Dosage_method",
     )
 
-    timingRepeatFrequency = models.PositiveIntegerField(
+    timing = TimingField(
         null=True, blank=True, help_text="Event occurs frequency times per period"
-    )
-    timingRepeatPeriod = models.FloatField(
-        null=True, blank=True, help_text="Event occurs frequency times per period"
-    )
-    timingRepeatPeriodUnit = models.CharField(
-        choices=UCUM,
-        max_length=8,
-        null=True,
-        blank=True,
-        help_text="The units of time for the period in UCUM units.",
     )
 
     asNeededCodeableConcept = models.ForeignKey(

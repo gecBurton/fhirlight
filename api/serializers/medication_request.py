@@ -1,7 +1,5 @@
 from rest_framework.fields import (
     BooleanField,
-    IntegerField,
-    CharField,
 )
 from rest_framework.serializers import Serializer
 
@@ -13,6 +11,7 @@ from api.models.medication_request import (
 from api.serializers.common import (
     ProfileSerializer,
     BaseModelSerializer,
+    TimingSerializer,
 )
 
 
@@ -27,18 +26,8 @@ class MedicationRequestDosageInstructionDoseAndRateSerializer(BaseModelSerialize
         model = MedicationRequestDosageInstructionDoseAndRate
 
 
-class RepeatSerializer(Serializer):
-    frequency = IntegerField(source="timingRepeatFrequency")
-    period = IntegerField(source="timingRepeatPeriod")
-    periodUnit = CharField(source="timingRepeatPeriodUnit")
-
-
-class TimingSerializer(Serializer):
-    repeat = RepeatSerializer(required=False, source="*")
-
-
 class DosageInstructionSerializer(BaseModelSerializer):
-    timing = TimingSerializer(required=False, source="*")
+    timing = TimingSerializer(required=False)
     doseAndRate = MedicationRequestDosageInstructionDoseAndRateSerializer(
         required=False,
         many=True,
@@ -51,9 +40,6 @@ class DosageInstructionSerializer(BaseModelSerializer):
             "profile",
             "created_at",
             "updated_at",
-            "timingRepeatFrequency",
-            "timingRepeatPeriod",
-            "timingRepeatPeriodUnit",
         )
         model = MedicationRequestDosageInstruction
 

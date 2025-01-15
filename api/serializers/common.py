@@ -34,7 +34,7 @@ def strip_none(obj):
     return obj
 
 
-class QuantitySerializer(Serializer):
+class FHIRDataTypeSerializer(Serializer):
     value = FloatField(required=False)
     code = CharField(required=False)
     system = URLField(required=False)
@@ -46,13 +46,20 @@ class QuantitySerializer(Serializer):
         super().__init__(*args, **kwargs)
 
 
-class TimingRepeatSerializer(Serializer):
+class QuantitySerializer(FHIRDataTypeSerializer):
+    value = FloatField(required=False)
+    code = CharField(required=False)
+    system = URLField(required=False)
+    unit = CharField(required=False)
+
+
+class TimingRepeatSerializer(FHIRDataTypeSerializer):
     frequency = IntegerField()
     period = IntegerField()
     periodUnit = CharField()
 
 
-class TimingSerializer(Serializer):
+class TimingSerializer(FHIRDataTypeSerializer):
     repeat = TimingRepeatSerializer()
 
 
