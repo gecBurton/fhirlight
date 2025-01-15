@@ -60,7 +60,7 @@ This might be useful to you if you want:
 | UKCore-OperationOutcome         | ✅             | ❌            |
 | UKCore-Organization             | ✅             | ✅            |
 | UKCore-Patient                  | ✅             | ❌            |
-| UKCore-Practitioner             | ✅             | ❌            |
+| UKCore-Practitioner             | ✅             | ✅            |
 | UKCore-PractitionerRole         | ✅             | ❌            |
 | UKCore-Procedure                | ✅             | ❌            |
 | UKCore-Questionnaire            | ✅             | ❌            |
