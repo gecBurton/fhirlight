@@ -20,6 +20,7 @@ from api.models import (
     MedicationProfile,
     ProcedureProfile,
     MedicationRequestProfile,
+    HealthcareServiceProfile,
 )
 from tests.utils import prepare_payload
 
@@ -92,6 +93,7 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
         "UKCore-QuestionnaireResponse-InpatientSurvey-Example",
         "UKCore-Organization-Maximal-Example",
         "UKCore-Practitioner-Maximal-Example",
+        "UKCore-PractitionerRole-Maximal-Example",
     ],
 )
 def test_resource(
@@ -131,6 +133,7 @@ def test_resource(
                 MedicationRequestProfile,
                 {"subject": example_patient},
             ),
+            "healthcareservice": (HealthcareServiceProfile, {}),
         }
 
         resource_class, kwargs = resource_types[dependant_resource_type]
