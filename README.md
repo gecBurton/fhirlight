@@ -61,7 +61,7 @@ This might be useful to you if you want:
 | UKCore-Organization             | ✅             | ✅            |
 | UKCore-Patient                  | ✅             | ❌            |
 | UKCore-Practitioner             | ✅             | ✅            |
-| UKCore-PractitionerRole         | ✅             | ❌            |
+| UKCore-PractitionerRole         | ✅             | ✅            |
 | UKCore-Procedure                | ✅             | ❌            |
 | UKCore-Questionnaire            | ✅             | ❌            |
 | UKCore-QuestionnaireResponse    | ✅             | ❌            |

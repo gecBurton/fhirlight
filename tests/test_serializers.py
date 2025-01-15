@@ -256,9 +256,12 @@ def test_slot(resource, general_practice_nurse_clinic, richard_smith):
     "resource",
     [
         "UKCore-PractitionerRole-GeneralPractitioner-Example",
+        "UKCore-PractitionerRole-Maximal-Example",
     ],
 )
-def test_practitioner_role(resource, white_rose_medical_centre, doctor_paul_rastall):
+def test_practitioner_role(
+    resource, white_rose_medical_centre, doctor_paul_rastall, orthopaedic_service
+):
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)
 

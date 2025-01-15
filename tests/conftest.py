@@ -15,6 +15,7 @@ from api.models import (
     AllergyIntoleranceProfile,
     MedicationProfile,
     MedicationRequestProfile,
+    HealthcareServiceProfile,
 )
 from api.models.datatypes import Concept
 
@@ -271,3 +272,12 @@ def eye_drops(richard_smith):
     )
     yield medication
     medication.delete()
+
+
+@pytest.fixture
+def orthopaedic_service():
+    healthcare_service = HealthcareServiceProfile.objects.create(
+        id="UKCore-HealthcareService-OrthopaedicService-Example"
+    )
+    yield healthcare_service
+    healthcare_service.delete()
