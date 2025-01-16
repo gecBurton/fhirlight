@@ -854,3 +854,8 @@
 "301354004", "http://snomed.info/sct", "Pain of ear", "asNeededCodeableConcept"
 "GLH", "https://fhir.hl7.org.uk/CodeSystem/UKCore-OrganizationTypeGenomics", "Genomic Lab Hub", "UKCoreOrganizationType"
 "BN", "http://terminology.hl7.org/CodeSystem/v2-0360", "Bachelor of Nursing", "v2.0360.2.7"
+"A", "https://fhir.hl7.org.uk/CodeSystem/UKCore-EthnicCategoryEngland", "White - British", "UKCoreEthnicCategory"
+"G", "https://fhir.hl7.org.uk/CodeSystem/UKCore-EthnicCategoryEngland", "Mixed - Any other mixed background", "UKCoreEthnicCategory"
+"H", "https://fhir.hl7.org.uk/CodeSystem/UKCore-ResidentialStatus", "UK Resident", "UKCoreResidentialStatus"
+"3", "https://fhir.hl7.org.uk/CodeSystem/UKCore-PreferredContactMethod", "Telephone", "UKCorePreferredContactMethod"
+"11", "https://fhir.hl7.org.uk/CodeSystem/UKCore-PreferredWrittenCommunicationFormat", "Large print", "UKCorePreferredWrittenCommunicationFormat"

@@ -1,6 +1,13 @@
 from django.db import models
 
-from api.models.datatypes import Name, Identifier, ContactPoint, Address, Concept
+from api.models.datatypes import (
+    Name,
+    Identifier,
+    ContactPoint,
+    Address,
+    Concept,
+    Extension,
+)
 from api.models.common import BaseProfile
 
 
@@ -35,6 +42,29 @@ class PatientProfile(BaseProfile):
         limit_choices_to={"system": Concept.VALUESET.UK_CORE_HUMAN_LANGUAGE},
         help_text="",
     )
+    _birthDate = models.DateTimeField(null=True, blank=True, help_text="")
+
+
+class PatientExtension(Extension):
+    profile = models.ForeignKey(
+        PatientProfile,
+        on_delete=models.CASCADE,
+    )
+
+    class URL(models.TextChoices):
+        ETHNIC_CATEGORY = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-EthnicCategory"  # valueCodeableConcept
+        CONTACT_PREFERENCE = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ContactPreference"  # extension
+        PREFERRED_CONTACT_METHOD = "PreferredContactMethod"  # valueCodeableConcept
+        PREFERRED_CONTACT_TIMES = "PreferredContactTimes"  # valueTiming
+        PREFERRED_WRITTEN_COMMUNICATION_FORMAT = (
+            "PreferredWrittenCommunicationFormat"  # valueCodeableConcept
+        )
+        DEATH_NOTIFICATION_STATUS = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-DeathNotificationStatus"  # extension
+        deathNotificationStatus = "deathNotificationStatus"  # valueCodeableConcept
+        system_EFFECTIVE_DATE = "systemEffectiveDate"  # valueDateTime
+        RESIDENTIAL_STATUS = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ResidentialStatus"  # valueCodeableConcept
+
+    url = models.CharField(max_length=256)
 
 
 class PatientIdentifier(Identifier):

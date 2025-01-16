@@ -284,6 +284,12 @@ class Concept(models.Model):
         AS_NEEDED_CODEABLE_CONCEPT = "asNeededCodeableConcept"
         UK_CORE_ORGANIZATION_TYPE = "UKCoreOrganizationType"
         DEGREE_LICENSE_CERTIFICATE = "v2.0360.2.7"
+        UK_CORE_ETHNIC_CATEGORY = "UKCoreEthnicCategory"
+        UK_CORE_RESIDENTIAL_STATUS = "UKCoreResidentialStatus"
+        UK_CORE_PREFERRED_WRITTEN_COMMUNICATION_FORMAT = (
+            "UKCorePreferredWrittenCommunicationFormat"
+        )
+        UK_CORE_PREFERRED_CONTACT_METHOD = "UKCorePreferredContactMethod"
 
     system = models.CharField(
         null=True,
@@ -382,3 +388,17 @@ class DoseAndRate(DataTypeWithPeriod):
     doseQuantity = QuantityField(
         null=True, blank=True, help_text="Numerical value (with implicit precision)"
     )
+
+
+class Extension(DataTypeWithPeriod):
+    valueAddress = models.JSONField(null=True, blank=True)
+    valueBoolean = models.BooleanField(null=True, blank=True)
+    valueCodeableConcept = models.ForeignKey(
+        Concept, on_delete=models.CASCADE, null=True, blank=True
+    )
+    valueDateTime = models.DateTimeField(null=True, blank=True)
+    valueTiming = TimingField(null=True, blank=True)
+    extension = models.ManyToManyField("self", blank=True)
+
+    class Meta:
+        abstract = True
