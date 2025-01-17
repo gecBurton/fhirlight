@@ -111,7 +111,7 @@ class MedicationStatementDosage(Dosage):
 
 
 class MedicationStatementDosageDoseAndRate(DoseAndRate):
-    dosage = models.ForeignKey(
+    profile = models.ForeignKey(
         MedicationStatementDosage,
         on_delete=models.CASCADE,
     )

@@ -1,8 +1,3 @@
-from rest_framework.fields import (
-    DateTimeField,
-    JSONField,
-)
-
 from api.models.observation import (
     ObservationProfile,
 )
@@ -12,11 +7,6 @@ from api.serializers.common import (
 
 
 class ObservationSerializer(ProfileSerializer):
-    effectiveDateTime = DateTimeField(required=False)
-    effectiveInstant = DateTimeField(required=False)
-
-    valueQuantity = JSONField(required=False)
-
     class Meta:
         exclude = (
             "created_at",
