@@ -1,14 +1,8 @@
 from rest_framework.fields import URLField, CharField
 from rest_framework.serializers import Serializer
 
-from api.models.message_header import MessageHeaderProfile, MessageHeaderDestination
-from api.serializers.common import ProfileSerializer, BaseModelSerializer
-
-
-class MessageHeaderDestinationSerializer(BaseModelSerializer):
-    class Meta:
-        fields = ("receiver", "endpoint")
-        model = MessageHeaderDestination
+from api.models.message_header import MessageHeaderProfile
+from api.serializers.common import ProfileSerializer
 
 
 class MessageHeaderEventCodingSerializer(Serializer):
@@ -23,9 +17,6 @@ class MessageHeaderSourceSerializer(Serializer):
 
 class MessageHeaderSerializer(ProfileSerializer):
     eventCoding = MessageHeaderEventCodingSerializer(source="*")
-    destination = MessageHeaderDestinationSerializer(
-        many=True, required=False, source="messageheaderdestination_set"
-    )
     source = MessageHeaderSourceSerializer(source="*")
 
     class Meta:

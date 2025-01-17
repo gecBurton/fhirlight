@@ -1,9 +1,5 @@
-from api.models.medication_dispense import (
-    MedicationDispenseProfile,
-)
-from api.serializers.common import (
-    ProfileSerializer,
-)
+from api.models.medication_dispense import MedicationDispenseProfile
+from api.serializers.common import ProfileSerializer
 
 
 class MedicationDispenseSerializer(ProfileSerializer):
