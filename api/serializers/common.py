@@ -184,11 +184,6 @@ class BaseModelSerializer(WritableNestedModelSerializer):
         representation = super().to_representation(instance)
         return strip_none(representation)
 
-
-class ProfileSerializer(BaseModelSerializer):
-    id = CharField()
-    resourceType = SerializerMethodField()
-
     def get_resourceType(self, _obj):
         return self.Meta.model.__name__.removesuffix("Profile")
 
@@ -199,17 +194,26 @@ class ProfileSerializer(BaseModelSerializer):
         for related_object in self.Meta.model._meta.related_objects:
             related_model = related_object.related_model
 
-            field_name = related_model.__name__.removeprefix(this_name)
+            field_name = related_model.__name__
+            if this_name == field_name:
+                continue
+
+            if field_name.endswith("Profile"):
+                continue
+
+            field_name = field_name.removeprefix(this_name)
             field_name = field_name[0].lower() + field_name[1:]
 
-            # source = related_object.get_accessor_name()
-
-            if this_name == "MedicationRequest" and "Profile" not in field_name:
-                pass
+            possible_fields = {
+                field.attname
+                for field in related_model._meta.concrete_fields
+                if hasattr(field, "attname")
+            }
+            fields_to_exclude = {"uuid", "profile", "created_at", "updated_at"}
 
             class ChildSerializer(BaseModelSerializer):
                 class Meta:
-                    exclude = ("uuid", "profile", "created_at", "updated_at")
+                    exclude = tuple(fields_to_exclude & possible_fields) + ("profile",)
                     model = related_model
 
             if field_name not in self.fields:
@@ -225,3 +229,8 @@ class ProfileSerializer(BaseModelSerializer):
                         required=False,
                         source=f"{this_name}{field_name}_set".lower(),
                     )
+
+
+class ProfileSerializer(BaseModelSerializer):
+    id = CharField()
+    resourceType = SerializerMethodField()
