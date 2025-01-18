@@ -78,7 +78,7 @@
                 },
                 {
                     "url": "systemEffectiveDate",
-                    "valueDateTime": "2019-08-01T00:00:00.000Z"
+                    "valueDateTime": "2019-08-01"
                 }
             ]
         },
@@ -166,7 +166,6 @@
             ],
             "name": {
                 "use": "official",
-                "text": "JACKSON Jane (Miss)",
                 "family": "Jackson",
                 "given":  [
                     "Jane"

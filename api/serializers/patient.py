@@ -3,13 +3,12 @@ from rest_framework.serializers import Serializer, RelatedField, SerializerMetho
 
 from api.models import PatientProfile
 from api.models.datatypes import Concept
-from api.models.patient import PatientExtension
+from api.models.patient import PatientExtension, PatientContact
 from api.serializers.common import (
     ProfileSerializer,
     ConceptSerializer,
     BaseModelSerializer,
     TimingSerializer,
-    RelatedResourceSerializer,
 )
 
 from django.utils.translation import gettext_lazy as _
@@ -73,14 +72,53 @@ class BirthDateSerializer(Serializer):
 
 
 class BaseExtensionSerializer(BaseModelSerializer):
+    default_error_messages = {
+        "required": _("This field is required."),
+        "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
+    }
+
     url = CharField()
     valueAddress = JSONField(required=False)
     valueBoolean = BooleanField(required=False)
-    valueCodeableConcept = RelatedResourceSerializer(
-        queryset=Concept.objects.all(), required=False
-    )
+    valueCodeableConcept = JSONField(required=False)
     valueDateTime = DateTimeField(required=False)
     valueTiming = TimingSerializer(required=False)
+
+    def to_internal_value(self, data):
+        internal_value = super().to_internal_value(data)
+
+        if valueCodeableConcept := data.get("valueCodeableConcept"):
+            code = valueCodeableConcept["coding"][0]["code"]
+            url = data["url"]
+            valuesets = {
+                "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-EthnicCategory": Concept.VALUESET.UK_CORE_ETHNIC_CATEGORY,
+                "PreferredContactMethod": Concept.VALUESET.UK_CORE_PREFERRED_CONTACT_METHOD,
+                "PreferredWrittenCommunicationFormat": Concept.VALUESET.UK_CORE_PREFERRED_WRITTEN_COMMUNICATION_FORMAT,
+                "deathNotificationStatus": Concept.VALUESET.UK_CORE_DEATH_NOTIFICATION_STATUS,
+                "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ResidentialStatus": Concept.VALUESET.UK_CORE_RESIDENTIAL_STATUS,
+            }
+            valueset = valuesets[url]
+            try:
+                internal_value["valueCodeableConcept"] = Concept.objects.get(
+                    code=code, valueset=valueset
+                )
+            except Concept.DoesNotExist:
+                self.fail("does_not_exist", pk_value=(code, valueset))
+        return internal_value
+
+    def to_representation(self, instance):
+        if isinstance(instance, dict):
+            if valueCodeableConcept := instance.get("valueCodeableConcept"):
+                instance["valueCodeableConcept"] = {
+                    "coding": [
+                        {
+                            "code": valueCodeableConcept.code,
+                            "system": valueCodeableConcept.system,
+                            "display": valueCodeableConcept.display,
+                        }
+                    ]
+                }
+        return super().to_representation(instance)
 
     # extension = models.ManyToManyField("self", blank=True)
     class Meta:
@@ -92,8 +130,18 @@ class ExtensionSerializer(BaseExtensionSerializer):
     extension = BaseExtensionSerializer(many=True, required=False)
 
 
-class PatientSerializer(ProfileSerializer):
+class PatientContactSerializer(BaseModelSerializer):
     extension = ExtensionSerializer(many=True, required=False)
+
+    class Meta:
+        exclude = ("uuid", "created_at", "updated_at", "profile")
+        model = PatientContact
+
+
+class PatientSerializer(ProfileSerializer):
+    extension = ExtensionSerializer(
+        many=True, required=False, source="patientextension_set"
+    )
     communication = PatientCommunicationSerializer(
         required=False,
         many=True,

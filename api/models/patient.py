@@ -7,8 +7,16 @@ from api.models.datatypes import (
     Address,
     Concept,
     Extension,
+    DataTypeWithPeriod,
 )
 from api.models.common import BaseProfile
+
+
+class Gender(models.TextChoices):
+    MALE = "male"
+    FEMALE = "female"
+    OTHER = "other"
+    UNKNOWN = "unknown"
 
 
 class PatientProfile(BaseProfile):
@@ -21,12 +29,6 @@ class PatientProfile(BaseProfile):
     # Last Updated	2023-04-28
     # Description	This profile defines the UK constraints and extensions on the International FHIR resource Patient.
 
-    class Gender(models.TextChoices):
-        MALE = "male"
-        FEMALE = "female"
-        OTHER = "other"
-        UNKNOWN = "unknown"
-
     gender = models.CharField(
         null=True,
         blank=True,
@@ -34,6 +36,7 @@ class PatientProfile(BaseProfile):
         choices=Gender,
         help_text="Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
     )
+
     birthDate = models.DateField(
         null=True, blank=True, help_text="The date of birth for the individual."
     )
@@ -51,21 +54,6 @@ class PatientExtension(Extension):
         on_delete=models.CASCADE,
     )
 
-    class URL(models.TextChoices):
-        ETHNIC_CATEGORY = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-EthnicCategory"  # valueCodeableConcept
-        CONTACT_PREFERENCE = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ContactPreference"  # extension
-        PREFERRED_CONTACT_METHOD = "PreferredContactMethod"  # valueCodeableConcept
-        PREFERRED_CONTACT_TIMES = "PreferredContactTimes"  # valueTiming
-        PREFERRED_WRITTEN_COMMUNICATION_FORMAT = (
-            "PreferredWrittenCommunicationFormat"  # valueCodeableConcept
-        )
-        DEATH_NOTIFICATION_STATUS = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-DeathNotificationStatus"  # extension
-        deathNotificationStatus = "deathNotificationStatus"  # valueCodeableConcept
-        system_EFFECTIVE_DATE = "systemEffectiveDate"  # valueDateTime
-        RESIDENTIAL_STATUS = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ResidentialStatus"  # valueCodeableConcept
-
-    url = models.CharField(max_length=256)
-
 
 class PatientIdentifier(Identifier):
     """An identifier for this patient."""
@@ -81,6 +69,13 @@ class PatientIdentifier(Identifier):
 
     profile = models.ForeignKey(
         PatientProfile,
+        on_delete=models.CASCADE,
+    )
+
+
+class PatientIdentifierExtension(Extension):
+    profile = models.ForeignKey(
+        PatientIdentifier,
         on_delete=models.CASCADE,
     )
 
@@ -104,4 +99,63 @@ class PatientAddress(Address):
         PatientProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
+    )
+
+
+class PatientContact(DataTypeWithPeriod):
+    profile = models.ForeignKey(
+        PatientProfile,
+        on_delete=models.CASCADE,
+        help_text="A name associated with the contact person.",
+    )
+
+    gender = models.CharField(
+        null=True,
+        blank=True,
+        max_length=8,
+        choices=Gender,
+        help_text="Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
+    )
+
+    relationship = models.ManyToManyField(
+        Concept,
+        limit_choices_to={
+            "valueset": Concept.VALUESET.UK_CORE_PERSON_RELATIONSHIP_TYPE
+        },
+        help_text="The nature of the relationship between the patient and the contact person.",
+        blank=True,
+    )
+
+
+class PatientContactName(Name):
+    profile = models.OneToOneField(
+        PatientContact,
+        on_delete=models.CASCADE,
+        help_text="A name associated with the contact person.",
+        related_name="PatientContact_name",
+    )
+
+
+class PatientContactAddress(Address):
+    profile = models.OneToOneField(
+        PatientContact,
+        on_delete=models.CASCADE,
+        help_text="A name associated with the contact person.",
+        related_name="PatientContact_address",
+    )
+
+
+class PatientContactTelecom(ContactPoint):
+    profile = models.ForeignKey(
+        PatientContact,
+        on_delete=models.CASCADE,
+        help_text="A name associated with the contact person.",
+        related_name="PatientContact_telecom",
+    )
+
+
+class PatientContactExtension(Extension):
+    profile = models.ForeignKey(
+        PatientContact,
+        on_delete=models.CASCADE,
     )

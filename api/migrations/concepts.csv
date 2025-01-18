@@ -859,3 +859,5 @@
 "H", "https://fhir.hl7.org.uk/CodeSystem/UKCore-ResidentialStatus", "UK Resident", "UKCoreResidentialStatus"
 "3", "https://fhir.hl7.org.uk/CodeSystem/UKCore-PreferredContactMethod", "Telephone", "UKCorePreferredContactMethod"
 "11", "https://fhir.hl7.org.uk/CodeSystem/UKCore-PreferredWrittenCommunicationFormat", "Large print", "UKCorePreferredWrittenCommunicationFormat"
+"U", "https://fhir.hl7.org.uk/CodeSystem/UKCore-DeathNotificationStatus", "Removed", "UKCoreDeathNotificationStatus"
+"01", "https://fhir.hl7.org.uk/CodeSystem/UKCore-NHSNumberVerificationStatusEngland", "Number present and verified", "UKCoreNHSNumberVerificationStatus"
