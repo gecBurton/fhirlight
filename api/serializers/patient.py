@@ -1,4 +1,9 @@
-from rest_framework.fields import DateTimeField, CharField, JSONField, BooleanField
+from rest_framework.fields import (
+    DateTimeField,
+    CharField,
+    JSONField,
+    BooleanField,
+)
 from rest_framework.serializers import Serializer, RelatedField, SerializerMethodField
 
 from api.models import PatientProfile
@@ -14,7 +19,7 @@ from api.serializers.common import (
 from django.utils.translation import gettext_lazy as _
 
 
-class LanguageSerializer(Serializer):
+class CodableConceptSerializer(Serializer):
     coding = ConceptSerializer(many=True)
 
 
@@ -80,7 +85,7 @@ class BaseExtensionSerializer(BaseModelSerializer):
     url = CharField()
     valueAddress = JSONField(required=False)
     valueBoolean = BooleanField(required=False)
-    valueCodeableConcept = JSONField(required=False)
+    valueCodeableConcept = CodableConceptSerializer(required=False)
     valueDateTime = DateTimeField(required=False)
     valueTiming = TimingSerializer(required=False)
 
@@ -89,7 +94,6 @@ class BaseExtensionSerializer(BaseModelSerializer):
 
         if valueCodeableConcept := data.get("valueCodeableConcept"):
             code = valueCodeableConcept["coding"][0]["code"]
-            url = data["url"]
             valuesets = {
                 "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-EthnicCategory": Concept.VALUESET.UK_CORE_ETHNIC_CATEGORY,
                 "PreferredContactMethod": Concept.VALUESET.UK_CORE_PREFERRED_CONTACT_METHOD,
@@ -97,7 +101,7 @@ class BaseExtensionSerializer(BaseModelSerializer):
                 "deathNotificationStatus": Concept.VALUESET.UK_CORE_DEATH_NOTIFICATION_STATUS,
                 "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ResidentialStatus": Concept.VALUESET.UK_CORE_RESIDENTIAL_STATUS,
             }
-            valueset = valuesets[url]
+            valueset = valuesets[data["url"]]
             try:
                 internal_value["valueCodeableConcept"] = Concept.objects.get(
                     code=code, valueset=valueset
@@ -107,22 +111,35 @@ class BaseExtensionSerializer(BaseModelSerializer):
         return internal_value
 
     def to_representation(self, instance):
-        if isinstance(instance, dict):
-            if valueCodeableConcept := instance.get("valueCodeableConcept"):
-                instance["valueCodeableConcept"] = {
-                    "coding": [
-                        {
-                            "code": valueCodeableConcept.code,
-                            "system": valueCodeableConcept.system,
-                            "display": valueCodeableConcept.display,
-                        }
-                    ]
-                }
-        return super().to_representation(instance)
+        value_codeable_concept = None
+        if isinstance(instance, dict) and "valueCodeableConcept" in instance:
+            value_codeable_concept = {
+                "coding": [
+                    {
+                        "code": instance["valueCodeableConcept"].code,
+                        "system": instance["valueCodeableConcept"].system,
+                        "display": instance["valueCodeableConcept"].display,
+                    }
+                ]
+            }
+        elif instance.valueCodeableConcept:
+            value_codeable_concept = {
+                "coding": [
+                    {
+                        "code": instance.valueCodeableConcept.code,
+                        "system": instance.valueCodeableConcept.system,
+                        "display": instance.valueCodeableConcept.display,
+                    }
+                ]
+            }
+            instance.valueCodeableConcept = None
 
-    # extension = models.ManyToManyField("self", blank=True)
+        representation = super().to_representation(instance)
+        representation["valueCodeableConcept"] = value_codeable_concept
+        return representation
+
     class Meta:
-        exclude = ("created_at", "updated_at", "profile")
+        exclude = ("created_at", "updated_at", "profile", "uuid")
         model = PatientExtension
 
 
