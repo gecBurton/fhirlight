@@ -122,7 +122,8 @@ class BaseExtensionSerializer(BaseModelSerializer):
                     }
                 ]
             }
-        elif instance.valueCodeableConcept:
+            instance["valueCodeableConcept"] = None
+        elif hasattr(instance, "valueCodeableConcept"):
             value_codeable_concept = {
                 "coding": [
                     {
