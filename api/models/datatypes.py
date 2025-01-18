@@ -284,6 +284,14 @@ class Concept(models.Model):
         AS_NEEDED_CODEABLE_CONCEPT = "asNeededCodeableConcept"
         UK_CORE_ORGANIZATION_TYPE = "UKCoreOrganizationType"
         DEGREE_LICENSE_CERTIFICATE = "v2.0360.2.7"
+        UK_CORE_ETHNIC_CATEGORY = "UKCoreEthnicCategory"
+        UK_CORE_RESIDENTIAL_STATUS = "UKCoreResidentialStatus"
+        UK_CORE_PREFERRED_WRITTEN_COMMUNICATION_FORMAT = (
+            "UKCorePreferredWrittenCommunicationFormat"
+        )
+        UK_CORE_PREFERRED_CONTACT_METHOD = "UKCorePreferredContactMethod"
+        UK_CORE_DEATH_NOTIFICATION_STATUS = "UKCoreDeathNotificationStatus"
+        UK_CORE_NHS_NUMBER_VERIFICATION_STATUS = "UKCoreNHSNumberVerificationStatus"
 
     system = models.CharField(
         null=True,
@@ -382,3 +390,37 @@ class DoseAndRate(DataTypeWithPeriod):
     doseQuantity = QuantityField(
         null=True, blank=True, help_text="Numerical value (with implicit precision)"
     )
+
+
+class Extension(DataTypeWithPeriod):
+    class URL(models.TextChoices):
+        ETHNIC_CATEGORY = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-EthnicCategory"  # valueCodeableConcept
+        CONTACT_PREFERENCE = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ContactPreference"  # extension
+        PREFERRED_CONTACT_METHOD = "PreferredContactMethod"  # valueCodeableConcept
+        PREFERRED_CONTACT_TIMES = "PreferredContactTimes"  # valueTiming
+        PREFERRED_WRITTEN_COMMUNICATION_FORMAT = (
+            "PreferredWrittenCommunicationFormat"  # valueCodeableConcept
+        )
+        DEATH_NOTIFICATION_STATUS = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-DeathNotificationStatus"  # extension
+        deathNotificationStatus = "deathNotificationStatus"  # valueCodeableConcept
+        system_EFFECTIVE_DATE = "systemEffectiveDate"  # valueDateTime
+        RESIDENTIAL_STATUS = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ResidentialStatus"  # valueCodeableConcept
+        UK_CORE_NHS_NUMBER_VERIFICATION_STATUS = "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-NHSNumberVerificationStatus"  # valueCodeableConcept
+
+    url = models.CharField(max_length=256)
+
+    valueAddress = models.JSONField(null=True, blank=True)
+    valueBoolean = models.BooleanField(null=True, blank=True)
+    valueCodeableConcept = models.ForeignKey(
+        Concept,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    valueDateTime = models.DateTimeField(null=True, blank=True)
+    valueTiming = TimingField(null=True, blank=True)
+    valuePositiveInt = models.PositiveIntegerField(null=True, blank=True)
+    extension = models.ManyToManyField("self", blank=True)
+
+    class Meta:
+        abstract = True

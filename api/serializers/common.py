@@ -9,6 +9,8 @@ from rest_framework.fields import (
     URLField,
     IntegerField,
     DateTimeField,
+    ListField,
+    ChoiceField,
 )
 from rest_framework.relations import RelatedField
 from django.utils.translation import gettext_lazy as _
@@ -60,6 +62,29 @@ class TimingRepeatSerializer(FHIRDataTypeSerializer):
     frequency = IntegerField()
     period = IntegerField()
     periodUnit = CharField()
+    dayOfWeek = ListField(
+        child=ChoiceField(choices=["mon", "tue", "wed", "fri", "sat", "sun"]),
+        required=False,
+    )
+    when = ListField(
+        child=ChoiceField(
+            choices=[
+                "MORN",
+                "MORN.early",
+                "MORN.late",
+                "NOON",
+                "AFT",
+                "AFT.early",
+                "AFT.late",
+                "EVE",
+                "EVE.early",
+                "EVE.late",
+                "NIGHT",
+                "PHS",
+            ]
+        ),
+        required=False,
+    )
 
 
 class TimingSerializer(FHIRDataTypeSerializer):

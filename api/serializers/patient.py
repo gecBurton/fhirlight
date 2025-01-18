@@ -1,16 +1,25 @@
-from rest_framework.serializers import Serializer, RelatedField
+from rest_framework.fields import (
+    DateTimeField,
+    CharField,
+    JSONField,
+    BooleanField,
+)
+from rest_framework.serializers import Serializer, RelatedField, SerializerMethodField
 
 from api.models import PatientProfile
 from api.models.datatypes import Concept
+from api.models.patient import PatientExtension, PatientContact
 from api.serializers.common import (
     ProfileSerializer,
     ConceptSerializer,
+    BaseModelSerializer,
+    TimingSerializer,
 )
 
 from django.utils.translation import gettext_lazy as _
 
 
-class LanguageSerializer(Serializer):
+class CodableConceptSerializer(Serializer):
     coding = ConceptSerializer(many=True)
 
 
@@ -48,7 +57,109 @@ class PatientCommunicationSerializer(RelatedField):
         }
 
 
+class BirthDateExtensionSerializer(Serializer):
+    valueDateTime = DateTimeField(required=False)
+    url = SerializerMethodField(read_only=True)
+
+    def get_url(self, _):
+        return "http://hl7.org/fhir/StructureDefinition/patient-birthTime"
+
+
+class BirthDateSerializer(Serializer):
+    extension = BirthDateExtensionSerializer(many=True)
+
+    def to_internal_value(self, data):
+        internal_data = super().to_internal_value(data)
+        return internal_data["extension"][0]["valueDateTime"]
+
+    def to_representation(self, instance):
+        return super().to_representation({"extension": [{"valueDateTime": instance}]})
+
+
+class BaseExtensionSerializer(BaseModelSerializer):
+    default_error_messages = {
+        "required": _("This field is required."),
+        "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
+    }
+
+    url = CharField()
+    valueAddress = JSONField(required=False)
+    valueBoolean = BooleanField(required=False)
+    valueCodeableConcept = CodableConceptSerializer(required=False)
+    valueDateTime = DateTimeField(required=False)
+    valueTiming = TimingSerializer(required=False)
+
+    def to_internal_value(self, data):
+        internal_value = super().to_internal_value(data)
+
+        if valueCodeableConcept := data.get("valueCodeableConcept"):
+            code = valueCodeableConcept["coding"][0]["code"]
+            valuesets = {
+                "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-EthnicCategory": Concept.VALUESET.UK_CORE_ETHNIC_CATEGORY,
+                "PreferredContactMethod": Concept.VALUESET.UK_CORE_PREFERRED_CONTACT_METHOD,
+                "PreferredWrittenCommunicationFormat": Concept.VALUESET.UK_CORE_PREFERRED_WRITTEN_COMMUNICATION_FORMAT,
+                "deathNotificationStatus": Concept.VALUESET.UK_CORE_DEATH_NOTIFICATION_STATUS,
+                "https://fhir.hl7.org.uk/StructureDefinition/Extension-UKCore-ResidentialStatus": Concept.VALUESET.UK_CORE_RESIDENTIAL_STATUS,
+            }
+            valueset = valuesets[data["url"]]
+            try:
+                internal_value["valueCodeableConcept"] = Concept.objects.get(
+                    code=code, valueset=valueset
+                )
+            except Concept.DoesNotExist:
+                self.fail("does_not_exist", pk_value=(code, valueset))
+        return internal_value
+
+    def to_representation(self, instance):
+        value_codeable_concept = None
+        if isinstance(instance, dict) and "valueCodeableConcept" in instance:
+            value_codeable_concept = {
+                "coding": [
+                    {
+                        "code": instance["valueCodeableConcept"].code,
+                        "system": instance["valueCodeableConcept"].system,
+                        "display": instance["valueCodeableConcept"].display,
+                    }
+                ]
+            }
+            instance["valueCodeableConcept"] = None
+        elif hasattr(instance, "valueCodeableConcept"):
+            value_codeable_concept = {
+                "coding": [
+                    {
+                        "code": instance.valueCodeableConcept.code,
+                        "system": instance.valueCodeableConcept.system,
+                        "display": instance.valueCodeableConcept.display,
+                    }
+                ]
+            }
+            instance.valueCodeableConcept = None
+
+        representation = super().to_representation(instance)
+        representation["valueCodeableConcept"] = value_codeable_concept
+        return representation
+
+    class Meta:
+        exclude = ("created_at", "updated_at", "profile", "uuid")
+        model = PatientExtension
+
+
+class ExtensionSerializer(BaseExtensionSerializer):
+    extension = BaseExtensionSerializer(many=True, required=False)
+
+
+class PatientContactSerializer(BaseModelSerializer):
+    extension = ExtensionSerializer(many=True, required=False)
+
+    class Meta:
+        exclude = ("uuid", "created_at", "updated_at", "profile")
+        model = PatientContact
+
+
 class PatientSerializer(ProfileSerializer):
+    extension = ExtensionSerializer(
+        many=True, required=False, source="patientextension_set"
+    )
     communication = PatientCommunicationSerializer(
         required=False,
         many=True,
@@ -56,6 +167,8 @@ class PatientSerializer(ProfileSerializer):
             valueset=Concept.VALUESET.UK_CORE_HUMAN_LANGUAGE
         ),
     )
+
+    _birthDate = BirthDateSerializer(required=False)
 
     class Meta:
         exclude = (

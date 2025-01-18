@@ -18,3 +18,6 @@ test:
 
 examples:
 	poetry run python manage.py load_example_data
+
+database:
+	docker-compose up -d postgres
