@@ -17,3 +17,6 @@ class BaseProfile(PolymorphicModel):
     active = models.BooleanField(
         default=True, help_text="Whether the record is still in active use"
     )
+
+    class Meta:
+        ordering = ("-created_at",)
