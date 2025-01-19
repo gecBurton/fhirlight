@@ -1,7 +1,14 @@
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
-from api.models.datatypes import Concept, Name, Address, ContactPoint
+from api.models.datatypes import (
+    Concept,
+    Name,
+    Address,
+    ContactPoint,
+    DataTypeWithPeriod,
+)
 
 
 class RelatedPersonProfile(BaseProfile):
@@ -21,12 +28,40 @@ class RelatedPersonProfile(BaseProfile):
         help_text="The patient this person is related to.",
         related_name="RelatedPerson_patient",
     )
+
     relationship = models.ManyToManyField(
         Concept,
         limit_choices_to={
             "valueset": Concept.VALUESET.UK_CORE_PERSON_RELATIONSHIP_TYPE
         },
         help_text="The nature of the relationship.",
+        related_name="RelatedPerson_relationship",
+    )
+
+    class Gender(models.TextChoices):
+        MALE = "male"
+        FEMALE = "female"
+        OTHER = "other"
+        UNKNOWN = "unknown"
+
+    gender = models.CharField(
+        null=True,
+        blank=True,
+        max_length=8,
+        choices=Gender,
+        help_text="Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.",
+    )
+
+    birthDate = models.DateTimeField(
+        null=True, blank=True, help_text="The date on which the related person was born"
+    )
+
+    # photo
+
+    period = PeriodField(
+        null=True,
+        blank=True,
+        help_text="The date on which the related person was born.",
     )
 
 
@@ -49,4 +84,25 @@ class RelatedPersonAddress(Address):
         RelatedPersonProfile,
         on_delete=models.CASCADE,
         help_text="A name associated with the contact person.",
+    )
+
+
+class RelatedPersonCommunication(DataTypeWithPeriod):
+    profile = models.ForeignKey(
+        RelatedPersonProfile,
+        on_delete=models.CASCADE,
+    )
+
+    preferred = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="Indicates whether or not the patient prefers this language (over other languages he masters up a certain level).",
+    )
+
+    language = models.ForeignKey(
+        Concept,
+        on_delete=models.CASCADE,
+        limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_HUMAN_LANGUAGE},
+        help_text="The language which can be used to communicate with the patient about his or her health",
+        related_name="RelatedPersonCommunication_language",
     )

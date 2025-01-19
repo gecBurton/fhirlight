@@ -69,6 +69,7 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
         "UKCore-Questionnaire-InpatientSurvey-Example",
         "UKCore-Procedure-ExaminationOfSkin-Example",
         "UKCore-RelatedPerson-JoySmith-Example",
+        "UKCore-RelatedPerson-Maximal-Example",
         "UKCore-DiagnosticReport-DiagnosticStudiesReport-Example",
         "UKCore-DiagnosticReport-Lab-DiagnosticStudiesReport-Example",
         "UKCore-Encounter-InpatientEncounter-Example",

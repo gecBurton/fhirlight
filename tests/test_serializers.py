@@ -325,9 +325,7 @@ def test_procedure(resource, richard_smith):
 @pytest.mark.django_db
 @pytest.mark.parametrize(
     "resource",
-    [
-        "UKCore-RelatedPerson-JoySmith-Example",
-    ],
+    ["UKCore-RelatedPerson-JoySmith-Example", "UKCore-RelatedPerson-Maximal-Example"],
 )
 def test_related_person(resource, richard_smith):
     with open(f"{TEST_DIR}/data/{resource}.json") as f:

@@ -65,7 +65,7 @@ This might be useful to you if you want:
 | UKCore-Procedure                | ✅             | ❌           |
 | UKCore-Questionnaire            | ✅             | ❌           |
 | UKCore-QuestionnaireResponse    | ✅             | ❌           |
-| UKCore-RelatedPerson            | ✅             | ❌           |
+| UKCore-RelatedPerson            | ✅             | ✅           |
 | UKCore-Schedule                 | ✅             | ✅           |
 | UKCore-ServiceRequest           | ✅             | ❌           |
 | UKCore-Slot                     | ✅             | ❌           |
