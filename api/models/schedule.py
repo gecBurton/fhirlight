@@ -45,7 +45,17 @@ class ScheduleProfile(BaseProfile):
     )
     actor = models.ManyToManyField(
         BaseProfile,
-        limit_choices_to={"polymorphic_ctype__model__in": ["locationprofile"]},
+        limit_choices_to={
+            "polymorphic_ctype__model__in": [
+                "deviceprofile",
+                "healthcareserviceprofile",
+                "locationprofile",
+                "patientprofile",
+                "practitionerprofile",
+                "practitionerroleprofile",
+                "relatedpersonprofile",
+            ]
+        },
         help_text="Resource(s) that availability information is being provided for",
         related_name="schedule_actor",
     )
