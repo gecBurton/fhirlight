@@ -1,21 +1,21 @@
 import pytest
 
 from api.models import (
-    PatientProfile,
-    OrganizationProfile,
-    ObservationProfile,
-    PractitionerProfile,
-    LocationProfile,
-    SpecimenProfile,
-    EncounterProfile,
-    DiagnosticReportProfile,
-    ConditionProfile,
-    ServiceRequestProfile,
-    ProcedureProfile,
     AllergyIntoleranceProfile,
+    ConditionProfile,
+    DiagnosticReportProfile,
+    EncounterProfile,
+    HealthcareServiceProfile,
+    LocationProfile,
     MedicationProfile,
     MedicationRequestProfile,
-    HealthcareServiceProfile,
+    ObservationProfile,
+    OrganizationProfile,
+    PatientProfile,
+    PractitionerProfile,
+    ProcedureProfile,
+    ServiceRequestProfile,
+    SpecimenProfile,
 )
 from api.models.datatypes import Concept
 

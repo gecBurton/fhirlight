@@ -1,6 +1,6 @@
 from api.models import FamilyMemberHistoryProfile
 from api.models.family_member_history import FamilyMemberHistoryCondition
-from api.serializers.common import ProfileSerializer, BaseModelSerializer
+from api.serializers.common import BaseModelSerializer, ProfileSerializer
 
 
 class FamilyMemberHistoryConditionSerializer(BaseModelSerializer):

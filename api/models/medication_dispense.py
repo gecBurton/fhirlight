@@ -4,9 +4,9 @@ from api.fields import QuantityField
 from api.models.common import BaseProfile
 from api.models.datatypes import (
     DataTypeWithPeriod,
-    Identifier,
     Dosage,
     DoseAndRate,
+    Identifier,
 )
 
 

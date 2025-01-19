@@ -1,65 +1,67 @@
 from rest_framework.viewsets import ModelViewSet
 
 from api.models import (
-    PatientProfile,
-    MedicationProfile,
-    ObservationProfile,
-    SpecimenProfile,
-    LocationProfile,
-    ImmunizationProfile,
-    OperationOutcomeProfile,
-    SlotProfile,
-    PractitionerRoleProfile,
-    ScheduleProfile,
-    QuestionnaireProfile,
-    ProcedureProfile,
-    RelatedPersonProfile,
-    DiagnosticReportProfile,
-    EncounterProfile,
-    ConditionProfile,
-    DeviceProfile,
-    ConsentProfile,
-    EpisodeOfCareProfile,
-    MessageHeaderProfile,
-    ServiceRequestProfile,
-    ImagingStudyProfile,
+    AllergyIntoleranceProfile,
     AppointmentProfile,
     CompositionProfile,
+    ConditionProfile,
+    ConsentProfile,
+    DeviceProfile,
+    DiagnosticReportProfile,
+    EncounterProfile,
+    EpisodeOfCareProfile,
     FamilyMemberHistoryProfile,
     FlagProfile,
     HealthcareServiceProfile,
-    TaskProfile,
+    ImagingStudyProfile,
+    ImmunizationProfile,
     ListProfile,
-    MedicationRequestProfile,
+    LocationProfile,
     MedicationAdministrationProfile,
+    MedicationProfile,
+    MedicationRequestProfile,
     MedicationStatementProfile,
+    MessageHeaderProfile,
+    ObservationProfile,
+    OperationOutcomeProfile,
+    PatientProfile,
+    PractitionerRoleProfile,
+    ProcedureProfile,
+    QuestionnaireProfile,
     QuestionnaireResponseProfile,
+    RelatedPersonProfile,
+    ScheduleProfile,
+    ServiceRequestProfile,
+    SlotProfile,
+    SpecimenProfile,
+    TaskProfile,
 )
 from api.models.medication_dispense import MedicationDispenseProfile
-from api.serializers.encounter import EncounterSerializer
 from api.models.organization import OrganizationProfile
 from api.models.practitioner import PractitionerProfile
 from api.serializers import (
-    DeviceSerializer,
-    ConsentSerializer,
-    EpisodeOfCareSerializer,
-    MessageHeaderSerializer,
-    ServiceRequestSerializer,
-    ImagingStudySerializer,
+    AllergyIntoleranceSerializer,
     AppointmentSerializer,
     CompositionSerializer,
+    ConsentSerializer,
+    DeviceSerializer,
+    EpisodeOfCareSerializer,
     FamilyMemberHistorySerializer,
     FlagSerializer,
-    TaskSerializer,
+    ImagingStudySerializer,
     ListSerializer,
-    MedicationRequestSerializer,
     MedicationAdministrationSerializer,
     MedicationDispenseSerializer,
+    MedicationRequestSerializer,
     MedicationStatementSerializer,
+    MessageHeaderSerializer,
     QuestionnaireResponseSerializer,
+    ServiceRequestSerializer,
+    TaskSerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.diagnostic_report import DiagnosticReportSerializer
+from api.serializers.encounter import EncounterSerializer
 from api.serializers.healthcare_service import HealthcareServiceSerializer
 from api.serializers.immunization import ImmunizationSerializer
 from api.serializers.location import LocationSerializer
@@ -291,4 +293,10 @@ class MedicationDispenseViewSet(ModelViewSet):
 class MedicationStatementViewSet(ModelViewSet):
     queryset = MedicationStatementProfile.objects.all()
     serializer_class = MedicationStatementSerializer
+    lookup_field = "id"
+
+
+class AllergyIntoleranceViewSet(ModelViewSet):
+    queryset = AllergyIntoleranceProfile.objects.all()
+    serializer_class = AllergyIntoleranceSerializer
     lookup_field = "id"

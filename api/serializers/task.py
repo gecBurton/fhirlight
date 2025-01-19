@@ -2,7 +2,7 @@ from rest_framework.fields import IntegerField
 from rest_framework.serializers import Serializer
 
 from api.models import TaskProfile
-from api.serializers.common import ProfileSerializer, PeriodSerializer
+from api.serializers.common import PeriodSerializer, ProfileSerializer
 
 
 class RestrictionSerializer(Serializer):

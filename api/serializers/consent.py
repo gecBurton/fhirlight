@@ -3,8 +3,8 @@ from rest_framework.serializers import Serializer
 from api.models.consent import ConsentProfile
 from api.models.datatypes import Concept
 from api.serializers.common import (
-    ProfileSerializer,
     ConceptModelSerializer,
+    ProfileSerializer,
 )
 
 

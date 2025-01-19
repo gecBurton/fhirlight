@@ -1,9 +1,10 @@
 import uuid
+
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models import UniqueConstraint
 
-from api.fields import QuantityField, TimingField, PeriodField
+from api.fields import PeriodField, QuantityField, TimingField
 
 
 class Coding(models.Model):
@@ -284,6 +285,7 @@ class Concept(models.Model):
         AS_NEEDED_CODEABLE_CONCEPT = "asNeededCodeableConcept"
         UK_CORE_ORGANIZATION_TYPE = "UKCoreOrganizationType"
         DEGREE_LICENSE_CERTIFICATE = "v2.0360.2.7"
+        UK_CORE_ALLERGY_SUBSTANCE = "UKCoreAllergySubstance"
 
     system = models.CharField(
         null=True,

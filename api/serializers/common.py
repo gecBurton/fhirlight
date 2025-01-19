@@ -1,20 +1,20 @@
 from datetime import datetime
 
 from django.db.models import ForeignKey, OneToOneField
+from django.utils.translation import gettext_lazy as _
 from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework.fields import (
     CharField,
-    SerializerMethodField,
-    FloatField,
-    URLField,
-    IntegerField,
     DateTimeField,
+    FloatField,
+    IntegerField,
+    SerializerMethodField,
+    URLField,
 )
 from rest_framework.relations import RelatedField
-from django.utils.translation import gettext_lazy as _
-from rest_framework.serializers import Serializer, ModelSerializer
+from rest_framework.serializers import ModelSerializer, Serializer
 
-from api.fields import QuantityField, TimingField, PeriodField
+from api.fields import PeriodField, QuantityField, TimingField
 from api.models.datatypes import Concept
 
 

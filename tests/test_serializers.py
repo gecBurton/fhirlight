@@ -5,13 +5,13 @@ import os
 import pytest
 
 from api.serializers import (
-    ServiceRequestSerializer,
     AllergyIntoleranceSerializer,
     AppointmentSerializer,
     CompositionSerializer,
-    MedicationRequestSerializer,
     MedicationAdministrationSerializer,
+    MedicationRequestSerializer,
     MedicationStatementSerializer,
+    ServiceRequestSerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.consent import ConsentSerializer
@@ -526,6 +526,7 @@ def test_imaging_study(resource, richard_smith):
     [
         "UKCore-AllergyIntolerance-EnteredInError-Example",
         "UKCore-AllergyIntolerance-Amoxicillin-Example",
+        "UKCore-AllergyIntolerance-Maximal-Example",
     ],
 )
 def test_allergy_intolerance(

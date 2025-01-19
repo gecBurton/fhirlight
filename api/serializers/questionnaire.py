@@ -2,11 +2,11 @@ from rest_framework.serializers import ModelSerializer
 
 from api.models import QuestionnaireProfile
 from api.models.questionnaire import (
-    QuestionnaireIdentifier,
     QuestionnaireContact,
+    QuestionnaireIdentifier,
     QuestionnaireItem,
 )
-from api.serializers.common import ProfileSerializer, BaseModelSerializer
+from api.serializers.common import BaseModelSerializer, ProfileSerializer
 
 
 class QuestionnaireIdentifierSerializer(BaseModelSerializer):

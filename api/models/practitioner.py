@@ -2,15 +2,15 @@ from django.db import models
 
 from api.fields import PeriodField
 from api.models import OrganizationProfile
+from api.models.common import BaseProfile
 from api.models.datatypes import (
-    ContactPoint,
     Address,
+    Concept,
+    ContactPoint,
+    DataTypeWithPeriod,
     Identifier,
     Name,
-    DataTypeWithPeriod,
-    Concept,
 )
-from api.models.common import BaseProfile
 
 
 class PractitionerProfile(BaseProfile):

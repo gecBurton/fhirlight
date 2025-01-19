@@ -1,4 +1,4 @@
-from rest_framework.fields import URLField, CharField
+from rest_framework.fields import CharField, URLField
 from rest_framework.serializers import Serializer
 
 from api.models.message_header import MessageHeaderProfile

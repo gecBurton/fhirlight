@@ -5,8 +5,8 @@ from api.models.encounter import (
     EncounterProfile,
 )
 from api.serializers.common import (
-    ProfileSerializer,
     ConceptModelSerializer,
+    ProfileSerializer,
     RelatedResourceSerializer,
 )
 

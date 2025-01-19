@@ -7,8 +7,8 @@ from api.models import MedicationAdministrationProfile
 from api.models.datatypes import Concept
 from api.serializers.common import (
     ProfileSerializer,
-    RelatedResourceSerializer,
     QuantitySerializer,
+    RelatedResourceSerializer,
 )
 
 

@@ -1,13 +1,12 @@
-from rest_framework.serializers import Serializer, RelatedField
+from django.utils.translation import gettext_lazy as _
+from rest_framework.serializers import RelatedField, Serializer
 
 from api.models import PatientProfile
 from api.models.datatypes import Concept
 from api.serializers.common import (
-    ProfileSerializer,
     ConceptSerializer,
+    ProfileSerializer,
 )
-
-from django.utils.translation import gettext_lazy as _
 
 
 class LanguageSerializer(Serializer):

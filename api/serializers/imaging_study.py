@@ -2,9 +2,9 @@ from api.models import ImagingStudyProfile
 from api.models.datatypes import Concept
 from api.models.imaging_study import ImagingStudySeries, ImagingStudySeriesInstance
 from api.serializers.common import (
-    ProfileSerializer,
     BaseModelSerializer,
     ConceptModelSerializer,
+    ProfileSerializer,
 )
 
 

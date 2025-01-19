@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.contrib.admin import StackedInline
-from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModelAdmin
+from polymorphic.admin import PolymorphicChildModelAdmin, PolymorphicParentModelAdmin
 
 from api.models.common import BaseProfile
 from api.models.organization import (
-    OrganizationProfile,
-    OrganizationTelecom,
     OrganizationAddress,
     OrganizationIdentifier,
+    OrganizationProfile,
+    OrganizationTelecom,
 )
 
 

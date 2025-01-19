@@ -1,5 +1,5 @@
-from api.models.list import ListProfile, ListEntry
-from api.serializers.common import ProfileSerializer, BaseModelSerializer
+from api.models.list import ListEntry, ListProfile
+from api.serializers.common import BaseModelSerializer, ProfileSerializer
 
 
 class ListEntrySerializer(BaseModelSerializer):

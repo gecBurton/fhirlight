@@ -1,7 +1,7 @@
 from django.db import models
 
 from api.models.common import BaseProfile
-from api.models.datatypes import Identifier, DataTypeWithPeriod
+from api.models.datatypes import DataTypeWithPeriod, Identifier
 from api.models.questionnaire import QuestionnaireBase
 
 

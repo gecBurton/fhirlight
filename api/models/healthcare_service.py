@@ -3,7 +3,7 @@ from django.db import models
 
 from api.fields import PeriodField
 from api.models.common import BaseProfile
-from api.models.datatypes import Concept, ContactPoint, Identifier, DataTypeWithPeriod
+from api.models.datatypes import Concept, ContactPoint, DataTypeWithPeriod, Identifier
 
 
 class HealthcareServiceProfile(BaseProfile):
