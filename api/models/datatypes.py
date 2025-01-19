@@ -284,6 +284,7 @@ class Concept(models.Model):
         AS_NEEDED_CODEABLE_CONCEPT = "asNeededCodeableConcept"
         UK_CORE_ORGANIZATION_TYPE = "UKCoreOrganizationType"
         DEGREE_LICENSE_CERTIFICATE = "v2.0360.2.7"
+        UK_CORE_ALLERGY_SUBSTANCE = "UKCoreAllergySubstance"
 
     system = models.CharField(
         null=True,

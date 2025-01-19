@@ -1,0 +1,88 @@
+{
+    "resourceType": "AllergyIntolerance",
+    "id": "UKCore-AllergyIntolerance-Maximal-Example",
+    "clinicalStatus": {
+        "coding":  [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+                "code": "active",
+                "display": "Active"
+            }
+        ]
+    },
+    "verificationStatus": {
+        "coding":  [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+                "code": "confirmed",
+                "display": "Confirmed"
+            }
+        ]
+    },
+    "type": "allergy",
+    "category": "food",
+    "criticality": "low",
+    "onsetDateTime": "2014-02-23",
+    "lastOccurrence": "2014-02-28",
+    "identifier": [
+        {"system":  "unknown", "value":  "123456"}
+    ],
+    "code": {
+        "coding":  [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "372687004",
+                "display": "Amoxicillin"
+            }
+        ]
+    },
+    "patient": {
+        "reference": "Patient/UKCore-Patient-RichardSmith-Example"
+    },
+    "encounter": {
+        "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
+    },
+    "recordedDate": "2019-12-10T13:00:00Z",
+    "recorder": {
+        "reference": "Practitioner/UKCore-Practitioner-ConsultantSandraGose-Example"
+    },
+    "asserter": {
+        "reference": "Practitioner/UKCore-Practitioner-ConsultantSandraGose-Example"
+    },
+    "reaction":  [
+        {
+            "substance": {
+                "coding": [
+                    {
+                        "code": "1856211000001101",
+                        "system": "http://snomed.info/sct",
+                        "display": "Paracetamol 500mg Effervescent x100 Tablets (P), PL 51463/0031"
+                    }
+                ]
+            },
+            "description": "lorem ipsum",
+            "onset": "2014-02-28",
+            "exposureRoute": {
+                "coding": [
+                    {
+                        "code":  "58831000052108",
+                        "system": "http://snomed.info/sct",
+                        "display": "Subretinal route"
+                    }
+                ]
+            },
+            "manifestation":  [
+                {
+                    "coding":  [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "247472004",
+                            "display": "Urticarial rash"
+                        }
+                    ]
+                }
+            ],
+            "severity": "mild"
+        }
+    ]
+}
