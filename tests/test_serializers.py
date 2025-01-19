@@ -526,6 +526,7 @@ def test_imaging_study(resource, richard_smith):
     [
         "UKCore-AllergyIntolerance-EnteredInError-Example",
         "UKCore-AllergyIntolerance-Amoxicillin-Example",
+        "UKCore-AllergyIntolerance-Maximal-Example",
     ],
 )
 def test_allergy_intolerance(

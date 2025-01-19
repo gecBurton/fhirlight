@@ -161,7 +161,7 @@ class AllergyIntoleranceIdentifier(Identifier):
         AllergyIntoleranceProfile,
         on_delete=models.CASCADE,
     )
-    system = models.URLField(
+    system = models.CharField(
         max_length=64,
         help_text="Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
     )

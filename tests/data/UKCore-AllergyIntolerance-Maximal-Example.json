@@ -20,7 +20,7 @@
         ]
     },
     "type": "allergy",
-    "category": "food",
+    "category": ["food"],
     "criticality": "low",
     "onsetDateTime": "2014-02-23",
     "lastOccurrence": "2014-02-28",

@@ -39,6 +39,7 @@ from api.views import (
     MedicationDispenseViewSet,
     MedicationStatementViewSet,
     QuestionnaireResponseViewSet,
+    AllergyIntoleranceViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -118,6 +119,12 @@ router.register(
     MedicationStatementViewSet,
     basename="medicationstatement",
 )
+router.register(
+    r"AllergyIntolerance",
+    AllergyIntoleranceViewSet,
+    basename="allergyintolerance",
+)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
