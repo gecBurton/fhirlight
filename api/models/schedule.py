@@ -2,7 +2,7 @@ from django.db import models
 
 from api.fields import PeriodField
 from api.models.common import BaseProfile
-from api.models.datatypes import Identifier, Concept
+from api.models.datatypes import Concept, Identifier
 
 
 class ScheduleProfile(BaseProfile):

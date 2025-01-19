@@ -2,7 +2,7 @@ from api.models.questionnaire_response import (
     QuestionnaireResponseItem,
     QuestionnaireResponseProfile,
 )
-from api.serializers.common import ProfileSerializer, BaseModelSerializer
+from api.serializers.common import BaseModelSerializer, ProfileSerializer
 
 
 class QuestionnaireResponseChildItemSerializer(BaseModelSerializer):

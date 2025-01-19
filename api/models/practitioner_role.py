@@ -4,7 +4,7 @@ from django.db.models import CharField
 
 from api.fields import PeriodField
 from api.models.common import BaseProfile
-from api.models.datatypes import ContactPoint, Concept, Identifier, DataTypeWithPeriod
+from api.models.datatypes import Concept, ContactPoint, DataTypeWithPeriod, Identifier
 
 
 class PractitionerRoleProfile(BaseProfile):

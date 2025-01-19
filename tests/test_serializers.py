@@ -5,13 +5,13 @@ import os
 import pytest
 
 from api.serializers import (
-    ServiceRequestSerializer,
     AllergyIntoleranceSerializer,
     AppointmentSerializer,
     CompositionSerializer,
-    MedicationRequestSerializer,
     MedicationAdministrationSerializer,
+    MedicationRequestSerializer,
     MedicationStatementSerializer,
+    ServiceRequestSerializer,
 )
 from api.serializers.condition import ConditionSerializer
 from api.serializers.consent import ConsentSerializer

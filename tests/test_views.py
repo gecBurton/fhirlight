@@ -6,21 +6,21 @@ from django.urls import reverse
 
 from api.management.commands.load_example_data import extract_reference
 from api.models import (
-    PatientProfile,
-    OrganizationProfile,
-    PractitionerProfile,
-    LocationProfile,
-    ObservationProfile,
-    SpecimenProfile,
-    EncounterProfile,
-    DiagnosticReportProfile,
-    ConditionProfile,
-    ServiceRequestProfile,
     AllergyIntoleranceProfile,
-    MedicationProfile,
-    ProcedureProfile,
-    MedicationRequestProfile,
+    ConditionProfile,
+    DiagnosticReportProfile,
+    EncounterProfile,
     HealthcareServiceProfile,
+    LocationProfile,
+    MedicationProfile,
+    MedicationRequestProfile,
+    ObservationProfile,
+    OrganizationProfile,
+    PatientProfile,
+    PractitionerProfile,
+    ProcedureProfile,
+    ServiceRequestProfile,
+    SpecimenProfile,
 )
 from tests.utils import prepare_payload
 

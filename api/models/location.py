@@ -1,7 +1,7 @@
 from django.db import models
 
 from api.models.common import BaseProfile
-from api.models.datatypes import Address, Identifier, ContactPoint, Concept
+from api.models.datatypes import Address, Concept, ContactPoint, Identifier
 
 
 class LocationProfile(BaseProfile):

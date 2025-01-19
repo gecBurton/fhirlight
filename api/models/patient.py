@@ -1,7 +1,7 @@
 from django.db import models
 
-from api.models.datatypes import Name, Identifier, ContactPoint, Address, Concept
 from api.models.common import BaseProfile
+from api.models.datatypes import Address, Concept, ContactPoint, Identifier, Name
 
 
 class PatientProfile(BaseProfile):

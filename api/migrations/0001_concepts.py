@@ -2,8 +2,7 @@
 import json
 import os.path
 
-from django.db import migrations
-from django.db import models
+from django.db import migrations, models
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 

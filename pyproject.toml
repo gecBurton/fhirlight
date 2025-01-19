@@ -29,3 +29,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "fhirlight.settings"
+
+[tool.ruff.lint]
+extend-select = ["I"]
