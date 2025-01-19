@@ -1,4 +1,3 @@
-
 from api.models.observation import (
     ObservationProfile,
 )
