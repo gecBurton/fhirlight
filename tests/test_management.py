@@ -8,4 +8,4 @@ from api.models.common import BaseProfile
 def test_load_example_data():
     assert BaseProfile.objects.count() == 0
     call_command("load_example_data")
-    assert BaseProfile.objects.count() == 75
+    assert BaseProfile.objects.count() == 76

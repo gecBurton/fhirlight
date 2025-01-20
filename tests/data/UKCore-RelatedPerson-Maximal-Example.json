@@ -1,57 +1,58 @@
 {
-    "resourceType": "RelatedPerson",
-    "id": "UKCore-RelatedPerson-Maximal-Example",
-    "patient": {
-        "reference": "Patient/UKCore-Patient-RichardSmith-Example"
+  "resourceType": "RelatedPerson",
+  "id": "UKCore-RelatedPerson-Maximal-Example",
+  "patient": {
+    "reference": "Patient/UKCore-Patient-RichardSmith-Example"
+  },
+  "relationship": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+          "code": "WIFE",
+          "display": "wife"
+        }
+      ]
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "family": "SMITH",
+      "given": [
+        "Joy"
+      ]
+    }
+  ],
+  "gender": "female",
+  "birthDate": "1978-12-12",
+  "period": {
+    "start": "2023-04-28"
+  },
+  "communication": [
+    {
+      "language": {
+        "coding": [
+          {
+            "code": "en",
+            "display": "English",
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage"
+          }
+        ]
+      },
+      "preferred": true
     },
-    "relationship":  [
-        {
-            "coding":  [
-                {
-                    "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
-                    "code": "WIFE",
-                    "display": "wife"
-                }
-            ]
-        }
-    ],
-    "name":  [
-        {
-            "use": "official",
-            "family": "SMITH",
-            "given":  [
-                "Joy"
-            ]
-        }
-    ],
-    "gender": "female",
-    "birthDate": "1978-12-12",
-    "period": {"start":  "2023-04-28"},
-    "communication" : [
-        {
-            "language":  {
-                "coding":  [
-                    {
-                        "code":  "en",
-                        "display": "English",
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage"
-                    }
-                ]
-            },
-            "preferred": true
-        },
-        {
-            "language":  {
-                "coding":  [
-                    {
-                        "code":  "fr",
-                        "display": "French",
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage"
-                    }
-                ]
-            },
-            "preferred": false
-        }
-    ]
-
+    {
+      "language": {
+        "coding": [
+          {
+            "code": "fr",
+            "display": "French",
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage"
+          }
+        ]
+      },
+      "preferred": false
+    }
+  ]
 }

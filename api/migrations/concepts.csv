@@ -887,3 +887,6 @@
 "oth-oerr", "http://terminology.hl7.org/CodeSystem/appointment-cancellation-reason", "Other: Schedule Order Error", "AppointmentCancellationReason"
 "oth-swie", "http://terminology.hl7.org/CodeSystem/appointment-cancellation-reason", "Other: Silent Walk In Error", "AppointmentCancellationReason"
 "oth-weath", "http://terminology.hl7.org/CodeSystem/appointment-cancellation-reason", "Other: Weather", "AppointmentCancellationReason"
+"3461000175106", "http://snomed.info/sct", "Admitted for observation (finding)", "ManifestationAndSymptomCodes"
+"69605008", "http://snomed.info/sct", "Clinical stage II E (finding)", "ConditionStage"
+"261023001", "http://snomed.info/sct", "Pathological staging (qualifier value)", "ConditionStageType"

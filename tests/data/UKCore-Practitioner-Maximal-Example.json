@@ -1,75 +1,75 @@
 {
-    "resourceType": "Practitioner",
-    "id": "UKCore-Practitioner-Maximal-Example",
-    "identifier":  [
+  "resourceType": "Practitioner",
+  "id": "UKCore-Practitioner-Maximal-Example",
+  "identifier": [
+    {
+      "system": "https://fhir.nhs.uk/Id/sds-user-id",
+      "value": "G12345678"
+    }
+  ],
+  "name": [
+    {
+      "family": "Burton",
+      "given": [
+        "George",
+        "E",
+        "C"
+      ],
+      "prefix": [
+        "Dr"
+      ]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "email",
+      "value": "drgeorge@yorks-gp.nhs",
+      "use": "work"
+    }
+  ],
+  "birthDate": "1999-04-21",
+  "communication": [
+    {
+      "coding": [
         {
-            "system": "https://fhir.nhs.uk/Id/sds-user-id",
-            "value": "G12345678"
+          "code": "en",
+          "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage",
+          "display": "English"
         }
-    ],
-    "name":  [
-        {
-            "family": "Burton",
-            "given":  [
-                "George",
-                "E",
-                "C"
-            ],
-            "prefix":  [
-                "Dr"
-            ]
-        }
-    ],
-    "telecom":  [
-        {
-            "system": "email",
-            "value": "drgeorge@yorks-gp.nhs",
-            "use": "work"
-        }
-    ],
-    "birthDate": "1999-04-21",
-    "communication": [
-        {
-            "coding":  [
-                {
-                    "code":  "en",
-                    "system":  "https://fhir.hl7.org.uk/CodeSystem/UKCore-HumanLanguage",
-                    "display":  "English"
-                }
-            ]
-        }
-    ],
-    "qualification": [
-        {
-            "code":  {
-                "coding": [
-                    {
-                        "code":  "BN",
-                        "system":  "http://terminology.hl7.org/CodeSystem/v2-0360",
-                        "display":  "Bachelor of Nursing"
-                    }
-                ]
-            },
-            "period": {
-                "start": "2000-01-01"
-            },
-            "issuer": {
-                "reference":  "Organization/UKCore-Organization-Minimal-Example"
-            }
-        }
-    ],
-    "address":  [
-        {
-            "use": "work",
-            "type": "both",
-            "line":  [
-                "Chapel Main Practice",
-                "22 Brightside Crescent"
-            ],
-            "city": "Overtown",
-            "district": "West Yorkshire",
-            "postalCode": "LS10 4YU"
-        }
-    ],
-    "gender": "male"
+      ]
+    }
+  ],
+  "qualification": [
+    {
+      "code": {
+        "coding": [
+          {
+            "code": "BN",
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0360",
+            "display": "Bachelor of Nursing"
+          }
+        ]
+      },
+      "period": {
+        "start": "2000-01-01"
+      },
+      "issuer": {
+        "reference": "Organization/UKCore-Organization-Minimal-Example"
+      }
+    }
+  ],
+  "address": [
+    {
+      "use": "work",
+      "type": "both",
+      "line": [
+        "Chapel Main Practice",
+        "22 Brightside Crescent"
+      ],
+      "city": "Overtown",
+      "district": "West Yorkshire",
+      "postalCode": "LS10 4YU"
+    }
+  ],
+  "gender": "male"
 }

@@ -37,7 +37,7 @@ This might be useful to you if you want:
 | UKCore-AllergyIntolerance       | ✅            | ✅                                  |
 | UKCore-Appointment              | ✅            | ✅                                  |
 | UKCore-Composition              | ✅            | ❌                                  |
-| UKCore-Condition                | ✅            | ❌                                  |
+| UKCore-Condition                | ✅            | ✅                                  |
 | UKCore-Consent                  | ✅            | ❌                                  |
 | UKCore-Device                   | ✅            | ❌                                  |
 | UKCore-DiagnosticReport         | ✅            | ❌                                  |

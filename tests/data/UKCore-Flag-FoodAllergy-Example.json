@@ -1,43 +1,43 @@
 {
-    "resourceType": "Flag",
-    "id": "UKCore-Flag-FoodAllergy-Example",
-    "identifier":  [
-        {
-            "system": "https://tools.ietf.org/html/rfc4122",
-            "value": "f4f703a9-ef92-4515-a7b0-99271428c84e"
-        }
-    ],
-    "status": "active",
-    "category":  [
-        {
-            "coding":  [
-                {
-                    "system": "http://terminology.hl7.org/CodeSystem/flag-category",
-                    "code": "diet",
-                    "display": "Diet"
-                }
-            ]
-        }
-    ],
-    "code": {
-        "coding":  [
-            {
-                "system": "http://snomed.info/sct",
-                "code": "226201008",
-                "display": "Peanut-free diet"
-            }
-        ]
-    },
-    "subject": {
-        "reference": "Patient/UKCore-Patient-RichardSmith-Example"
-    },
-    "period": {
-        "start": "2019-12-10T13:00:00Z"
-    },
-    "encounter": {
-        "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
-    },
-    "author": {
-      "reference": "Practitioner/UKCore-Practitioner-DoctorPaulRastall-Example"
+  "resourceType": "Flag",
+  "id": "UKCore-Flag-FoodAllergy-Example",
+  "identifier": [
+    {
+      "system": "https://tools.ietf.org/html/rfc4122",
+      "value": "f4f703a9-ef92-4515-a7b0-99271428c84e"
     }
+  ],
+  "status": "active",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/flag-category",
+          "code": "diet",
+          "display": "Diet"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "226201008",
+        "display": "Peanut-free diet"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/UKCore-Patient-RichardSmith-Example"
+  },
+  "period": {
+    "start": "2019-12-10T13:00:00Z"
+  },
+  "encounter": {
+    "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
+  },
+  "author": {
+    "reference": "Practitioner/UKCore-Practitioner-DoctorPaulRastall-Example"
+  }
 }

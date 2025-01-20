@@ -19,6 +19,7 @@ from api.models import (
     PatientProfile,
     PractitionerProfile,
     ProcedureProfile,
+    RelatedPersonProfile,
     ServiceRequestProfile,
     SpecimenProfile,
 )
@@ -38,6 +39,7 @@ TEST_DIR = os.path.dirname(os.path.abspath(__file__))
         "UKCore-Appointment-OrthopaedicSurgery-Example",
         "UKCore-Composition-Discharge-Example",
         "UKCore-Condition-BleedingFromEar-Example",
+        "UKCore-Condition-Maximal-Example",
         "UKCore-Consent-ForInformationAccess-Example",
         "UKCore-DiagnosticReport-DiagnosticStudiesReport-Example",
         "UKCore-DiagnosticReport-Lab-DiagnosticStudiesReport-Example",
@@ -139,6 +141,7 @@ def test_resource(
                 {"subject": example_patient},
             ),
             "healthcareservice": (HealthcareServiceProfile, {}),
+            "relatedperson": (RelatedPersonProfile, {"patient": example_patient}),
         }
 
         resource_class, kwargs = resource_types[dependant_resource_type]

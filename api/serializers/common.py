@@ -112,9 +112,7 @@ class RelatedResourceSerializer(RelatedField):
     default_error_messages = {
         "required": _("This field is required."),
         "does_not_exist": _('Invalid pk "{pk_value}" - object does not exist.'),
-        "incorrect_format": _(
-            'Incorrect format. Expected {"language": {"coding": [{"code": code]}}.'
-        ),
+        "incorrect_format": _("Incorrect format."),
         "incorrect_resource_type": _(
             "incorrect resourceType. Expected {resource_type}"
         ),
@@ -140,7 +138,11 @@ class RelatedResourceSerializer(RelatedField):
         else:
             if not (isinstance(data, dict) and "reference" in data):
                 self.fail("required")
-            resource_type, id = data["reference"].split("/", 2)
+
+            try:
+                resource_type, id = data["reference"].split("/", 2)
+            except ValueError:
+                self.fail("incorrect_format")
 
             if field_name := self.source:
                 parent = self.parent
