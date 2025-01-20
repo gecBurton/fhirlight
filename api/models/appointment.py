@@ -1,5 +1,6 @@
 from django.db import models
 
+from api.fields import PeriodField
 from api.models.common import BaseProfile
 from api.models.datatypes import Concept, DataTypeWithPeriod, Identifier
 
@@ -38,6 +39,17 @@ class AppointmentProfile(BaseProfile):
         choices=STATUS,
         help_text="The overall status of the Appointment.",
     )
+
+    cancellationReason = models.ForeignKey(
+        Concept,
+        limit_choices_to={"valueset": Concept.VALUESET.APPOINTMENT_CANCELLATION_REASON},
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        help_text="The coded reason for the appointment being cancelled. This is often used in reporting/billing/further processing to determine if further actions are required, or specific fees apply.",
+        related_name="AppointmentProfile_cancellationReason",
+    )
+
     serviceCategory = models.ManyToManyField(
         Concept,
         limit_choices_to={"valueset": Concept.VALUESET.SERVICE_CATEGORY},
@@ -45,6 +57,7 @@ class AppointmentProfile(BaseProfile):
         help_text="A broad categorization of the service that is to be performed during this appointment.",
         related_name="AppointmentProfile_serviceCategory",
     )
+
     serviceType = models.ManyToManyField(
         Concept,
         limit_choices_to={"valueset": Concept.VALUESET.SERVICE_TYPE},
@@ -52,6 +65,7 @@ class AppointmentProfile(BaseProfile):
         help_text="The specific service that is to be performed during this appointment.",
         related_name="AppointmentProfile_serviceType",
     )
+
     specialty = models.ManyToManyField(
         Concept,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_PRACTICE_SETTINGS_CODE},
@@ -59,6 +73,7 @@ class AppointmentProfile(BaseProfile):
         help_text="The specialty of a practitioner that would be required to perform the service requested in this appointment.",
         related_name="AppointmentProfile_specialty",
     )
+
     appointmentType = models.ForeignKey(
         Concept,
         limit_choices_to={"valueset": Concept.VALUESET.UK_CORE_APPOINTMENT_REASON_CODE},
@@ -68,46 +83,87 @@ class AppointmentProfile(BaseProfile):
         help_text="The style of appointment or patient that has been booked in the slot (not service type).",
         related_name="AppointmentProfile_appointmentType",
     )
+
+    reasonCode = models.ManyToManyField(
+        Concept,
+        limit_choices_to={"valueset": Concept.VALUESET.ENCOUNTER_REASON_CODE},
+        blank=True,
+        help_text="The coded reason that this appointment is being scheduled. This is more clinical than administrative.",
+        related_name="AppointmentProfile_reasonCode",
+    )
+
+    reasonReference = models.ManyToManyField(
+        BaseProfile,
+        blank=True,
+        limit_choices_to={
+            "polymorphic_ctype__model__in": [
+                "conditionprofile",
+                "observationprofile",
+                "procedureprofile",
+            ]
+        },
+        help_text="Reason the appointment is to take place (resource)",
+        related_name="Appointment_reasonReference",
+    )
+
     priority = models.PositiveIntegerField(
         null=True,
         blank=True,
         help_text="Used to make informed decisions if needing to re-prioritize",
     )
+
     description = models.TextField(
         null=True,
         blank=True,
         help_text="Shown on a subject line in a meeting request, or appointment list",
     )
+
+    # supportingInformation could mean anything?
+
     start = models.DateTimeField(
         null=True, blank=True, help_text="When appointment is to take place"
     )
+
     end = models.DateTimeField(
         null=True, blank=True, help_text="When appointment is to conclude"
     )
+
+    # minutesDuration, why, we have start and end?
+
+    slot = models.ManyToManyField(
+        BaseProfile,
+        blank=True,
+        limit_choices_to={"polymorphic_ctype__model__in": ["slotprofile"]},
+        help_text="The slots from the participants' schedules that will be filled by the appointment.",
+        related_name="Appointment_slot",
+    )
+
     created = models.DateTimeField(
         null=True,
         blank=True,
         help_text="The date that this appointment was initially created",
     )
+
     comment = models.TextField(null=True, blank=True, help_text="Additional comments")
+
     patientInstruction = models.TextField(
         null=True,
         blank=True,
         help_text="Detailed information and instructions for the patient",
     )
-    reasonReference = models.ManyToManyField(
-        BaseProfile,
-        blank=True,
-        limit_choices_to={"polymorphic_ctype__model__in": ["conditionprofile"]},
-        help_text="Reason the appointment is to take place (resource)",
-        related_name="Appointment_reasonReference",
-    )
+
     basedOn = models.ManyToManyField(
         BaseProfile,
         blank=True,
         limit_choices_to={"polymorphic_ctype__model__in": ["servicerequestprofile"]},
         help_text="The service request this appointment is allocated to assess",
         related_name="Appointment_basedOn",
+    )
+
+    requestedPeriod = PeriodField(
+        null=True,
+        blank=True,
+        help_text="A set of date ranges (potentially including times) that the appointment is preferred to be scheduled within.",
     )
 
 
@@ -149,6 +205,7 @@ class AppointmentParticipant(DataTypeWithPeriod):
         help_text="Role of participant in the appointment.",
         related_name="AppointmentParticipant_type",
     )
+
     actor = models.ForeignKey(
         BaseProfile,
         blank=True,
@@ -165,6 +222,10 @@ class AppointmentParticipant(DataTypeWithPeriod):
         related_name="AppointmentParticipant_actor",
     )
 
+    status = models.CharField(
+        max_length=16, choices=STATUS, help_text="Participation status of the actor."
+    )
+
     required = models.CharField(
         null=True,
         blank=True,
@@ -172,6 +233,7 @@ class AppointmentParticipant(DataTypeWithPeriod):
         max_length=16,
         help_text="Whether this participant is required to be present at the meeting.",
     )
-    status = models.CharField(
-        max_length=16, choices=STATUS, help_text="Participation status of the actor."
+
+    period = PeriodField(
+        null=True, blank=True, help_text="Participation period of the actor."
     )

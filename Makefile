@@ -3,7 +3,8 @@ format:
 	poetry run ruff check --fix
 
 migrations:
-	poetry run python manage.py makemigrations
+	rm -f api/migrations/0002_v1.py
+	poetry run python manage.py makemigrations --name v1
 
 web:
 	poetry run python manage.py runserver
