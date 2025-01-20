@@ -286,6 +286,7 @@ class Concept(models.Model):
         UK_CORE_ORGANIZATION_TYPE = "UKCoreOrganizationType"
         DEGREE_LICENSE_CERTIFICATE = "v2.0360.2.7"
         UK_CORE_ALLERGY_SUBSTANCE = "UKCoreAllergySubstance"
+        APPOINTMENT_CANCELLATION_REASON = "AppointmentCancellationReason"
 
     system = models.CharField(
         null=True,

@@ -546,6 +546,7 @@ def test_allergy_intolerance(
     "resource",
     [
         "UKCore-Appointment-OrthopaedicSurgery-Example",
+        "UKCore-Appointment-Maximal-Example",
     ],
 )
 def test_appointment(
