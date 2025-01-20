@@ -1,60 +1,60 @@
 {
-    "resourceType": "ServiceRequest",
-    "id": "UKCore-ServiceRequest-ColonoscopyRequest-Example",
-    "status": "active",
-    "intent": "order",
-    "code": {
-        "coding":  [
-            {
-                "system": "http://snomed.info/sct",
-                "code": "73761001",
-                "display": "Colonoscopy"
-            }
-        ]
-    },
-    "subject": {
-        "reference": "Patient/UKCore-Patient-RichardSmith-Example"
-    },
-    "encounter": {
-        "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
-    },
-    "occurrencePeriod": {
-        "start": "2021-10-13T09:20:27Z"
-    },
-    "authoredOn": "2021-10-13T09:28:00Z",
-    "requester": {
-        "reference": "Practitioner/UKCore-Practitioner-DoctorPaulRastall-Example"
-    },
-    "performer":  [
+  "resourceType": "ServiceRequest",
+  "id": "UKCore-ServiceRequest-ColonoscopyRequest-Example",
+  "status": "active",
+  "intent": "order",
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "73761001",
+        "display": "Colonoscopy"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/UKCore-Patient-RichardSmith-Example"
+  },
+  "encounter": {
+    "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
+  },
+  "occurrencePeriod": {
+    "start": "2021-10-13T09:20:27Z"
+  },
+  "authoredOn": "2021-10-13T09:28:00Z",
+  "requester": {
+    "reference": "Practitioner/UKCore-Practitioner-DoctorPaulRastall-Example"
+  },
+  "performer": [
+    {
+      "reference": "Practitioner/UKCore-Practitioner-ConsultantSandraGose-Example"
+    }
+  ],
+  "locationReference": [
+    {
+      "reference": "Location/UKCore-Location-HospitalSJUH-Example"
+    }
+  ],
+  "reasonCode": [
+    {
+      "coding": [
         {
-            "reference": "Practitioner/UKCore-Practitioner-ConsultantSandraGose-Example"
+          "system": "http://snomed.info/sct",
+          "code": "271835004",
+          "display": "Abdominal distension, gaseous"
         }
-    ],
-    "locationReference":  [
-        {
-            "reference": "Location/UKCore-Location-HospitalSJUH-Example"
-        }
-    ],
-    "reasonCode":  [
-        {
-            "coding":  [
-                {
-                    "system": "http://snomed.info/sct",
-                    "code": "271835004",
-                    "display": "Abdominal distension, gaseous"
-                }
-            ]
-        }
-    ],
-    "reasonReference":  [
-        {
-            "reference": "DiagnosticReport/UKCore-DiagnosticReport-DiagnosticStudiesReport-Example"
-        }
-    ],
-    "supportingInfo":  [
-        {
-            "reference": "Observation/UKCore-Observation-Lab-WhiteCellCount-Example"
-        }
-    ],
-    "patientInstruction": "ADVICE GIVEN: If there are any new symptoms, or if the condition gets worse, changes or you have any other concerns, contact your GP."
+      ]
+    }
+  ],
+  "reasonReference": [
+    {
+      "reference": "DiagnosticReport/UKCore-DiagnosticReport-DiagnosticStudiesReport-Example"
+    }
+  ],
+  "supportingInfo": [
+    {
+      "reference": "Observation/UKCore-Observation-Lab-WhiteCellCount-Example"
+    }
+  ],
+  "patientInstruction": "ADVICE GIVEN: If there are any new symptoms, or if the condition gets worse, changes or you have any other concerns, contact your GP."
 }

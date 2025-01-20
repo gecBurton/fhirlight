@@ -1,22 +1,22 @@
 {
-    "resourceType": "EpisodeOfCare",
-    "id": "UKCore-EpisodeOfCare-SmokingCessationTherapy-Example",
-    "status": "finished",
-    "type":  [
+  "resourceType": "EpisodeOfCare",
+  "id": "UKCore-EpisodeOfCare-SmokingCessationTherapy-Example",
+  "status": "finished",
+  "type": [
+    {
+      "coding": [
         {
-            "coding":  [
-                {
-                    "system": "http://snomed.info/sct",
-                    "code": "710081004",
-                    "display": "Smoking cessation therapy"
-                }
-            ]
+          "system": "http://snomed.info/sct",
+          "code": "710081004",
+          "display": "Smoking cessation therapy"
         }
-    ],
-    "patient": {
-        "reference": "Patient/UKCore-Patient-RichardSmith-Example"
-    },
-    "managingOrganization": {
-        "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
+      ]
     }
+  ],
+  "patient": {
+    "reference": "Patient/UKCore-Patient-RichardSmith-Example"
+  },
+  "managingOrganization": {
+    "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
+  }
 }

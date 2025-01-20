@@ -1,227 +1,227 @@
 {
-    "resourceType": "Composition",
-    "id": "UKCore-Composition-Discharge-Example",
-    "identifier": {
-        "system": "https://tools.ietf.org/html/rfc4122",
-        "value": "2d361270-039f-4a48-827b-ef255ff8b6c4"
-    },
-    "status": "final",
-    "type": {
-        "coding":  [
-            {
-                "system": "http://snomed.info/sct",
-                "code": "373942005",
-                "display": "Discharge summary"
-            }
-        ]
-    },
-    "subject": {
-        "reference": "Patient/UKCore-Patient-RichardSmith-Example"
-    },
-    "encounter": {
-        "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
-    },
-    "date": "2021-02-12T19:00:00Z",
-    "author":  [
-        {
-            "reference": "Practitioner/UKCore-Practitioner-ConsultantSandraGose-Example"
-        }
-    ],
-    "title": "Accident & Emergency Discharge summary",
-    "custodian": {
-        "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
-    },
-    "section":  [
-        {
-            "title": "Allergies and adverse reaction",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "allergies-and-adverse-reaction",
-                        "display": "Allergies and adverse reaction"
-                    }
-                ]
-            },
-            "entry":  [
-                {
-                    "reference": "AllergyIntolerance/UKCore-AllergyIntolerance-Amoxicillin-Example"
-                }
-            ]
-        },
-        {
-            "title": "Attendance details",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "attendance-details",
-                        "display": "Attendance details"
-                    }
-                ]
-            }
-        },
-        {
-            "title": "Clinical narrative",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "clinical-narrative",
-                        "display": "Clinical narrative"
-                    }
-                ]
-            }
-        },
-        {
-            "title": "Contact for further information",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "contact-for-further-information",
-                        "display": "Contact for further information"
-                    }
-                ]
-            }
-        },
-        {
-            "title": "Diagnoses",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "diagnoses",
-                        "display": "Diagnoses"
-                    }
-                ]
-            },
-            "entry":  [
-                {
-                    "reference": "DiagnosticReport/UKCore-DiagnosticReport-DiagnosticStudiesReport-Example"
-                }
-            ]
-        },
-        {
-            "title": "GP practice",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "general-practitioner-practice",
-                        "display": "General practitioner practice"
-                    }
-                ]
-            },
-            "entry":  [
-                {
-                    "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
-                }
-            ]
-        },
-        {
-            "title": "Information and advice given",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "information-and-advice-given",
-                        "display": "Information and advice given"
-                    }
-                ]
-            }
-        },
-        {
-            "title": "Medications and medical devices",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "medications-and-medical-devices",
-                        "display": "Medications and medical devices"
-                    }
-                ]
-            },
-            "entry":  [
-                {
-                    "reference": "Medication/UKCore-Medication-TimololVTM-Example"
-                }
-            ]
-        },
-        {
-            "title": "Person completing record",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "person-completing-record",
-                        "display": "Person completing record"
-                    }
-                ]
-            },
-            "entry":  [
-                {
-                    "reference": "Practitioner/UKCore-Practitioner-ConsultantSandraGose-Example"
-                }
-            ]
-        },
-        {
-            "title": "Plan and requested actions",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "plan-and-requested-actions",
-                        "display": "Plan and requested actions"
-                    }
-                ]
-            }
-        },
-        {
-            "title": "Procedures",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "procedures",
-                        "display": "Procedures"
-                    }
-                ]
-            },
-            "entry":  [
-                {
-                    "reference": "Procedure/UKCore-Procedure-ExaminationOfSkin-Example"
-                }
-            ]
-        },
-        {
-            "title": "Referrer details",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "referrer-details",
-                        "display": "Referrer details"
-                    }
-                ]
-            }
-        },
-        {
-            "title": "Senior reviewing clinician",
-            "code": {
-                "coding":  [
-                    {
-                        "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
-                        "code": "senior-reviewing-clinician",
-                        "display": "Senior reviewing clinician"
-                    }
-                ]
-            },
-            "entry":  [
-                {
-                    "reference": "Practitioner/UKCore-Practitioner-DoctorPaulRastall-Example"
-                }
-            ]
-        }
+  "resourceType": "Composition",
+  "id": "UKCore-Composition-Discharge-Example",
+  "identifier": {
+    "system": "https://tools.ietf.org/html/rfc4122",
+    "value": "2d361270-039f-4a48-827b-ef255ff8b6c4"
+  },
+  "status": "final",
+  "type": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "373942005",
+        "display": "Discharge summary"
+      }
     ]
+  },
+  "subject": {
+    "reference": "Patient/UKCore-Patient-RichardSmith-Example"
+  },
+  "encounter": {
+    "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
+  },
+  "date": "2021-02-12T19:00:00Z",
+  "author": [
+    {
+      "reference": "Practitioner/UKCore-Practitioner-ConsultantSandraGose-Example"
+    }
+  ],
+  "title": "Accident & Emergency Discharge summary",
+  "custodian": {
+    "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
+  },
+  "section": [
+    {
+      "title": "Allergies and adverse reaction",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "allergies-and-adverse-reaction",
+            "display": "Allergies and adverse reaction"
+          }
+        ]
+      },
+      "entry": [
+        {
+          "reference": "AllergyIntolerance/UKCore-AllergyIntolerance-Amoxicillin-Example"
+        }
+      ]
+    },
+    {
+      "title": "Attendance details",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "attendance-details",
+            "display": "Attendance details"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Clinical narrative",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "clinical-narrative",
+            "display": "Clinical narrative"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Contact for further information",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "contact-for-further-information",
+            "display": "Contact for further information"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Diagnoses",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "diagnoses",
+            "display": "Diagnoses"
+          }
+        ]
+      },
+      "entry": [
+        {
+          "reference": "DiagnosticReport/UKCore-DiagnosticReport-DiagnosticStudiesReport-Example"
+        }
+      ]
+    },
+    {
+      "title": "GP practice",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "general-practitioner-practice",
+            "display": "General practitioner practice"
+          }
+        ]
+      },
+      "entry": [
+        {
+          "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
+        }
+      ]
+    },
+    {
+      "title": "Information and advice given",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "information-and-advice-given",
+            "display": "Information and advice given"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Medications and medical devices",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "medications-and-medical-devices",
+            "display": "Medications and medical devices"
+          }
+        ]
+      },
+      "entry": [
+        {
+          "reference": "Medication/UKCore-Medication-TimololVTM-Example"
+        }
+      ]
+    },
+    {
+      "title": "Person completing record",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "person-completing-record",
+            "display": "Person completing record"
+          }
+        ]
+      },
+      "entry": [
+        {
+          "reference": "Practitioner/UKCore-Practitioner-ConsultantSandraGose-Example"
+        }
+      ]
+    },
+    {
+      "title": "Plan and requested actions",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "plan-and-requested-actions",
+            "display": "Plan and requested actions"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Procedures",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "procedures",
+            "display": "Procedures"
+          }
+        ]
+      },
+      "entry": [
+        {
+          "reference": "Procedure/UKCore-Procedure-ExaminationOfSkin-Example"
+        }
+      ]
+    },
+    {
+      "title": "Referrer details",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "referrer-details",
+            "display": "Referrer details"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Senior reviewing clinician",
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.hl7.org.uk/CodeSystem/UKCore-RecordStandardHeadings",
+            "code": "senior-reviewing-clinician",
+            "display": "Senior reviewing clinician"
+          }
+        ]
+      },
+      "entry": [
+        {
+          "reference": "Practitioner/UKCore-Practitioner-DoctorPaulRastall-Example"
+        }
+      ]
+    }
+  ]
 }

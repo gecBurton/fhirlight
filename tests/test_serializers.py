@@ -367,9 +367,17 @@ def test_diagnostic_report(
     "resource",
     [
         "UKCore-Condition-BleedingFromEar-Example",
+        "UKCore-Condition-Maximal-Example",
     ],
 )
-def test_condition(resource, richard_smith):
+def test_condition(
+    resource,
+    richard_smith,
+    inpatient_encounter,
+    consultant_sandra_gose,
+    joy_smith,
+    diagnostic_studies_report,
+):
     with open(f"{TEST_DIR}/data/{resource}.json") as f:
         payload = json.load(f)
 

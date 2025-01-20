@@ -1,28 +1,28 @@
 {
-    "resourceType": "MessageHeader",
-    "id": "UKCore-MessageHeader-Discharge-Example",
-    "eventCoding": {
-        "system": "http://snomed.info/sct",
-        "code": "306689006",
-        "display": "Discharge to home"
-    },
-    "destination":  [
-        {
-            "endpoint": "urn:nhs:addressing:asid:477121007825",
-            "receiver": {
-                "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
-            }
-        }
-    ],
-    "sender": {
+  "resourceType": "MessageHeader",
+  "id": "UKCore-MessageHeader-Discharge-Example",
+  "eventCoding": {
+    "system": "http://snomed.info/sct",
+    "code": "306689006",
+    "display": "Discharge to home"
+  },
+  "destination": [
+    {
+      "endpoint": "urn:nhs:addressing:asid:477121007825",
+      "receiver": {
         "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
-    },
-    "source": {
-        "endpoint": "NOROT003"
-    },
-    "focus":  [
-        {
-            "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
-        }
-    ]
+      }
+    }
+  ],
+  "sender": {
+    "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
+  },
+  "source": {
+    "endpoint": "NOROT003"
+  },
+  "focus": [
+    {
+      "reference": "Encounter/UKCore-Encounter-InpatientEncounter-Example"
+    }
+  ]
 }

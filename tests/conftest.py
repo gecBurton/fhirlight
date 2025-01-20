@@ -14,6 +14,7 @@ from api.models import (
     PatientProfile,
     PractitionerProfile,
     ProcedureProfile,
+    RelatedPersonProfile,
     ServiceRequestProfile,
     SpecimenProfile,
 )
@@ -281,3 +282,12 @@ def orthopaedic_service():
     )
     yield healthcare_service
     healthcare_service.delete()
+
+
+@pytest.fixture
+def joy_smith(richard_smith):
+    related_person = RelatedPersonProfile.objects.create(
+        id="UKCore-RelatedPerson-JoySmith-Example", patient=richard_smith
+    )
+    yield related_person
+    related_person.delete()
